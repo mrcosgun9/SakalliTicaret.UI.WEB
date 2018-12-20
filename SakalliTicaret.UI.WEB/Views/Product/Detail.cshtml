@@ -1,0 +1,117 @@
+﻿@model SakalliTicaret.Core.Model.Entity.Product
+
+@{
+    ViewBag.Title = "Sakalli Ticaret | "+Model.Name;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="xt-product-inner">
+        <div class="col-md-5">
+            <div role="tabpanel" class="tab-pane active xt-product-tab">
+                <div class="tab-content xt-pro-small-image">
+                    <!-- Tab panel-->
+                    <div role="tabpanel" id="xt-pro-1" class="tab-pane fade">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
+                            <img src="@Model.ImageUrl" class="img-responsive" />
+
+                        </a>
+                    </div>
+                    <div role="tabpanel" id="xt-pro-2" class="tab-pane fade">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
+                            <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                        </a>
+                    </div>
+                    <div role="tabpanel" id="xt-pro-3" class="tab-pane fade active in">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
+                            <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                        </a>
+                    </div>
+                    <div role="tabpanel" id="xt-pro-4" class="tab-pane fade">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
+                            <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <!-- Nav tabs -->
+                <ul id="tablist" class="xt-pro-thumbs-list" role="tablist">
+                    <li role="presentation" class="">
+                        <a href="#xt-pro-1" role="tab" data-toggle="tab" aria-expanded="false">
+                            <img src="@Model.ImageUrl" alt="product thumbs">
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#xt-pro-2" role="tab" data-toggle="tab" aria-expanded="false">
+                            <img src="@Model.ImageUrl" alt="product thumbs">
+                        </a>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="#xt-pro-3" role="tab" data-toggle="tab" aria-expanded="true">
+                            <img src="@Model.ImageUrl" alt="product thumbs">
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#xt-pro-4" role="tab" data-toggle="tab" aria-expanded="false">
+                            <img src="@Model.ImageUrl" alt="product thumbs">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="each-product-info">
+                <h3>@Model.Name</h3>
+                <span class="single-price"><b>Fiyat:</b> @Model.Price ₺</span>
+                <p>@Model.Description</p>
+                @*<div class="color-select">
+                        Color:
+                        <ul>
+                            <li class="red-bg selected"><i class="fa fa-check"></i></li>
+                            <li class="green-bg"><i class="fa fa-check"></i></li>
+                            <li class="blue-bg"><i class="fa fa-check"></i></li>
+                        </ul>
+                    </div>
+                    <div class="select-size">
+                        Size:
+                        <ul>
+                            <li class="selected">M</li>
+                            <li>L</li>
+                            <li>XL</li>
+                        </ul>
+                    </div>*@
+                <div class="select-quantity">
+                    <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
+                </div>
+                <div class="product-add-cart">
+                    <a href="" class="btn btn-fill">Sepete Ekle</a>
+
+                </div>
+                <div class="product-additional-info">
+                    <ul>
+                        <li><b>Model:</b>@Model.Model</li>
+                        <li><b>Marka:</b>@Model.Brand</li>
+                        @*<li><b>Category:</b><a href="">@Model.Category.Name</a>, <a href="">Women</a></li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-9 mt-5">
+    <div class="xt-single-item-info margin-t-30">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs xt-single-item-tab" role="tablist" id="xt-product-dec-nav">
+            <li role="presentation" class="active">
+                <a href="#description" aria-controls="description" role="tab" data-toggle="tab">Açıklama</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content xt-tab-content">
+            <div role="tabpanel" class="tab-pane xt-pane xt-description fade in active" id="description">
+                <h3>Ürün Açıklaması</h3>
+                @Html.Raw(Model.Definition)
+            </div>
+
+        </div>
+    </div>
+</div>

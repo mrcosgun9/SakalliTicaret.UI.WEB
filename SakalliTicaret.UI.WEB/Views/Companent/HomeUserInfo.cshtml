@@ -1,0 +1,19 @@
+﻿@using SakalliTicaret.Core.Model.Entity
+@{
+    User user = Session["LoginUser"] as User;
+}
+@if (user == null)
+{
+    <ul>
+        <li><a href="/Kullanici/Kayit">Üye Ol</a></li>
+        <li><a href="/Kullanici/Giris">Giriş Yap</a></li>
+    </ul>
+}
+else
+{
+    <ul>
+        <li><a href="/Kullanici/Profil/Bilgiler">@user.Name @user.LastName </a></li>
+        <li><a href="/Kullanici/Cikis">Çıkış Yap</a></li>
+    </ul>
+
+            }

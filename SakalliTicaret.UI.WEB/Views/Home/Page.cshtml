@@ -1,0 +1,14 @@
+﻿@model SakalliTicaret.Core.Model.Entity.Page
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+
+<h4>@Model.Title</h4>
+<hr/>
+<h5>@Model.Description</h5>
+<hr/>
+<p>
+    @Html.Raw(Model.Content) 
+</p>
+

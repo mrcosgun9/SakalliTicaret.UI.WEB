@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="description" content="app landing page template" />
+    <meta name="keywords" content="app, landing page, gradient background, image background, video background, template, responsive, bootstrap" />
+    <meta name="developer" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- FAV AND ICONS   -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/apple-icon.png">
+    <link rel="shortcut icon" sizes="72x72" href="assets/images/apple-icon-72x72.png">
+    <link rel="shortcut icon" sizes="114x114" href="assets/images/apple-icon-114x114.png">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7cPlayfair+Display:400,400i,700,900" rel="stylesheet">
+    <!-- FONT ICONS -->
+    <link rel="stylesheet" href="~/Content/icons/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom Icon Font -->
+    <link rel="stylesheet" href="~/Content/fonts/flaticon.css">
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="~/Content/plugins/css/bootstrap.min.css">
+    <!-- Fancybox-->
+    <link rel="stylesheet" href="~/Content/plugins/css/jquery.fancybox.min.css">
+    <!-- Animation -->
+    <link rel="stylesheet" href="~/Content/plugins/css/animate.css">
+    <!-- owl -->
+    <link rel="stylesheet" href="~/Content/plugins/css/owl.css">
+    <!--flexslider-->
+    <link rel="stylesheet" href="~/Content/plugins/css/flexslider.min.css">
+    <!-- selectize -->
+    <link rel="stylesheet" href="~/Content/plugins/css/selectize.css">
+    <link rel="stylesheet" href="~/Content/plugins/css/selectize.bootstrap3.css">
+    <link rel="stylesheet" href="~/Content/plugins/css/jquery-ui.min.css">
+    <!--dropdown -->
+    <link rel="stylesheet" href="~/Content/plugins/css/bootstrap-dropdownhover.min.css">
+    <!-- mobile nav-->
+    <link rel="stylesheet" href="~/Content/plugins/css/meanmenu.css">
+    <!-- COUSTOM CSS link  -->
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+
+
+
+    <title>Sakalli Ticaret | @ViewBag.Title</title>
+    @RenderSection("AdditionalMeta", false)
+</head>
+<body>
+    <!--
+    |========================
+    |  HEADER
+    |========================
+    -->
+    <header id="xt-home" class="xt-header">
+        <div class="header-top">
+            <div class="container">
+                <div class="xt-language col-md-6 col-sm-6 col-xs-12">
+                    <div class="each-nav">
+                        @*<ul>
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English <span class="fa fa-angle-down"></span> </a>
+                                    <ul class="dropdown-menu xt-lang-dropdown">
+                                        <li><a href="">France</a></li>
+                                        <li><a href="causes-list.html">Bangla</a></li>
+                                        <li><a href="causes-details.html">Swidesh</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">USD <span class="fa fa-angle-down"></span> </a>
+                                    <ul class="dropdown-menu xt-lang-dropdown">
+                                        <li><a href="">USD</a></li>
+                                        <li><a href="causes-list.html">EURO</a></li>
+                                        <li><a href="causes-details.html">Riyal</a></li>
+                                    </ul>
+                                </li>
+                            </ul>*@
+                    </div>
+                </div>
+
+                <div class="user-nav pull-right col-md-6 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><a href="/Kullanici/Kayit">Üye Ol</a></li>
+                        <li><a href="/Kullanici/Giris">Giriş Yap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-navigation">
+            <nav class="navbar navbar-fixed-top nav-scroll">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span aria-hidden="true" class="icon"></span>
+                                </button>
+                                <a class="navbar-brand" href="/Anasayfa">
+                                    <img src="~/Content/Images/sakalli logo-01.png" class="img-responsive" />
+
+
+                                </a>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="js-navbar-menu">
+                                <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
+                                    @{Html.RenderAction("HomeTopMenu", "Companent");}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!--Mobile Menu-->
+        <div class="main-color-bg">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-3 left-menu-wrapper">
+
+                    </div>
+                    <div class="col-md- col-sm-10 col-xs-12 xt-header-search">
+
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-spacing">
+        <div class="container">
+            <div class="row">
+                <div class="mobile-menu-area visible-xs visible-sm">
+                    <div class="mobile-menu">
+                        <nav id="mobile-menu-active">
+                            <ul class="main">
+                                <li><a class="main-a" href="">Shirt</a></li>
+                                <li><a class="main-a" href="">Pant</a></li>
+                                <li class="active">
+                                    <a class="main-a" href="#">Bourkha</a>
+                                    <ul>
+                                        <li><a href="#">Hijab</a></li>
+                                        <li><a href="#">Scarf</a></li>
+                                        <li>
+                                            <a href="#" class="main-a">Shirt</a>
+                                            <ul>
+                                                <li><a href="#">T-Shirt</a></li>
+                                                <li><a href="#">Trousers</a></li>
+                                                <li><a href="#">Jackets & sweater</a></li>
+                                                <li><a href="#">3 Piece</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="main-a" href="">Shawl</a></li>
+                                <li><a class="main-a" href="">Other</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="xt-product-subpage">
+        <div class="container">
+            <div class="row">
+                @if (ViewBag.ResultType != null)
+                {
+                    <div class="alert alert-@ViewBag.ResultType" role="alert">
+                        @ViewBag.ResultMessage
+                    </div>
+                }
+
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+
+    @{Html.RenderAction("FooterSocialMedia", "Companent");}
+    @{Html.RenderAction("HomeFooter", "Companent");}
+
+    <!-- jquery -->
+    <script src="~/Content/plugins/js/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Content/plugins/js/bootstrap.min.js"></script>
+    <!-- mean menu nav-->
+    <script src="~/Content/plugins/js/meanmenu.js"></script>
+    <!-- ajaxchimp -->
+    <script src="~/Content/plugins/js/jquery.ajaxchimp.min.js"></script>
+    <!-- wow -->
+    <script src="~/Content/plugins/js/wow.min.js"></script>
+    <!-- Owl carousel-->
+    <script src="~/Content/plugins/js/owl.carousel.js"></script>
+    <!--flexslider-->
+    <script src="~/Content/plugins/js/jquery.flexslider-min.js"></script>
+    <!--dropdownhover-->
+    <script src="~/Content/plugins/js/bootstrap-dropdownhover.min.js"></script>
+    <!--jquery-ui.min-->
+    <script src="~/Content/plugins/js/jquery-ui.min.js"></script>
+    <!--validator -->
+    <script src="~/Content/plugins/js/validator.min.js"></script>
+    <!--smooth scroll-->
+    <script src="~/Content/plugins/js/smooth-scroll.js"></script>
+    <!-- Fancybox js-->
+    <script src="~/Content/plugins/js/jquery.fancybox.min.js"></script>
+    <!-- selectize -->
+    <script src="~/Content/plugins/js/standalone/selectize.js"></script>
+    <!-- init -->
+    <script src="~/Content/js/init.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,122 @@
+﻿@model SakalliTicaret.Core.Model.Entity.Contact
+@if (Model!=null)
+{
+    <footer class="xt-footer">
+        <div class="container">
+            <div class="section-separator">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <div class="footer-widget footer-contact">
+                            <img src="assets/images/flogo.png" alt="" class="img-responsive">
+                            <ul>
+                                <li><i class="fa fa-mobile-phone"></i><a href="">@Model.Phone </a></li>
+                                <li><i class="fa fa-envelope-o"></i><a href="">@Model.Mail</a></li>
+                                <li>
+                                    <i class="fa fa-location-arrow"></i>
+                                    <address>Address: @Model.Adrress</address>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="footer-widget">
+                            <h4>Bilgi</h4>
+                            <ul>
+                                <li><a href=""><i class="fa fa-caret-right"></i>Hakkımızda</a></li>
+                                @*<li><a href=""><i class="fa fa-caret-right"></i>Blog</a></li>*@
+                         
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="footer-widget">
+                            <h4>Müşteri Servisi</h4>
+                            <ul>
+                                <li><a href=""><i class="fa fa-caret-right"></i>Alışveriş & İade</a></li>
+                                <li><a href=""><i class="fa fa-caret-right"></i>Güvenli Alışveriş</a></li>
+
+                                <li><a href=""><i class="fa fa-caret-right"></i>İletişim</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="footer-widget">
+                            <h4>Bilgi</h4>
+                            <ul>
+                                <li><a href=""><i class="fa fa-caret-right"></i>Adres Bilgisi</a></li>
+
+                                <li><a href=""><i class="fa fa-caret-right"></i>Teslimat Bilgisi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="footer-middle bg-2">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-widget-2">
+                            <div class="row">
+                                <div class="col-md-2 f-icon">
+                                    <i class="fa flaticon-credit-card"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <h4>Güvenli Ödeme</h4>
+                                    <p>
+                                        Dünyanın en popüler ve güvenli ödeme yöntemleriyle ödeme yapın.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-widget-2">
+                            <div class="row">
+                                <div class="col-md-2 f-icon">
+                                    <i class="fa flaticon-shipped"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <h4>Hızlı Kargolama</h4>
+                                    <p>
+                                        3 iş günü içerisinde ürünleriniz kargoya verilir.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-widget-2">
+                            <div class="row">
+                                <div class="col-md-2 f-icon">
+                                    <i class="fa flaticon-question"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <h4>7/24 Yardım Merkezi</h4>
+                                    <p>
+                                        Sorunsuz bir alışveriş deneyimi için mail yoluyla iletişime geçebilirsiniz.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-md-6 col-sm-6">
+                    
+                        <p> © @DateTime.Now.Year Tüm Hakları Saklıdır. <a href="#">Mrcosgun</a> Tarafından Tasarlandı.
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <img src="~/Content/Images/payment.png" alt="" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+}

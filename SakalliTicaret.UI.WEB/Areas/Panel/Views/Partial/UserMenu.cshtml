@@ -1,0 +1,14 @@
+﻿@using SakalliTicaret.Core.Model.Entity
+@{
+    User user = Session["AdminLoginUser"] as User;
+    string res = user.ImageUrl != null ? user.ImageUrl : "/Areas/Panel/Content/images/user.png";
+}
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="@res" class="profile-pic" /></a>
+    <div class="dropdown-menu dropdown-menu-right animated zoomIn">
+        <ul class="dropdown-user">
+            <li><a href="/Panel/Users/Details?id=@user.ID"><i class="ti-user"></i> Profil</a></li>
+            <li><a href="/Panel/Login/LogOut"><i class="fa fa-power-off"></i> Çıkış</a></li>
+        </ul>
+    </div>
+</li>

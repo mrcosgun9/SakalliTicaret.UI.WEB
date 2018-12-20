@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+<div class="col-12">
+<div class="card">
+<p>
+    <a href="/Panel/Categories/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Kategori Ekle</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateUserID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateUserID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+</div>
+</div>
+

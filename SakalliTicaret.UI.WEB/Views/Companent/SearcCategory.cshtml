@@ -1,0 +1,9 @@
+﻿
+@model IEnumerable<SakalliTicaret.Core.Model.Entity.Category>
+<option>Tüm Kategoriler</option>
+@foreach (var item in Model)
+{
+    <option>@item.Name</option>
+}
+
+

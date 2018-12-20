@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.Page>
+
+@{
+    ViewBag.Title = "Sayfa Listesi";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card">
+        <p>
+            <a href="/Panel/Pages/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Sayfa Ekle</a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+
+                <th>
+       
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }) |
+
+                        @Html.ActionLink("Sil", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

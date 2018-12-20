@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.SocialMedia>
+<div class="black-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                @*<form class="form-inline xt-subscribe-form">
+                        <div class="form-group col-xs-10 xt-subscribe">
+                            <label for="subscribe">Subscribe</label>
+                            <input type="text" class="form-control" id="subscribe" placeholder="Your email address">
+                        </div>
+                        <div class="col-md-2 col-xs-2">
+                            <button type="submit" class="btn btn-fill"><i class="fa flaticon-home"></i></button>
+                        </div>
+                    </form>*@
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="xt-social">
+                    <span>Takip Edin</span>
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                            <li><a title="@item.Name" href="@item.Url"><i class="fa @item.Icon"></i></a></li>
+
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

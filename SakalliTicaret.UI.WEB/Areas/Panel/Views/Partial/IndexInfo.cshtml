@@ -1,0 +1,59 @@
+﻿@using SakalliTicaret.UI.WEB.Areas.Panel.Controllers
+@{
+    IndexInfoValues infoValues = ViewBag.infoValue;
+}
+
+<div class="col-md-3">
+    <div class="card p-30">
+        <div class="media">
+            <div class="media-left meida media-middle">
+                <span><i class="fa fa-archive f-s-40 color-warning"></i></span>
+            </div>
+            <div class="media-body media-text-right">
+                <h2>@infoValues.ProductCount</h2>
+                <p class="m-b-0">Ürün Sayısı</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="card p-30">
+        <div class="media">
+            <div class="media-left meida media-middle">
+                <span><i class="fa fa-shopping-cart f-s-40 color-success"></i></span>
+            </div>
+            <div class="media-body media-text-right">
+                <h2>@infoValues.SaleCount</h2>
+                <p class="m-b-0">Sipariş</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card p-30">
+        <div class="media">
+            <div class="media-left meida media-middle">
+                <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+            </div>
+            <div class="media-body media-text-right">
+                <h2>@infoValues.UserCount</h2>
+                <p class="m-b-0">Müşteri</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card p-30">
+        <div class="media">
+            <div class="media-left meida media-middle">
+                <span><i class="fa fa-turkish-lira f-s-40 color-primary"></i></span>
+            </div>
+            <div class="media-body media-text-right">
+                <h2>-</h2>
+                <p class="m-b-0">Total </p>
+            </div>
+        </div>
+    </div>
+</div>

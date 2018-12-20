@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.Product>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3 margin-b-30">
+        <div class="card">
+            <a href="~/Product/Detail?id=@item.ID">
+                <div class="cardimagediv">
+                    <img class="card-img-top" src="@item.ImageUrl" />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <small>@item.Price TL</small>
+
+                </div>
+            </a>
+            <input value="Sepete Ekle" name="@item.ID" class="btn btn-primary btn-block basketCreate" type="submit" />
+
+            @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
+        </div>
+
+    </div>
+}

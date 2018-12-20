@@ -1,0 +1,76 @@
+﻿@model SakalliTicaret.UI.WEB.App_Class.BasketClass
+@{
+    ViewBag.Title = "Sepetim";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="col-md-9 basketlist">
+    
+    @if (Model == null || Model.Products.Count == 0)
+    {
+        <div class="sepetbos">
+            <i style="font-size: 60px; color: darkcyan;" class="fa fa-shopping-cart"></i>
+            <br/>
+            <h4>Sepetinizde Ürün Bulunmamaktadır.</h4>
+            <a href="/Anasayfa" class="btn btn-primary">Ana Sayfa</a>
+        </div>
+    }
+    else
+    {
+        <div class="baslikborder">Sepet</div>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Resim</th>
+                    <th>Adı</th>
+                    <th>Birim Fiyat</th>
+                    <th>Adet</th>
+                    <th>Top. Fiyat</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                @{
+                    int i = 1;
+                }
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td class="text-left">
+
+                            <div class="sepetimage">
+                                <img src="@item.Product.ImageUrl" />
+                            </div>
+                        </td>
+                        <td class="text-left">
+                            <a href="Urun/@item.Product.ID/@item.Product.Name.Replace(" ","").ToLower()" target="_blank">
+                                @item.Product.Name
+                            </a>
+                        </td>
+
+
+                        <td class="text-left">@item.Product.Price ₺</td>
+                        <td class="text-left">@item.Quantity</td>
+                        <td class="text-left">@item.Total ₺</td>
+                        <td class="text-left">
+                            <a href="Sepetim/Sil/@item.siparisDetayId">
+                                <i class="fa fa-minus-circle" style="color:#b22222"></i>
+                                @*<i class="material-icons sepetsil" name="@item.Urun.urunId">cancel</i>*@
+                            </a>
+                        </td>
+                    </tr>
+                    i = i + 1;
+                }
+            </tbody>
+        </table>
+        <div class="sepetislemler">
+            <a class="btn btn-danger" href="/Sepetim/SepetTemizle">Temizle</a>
+            <a class="btn btn-primary" href="/Sepetim/Tamamla">Sepeti Onayla</a>
+
+        </div>
+                    }
+
+</div>

@@ -1,0 +1,38 @@
+﻿@using SakalliTicaret.Core.Model.Entity
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    User user = Session["LoginUser"] as User;
+
+}
+<h5>
+    Üyelik Bilgilerim
+</h5>
+
+<hr />
+<form>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="formGroupExampleInput">İsim</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@user.Name">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Soyisim</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@user.LastName">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Telefon</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@user.Telephone">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Email</label>
+            <input type="text" disabled="disabled" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@user.Email">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.Page>
+<li class="active"><a href="/Anasayfa">Anasayfa</a></li>
+<li><a href="/Urunler/YeniUrunler">Yeni Ürünler</a></li>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/Sayfa/@item.ID/@item.Title">@item.Title</a>
+    </li>
+}
+
+<li><a href="#">İletişim</a></li>
