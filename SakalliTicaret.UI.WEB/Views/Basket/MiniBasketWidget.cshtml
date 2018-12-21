@@ -10,7 +10,7 @@
                 foreach (var item in Model.Products)
                 {
                     <li>
-                        <a href="">
+                        <a href="Urun/@item.Product.ID/@item.Product.Name.Replace(" ","").ToLower()">
                             <div class="basketimagediv">
                                 <img src="@item.Product.ImageUrl" alt="">
 

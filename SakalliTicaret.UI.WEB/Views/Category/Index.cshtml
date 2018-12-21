@@ -1,14 +1,14 @@
 ﻿@model List<SakalliTicaret.Core.Model.Entity.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kategori";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 @foreach (var item in Model)
 {
     <div class="col-md-3">
         <div class="card">
-            <a href="~/Product/Detail?id=@item.ID">
+            <a href="Urun/@item.ID/@item.Name.Replace(" ","").ToLower()">
                 <div class="cardimagediv">
                     <img class="card-img-top" src="@item.ImageUrl" />
                 </div>
