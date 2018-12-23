@@ -1,21 +1,22 @@
 ﻿@model SakalliTicaret.UI.WEB.App_Class.BasketClass
 @{
     ViewBag.Title = "Sepetim";
-    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
 }
-<div class="col-md-9 basketlist">
-    
-    @if (Model == null || Model.Products.Count == 0)
-    {
+
+@if (Model == null || Model.Products.Count == 0)
+{<div class="col-md-12 basketlist">
         <div class="sepetbos">
             <i style="font-size: 60px; color: darkcyan;" class="fa fa-shopping-cart"></i>
-            <br/>
+            <br />
             <h4>Sepetinizde Ürün Bulunmamaktadır.</h4>
             <a href="/Anasayfa" class="btn btn-primary">Ana Sayfa</a>
         </div>
-    }
-    else
-    {
+    </div>
+}
+else
+{
+    <div class="col-md-9 basketlist">
         <div class="baslikborder">Sepet</div>
         <table class="table-fill">
             <thead>
@@ -67,10 +68,31 @@
             </tbody>
         </table>
         <div class="sepetislemler">
-            <a class="btn btn-danger" href="/Sepetim/SepetTemizle">Temizle</a>
-            <a class="btn btn-primary" href="/Sepetim/Tamamla">Sepeti Onayla</a>
+            @*<a class="btn btn-danger" href="Sepet/Temizle">Temizle</a>*@
+
 
         </div>
-                    }
+        @{Html.RenderAction("Index", "UserAddresses");}
 
-</div>
+
+    </div>
+    <div class="col-md-3">
+        <div class="baslikborder">Sepet Özeti</div>
+
+
+        <table class="table-fill">
+            <tbody>
+                <tr>
+                    <td>  Toplam @Model.Products.Count Ürün</td>
+
+                </tr>
+                <tr>
+                    <td><b>Toplam Tutar:</b>@Model.SubTotal</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" style="float: right" href="Sepet/Tamamla">Sepeti Onayla</a>
+    </div>
+
+            }
+

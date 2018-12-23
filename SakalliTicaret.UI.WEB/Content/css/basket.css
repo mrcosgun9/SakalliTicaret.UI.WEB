@@ -80,36 +80,38 @@
     padding: 0 0 10px 0;
 }
 
-.basketlist .table-fill {
+.table-fill {
     width: 100%;
 }
 
-    .basketlist .table-fill .sepetimage {
+    .table-fill .sepetimage {
         width: 100px;
         height: 100px;
         overflow: hidden;
     }
 
-    .basketlist .table-fill tbody tr {
+    .table-fill tbody tr {
         height: 120px;
         border-bottom: 1px solid #ddd;
     }
 
-    .basketlist .table-fill tbody tr:last-child {
-        border: 0;
-    }
+        .table-fill tbody tr:last-child {
+            border: 0;
+        }
 
-    .basketlist .table-fill .sepetimage img {
+    .table-fill .sepetimage img {
         width: 100%;
     }
 
-    .basketlist .table-fill thead tr {
+    .table-fill thead tr {
         border-bottom: 1px solid #ddd;
         height: 40px;
     }
-    .sepetislemler {
-        text-align: right
-    }
-    .sepetbos {
-        text-align: center;
-    }
+
+.sepetislemler {
+    text-align: right;
+}
+
+.sepetbos {
+    text-align: center;
+}

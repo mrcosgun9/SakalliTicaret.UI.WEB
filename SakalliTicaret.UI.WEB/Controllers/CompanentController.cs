@@ -20,7 +20,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
         public ActionResult IndexProcudt()
         {
-            var model = db.Products.Take(6).ToList();
+            var model = db.Products.OrderBy(x=>x.Name).ToList();
             return View(model);
         }
         public ActionResult SearcCategory()

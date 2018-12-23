@@ -54,11 +54,16 @@ namespace SakalliTicaret.UI.WEB.App_Class
         public void BasketItemRemove(int id)
         {
             BasketClass s = (BasketClass)HttpContext.Current.Session["AktifSepet"];
-            BasketItem si = s.Products.FirstOrDefault(x => x.siparisDetayId == id);
+            if (s != null)
+            {
+                BasketItem si = s.Products.FirstOrDefault(x => x.siparisDetayId == id);
+                s.Products.Remove(si);
+                HttpContext.Current.Session["AktifSepet"] = s;
+            }
 
             //tblSiparisDetay siparisDetay=db.tblSiparisDetay.Where(x=>x.Urun==id&&x.siparis==)
-            s.Products.Remove(si);
-            HttpContext.Current.Session["AktifSepet"] = s;
+
+
         }
         public void BasketItemUpdate(int id, int adet)
         {
@@ -68,7 +73,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 s.Products.FirstOrDefault(x => x.Product.ID == si.Product.ID).Quantity = adet;
             HttpContext.Current.Session["AktifSepet"] = s;
         }
-        public void SepetTemizle()
+        public void AllClear()
         {
             HttpContext.Current.Session.Remove("AktifSepet");
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SakalliTicaret.Core.Model;
+using SakalliTicaret.Core.Model.Entity;
 
 namespace SakalliTicaret.UI.WEB
 {
@@ -35,6 +36,27 @@ namespace SakalliTicaret.UI.WEB
 
             return false;
 
+        }
+
+        public bool IsLogin()
+        {
+            if (HttpContext.Current.Session["LoginUserId"] != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public User IsLoginUser()
+        {
+            var loginUser = HttpContext.Current.Session["LoginUser"];
+            User user = null;
+            if (loginUser != null)
+            {
+                user = loginUser as User;
+            }
+
+            return user;
         }
     }
 }

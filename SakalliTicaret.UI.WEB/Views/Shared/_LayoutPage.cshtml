@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SakalliTicaret.Core.Model.Entity
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -43,6 +44,7 @@
     <link href="~/Content/css/responsive.css" rel="stylesheet" />
     <link href="~/Content/css/prophet.css" rel="stylesheet" />
     <link href="~/Content/css/basket.css" rel="stylesheet" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
 
     <title>@ViewBag.Title</title>
     @RenderSection("AdditionalMeta", false)
@@ -53,6 +55,7 @@
     |  HEADER
     |========================
     -->
+
     <header id="xt-home" class="xt-header">
         <div class="header-top">
             <div class="container">
@@ -147,10 +150,16 @@
                     </div>
                     <div class="col-md-1 col-sm-2 col-xs-2">
                         <div class="xt-cart">
+                             @{
+                                Basket basket= Session["AktifSepet"] as Basket;
+                                
+                            }
                             <div id="basketListOpen">
                                 <i class="fa flaticon-shopping-cart"></i>
                             </div>
-                         
+
+                            @*<span class="xt-item-count">@basket.Product.Count</span>*@
+
                         </div>
                     </div>
                 </div>
@@ -246,6 +255,7 @@
     <!-- init -->
     <script src="~/Content/js/init.js"></script>
     <!-- toastr -->
+    <script src="~/scripts/toastr.min.js"></script>
     <script src="~/Content/js/prophet.js"></script>
     <script src="~/Content/js/main.js"></script>
 
@@ -267,17 +277,18 @@
                         success: function sVeriGetir(veri) {
                             $(".basketdiv").html('');
                             $(".basketdiv").html(veri);
-                            console.log(veri);
+                            toastr.success('Ürün Sepete Başarıyla Eklendi');
+            
                         }
                     });
                 },
                 error: function myfunction() {
-                    alert("Hata Oluştu");
+                    toastr.warning('Ürün Sepete Eklenemedi.Bizimle İletişime Geçin Lütfen.');
                 }
             });
         });
-        $("#basketListOpen").click(function() {
-    
+        $("#basketListOpen").click(function () {
+
             $(".basketdiv").animate({
                 width: "toggle"
             });

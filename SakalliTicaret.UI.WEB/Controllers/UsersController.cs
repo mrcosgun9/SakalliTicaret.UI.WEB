@@ -43,6 +43,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
         // GET: Users/Create
         [Route("Kullanici/Kayit")]
+        [ControlLoginPerformed]
         public ActionResult Create()
         {
             return View();
@@ -54,6 +55,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Kullanici/Kayit")]
+        [ControlLoginPerformed]
         public ActionResult Create([Bind(Include = "ID,Name,LastName,Email,ImageUrl,Telephone,Password,TCKN,IsActive,IsAdmin,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] User user)
         {
             if (ModelState.IsValid)
@@ -127,23 +129,30 @@ namespace SakalliTicaret.UI.WEB.Controllers
             return RedirectToAction("Index");
         }
         [Route("Kullanici/KayitBasarili")]
+        [ControlLoginPerformed]
         public ActionResult CreateSuccess()
         {
             return View();
         }
-        [Route("Kullanici/Giris")]
-        public ActionResult Login()
+        [Route("Kullanici/Giris/{ret?}")]
+        [ControlLoginPerformed]
+        public ActionResult Login(string ret)
         {
             return View();
         }
         [HttpPost]
-        [Route("Kullanici/Giris")]
-        public ActionResult Login([Bind(Include = "Email,Password")]User user)
+        [Route("Kullanici/Giris/{ret?}")]
+        [ControlLoginPerformed]
+        public ActionResult Login([Bind(Include = "Email,Password")]User user,string ret)
         {
             if (new LoginState().IsLoginSucces(user.Email, user.Password, false))
             {
                 ViewBag.ResultType = "success";
                 ViewBag.ResultMessage = "Giriş İşlemi Başarılı. İyi Alışverişler.";
+                if (ret=="Sepet")
+                {
+                    return Redirect("/Sepetim");
+                }
                 return Redirect("/Anasayfa");
             }
             ViewBag.ResultType = "danger";
@@ -161,10 +170,17 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [ControlLogin]
         public ActionResult UserInfo(string Page)
         {
+           
             switch (Page)
             {
                 case "Bilgiler":
-                    return View("_ProfileInfo");
+                    var loginUser = Session["LoginUser"];
+                    User user = null;
+                    if (loginUser != null)
+                    {
+                        user = loginUser as User;
+                    }
+                    return View("_ProfileInfo",user);
                     break;
                 case "Adresler":
                     return View("_AddressList");

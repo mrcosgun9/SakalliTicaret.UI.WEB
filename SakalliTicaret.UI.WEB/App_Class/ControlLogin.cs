@@ -12,7 +12,9 @@ namespace SakalliTicaret.UI.WEB.App_Class
         {
             try
             {
-                if (!string.IsNullOrEmpty(HttpContext.Current.Session["LoginUser"].ToString()))
+                var loginUser = HttpContext.Current.Session["LoginUser"];
+
+                if (loginUser != null)
                 {
                     base.OnActionExecuting(filterContext);
 
