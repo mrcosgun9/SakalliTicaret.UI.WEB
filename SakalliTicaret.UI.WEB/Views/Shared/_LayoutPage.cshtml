@@ -149,6 +149,7 @@
                         <div class="xt-cart">
                             <div id="basketListOpen">
                                 <i class="fa flaticon-shopping-cart"></i>
+                                <span class="xt-item-count">0</span>
                             </div>
                          
                         </div>
@@ -267,7 +268,7 @@
                         success: function sVeriGetir(veri) {
                             $(".basketdiv").html('');
                             $(".basketdiv").html(veri);
-                            console.log(veri);
+
                         }
                     });
                 },
