@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
@@ -91,8 +92,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 {
                     if (_loginState.IsLogin())
                     {
-                      
-                        return View("Sepet/Tamamla/Adres");
+
+                        return Redirect("/Sepet/Tamamla/Adres");
 
                     }
                     else
@@ -137,8 +138,48 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //}
             return View();
         }
+        [Route("Sepet/Tamamla/Adres")]
+        public ActionResult BasketCompleteAddress()
+        {
+            User user = _loginState.IsLoginUser();
+            BasketClass s = (BasketClass)Session["AktifSepet"];
+            //GirisSepetControl();
+            if (s == null)
+            {
+                return Redirect("/Anasayfa");
+            }
+            if (user == null)
+            {
+                return Redirect("/Kullanici/Giris");
+            }
+            var model = db.UserAddresses.Include(u => u.User).Where(x => x.UserId == user.ID).ToList();
+            //var model = db.UserAddresses.Include(x => x.Users).Where(x => x.UserId == user.ID).ToList();
 
-
+            return View(model);
+        }
+        [Route("Sepet/Tamamla/Adres")]
+        [HttpPost]
+        public ActionResult BasketCompleteAddress(int ID)
+        {
+            BasketClass s = (BasketClass)Session["AktifSepet"];
+            if (s==null)
+            {
+                return Redirect("/Anasayfa");
+            }
+            else
+            {
+                s.AddressId = ID;
+                Session["AktifSepet"] = s;
+                return Redirect("/Sepet/Tamamla/Ödeme");
+            }
+            return View();
+        }
+        [Route("Sepet/Tamamla/Ödeme")]
+        public ActionResult BasketCompletePayment()
+        {
+            BasketClass s = (BasketClass)Session["AktifSepet"];
+            return View();
+        }
         //private void GirisSepetControl()
         //{
         //    int userId = Convert.ToInt32(Session["userId"]);

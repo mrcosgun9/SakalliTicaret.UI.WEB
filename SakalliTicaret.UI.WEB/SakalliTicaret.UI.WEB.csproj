@@ -1625,6 +1625,7 @@
     <Content Include="Content\css\color\color-6.css" />
     <Content Include="Content\css\iconfont.css" />
     <Content Include="Content\css\prophet.css" />
+    <Content Include="Content\css\StyleSheet.css" />
     <Content Include="Content\js\prophet.js" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
@@ -2114,6 +2115,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserAddresses1Controller.cs" />
     <Compile Include="Controllers\UserAddressesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2412,6 +2414,13 @@
     <Content Include="Views\UserAddresses\Index.cshtml" />
     <Content Include="Views\Basket\_BasketAddressConfirmation.cshtml" />
     <Content Include="Views\Basket\_BasketProductConfirmation.cshtml" />
+    <Content Include="Views\Basket\BasketCompleteAddress.cshtml" />
+    <Content Include="Views\UserAddresses1\Create.cshtml" />
+    <Content Include="Views\UserAddresses1\Delete.cshtml" />
+    <Content Include="Views\UserAddresses1\Details.cshtml" />
+    <Content Include="Views\UserAddresses1\Edit.cshtml" />
+    <Content Include="Views\UserAddresses1\Index.cshtml" />
+    <Content Include="Views\Basket\BasketCompletePayment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

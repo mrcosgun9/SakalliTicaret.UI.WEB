@@ -151,7 +151,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 ViewBag.ResultMessage = "Giriş İşlemi Başarılı. İyi Alışverişler.";
                 if (ret=="Sepet")
                 {
-                    return Redirect("/Sepetim");
+                    return Redirect("/Sepet/Tamamla/Adres");
                 }
                 return Redirect("/Anasayfa");
             }

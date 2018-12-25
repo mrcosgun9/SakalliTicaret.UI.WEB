@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.UserAddress>
+@{
+    ViewBag.Title = "BasketCompleteAddress";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+
+
+
+@if (Session["LoginUser"] != null)
+{
+    <div class="baslikborder">Adres Listesi</div>
+    if (!Model.Any() || Model == null)
+    {
+        <div>
+            <b>
+                Adres Kaydı Bulunamadı Lütfen Adres Ekleyin
+            </b>
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm("BasketCompleteAddress","Basket",FormMethod.Post))
+         {
+             <ul class="adreslist">
+                 @foreach (var item in Model)
+                 {
+                     <li>
+                         @*@Html.RadioButtonFor(m => m.SelectedAnswer, "Answer1")*@
+                         @Html.RadioButton("ID", item.ID, new {@id = item.ID})
+                         <div class="addresslistitem">
+                             <b>@item.Title</b> - @item.User.Name @item.User.LastName
+                         </div>
+                         <div class="addresslistitem">
+                             @item.Address
+                         </div>
+                         <div class="addresslistitem">
+                             <b>Fatura:</b>Bireysel
+                         </div>
+                         <div class="addresslistitem">
+                             <b>Tel:</b>@item.Phone
+                         </div>
+                     </li>
+                 }
+             </ul>
+             <input type="submit" value="Adres Onayla" class="btn btn-success"/>
+         }
+       
+    }
+    <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Adres Ekle</a>
+}
+
+
+<!-- Modal -->
+@*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                @{Html.RenderAction("Create", "UserAddresses");}
+            </div>
+
+        </div>
+    </div>
+</div>*@

@@ -16,7 +16,7 @@
 }
 else
 {
-    <div class="col-md-9 basketlist">
+    <div class="col-md-12 basketlist">
         <div class="baslikborder">Sepet</div>
         <table class="table-fill">
             <thead>
@@ -67,32 +67,14 @@ else
                 }
             </tbody>
         </table>
-        <div class="sepetislemler">
+        <div class="sepetozet text-right margin-t-20 margin-b-20">
+            <div><b>Toplam:</b>@Model.Products.Count Ürün</div>
+            <div>
+                <b>Toplam Tutar:</b>@Model.SubTotal
+            </div>
             @*<a class="btn btn-danger" href="Sepet/Temizle">Temizle</a>*@
-
-
         </div>
-        @{Html.RenderAction("Index", "UserAddresses");}
-
-
     </div>
-    <div class="col-md-3">
-        <div class="baslikborder">Sepet Özeti</div>
+    <a class="btn btn-primary" style="float: right" href="Sepet/Tamamla">Sepeti Onayla</a>
 
-
-        <table class="table-fill">
-            <tbody>
-                <tr>
-                    <td>  Toplam @Model.Products.Count Ürün</td>
-
-                </tr>
-                <tr>
-                    <td><b>Toplam Tutar:</b>@Model.SubTotal</td>
-                </tr>
-            </tbody>
-        </table>
-        <a class="btn btn-primary" style="float: right" href="Sepet/Tamamla">Sepeti Onayla</a>
-    </div>
-
-            }
-
+                    }

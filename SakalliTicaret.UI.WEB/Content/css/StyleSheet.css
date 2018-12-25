@@ -1,4 +1,4 @@
-﻿.adreslist li{
+﻿.adreslist li {
     width: 250px;
     border: 1px solid #ddd;
     display: inline-block;
@@ -19,9 +19,43 @@
     padding: 5px 10px;
 }
 
-.radio:checked + .label {   /* target next sibling (+) label */
+.radio:checked + .label { /* target next sibling (+) label */
     background-color: blue;
 }
+
 .AktifAdres {
     border-color: #2e8b57 !important;
 }
+
+.productStyle {
+    display: inline-block;
+    position: relative;
+    margin: 0 0 10px 0;
+}
+
+    .productStyle .card-body .card-title {
+        height: 50px;
+        font-size: 1.2em;
+    }
+
+    .productStyle .basketCreate {
+        font-size: 0.8em;
+        padding: 0 8px;
+        float: right;
+        border: 1px solid #26a69a ;
+        background: transparent;
+        font-weight: bold;
+        transition: all ease-in-out 0.2s;
+    }
+        .productStyle .basketCreate:hover {
+            background: #26a69a ;
+            color: #fff;
+        }
+            .productStyle .basketCreate:hover i {
+                color: #fff;
+            }
+        .productStyle .basketCreate i {
+            font-size: 1.2em;
+            color: #26a69a ;
+            margin: 0  5px 0 0 ;
+        }

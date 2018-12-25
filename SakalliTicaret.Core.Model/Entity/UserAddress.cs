@@ -24,6 +24,7 @@ namespace SakalliTicaret.Core.Model.Entity
         public bool IsActice { get; set; }
         [Display(Name = "Varsayılan")]
         public bool IsDefault { get; set; }
+        public virtual IEnumerable<User> Users { get; set; }
 
     }
 }

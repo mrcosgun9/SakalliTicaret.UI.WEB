@@ -41,9 +41,12 @@
     <!-- COUSTOM CSS link  -->
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link href="~/Content/css/responsive.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+    <link href="~/Content/css/prophet.css" rel="stylesheet" />
     <link href="~/Content/css/basket.css" rel="stylesheet" />
-
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/Content/css/StyleSheet.css" rel="stylesheet" />
     <title>Sakalli Ticaret | @ViewBag.Title</title>
     @RenderSection("AdditionalMeta", false)
 </head>
@@ -53,12 +56,12 @@
     |  HEADER
     |========================
     -->
-    <header id="xt-home" class="xt-header">
-        <div class="header-top">
-            <div class="container">
-                <div class="xt-language col-md-6 col-sm-6 col-xs-12">
-                    <div class="each-nav">
-                        @*<ul>
+<header id="xt-home" class="xt-header">
+    <div class="header-top">
+        <div class="container">
+            <div class="xt-language col-md-6 col-sm-6 col-xs-12">
+                <div class="each-nav">
+                    @*<ul>
                                 <li class="dropdown">
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English <span class="fa fa-angle-down"></span> </a>
                                     <ul class="dropdown-menu xt-lang-dropdown">
@@ -76,62 +79,90 @@
                                     </ul>
                                 </li>
                             </ul>*@
-                    </div>
-                </div>
-
-                <div class="user-nav pull-right col-md-6 col-sm-6 col-xs-12">
-                    <ul>
-                        <li><a href="/Kullanici/Kayit">Üye Ol</a></li>
-                        <li><a href="/Kullanici/Giris">Giriş Yap</a></li>
-                    </ul>
                 </div>
             </div>
+
+            <div class="user-nav pull-right col-md-6 col-sm-6 col-xs-12">
+                @{Html.RenderAction("HomeUserInfo", "Companent");}
+            </div>
         </div>
+    </div>
 
-        <div class="main-navigation">
-            <nav class="navbar navbar-fixed-top nav-scroll">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                    <span aria-hidden="true" class="icon"></span>
-                                </button>
-                                <a class="navbar-brand" href="/Anasayfa">
-                                    <img src="~/Content/Images/sakalli logo-01.png" class="img-responsive" />
+    <div class="main-navigation">
+        <nav class="navbar navbar-fixed-top nav-scroll">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span aria-hidden="true" class="icon"></span>
+                            </button>
+                            <a class="navbar-brand" href="/Anasayfa">
+                                <img src="~/Content/Images/sakalli logo-01.png" class="img-responsive" />
 
 
-                                </a>
-                            </div>
+                            </a>
+                        </div>
 
-                            <div class="collapse navbar-collapse" id="js-navbar-menu">
-                                <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
-                                    @{Html.RenderAction("HomeTopMenu", "Companent");}
-                                </ul>
-                            </div>
+                        <div class="collapse navbar-collapse" id="js-navbar-menu">
+                            <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
+                                @{Html.RenderAction("HomeTopMenu", "Companent");}
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </nav>
-        </div>
-        <!--Mobile Menu-->
-        <div class="main-color-bg">
-            <div class="container">
-                <div class="row">
+            </div>
+        </nav>
+    </div>
+    <!--Mobile Menu-->
+    <div class="main-color-bg">
+        <div class="container">
+            <div class="row">
 
-                    <div class="col-md-3 left-menu-wrapper">
-
+                @*<div class="col-md-3 left-menu-wrapper">
+                    <div class="xt-sidenav hidden-xs hidden-sm">
+                        <nav>
+                            <ul class="xt-side-menu">
+                                <li>
+                                    <a href="#">Kategoriler</a>
+                                    <ul class="xt-dropdown">
+                                        @{Html.RenderAction("SliderMenu", "Companent");}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                    <div class="col-md- col-sm-10 col-xs-12 xt-header-search">
-
+                </div>*@
+                <div class="col-md-8 col-sm-10 col-xs-12 xt-header-search">
+                    <div class="form-group xt-form search-bar  col-md-8 col-sm-8 col-xs-7 padding-right-o">
+                        <input type="text" class="form-control" placeholder="Site İçi Arama" />
                     </div>
-                    <div class="col-md-1 col-sm-2 col-xs-2">
+                    <div class="form-group xt-form xt-search-cat col-md-4 col-sm-4 col-xs-5 padding-left-o ">
+                        <div class="xt-select xt-search-opt">
+                            <select class="xt-dropdown-search select-beast">
+                                @{Html.RenderAction("SearcCategory", "Companent");}
+                            </select>
+                        </div>
+                        <div class="xt-search-opt xt-search-btn">
+                            <button type="button" class="btn btn-primary btn-search"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-2">
+                    <div class="xt-cart">
+                    
+                        <div id="basketListOpen">
+                            <i class="fa flaticon-shopping-cart"></i>
+                        </div>
+
+                        @*<span class="xt-item-count">@basket.Product.Count</span>*@
 
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <div class="menu-spacing">
         <div class="container">
@@ -183,7 +214,9 @@
             </div>
         </div>
     </div>
-
+<div class="basketdiv">
+    @{Html.RenderAction("MiniBasketWidget", "Basket");}
+</div>
     @{Html.RenderAction("FooterSocialMedia", "Companent");}
     @{Html.RenderAction("HomeFooter", "Companent");}
 
@@ -214,7 +247,46 @@
     <!-- selectize -->
     <script src="~/Content/plugins/js/standalone/selectize.js"></script>
     <!-- init -->
-    <script src="~/Content/js/init.js"></script>
+<script src="~/Content/js/init.js"></script>
+<script src="~/scripts/toastr.min.js"></script>
+<script src="~/Content/js/prophet.js"></script>
+<script src="~/Content/js/main.js"></script>
+
+<script>
+    $(function () {
+        var toast = new Message('Message here!');
+        toast.show();
+    });
+    $(".basketCreate").click(function myfunction() {
+        var uid = $(this).attr("name");
+        $.ajax({
+            type: "GET",
+            url: "/Basket/Create",
+            data: { productId: uid },
+            success: function myfunction() {
+                $.ajax({
+                    type: "GET",
+                    url: "/Basket/MiniBasketWidget",
+                    success: function sVeriGetir(veri) {
+                        $(".basketdiv").html('');
+                        $(".basketdiv").html(veri);
+                        toastr.success('Ürün Sepete Başarıyla Eklendi');
+            
+                    }
+                });
+            },
+            error: function myfunction() {
+                toastr.warning('Ürün Sepete Eklenemedi.Bizimle İletişime Geçin Lütfen.');
+            }
+        });
+    });
+    $("#basketListOpen").click(function () {
+
+        $(".basketdiv").animate({
+            width: "toggle"
+        });
+    });
+</script>
     @RenderSection("scripts", false)
 </body>
 </html>
