@@ -18,7 +18,12 @@ namespace SakalliTicaret.Core.Model.Entity
         public string City { get; set; }
         [Display(Name = "Adres")]
         public string Address { get; set; }
+        [Display(Name = "Telefon")]
+        public string Phone { get; set; }
         [Display(Name = "Aktif")]
         public bool IsActice { get; set; }
+        [Display(Name = "Varsayılan")]
+        public bool IsDefault { get; set; }
+
     }
 }

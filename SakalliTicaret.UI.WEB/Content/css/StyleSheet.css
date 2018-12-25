@@ -1,0 +1,27 @@
+﻿.adreslist li{
+    width: 250px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin: 1em 1em;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.isHidden {
+    display: none; /* hide radio buttons */
+}
+
+.label {
+    display: inline-block;
+    background-color: red;
+    width: 120px;
+    height: 120px;
+    padding: 5px 10px;
+}
+
+.radio:checked + .label {   /* target next sibling (+) label */
+    background-color: blue;
+}
+.AktifAdres {
+    border-color: #2e8b57 !important;
+}

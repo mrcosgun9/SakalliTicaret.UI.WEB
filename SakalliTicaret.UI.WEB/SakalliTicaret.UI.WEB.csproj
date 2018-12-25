@@ -2410,6 +2410,8 @@
     <Content Include="Views\UserAddresses\Details.cshtml" />
     <Content Include="Views\UserAddresses\Edit.cshtml" />
     <Content Include="Views\UserAddresses\Index.cshtml" />
+    <Content Include="Views\Basket\_BasketAddressConfirmation.cshtml" />
+    <Content Include="Views\Basket\_BasketProductConfirmation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
