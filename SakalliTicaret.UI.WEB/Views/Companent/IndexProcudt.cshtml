@@ -50,7 +50,7 @@
 
                 @foreach (var item in Model)
                 {
-                    <div class="col-md-3 productStyle">
+                    <div class="col-md-3 productStyle"><small>@item.Price TL</small>
                         <div class="card">
                             <a href="Urun/@item.ID/@item.Name.Replace(" ","").ToLower()">
                                 <div class="cardimagediv">
@@ -58,10 +58,11 @@
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@item.Name</h5>
-                                    <small>@item.Price TL</small>
+                                    
 
                                 </div>
                             </a>
+                            <small stle="float:left;">@item.Price TL</small>
                             <button  name="@item.ID" class="basketCreate" type="submit" ><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
                             @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
