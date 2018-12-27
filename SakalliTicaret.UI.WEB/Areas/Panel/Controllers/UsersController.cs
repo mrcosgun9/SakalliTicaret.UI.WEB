@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
+using SakalliTicaret.UI.WEB.App_Class;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
     public class UsersController : AdminControlerBase
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
-
+        LogClass _logClass=new LogClass();
         // GET: Panel/Users
         public ActionResult Index()
         {
@@ -53,11 +54,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                InsertedUsers insertedUsers=new InsertedUsers();
-                insertedUsers.User = user;
-                insertedUsers.CreateUserID = (int)Session["AdminLoginUser"];
-                insertedUsers.Actions = "Insert";
-                db.InsertedUserses.Add(insertedUsers);
+                _logClass.UserLog(user ,"Ekleme");
                 return RedirectToAction("Index");
             }
 
@@ -91,6 +88,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 {
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
+                    _logClass.UserLog(user, "Düzenleme");
                     return RedirectToAction("Index");
                 }
                 return View(user);
@@ -125,6 +123,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
+            _logClass.UserLog(user, "Silme");
             return RedirectToAction("Index");
         }
 

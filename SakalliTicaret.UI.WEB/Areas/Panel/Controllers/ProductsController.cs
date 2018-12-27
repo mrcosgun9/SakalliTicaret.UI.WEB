@@ -9,13 +9,14 @@ using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
+using SakalliTicaret.UI.WEB.App_Class;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
     public class ProductsController : AdminControlerBase
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
-
+        LogClass _logClass = new LogClass();
         private Functions _functions=new Functions();
         // GET: Panel/Products
         public ActionResult Index()
@@ -72,6 +73,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
+                _logClass.ProductLog(product, "Ekleme");
                 return RedirectToAction("Index");
             }
 
@@ -107,6 +109,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+                _logClass.ProductLog(product, "Düzenleme");
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
@@ -139,6 +142,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 System.IO.File.Delete(Server.MapPath(product.ImageUrl));
             db.Products.Remove(product);
             db.SaveChanges();
+            _logClass.ProductLog(product, "Silme");
             return RedirectToAction("Index");
         }
 

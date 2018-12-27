@@ -54,7 +54,10 @@
     <Compile Include="Entity\Basket.cs" />
     <Compile Include="Entity\Category.cs" />
     <Compile Include="Entity\Contact.cs" />
-    <Compile Include="Entity\InsertedUsers.cs" />
+    <Compile Include="Entity\LogBasket.cs" />
+    <Compile Include="Entity\LogCategory.cs" />
+    <Compile Include="Entity\LogProduct.cs" />
+    <Compile Include="Entity\LogUsers.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\OrderPayment.cs" />
     <Compile Include="Entity\OrderProduct.cs" />

@@ -26,7 +26,10 @@ namespace SakalliTicaret.Core.Model
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<SocialMedia> SocialMediae { get; set; }
         public DbSet<Page> Pages { get; set; }
-        public DbSet<InsertedUsers> InsertedUserses { get; set; }
+        public DbSet<LogUsers> LogUsers { get; set; }
+        public DbSet<LogBasket> LogBaskets { get; set; }
+        public DbSet<LogCategory> LogCategories { get; set; }
+        public DbSet<LogProduct> LogProducts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

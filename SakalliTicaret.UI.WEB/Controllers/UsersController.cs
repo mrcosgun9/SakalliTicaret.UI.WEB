@@ -19,7 +19,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
     public class UsersController : BaseControler
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
-
+        LogClass _logClass = new LogClass();
         // GET: Users
         public ActionResult Index()
         {
@@ -65,6 +65,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 user.IsActive = true;
                 db.Users.Add(user);
                 db.SaveChanges();
+                _logClass.UserLog(user, "Ekleme");
                 return Redirect("/Kullanici/KayitBasarili");
 
             }
@@ -98,6 +99,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
+                _logClass.UserLog(user, "Düzenleme");
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -126,6 +128,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
+            _logClass.UserLog(user, "Silme");
             return RedirectToAction("Index");
         }
         [Route("Kullanici/KayitBasarili")]

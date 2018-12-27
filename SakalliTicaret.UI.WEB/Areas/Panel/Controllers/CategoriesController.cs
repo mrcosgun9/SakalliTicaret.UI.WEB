@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
+using SakalliTicaret.UI.WEB.App_Class;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
     public class CategoriesController : AdminControlerBase
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
-
+        LogClass _logClass = new LogClass();
         // GET: Panel/Categories
         public ActionResult Index()
         {
@@ -58,6 +59,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
+                _logClass.CategoryLog(category, "Ekleme");
                 return RedirectToAction("Index");
             }
             ViewBag.UstKategoriList = db.Categories.Where(x => x.ParentId == null).ToList();
@@ -94,6 +96,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
+                _logClass.CategoryLog(category, "Düzenleme");
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -122,6 +125,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
+            _logClass.CategoryLog(category, "Silme");
             return RedirectToAction("Index");
         }
 
