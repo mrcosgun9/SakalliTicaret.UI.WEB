@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.UI.WEB.Controllers.Base;
+using SakalliTicaret.UI.WEB.Models;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -18,8 +19,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             return View(Category);
         }
 
-        public ActionResult IndexProcudt()
+        public ActionResult IndexProcudt(FilterModel filterModel)
         {
+
             var model = db.Products.OrderBy(x=>x.Name).ToList();
             return View(model);
         }

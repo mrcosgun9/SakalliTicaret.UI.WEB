@@ -2,27 +2,20 @@
 
 @{
     ViewBag.Title = "Kategori";
-    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
 }
-@foreach (var item in Model)
-{
-    <div class="col-md-3">
-        <div class="card">
-            <a href="Urun/@item.ID/@item.Name.Replace(" ","").ToLower()">
-                <div class="cardimagediv">
-                    <img class="card-img-top" src="@item.ImageUrl" />
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <small>@item.Price TL</small>
-
-                </div>
-            </a>
-
-            <a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
-        </div>
-
+<div class="col-md-3 left-menu-wrapper">
+    <div class="xt-sidenav hidden-xs hidden-sm">
+        <nav>
+            <ul class="xt-side-menu">
+                <li>
+                    <a href="#">Kategoriler</a>
+                    <ul class="xt-dropdown">
+                        @{Html.RenderAction("SliderMenu", "Companent");}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </div>
-
-
-}
+</div>
+@{Html.RenderAction("IndexProcudt", "Companent");}
