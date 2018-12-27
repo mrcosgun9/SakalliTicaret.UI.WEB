@@ -895,7 +895,7 @@ p {
   background-attachment: fixed;
 }
 .section-separator {
-  padding: 50px 0;
+  padding: 0px 0;
 }
 .section-margin {
   margin: 90px 0;
@@ -1792,7 +1792,7 @@ ul li {
   padding-right: 0;
 }
 .xt-sidenav {
-  padding-top: 15px;
+  padding-top: 0px;
 }
 .xt-side-menu {
   position: relative;
@@ -1851,9 +1851,9 @@ ul li {
 .xt-dropdown > li > a {
   display: block;
   color: #000;
-  padding: 14px 0;
-  font-weight: 600;
-  font-size: 14px;
+  padding: 2px 0;
+  font-weight: bold;
+  font-size: 13px;
   line-height: 22px;
   text-transform: capitalize;
   padding-left: 20px;
@@ -1870,8 +1870,8 @@ ul li {
 }
 .xt-dropdown > li > a > i {
   padding: 10px;
-  color: #333333;
-  font-size: 20px;
+  color: #F14F2F;
+  font-size: 8px;
 }
 .xt-dropdown > li > a > i.right-icon {
   float: right;
@@ -1930,25 +1930,34 @@ ul li {
   color: #F14F2F;
 }
 .xt-column {
-  padding: 20px 0;
+  padding: 0px 0;
 }
 nav ul.xt-side-menu {
-  min-height: 50px;
-  background: #555555 none repeat scroll 0 0;
+  /*min-height: 50px;*/
+  /*background: #555555 none repeat scroll 0 0;*/
 }
 nav ul.xt-side-menu > li,
 .right-menu > ul > li {
-  display: inline-block;
-  margin: 15px 0;
+  display: block;
+  margin: 4px 0;
+    border-bottom: 1px solid #ddd;
+}
+nav ul.xt-side-menu > li:last-child,
+.right-menu > ul > li:last-child {
+    border: 0;
 }
 nav ul.xt-side-menu > li > a {
   display: block;
-  padding: 0 20px;
-  color: #fff;
-  font-size: 18px;
+  padding: 0 0px;
+  color: #555555;
+  font-size: 12px;
   line-height: 25px;
   font-weight: 600;
 }
+    nav ul.xt-side-menu > li > a i {
+        color: #F14F2F;
+        margin: 0 10px 0 15px;
+    }
 nav ul.xt-side-menu > li > ul.xt-dropdown {
   position: absolute;
   width: 100%;

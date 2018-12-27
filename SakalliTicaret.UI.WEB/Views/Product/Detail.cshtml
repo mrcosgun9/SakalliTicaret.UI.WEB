@@ -4,7 +4,18 @@
     ViewBag.Title = "Sakalli Ticaret | "+Model.Name;
     Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
 }
+<div class="col-md-3 left-menu-wrapper">
+    <div class="xt-sidenav hidden-xs hidden-sm">
+        <nav>
+            <div class="kategoriBaslik">Kategoriler</div>
+            <ul class="xt-side-menu">
 
+                @{Html.RenderAction("SliderMenu", "Companent");}
+
+            </ul>
+        </nav>
+    </div>
+</div>
 <div class="col-md-9">
     <div class="xt-product-inner">
         <div class="col-md-5">
@@ -83,7 +94,8 @@
                     <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
                 </div>
                 <div class="product-add-cart">
-                    <a href="" class="btn btn-fill">Sepete Ekle</a>
+                    <button name="@Model.ID" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+
 
                 </div>
                 <div class="product-additional-info">
@@ -96,8 +108,6 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-md-9 mt-5">
     <div class="xt-single-item-info margin-t-30">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs xt-single-item-tab" role="tablist" id="xt-product-dec-nav">
@@ -115,3 +125,4 @@
         </div>
     </div>
 </div>
+

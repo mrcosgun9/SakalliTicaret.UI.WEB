@@ -2104,6 +2104,7 @@
     <Compile Include="App_Class\ControlerBase.cs" />
     <Compile Include="App_Class\ControlLogin.cs" />
     <Compile Include="App_Class\ControlLoginPerformed.cs" />
+    <Compile Include="App_Class\Fonctions.cs" />
     <Compile Include="App_Class\LogClass.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Panel\AdminControlerBase.cs" />
@@ -2126,7 +2127,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\UserAddresses1Controller.cs" />
     <Compile Include="Controllers\UserAddressesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">

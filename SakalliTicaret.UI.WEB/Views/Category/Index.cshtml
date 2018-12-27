@@ -7,13 +7,12 @@
 <div class="col-md-3 left-menu-wrapper">
     <div class="xt-sidenav hidden-xs hidden-sm">
         <nav>
+            <div class="kategoriBaslik">Kategoriler</div>
             <ul class="xt-side-menu">
-                <li>
-                    <a href="#">Kategoriler</a>
-                    <ul class="xt-dropdown">
-                        @{Html.RenderAction("SliderMenu", "Companent");}
-                    </ul>
-                </li>
+
+
+                @{Html.RenderAction("SliderMenu", "Companent");}
+
             </ul>
         </nav>
     </div>

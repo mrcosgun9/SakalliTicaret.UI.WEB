@@ -68,7 +68,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel
             {
                 Yeni = Yeni + dizi[i].ToString();
             }
-            return Yeni + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "." + uzanti;
+            return Yeni + "_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "." ;
         }
     }
 }

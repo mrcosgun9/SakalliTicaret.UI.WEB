@@ -2,5 +2,5 @@
 @model IEnumerable<SakalliTicaret.Core.Model.Entity.Category>
 @foreach (var item in Model)
 {
-    <li><a href="/Kategori/@item.ID/@item.Name.Trim()"><i class="fa flaticon-menu"></i>@item.Name</a></li>
+    <li><a href="/Urun/Filter?filter=@item.ID"><i class="fa fa-circle"></i>@item.Name</a></li>
 }

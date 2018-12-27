@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using PagedList;
 using SakalliTicaret.Core.Model;
+using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.Controllers.Base;
 using SakalliTicaret.UI.WEB.Models;
 
@@ -12,23 +13,41 @@ namespace SakalliTicaret.UI.WEB.Controllers
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
         // GET: Home
-        [Route("Anasayfa")]
+        [Route("Anasayfa/{Page?}")]
         [Route]
         public ActionResult Index(FilterModel filterModel)
         {
+        
             List<PageRanking> pageRankings = new List<PageRanking>
             {
-                new PageRanking {Id = 1, Adi = "Alfabetik (A-Z)"},
-                new PageRanking {Id = 2, Adi = "Alfabetik (Z-A)"},
-                new PageRanking {Id = 3, Adi = "Azalan Fiyat"},
-                new PageRanking {Id = 4, Adi = "Artan Fiyat"},
-                new PageRanking {Id = 5, Adi = "Yayın Tarihi"}
+                new PageRanking {Id = 1, Name = "Alfabetik (A-Z)"},
+                new PageRanking {Id = 2, Name = "Alfabetik (Z-A)"},
+                new PageRanking {Id = 3, Name = "Azalan Fiyat"},
+                new PageRanking {Id = 4, Name = "Artan Fiyat"},
 
             };
-            ViewBag.PageRanking = new SelectList(pageRankings, "Id", "Adi");
+            ViewBag.PageRanking = new SelectList(pageRankings, "Id", "Name");
             int page = filterModel.Page ?? 1;
             int pageCount = filterModel.PageCount ?? 30;
-            filterModel.Products = db.Products.OrderBy(x => x.Name).ToPagedList(page, pageCount);
+            switch (filterModel.PageRanking)
+            {
+                case 1:
+                    filterModel.Products = db.Products.OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                    break;
+                case 2:
+                    filterModel.Products = db.Products.OrderByDescending(x => x.Name).ToPagedList(page, pageCount);
+                    break;
+                case 3:
+                    filterModel.Products = db.Products.OrderBy(x => x.Price).ToPagedList(page, pageCount);
+                    break;
+                case 4:
+                    filterModel.Products = db.Products.OrderByDescending(x => x.Price).ToPagedList(page, pageCount);
+                    break;
+
+                default:
+                    filterModel.Products = db.Products.OrderByDescending(x=>x.Name).ToPagedList(page, pageCount);
+                    break;
+            }
             if (Request.IsAjaxRequest())
             {
                 return PartialView("_Products", filterModel);
@@ -50,7 +69,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         {
             public int Id { get; set; }
 
-            public string Adi { get; set; }
+            public string Name { get; set; }
         }
     }
 }

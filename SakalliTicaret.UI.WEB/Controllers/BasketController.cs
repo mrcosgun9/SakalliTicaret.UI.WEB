@@ -27,8 +27,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             return View((BasketClass)HttpContext.Session["AktifSepet"]);
         }
-        public void Create(int productId)
+        public int Create(int productId)
         {
+            int basketCount = 0;
             try
             {
                 BasketClass.BasketItem basketItem = new BasketClass.BasketItem();
@@ -41,13 +42,15 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 if (Session["userId"] != null)
                 {
                     int musteriId = (int)HttpContext.Session["userId"];
-
                 }
+                s = (BasketClass)Session["AktifSepet"];
+                basketCount = s.Products.Count;
             }
             catch (Exception e)
             {
 
             }
+            return basketCount;
         }
         [Route("Sepet/Temizle")]
         public ActionResult SepetTemizle()

@@ -1,4 +1,5 @@
 ﻿
+@using PagedList.Mvc
 @model SakalliTicaret.UI.WEB.Models.FilterModel
 @{
     ViewBag.Title = "Sakalli Ticaret | İyi Alışverişler";
@@ -8,25 +9,126 @@
 <div class="col-md-3 left-menu-wrapper">
     <div class="xt-sidenav hidden-xs hidden-sm">
         <nav>
+            <div class="kategoriBaslik">Kategoriler</div>
             <ul class="xt-side-menu">
-                <li>
-                    <a href="#">Kategoriler</a>
-                    <ul class="xt-dropdown">
-                        @{Html.RenderAction("SliderMenu", "Companent");}
-                    </ul>
-                </li>
+
+                @{Html.RenderAction("SliderMenu", "Companent");}
+
             </ul>
         </nav>
     </div>
 </div>
+<div class="col-md-9">
+    <div class="xt-feature-product">
+        <div class="section-separator">
+            <div class="xt-filter-nav padding-bottom-60">
+                @*<div class="col-md-2 col-sm-2 col-xs-6">
+                        <div class="xt-view">
+                            <a href="" class="active"><i class="fa fa-th-large"></i></a>
+                            <a href=""><i class="fa fa-navicon"></i></a>
+                        </div>
+                    </div>*@
+                <div class="col-md-6 col-sm-6"></div>
+                <div class="col-md-2 col-sm-2 col-xs-6 xt-show-item">
+                    <label>Adet: </label>
+                    <div class="xt-select xt-search-opt xt-item-view-count">
+                        <select class="xt-category-search select-beast">
+                            <option>30</option>
+                            <option>60</option>
+                            <option>90</option>
+                            <option>120</option>
+                            <option>150</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group xt-shop-category col-md-4 col-sm-4 col-xs-12">
+                    <div class="xt-select xt-search-opt">
+                        @Html.DropDownList("PageRanking", (IEnumerable<SelectListItem>) ViewBag.PageRanking, new {@onchange = "getProduct()", @id = "drSiralama", @class = "xt-category-search select-beast block"})
+                        @*<select class="xt-category-search select-beast">
+                                <option>Artan Fiyat</option>
+                                <option>Azalan Fiyat</option>
+                                <option>Eklenme Tarihi</option>
+                            </select>*@
+                    </div>
 
-@if (Model.Products != null)
-{
-    @Html.Partial("_Products", @Model)
-}   
-else
-{
-<div class="alert alert-dark" role="alert">
-    Üzgünüz! Aradığınız kriterlere uygun ürün bulunamadı.
+                </div>
+                
+            </div>
+            <div class="clearfix"></div>
+            <div class="xt-each-feature" id="urunDiv">
+
+                @if (Model.Products != null)
+                {
+                    @Html.Partial("_Products", @Model)
+                }
+                else
+                {
+                    <div class="alert alert-dark" role="alert">
+                        Üzgünüz! Aradığınız kriterlere uygun ürün bulunamadı.
+                    </div>
+                }
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 xt-bottom-hr">
+                <hr class="xt-hr">
+            </div>
+            <div class="xt-filter-nav padding-bottom-60">          
+                <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                    <div class="xt-page-pagination">
+                        <nav aria-label="Page navigation">
+                            @Html.PagedListPager(Model.Products, page => Url.Action("Index", new RouteValueDictionary
+                            {
+                                {"Page",page},
+                                {"PageRanking",Model.PageRanking},
+                                {"Category",Model.Category},
+                                {"PageCount",Model.PageCount}
+                            }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "urunDiv" }))
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+@section scripts{
+    <script>
+        function getProduct() {
+            var pageRanking = $('#drSiralama').val();
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Index","Home")',
+                traditional: true,
+                data: { PageRanking: pageRanking },
+                success: function (result) {
+                    $("#urunDiv").html(result);
+                    //if (typeof kategori !== "undefined") {
+                    //    if (by.length === 0 && ye.length === 0) {
+                    //        history.pushState("", "", '?' + 'kategori=' + kategori);
+                    //    }
+
+                    //    else if (by.length !== 0 && ye.length !== 0) {
+                    //        history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'BaskiTarihi=' + by + '&' + 'YayinEvi=' + ye);
+                    //    }
+                    //    else if (by.length !== 0 && ye.length !== 0) {
+                    //        history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'BaskiTarihi=' + by + '&' + 'YayinEvi=' + ye);
+                    //    }
+
+                    //    else if (ye.length !== 0) {
+                    //        history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'YayinEvi=' + ye);
+                    //    }
+                    //    else if (by.length !== 0) {
+                    //        history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'BaskiTarihi=' + by);
+                    //    }
+                    //}
+
+
+                }
+
+            });
+        }
+    </script>
 }

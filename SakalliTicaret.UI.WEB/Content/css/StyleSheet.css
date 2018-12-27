@@ -35,27 +35,37 @@
 
     .productStyle .card-body .card-title {
         height: 50px;
-        font-size: 1.2em;
+        font-size: 1em;
     }
 
-    .productStyle .basketCreate {
-        font-size: 0.8em;
-        padding: 0 8px;
-        float: right;
-        border: 1px solid #26a69a ;
-        background: transparent;
-        font-weight: bold;
-        transition: all ease-in-out 0.2s;
+.basketCreate {
+    font-size: 0.8em;
+    padding: 0 8px;
+    float: right;
+    border: 1px solid #26a69a;
+    background: transparent;
+    font-weight: bold;
+    transition: all ease-in-out 0.2s;
+}
+
+    .basketCreate:hover {
+        background: #26a69a;
+        color: #fff;
     }
-        .productStyle .basketCreate:hover {
-            background: #26a69a ;
+
+        .basketCreate:hover i {
             color: #fff;
         }
-            .productStyle .basketCreate:hover i {
-                color: #fff;
-            }
-        .productStyle .basketCreate i {
-            font-size: 1.2em;
-            color: #26a69a ;
-            margin: 0  5px 0 0 ;
-        }
+
+    .basketCreate i {
+        font-size: 1.2em;
+        color: #26a69a;
+        margin: 0 5px 0 0;
+    }
+
+.kategoriBaslik {
+    background: #555555;
+    color: #fff;
+    padding: 5px 15px;
+    box-sizing: border-box;
+}

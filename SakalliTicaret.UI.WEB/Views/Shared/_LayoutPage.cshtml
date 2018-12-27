@@ -121,14 +121,12 @@
 
                     <div class="col-md-3 left-menu-wrapper">
                         <div class="xt-sidenav hidden-xs hidden-sm">
+                            
                             <nav>
                                 <ul class="xt-side-menu">
-                                    <li>
-                                        <a href="#">Kategoriler</a>
-                                        <ul class="xt-dropdown">
-                                            @{Html.RenderAction("SliderMenu", "Companent");}
-                                        </ul>
-                                    </li>
+
+                                    @{Html.RenderAction("SliderMenu", "Companent");}
+
                                 </ul>
                             </nav>
                         </div>
@@ -150,9 +148,9 @@
                     </div>
                     <div class="col-md-1 col-sm-2 col-xs-2">
                         <div class="xt-cart">
-                             @{
-                                Basket basket= Session["AktifSepet"] as Basket;
-                                
+                            @{
+                                Basket basket = Session["AktifSepet"] as Basket;
+
                             }
                             <div id="basketListOpen">
                                 <i class="fa flaticon-shopping-cart"></i>
@@ -278,7 +276,7 @@
                             $(".basketdiv").html('');
                             $(".basketdiv").html(veri);
                             toastr.success('Ürün Sepete Başarıyla Eklendi');
-            
+
                         }
                     });
                 },

@@ -5107,7 +5107,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
         .pagination > li > a, .pagination > li > span {
             position: relative;
             float: left;
-            padding: 5px 5px;
+            padding: 6px 12px;
             margin-left: -1px;
             line-height: 1.42857143;
 
