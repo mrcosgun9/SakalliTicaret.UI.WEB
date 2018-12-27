@@ -55,7 +55,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 db.SaveChanges();
                 InsertedUsers insertedUsers=new InsertedUsers();
                 insertedUsers.User = user;
-               
+                insertedUsers.CreateUserID = (int)Session["AdminLoginUser"];
+                insertedUsers.Actions = "Insert";
                 db.InsertedUserses.Add(insertedUsers);
                 return RedirectToAction("Index");
             }

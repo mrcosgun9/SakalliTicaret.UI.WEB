@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SakalliTicaret.Core.Model.Entity;
 
 namespace SakalliTicaret.Core.Model
 {
@@ -16,9 +17,11 @@ namespace SakalliTicaret.Core.Model
 
         [Display(Name = "Eklenme Tarihi")]
         public DateTime CreateDateTime { get; set; }
+
         [Display(Name = "Oluşturan Kullanıcı")]
         public int CreateUserID { get; set; }
+
         [Display(Name = "Yapılan İşlem")]
-        public string Action { get; set; }
+        public string Actions { get; set; }
     }
 }
