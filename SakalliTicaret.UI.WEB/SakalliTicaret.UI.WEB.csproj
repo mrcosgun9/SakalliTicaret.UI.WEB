@@ -86,6 +86,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -1688,6 +1696,7 @@
     <Content Include="Content\js\init.js" />
     <Content Include="Content\less\responsive.css" />
     <Content Include="Content\less\style.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\plugins\css\ajax-loader.gif" />
     <Content Include="Content\plugins\css\animate.css" />
     <Content Include="Content\plugins\css\bootstrap-dropdownhover.min.css" />
@@ -2121,6 +2130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2421,6 +2431,7 @@
     <Content Include="Views\UserAddresses1\Edit.cshtml" />
     <Content Include="Views\UserAddresses1\Index.cshtml" />
     <Content Include="Views\Basket\BasketCompletePayment.cshtml" />
+    <Content Include="Views\Home\_Products.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2431,7 +2442,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Models\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SakallaTicaret.Helper\SakallaTicaret.Helper.csproj">
