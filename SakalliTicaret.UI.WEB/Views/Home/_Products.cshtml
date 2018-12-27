@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group xt-shop-category col-md-4 col-sm-4 col-xs-12">
                     <div class="xt-select xt-search-opt">
-                        @Html.DropDownList("PageRanking", (IEnumerable<SelectListItem>)ViewBag.PageRanking, new { @onchange = "getProduct()", @id = "drSiralama",@class="xt-category-search select-beast" })
+                        @Html.DropDownList("PageRanking", (IEnumerable<SelectListItem>)ViewBag.PageRanking, new { @onchange = "getProduct()", @id = "drSiralama" })
                         @*<select class="xt-category-search select-beast">
                             <option>Artan Fiyat</option>
                             <option>Azalan Fiyat</option>
@@ -81,7 +81,57 @@
                 <div class="col-md-2 col-sm-2 col-xs-6">
                     <div class="xt-view">
                         <a href="" class="active"><i class="fa fa-th-large"></i></a>
-                        <a href=""><i class="fa fa-navicon"></i></a>
+                        <a href=""><i function getProduct() {
+                                      var kategori = getUrlVars()["kategori"];
+                                      var by = [];
+                                      var ye = [];
+                                      var chckBaski = document.getElementsByName("chckbaski");
+                                      var chckYayin = document.getElementsByName("chckYayinEvi");
+                                      var siralama = $('#drSiralama').val();
+                                      var pCount = $('#drCount').val();
+                                      for (var i = 0; i < chckBaski.length; i++) {
+                            if (chckBaski[i].checked) {
+                            by.push(chckBaski[i].id);
+                            }
+                            }
+                            for (var i = 0; i < chckYayin.length; i++) {
+                            if (chckYayin[i].checked) {
+                            ye.push(chckYayin[i].id);
+                            }
+                            }
+
+                            $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("Index","Urun")',
+                            traditional: true,
+                            data: { Kategori: kategori, BaskiTarihi: by.toString(), YayinEvi: ye.toString(), SiralamaTip: siralama, PageCount: pCount },
+                            success: function (result) {
+                            $("#urunDiv").html(result);
+                            if (typeof kategori !== "undefined") {
+                            if (by.length === 0 && ye.length === 0) {
+                            history.pushState("", "", '?' + 'kategori=' + kategori);
+                            }
+
+                            else if (by.length !== 0 && ye.length !== 0) {
+                            history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'BaskiTarihi=' + by + '&' + 'YayinEvi=' + ye);
+                            }
+                            else if (by.length !== 0 && ye.length !== 0) {
+                            history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'BaskiTarihi=' + by + '&' + 'YayinEvi=' + ye);
+                            }
+
+                            else if (ye.length !== 0) {
+                            history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'YayinEvi=' + ye);
+                            }
+                            else if (by.length !== 0) {
+                            history.pushState("", "", '?' + 'kategori=' + kategori + '&' + 'BaskiTarihi=' + by);
+                            }
+                            }
+
+
+                            }
+
+                            });
+                            }; class="fa fa-navicon"></i></a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-6 xt-show-item">
