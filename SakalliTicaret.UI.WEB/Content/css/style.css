@@ -895,7 +895,7 @@ p {
   background-attachment: fixed;
 }
 .section-separator {
-  padding: 0px 0;
+  padding: 10px 0;
 }
 .section-margin {
   margin: 90px 0;
@@ -2009,7 +2009,7 @@ nav ul.xt-side-menu > li > ul.xt-dropdown {
   border-radius: 0;
 }
 .xt-select {
-  width: 80%;
+  width: 75%;
 }
 .xt-search-opt {
   float: left;

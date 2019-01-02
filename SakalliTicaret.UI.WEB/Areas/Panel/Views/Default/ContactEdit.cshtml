@@ -50,6 +50,13 @@
                         @Html.ValidationMessageFor(model => model.Adrress, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IframeUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.IframeUrl, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IframeUrl, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 @Html.HiddenFor(model => model.CreateDateTime)
                 @Html.HiddenFor(model => model.ID)
                 @Html.HiddenFor(model=>model.CreateUserID)

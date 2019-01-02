@@ -1875,6 +1875,11 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Panel\Views\Messages\Create.cshtml" />
+    <Content Include="Areas\Panel\Views\Messages\Delete.cshtml" />
+    <Content Include="Areas\Panel\Views\Messages\Details.cshtml" />
+    <Content Include="Areas\Panel\Views\Messages\Edit.cshtml" />
+    <Content Include="Areas\Panel\Views\Messages\Index.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -2112,6 +2117,7 @@
     <Compile Include="Areas\Panel\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Panel\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Panel\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Panel\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Panel\Controllers\PagesController.cs" />
     <Compile Include="Areas\Panel\Controllers\PartialController.cs" />
     <Compile Include="Areas\Panel\Controllers\ProductsController.cs" />
@@ -2125,6 +2131,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CompanentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserAddressesController.cs" />
@@ -2435,6 +2442,7 @@
     <Content Include="Views\Basket\BasketCompletePayment.cshtml" />
     <Content Include="Views\Home\_Products.cshtml" />
     <Content Include="Views\Home\HomeSearch.cshtml" />
+    <Content Include="Views\Pages\Contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,5 +19,7 @@ namespace SakalliTicaret.Core.Model.Entity
         public string Mail2 { get; set; }
         [Display(Name = "Adres")]
         public string Adrress { get; set; }
+        [Display(Name = "Maps Iframe Url")]
+        public string IframeUrl { get; set; }
     }
 }

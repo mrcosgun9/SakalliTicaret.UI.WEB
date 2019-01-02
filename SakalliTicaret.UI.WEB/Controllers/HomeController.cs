@@ -12,13 +12,15 @@ namespace SakalliTicaret.UI.WEB.Controllers
 {
     public class HomeController : BaseControler
     {
+
         private SakalliTicaretDb db = new SakalliTicaretDb();
         // GET: Home
         [Route("Anasayfa/{Page?}")]
+        [Route("Anasayfa/{Category?}/{categoryName?}")]
         [Route]
-        public ActionResult Index(FilterModel filterModel)
+        public ActionResult Index(FilterModel filterModel,string categoryName)
         {
-        
+
             List<PageRanking> pageRankings = new List<PageRanking>
             {
                 new PageRanking {Id = 1, Name = "Alfabetik (A-Z)"},
@@ -30,24 +32,44 @@ namespace SakalliTicaret.UI.WEB.Controllers
             ViewBag.PageRanking = new SelectList(pageRankings, "Id", "Name");
             int page = filterModel.Page ?? 1;
             int pageCount = filterModel.PageCount ?? 30;
-            switch (filterModel.PageRanking)
+            if (filterModel.Search != null && filterModel.searchCategory != 0)
             {
-                case 1:
-                    filterModel.Products = db.Products.OrderBy(x => x.Name).ToPagedList(page, pageCount);
-                    break;
-                case 2:
-                    filterModel.Products = db.Products.OrderByDescending(x => x.Name).ToPagedList(page, pageCount);
-                    break;
-                case 3:
-                    filterModel.Products = db.Products.OrderBy(x => x.Price).ToPagedList(page, pageCount);
-                    break;
-                case 4:
-                    filterModel.Products = db.Products.OrderByDescending(x => x.Price).ToPagedList(page, pageCount);
-                    break;
+                filterModel.Products = db.Products.Where(x => x.Name.Contains(filterModel.Search) && x.CategoryID == filterModel.searchCategory).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+            }
+            else if (filterModel.Search != null)
+            {
+                filterModel.Products = db.Products.Where(x => x.Name.Contains(filterModel.Search)).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+            }
+            else if (filterModel.searchCategory != 0)
+            {
+                filterModel.Products = db.Products.Where(x => x.CategoryID == filterModel.searchCategory).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+            }
+            else if (filterModel.Category != null)
+            {
+                filterModel.Products = db.Products.Where(x => x.CategoryID == filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+            }
+            else
+            {
+                switch (filterModel.PageRanking)
+                {
+                    case 1:
 
-                default:
-                    filterModel.Products = db.Products.OrderByDescending(x=>x.Name).ToPagedList(page, pageCount);
-                    break;
+                        filterModel.Products = db.Products.OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                        break;
+                    case 2:
+                        filterModel.Products = db.Products.OrderByDescending(x => x.Name).ToPagedList(page, pageCount);
+                        break;
+                    case 3:
+                        filterModel.Products = db.Products.OrderBy(x => x.Price).ToPagedList(page, pageCount);
+                        break;
+                    case 4:
+                        filterModel.Products = db.Products.OrderByDescending(x => x.Price).ToPagedList(page, pageCount);
+                        break;
+
+                    default:
+                        filterModel.Products = db.Products.OrderByDescending(x => x.Name).ToPagedList(page, pageCount);
+                        break;
+                }
             }
             if (Request.IsAjaxRequest())
             {
@@ -58,8 +80,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 return View(filterModel);
             }
 
-            return View();
         }
+
         [Route("Sayfa/{id}/{title}")]
         public ActionResult Page(int id)
         {
@@ -76,21 +98,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
         {
 
             return View();
-        }
-        [HttpPost]
-        public ActionResult HomeSearch(string searchText)
-        {
-            if (String.IsNullOrEmpty(searchText))
-            {
-                
-            }
-            FilterModel filterModel=new FilterModel();
-            int page = filterModel.Page ?? 1;
-            int pageCount = filterModel.PageCount ?? 30;
-            filterModel.Products = db.Products.Where(x=>x.Name.Contains(searchText)).OrderBy(x => x.Name).ToPagedList(page, pageCount);
-            filterModel.Page = page;
-            filterModel.PageCount = pageCount;
-            return View("Index", filterModel);
         }
 
         public ActionResult Search(string term)

@@ -58,6 +58,7 @@
     <Compile Include="Entity\LogCategory.cs" />
     <Compile Include="Entity\LogProduct.cs" />
     <Compile Include="Entity\LogUsers.cs" />
+    <Compile Include="Entity\Messages.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\OrderPayment.cs" />
     <Compile Include="Entity\OrderProduct.cs" />

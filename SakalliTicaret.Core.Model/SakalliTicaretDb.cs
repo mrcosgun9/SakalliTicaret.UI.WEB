@@ -30,6 +30,7 @@ namespace SakalliTicaret.Core.Model
         public DbSet<LogBasket> LogBaskets { get; set; }
         public DbSet<LogCategory> LogCategories { get; set; }
         public DbSet<LogProduct> LogProducts { get; set; }
+        public DbSet<Messages> Messageses { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
