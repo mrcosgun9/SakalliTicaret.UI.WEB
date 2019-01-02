@@ -2434,6 +2434,7 @@
     <Content Include="Views\UserAddresses1\Index.cshtml" />
     <Content Include="Views\Basket\BasketCompletePayment.cshtml" />
     <Content Include="Views\Home\_Products.cshtml" />
+    <Content Include="Views\Home\HomeSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

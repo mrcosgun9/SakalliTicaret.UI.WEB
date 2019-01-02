@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using PagedList;
@@ -70,6 +71,34 @@ namespace SakalliTicaret.UI.WEB.Controllers
             public int Id { get; set; }
 
             public string Name { get; set; }
+        }
+        public ActionResult HomeSearch()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult HomeSearch(string searchText)
+        {
+            if (String.IsNullOrEmpty(searchText))
+            {
+                
+            }
+            FilterModel filterModel=new FilterModel();
+            int page = filterModel.Page ?? 1;
+            int pageCount = filterModel.PageCount ?? 30;
+            filterModel.Products = db.Products.Where(x=>x.Name.Contains(searchText)).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+            filterModel.Page = page;
+            filterModel.PageCount = pageCount;
+            return View("Index", filterModel);
+        }
+
+        public ActionResult Search(string term)
+        {
+            var data = db.Products.Where(m => m.Name.Contains(term))
+                .Select(m => new { label = m.Name });
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

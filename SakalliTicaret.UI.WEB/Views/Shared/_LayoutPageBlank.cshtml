@@ -116,36 +116,17 @@
         <div class="main-color-bg">
             <div class="container">
                 <div class="row">
-
                     <div class="col-md-3 left-menu-wrapper">
-
                     </div>
-                    <div class="col-md-8 col-sm-10 col-xs-12 xt-header-search">
-                        <div class="form-group xt-form search-bar  col-md-8 col-sm-8 col-xs-7 padding-right-o">
-                            <input type="text" class="form-control" placeholder="Site İçi Arama" />
-                        </div>
-                        <div class="form-group xt-form xt-search-cat col-md-4 col-sm-4 col-xs-5 padding-left-o ">
-                            <div class="xt-select xt-search-opt">
-                                <select class="xt-dropdown-search select-beast">
-                                    @{Html.RenderAction("SearcCategory", "Companent");}
-                                </select>
-                            </div>
-                            <div class="xt-search-opt xt-search-btn">
-                                <button type="button" class="btn btn-primary btn-search"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                    @{Html.RenderAction("HomeSearch", "Home");}
                     <div class="col-md-1 col-sm-2 col-xs-2">
                         <div class="xt-cart">
-
                             <div id="basketListOpen">
                                 <i class="fa flaticon-shopping-cart animated" id="shoppingcart"></i>
                             </div>
-
                             <span class="xt-item-count">
                                 <b id="basketCount">0</b>
                             </span>
-
                         </div>
                     </div>
                 </div>
@@ -289,8 +270,14 @@
                 width: "toggle"
             });
         });
+        $(function () {
+            $(":input[data-autocomplete]").each(function () {
+                $(this).autocomplete({
+                    source: $(this).attr("data-autocomplete")
+                });
+            });
 
-
+        });
     </script>
     @RenderSection("scripts", false)
 </body>
