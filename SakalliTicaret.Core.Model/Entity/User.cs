@@ -28,7 +28,6 @@ namespace SakalliTicaret.Core.Model.Entity
         [Display(Name = "Telefon")]
         public string Telephone { get; set; }
         [Required]
-        [StringLength(5)]
         [Display(Name = "Şifre")]
         public string Password { get; set; }
         [Display(Name = "Tc Numarası")]
