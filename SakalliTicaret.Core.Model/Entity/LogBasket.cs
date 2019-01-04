@@ -8,6 +8,10 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class LogBasket:EntityLogBase
     {
-        public Basket Sepet { get; set; }
+        public int UserId { get; set; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+        public decimal Amount { get; set; }
+        public string BasketKey { get; set; }
     }
 }

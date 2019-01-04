@@ -8,125 +8,111 @@ using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
-using SakalliTicaret.UI.WEB.App_Class;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
-    public class UsersController : AdminControlerBase
+    public class LogCategoriesController : AdminControlerBase
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
-        LogClass _logClass=new LogClass();
-        // GET: Panel/Users
+
+        // GET: Panel/LogCategories
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.LogCategories.ToList());
         }
 
-        // GET: Panel/Users/Details/5
+        // GET: Panel/LogCategories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            LogCategory logCategory = db.LogCategories.Find(id);
+            if (logCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(logCategory);
         }
 
-        // GET: Panel/Users/Create
+        // GET: Panel/LogCategories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Panel/Users/Create
+        // POST: Panel/LogCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,LastName,Email,ImageUrl,Telephone,Password,TCKN,IsActive,IsAdmin,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] User user)
+        public ActionResult Create([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserID,Actions")] LogCategory logCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                db.LogCategories.Add(logCategory);
                 db.SaveChanges();
-                User sessions= Session["AdminLoginUser"] as User;
-                if (sessions != null) _logClass.UserLog(user, "Ekleme", sessions.ID);
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(logCategory);
         }
 
-        // GET: Panel/Users/Edit/5
+        // GET: Panel/LogCategories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            LogCategory logCategory = db.LogCategories.Find(id);
+            if (logCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(logCategory);
         }
 
-        // POST: Panel/Users/Edit/5
+        // POST: Panel/LogCategories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "ID,Name,LastName,Email,ImageUrl,Telephone,Password,TCKN,IsActive,IsAdmin,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] User user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserID,Actions")] LogCategory logCategory)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(user).State = EntityState.Modified;
-                    db.SaveChanges();
-                    User sessions = Session["AdminLoginUser"] as User;
-                    if (sessions != null) _logClass.UserLog(user, "Düzenleme", sessions.ID);
-                    return RedirectToAction("Index");
-                }
-                return View(user);
+                db.Entry(logCategory).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (Exception e)
-            {
-                return View();
-            }
-
+            return View(logCategory);
         }
 
-        // GET: Panel/Users/Delete/5
+        // GET: Panel/LogCategories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            LogCategory logCategory = db.LogCategories.Find(id);
+            if (logCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(logCategory);
         }
 
-        // POST: Panel/Users/Delete/5
+        // POST: Panel/LogCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            LogCategory logCategory = db.LogCategories.Find(id);
+            db.LogCategories.Remove(logCategory);
             db.SaveChanges();
-            User sessions = Session["AdminLoginUser"] as User;
-            if (sessions != null) _logClass.UserLog(user, "Silme", sessions.ID);
             return RedirectToAction("Index");
         }
 
