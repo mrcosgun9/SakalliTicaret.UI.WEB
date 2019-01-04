@@ -11,7 +11,7 @@
             
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Create","Users",FormMethod.Post))
+            @using (Html.BeginForm("Create","Users",FormMethod.Post,new {@id="UserCreate"}))
             {
                 @Html.AntiForgeryToken()
 

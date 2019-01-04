@@ -216,6 +216,7 @@
     <script src="~/Content/plugins/js/jquery.fancybox.min.js"></script>
     <!-- selectize -->
     <script src="~/Content/plugins/js/standalone/selectize.js"></script>
+    <script src="~/scripts/jquery.validate.js"></script>
     <!-- init -->
     <script src="~/Content/js/init.js"></script>
     <script src="~/scripts/toastr.min.js"></script>
@@ -229,6 +230,24 @@
         }
     }
     <script>
+        $("#UserCreate")
+            .validate({
+                rules: {
+                    Name: "required",
+                    LastName: "required",
+                    Telephone: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 11
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Password: "required"
+                }
+            });
+
 
         $(function () {
 
