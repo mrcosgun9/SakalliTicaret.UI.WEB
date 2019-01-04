@@ -17,7 +17,6 @@ namespace SakalliTicaret.UI.WEB.App_Class
             _logUsers.Actions = action;
             _logUsers.CreateDateTime = DateTime.Now;
             _logUsers.CreateUserID = 0;
-            _logUsers.User = _user;
             db.LogUsers.Add(_logUsers);
             db.SaveChanges();
         }
