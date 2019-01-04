@@ -12,5 +12,10 @@ namespace SakalliTicaret.Core.Model.Entity
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
         public virtual IEnumerable<Product> Products { get; set; }
+
+        public virtual Category ParentCategory { get; set; }
+        public virtual List<Category> Categories { get; set; }
+
+
     }
 }

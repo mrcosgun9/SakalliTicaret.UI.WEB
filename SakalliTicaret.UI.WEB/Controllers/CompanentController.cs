@@ -15,7 +15,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         // GET: Companent
         public ActionResult SliderMenu()
         {
-            var Category = db.Categories.OrderBy(x => x.Name).ToList();
+            var Category = db.Categories.Where(x => x.ParentId == null).OrderBy(x => x.Name).ToList();
             return View(Category);
         }
 
@@ -52,6 +52,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
             var model = db.Pages.Where(x => x.IsActive).ToList();
             return View(model);
         }
-      
+
     }
 }

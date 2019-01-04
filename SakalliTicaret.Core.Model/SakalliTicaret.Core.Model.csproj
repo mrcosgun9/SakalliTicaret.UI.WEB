@@ -63,6 +63,7 @@
     <Compile Include="Entity\OrderPayment.cs" />
     <Compile Include="Entity\OrderProduct.cs" />
     <Compile Include="Entity\Page.cs" />
+    <Compile Include="Entity\PosEntegration.cs" />
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Entity\SocialMedia.cs" />
     <Compile Include="Entity\Status.cs" />

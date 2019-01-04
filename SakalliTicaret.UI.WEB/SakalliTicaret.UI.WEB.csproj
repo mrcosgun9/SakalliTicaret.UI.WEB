@@ -1902,6 +1902,7 @@
     <Content Include="scripts\jquery-3.0.0.min.js" />
     <Content Include="scripts\jquery-3.0.0.slim.js" />
     <Content Include="scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="scripts\jquery.mask.js" />
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\popper-utils.js" />
