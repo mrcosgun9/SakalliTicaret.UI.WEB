@@ -20,7 +20,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var categories = db.Categories.Include(p => p.ParentCategory);
+            return View(categories.ToList());
         }
 
         // GET: Panel/Categories/Details/5

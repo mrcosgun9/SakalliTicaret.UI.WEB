@@ -1,0 +1,83 @@
+﻿@model SakalliTicaret.Core.Model.Entity.PosEntegration
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PosEntegration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Installments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Installments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateUserID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

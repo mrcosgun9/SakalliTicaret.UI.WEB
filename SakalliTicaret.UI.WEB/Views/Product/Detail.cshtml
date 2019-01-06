@@ -119,6 +119,10 @@
         <div class="tab-content xt-tab-content">
             <div role="tabpanel" class="tab-pane xt-pane xt-description fade in active" id="description">
                 <h3>Ürün Açıklaması</h3>
+                @*@foreach (var item in Model.Category.CategoryFeatureses)
+                {
+                    <b>item.Name</b>
+                }*@
                 @Html.Raw(Model.Definition)
             </div>
 

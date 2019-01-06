@@ -23,6 +23,7 @@ namespace SakalliTicaret.UI.WEB
                 if (admin)
                 {
 
+                    HttpContext.Current.Session["AdminLoginUserId"] = User.ID;
                     HttpContext.Current.Session["AdminLoginUser"] = User;
                 }
                 else

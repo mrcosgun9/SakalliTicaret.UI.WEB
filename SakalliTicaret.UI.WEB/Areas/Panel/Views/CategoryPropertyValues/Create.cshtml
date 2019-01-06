@@ -1,0 +1,50 @@
+﻿@model SakalliTicaret.Core.Model.Entity.CategoryPropertyValue
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-12">
+    <div class="card">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Özellik Değeri Ekle</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryPropertyId, "CategoryPropertyId", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        @Html.DropDownList("CategoryPropertyId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryPropertyId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+           
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Özellik Değerleri Listesi", "Index")
+        </div>
+    </div>
+</div>

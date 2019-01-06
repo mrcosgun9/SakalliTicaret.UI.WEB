@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.PosEntegration>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Installments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateUserID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Installments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateUserID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
