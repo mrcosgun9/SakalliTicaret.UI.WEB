@@ -2284,20 +2284,29 @@ nav ul.xt-side-menu {
             }
 
         nav ul.xt-side-menu > li > ul.xt-dropdown {
-            position: absolute;
             width: 100%;
-            left: 280px;
-            top: 0;
             background: #fff;
             border: 1px solid #ddd;
             z-index: 999;
-
             display: none;
+            border-top: 0;
+            border-bottom: 0;
         }
-  
-    nav ul.xt-side-menu li:hover .xt-dropdown {
+
+            nav ul.xt-side-menu > li > ul.xt-dropdown li a {
+                padding-left: 10px;
+                color: #555555;
+            }
+
+                nav ul.xt-side-menu > li > ul.xt-dropdown li a:hover {
+                    color: #F14F2F;
+                }
+/*nav ul.xt-side-menu li:hover .xt-dropdown {
         display: block;
-    }
+        transition: all ease-in-out 0.3s;
+
+        opacity: 1;
+    }*/
 
 .xt-header-search {
     padding: 15px 0;

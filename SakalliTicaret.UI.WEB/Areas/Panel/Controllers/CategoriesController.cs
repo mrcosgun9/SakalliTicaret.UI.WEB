@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
@@ -37,10 +38,38 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             return View(category);
         }
 
+        private void KategorileriGetir()
+        {
+            
+        }
+
+        private void CategoryGet()
+        {
+            
+        }
+        private string AgacOlustur(int parantId)
+        {
+            string html = "";
+            List<Category> subCategories=new List<Category>();
+            subCategories = db.Categories.Where(x => x.ParentId == parantId).ToList();
+            //DataRow[] altKategoriler = dt.Select("UstKategoriId=" + ustKategoriId);
+            if (subCategories.Count == 0) return html;
+            html += "<ul>";
+            foreach (var item  in subCategories)
+            {
+                int id = item.ID;
+                html += "<li>"+@item.Name+"</li>";
+                AgacOlustur(id);
+     
+            }
+            html += "</ul>";
+            return html;
+        }
         // GET: Panel/Categories/Create
         public ActionResult Create()
         {
-            ViewBag.UstKategoriList = db.Categories.Where(x => x.ParentId == null).ToList();
+           
+            ViewBag.UstKategoriList = db.Categories.ToList();
             return View();
         }
 
@@ -51,9 +80,9 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] Category category)
         {
-           
+
             var User = Session["AdminLoginUser"] as User;
-            category.CreateDateTime= DateTime.Now;
+            category.CreateDateTime = DateTime.Now;
             category.CreateUserID = User.ID;
             if (ModelState.IsValid)
             {
@@ -62,7 +91,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 _logClass.CategoryLog(category, "Ekleme");
                 return RedirectToAction("Index");
             }
-            ViewBag.UstKategoriList = db.Categories.Where(x => x.ParentId == null).ToList();
+            ViewBag.UstKategoriList = db.Categories.ToList();
             return View(category);
         }
 
@@ -78,7 +107,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UstKategoriList = db.Categories.Where(x => x.ParentId == null).ToList();
+            ViewBag.UstKategoriList = db.Categories.ToList();
             return View(category);
         }
 

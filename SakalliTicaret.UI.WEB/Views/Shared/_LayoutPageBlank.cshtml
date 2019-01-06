@@ -168,7 +168,6 @@
             </div>
         </div>
     </div>
-
     <div class="xt-product-subpage margin-b-30">
         <div class="container">
             <div class="row">
@@ -180,7 +179,7 @@
                 }
 
                 @RenderBody()
-
+               
             </div>
         </div>
     </div>
@@ -332,6 +331,19 @@
                 }
             });
             $('.selectonfocus').mask("00/00/0000", { selectOnFocus: true });
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("nav ul.xt-side-menu li").hover(
+                function () {
+                    $(this).children("ul").stop(true, true).slideDown();
+
+                },
+            function () {
+                $(this).children("ul").stop(true, true).slideUp();
+            });
         });
     </script>
     @RenderSection("scripts", false)

@@ -46,7 +46,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
         // GET: UserAddresses/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "ID", "Name");
             return View();
         }
 
@@ -55,7 +54,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserId,Title,City,Address,IsActice,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] UserAddress userAddress)
+        public ActionResult Create(UserAddress userAddress)
         {
             if (ModelState.IsValid)
             {
