@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using PagedList;
@@ -67,7 +68,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
                         break;
 
                     default:
-                        filterModel.Products = db.Products.OrderByDescending(x => x.Name).ToPagedList(page, pageCount);
+                        //todo:performans düzenlemesi için AsNoTracking eklendi kontrol edilecek
+                        filterModel.Products = db.Products.OrderByDescending(x => x.Name).AsNoTracking().ToPagedList(page, pageCount);
                         break;
                 }
             }

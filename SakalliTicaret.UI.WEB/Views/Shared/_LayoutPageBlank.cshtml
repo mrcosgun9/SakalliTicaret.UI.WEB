@@ -1,5 +1,5 @@
-﻿@using SakalliTicaret.Core.Model.Entity
-@using SakalliTicaret.UI.WEB.App_Class
+﻿@using SakalliTicaret.UI.WEB.App_Class
+@using System.Web.Optimization;
 <!DOCTYPE html>
 
 <html>
@@ -22,33 +22,7 @@
 
     <!-- Custom Icon Font -->
     <link rel="stylesheet" href="~/Content/fonts/flaticon.css">
-    <!-- Bootstrap-->
-    <link rel="stylesheet" href="~/Content/plugins/css/bootstrap.min.css">
-    <!-- Fancybox-->
-    <link rel="stylesheet" href="~/Content/plugins/css/jquery.fancybox.min.css">
-    <!-- Animation -->
-    <link rel="stylesheet" href="~/Content/plugins/css/animate.css">
-    <!-- owl -->
-    <link rel="stylesheet" href="~/Content/plugins/css/owl.css">
-    <!--flexslider-->
-    <link rel="stylesheet" href="~/Content/plugins/css/flexslider.min.css">
-    <!-- selectize -->
-    <link rel="stylesheet" href="~/Content/plugins/css/selectize.css">
-    <link rel="stylesheet" href="~/Content/plugins/css/selectize.bootstrap3.css">
-    <link rel="stylesheet" href="~/Content/plugins/css/jquery-ui.min.css">
-    <!--dropdown -->
-    <link rel="stylesheet" href="~/Content/plugins/css/bootstrap-dropdownhover.min.css">
-    <!-- mobile nav-->
-    <link rel="stylesheet" href="~/Content/plugins/css/meanmenu.css">
-    <!-- COUSTOM CSS link  -->
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <link href="~/Content/css/responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <link href="~/Content/css/responsive.css" rel="stylesheet" />
-    <link href="~/Content/css/prophet.css" rel="stylesheet" />
-    <link href="~/Content/css/basket.css" rel="stylesheet" />
-    <link href="~/Content/toastr.css" rel="stylesheet" />
-    <link href="~/Content/css/StyleSheet.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/css")
     <title>Sakalli Ticaret | @ViewBag.Title</title>
     @RenderSection("AdditionalMeta", false)
 </head>
@@ -121,12 +95,15 @@
                     @{Html.RenderAction("HomeSearch", "Home");}
                     <div class="col-md-1 col-sm-2 col-xs-2">
                         <div class="xt-cart">
-                            <div id="basketListOpen">
-                                <i class="fa flaticon-shopping-cart animated" id="shoppingcart"></i>
-                            </div>
-                            <span class="xt-item-count">
-                                <b id="basketCount">0</b>
-                            </span>
+                            <a href="/Sepetim">
+                                <div id="basketListOpen">
+                                    <i class="fa flaticon-shopping-cart animated" id="shoppingcart"></i>
+                                </div>
+                                <span class="xt-item-count">
+                                    <b id="basketCount">0</b>
+                                </span>
+                            </a>
+                           
                         </div>
                     </div>
                 </div>
@@ -189,38 +166,9 @@
     @{Html.RenderAction("FooterSocialMedia", "Companent");}
     @{Html.RenderAction("HomeFooter", "Companent");}
 
-    <!-- jquery -->
     <script src="~/Content/plugins/js/jquery-1.11.3.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="~/Content/plugins/js/bootstrap.min.js"></script>
-    <!-- mean menu nav-->
-    <script src="~/Content/plugins/js/meanmenu.js"></script>
-    <!-- ajaxchimp -->
-    <script src="~/Content/plugins/js/jquery.ajaxchimp.min.js"></script>
-    <!-- wow -->
-    <script src="~/Content/plugins/js/wow.min.js"></script>
-    <!-- Owl carousel-->
-    <script src="~/Content/plugins/js/owl.carousel.js"></script>
-    <!--flexslider-->
-    <script src="~/Content/plugins/js/jquery.flexslider-min.js"></script>
-    <!--dropdownhover-->
-    <script src="~/Content/plugins/js/bootstrap-dropdownhover.min.js"></script>
-    <!--jquery-ui.min-->
-    <script src="~/Content/plugins/js/jquery-ui.min.js"></script>
-    <!--validator -->
-    <script src="~/Content/plugins/js/validator.min.js"></script>
-    <!--smooth scroll-->
-    <script src="~/Content/plugins/js/smooth-scroll.js"></script>
-    <!-- Fancybox js-->
-    <script src="~/Content/plugins/js/jquery.fancybox.min.js"></script>
-    <!-- selectize -->
-    <script src="~/Content/plugins/js/standalone/selectize.js"></script>
-    <script src="~/scripts/jquery.validate.js"></script>
-    <!-- init -->
-    <script src="~/Content/js/init.js"></script>
-    <script src="~/scripts/toastr.min.js"></script>
-    <script src="~/Content/js/prophet.js"></script>
-    <script src="~/scripts/jquery.mask.js"></script>
+
+@Scripts.Render("~/bundles/script")
     @{
         BasketClass basketClass = (BasketClass)Session["AktifSepet"];
         int basketcount = 0;
@@ -229,123 +177,13 @@
             basketcount = @basketClass.Products.Count;
         }
     }
+    <script src="~/scripts/sakalliscript.js"></script>
     <script>
-        $("#UserCreate")
-            .validate({
-                rules: {
-                    Name: "required",
-                    LastName: "required",
-                    Telephone: {
-                        required: true,
-                        minlength: 10,
-                        maxlength: 11
-                    },
-                    Email: {
-                        required: true,
-                        email: true
-                    },
-                    Password: "required"
-                }
-            });
-
-
         $(function () {
-
             $("#basketCount").html(@basketcount);
-
-
-        });
-
-        $(".basketCreate").click(function myfunction() {
-            var uid = $(this).attr("name");
-            $.ajax({
-                type: "GET",
-                url: "/Basket/Create",
-                data: { productId: uid },
-                success: function myfunction(count) {
-                    $("#basketCount").html(count);
-                    $.ajax({
-                        type: "GET",
-                        url: "/Basket/MiniBasketWidget",
-                        success: function sVeriGetir(veri) {
-                            $(".basketdiv").html('');
-                            $(".basketdiv").html(veri);
-                            $("#shoppingcart").addClass("shake");
-
-
-                            toastr.success('Ürün Sepete Başarıyla Eklendi');
-
-                        }
-                    });
-                },
-                error: function myfunction() {
-                    toastr.warning('Ürün Sepete Eklenemedi.Bizimle İletişime Geçin Lütfen.');
-                }
-            });
-            $("#shoppingcart").removeClass("shake");
-        });
-        $("#basketListOpen").click(function () {
-            $(".basketdiv").animate({
-                width: "toggle"
-            });
-        });
-        $(function () {
-            $(":input[data-autocomplete]").each(function () {
-                $(this).autocomplete({
-                    source: $(this).attr("data-autocomplete")
-                });
-            });
-
-        });
-        $(document).ready(function () {
-            $('.date').mask('00/00/0000');
-            $('.time').mask('00:00:00');
-            $('.date_time').mask('00/00/0000 00:00:00');
-            $('.cep').mask('00000-000');
-            $('.phone').mask('0000-0000');
-            $('.phone_with_ddd').mask('(00) 0000-0000');
-            $('.phone_us').mask('00000000000');
-            $('.mixed').mask('AAA 000-S0S');
-            $('.cpf').mask('000.000.000-00', { reverse: true });
-            $('.cnpj').mask('00.000.000/0000-00', { reverse: true });
-            $('.money').mask('000.000.000.000.000,00', { reverse: true });
-            $('.money2').mask("#.##0,00", { reverse: true });
-            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
-                translation: {
-                    'Z': {
-                        pattern: /[0-9]/, optional: true
-                    }
-                }
-            });
-            $('.ip_address').mask('099.099.099.099');
-            $('.percent').mask('##0,00%', { reverse: true });
-            $('.clear-if-not-match').mask("00/00/0000", { clearIfNotMatch: true });
-            $('.placeholder').mask("00/00/0000", { placeholder: "__/__/____" });
-            $('.fallback').mask("00r00r0000", {
-                translation: {
-                    'r': {
-                        pattern: /[\/]/,
-                        fallback: '/'
-                    },
-                    placeholder: "__/__/____"
-                }
-            });
-            $('.selectonfocus').mask("00/00/0000", { selectOnFocus: true });
-        });
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $("nav ul.xt-side-menu li").hover(
-                function () {
-                    $(this).children("ul").stop(true, true).slideDown();
-
-                },
-            function () {
-                $(this).children("ul").stop(true, true).slideUp();
-            });
         });
     </script>
+
     @RenderSection("scripts", false)
 </body>
 </html>
