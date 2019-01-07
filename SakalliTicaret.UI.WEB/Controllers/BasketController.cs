@@ -43,7 +43,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 {
                     if (_loginState.IsLogin())
                     {
-
+                        //GirisSepetControl();
                         return Redirect("/Sepet/Tamamla/Adres");
 
                     }
@@ -54,39 +54,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Sepetim", "Home");
+                    return Redirect("Sepetim");
                 }
             }
-            //if (s.Products.Count != 0)
-            //{
-            //    if (s.Products.Count != 0)
-            //    {
-            //        if (Session["userId"] != null)
-            //        {
-            //            //                int userId = Convert.ToInt32(Session["userId"]);
-            //            //                GirisSepetControl();
-            //            //                var model = db.tblAdres.Where(x => x.musteriId == userId).ToList();
-            //            //                List<tblAdres> adresList;
-            //            //                adresList = model;
-            //            //                ViewBag.adreslistesi = adresList;
-            //            //                ViewBag.adresCount = adresList.Count();
-            //            return View();
-
-            //        }
-            //        else
-            //        {
-            //            return RedirectToAction("LoginAndRegistery", "Kullanici", new { ret = "sepet" });
-            //        }
-            //    }
-            //    else
-            //    {
-            //        return RedirectToAction("Sepetim", "Home");
-            //    }
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+         
             return View();
         }
         [Route("Sepet/Tamamla/Adres")]
@@ -180,7 +151,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         }
         private void posVoid()
         {
-            PosEntegration entegration = db.PosEntegrations.Find(1);
+            PosEntegration entegration = db.PosEntegrations.Find(2);
             // ####################### DÜZENLEMESİ ZORUNLU ALANLAR #######################
             //
             // API Entegrasyon Bilgileri - Mağaza paneline giriş yaparak BİLGİ sayfasından alabilirsiniz.
@@ -223,13 +194,13 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            string user_ip = GetIPAddress();
+            //string user_ip = GetIPAddress();
 
-            //string user_ip = "78.190.112.95";
-            if (user_ip == "" || user_ip == null)
-            {
-                user_ip = Request.ServerVariables["REMOTE_ADDR"];
-            }
+            string user_ip = "88.230.228.31";
+            //if (user_ip == "" || user_ip == null)
+            //{
+            //    user_ip = Request.ServerVariables["REMOTE_ADDR"];
+            //}
             //
             // ÖRNEK $user_basket oluşturma - Ürün adedine göre object'leri çoğaltabilirsiniz
             //foreach (var item in s.Urunler)
@@ -338,48 +309,46 @@ namespace SakalliTicaret.UI.WEB.Controllers
         }
         #endregion
 
-        //private void GirisSepetControl()
-        //{
-        //    int userId = Convert.ToInt32(Session["userId"]);
-        //    tblSiparis dbSiparis = db.tblSiparis.Where(x => x.MusteriId == userId && x.SiparisNo == null).FirstOrDefault();
-        //    tblSiparis siparisKayit = new tblSiparis();
-        //    Sepet s;
-        //    s = (Sepet)HttpContext.Session["AktifSepet"];
-        //    if (dbSiparis == null)
-        //    {
-
-        //        siparisKayit.MusteriId = userId;
-        //        siparisKayit.satisTarihi = DateTime.Now;
-        //        siparisKayit.sepetteMi = true;
-        //        db.tblSiparis.Add(siparisKayit);
-        //        db.SaveChanges();
-        //        s.sepetId = siparisKayit.satisId;
-        //        Session["AktifSepet"] = s;
-        //    }
-        //    else
-        //    {
-        //        s.musteriId = userId;
-        //        s.sepetId = dbSiparis.satisId;
-        //        Session["AktifSepet"] = s;
-        //        List<tblSiparisDetay> detays = db.tblSiparisDetay.Where(x => x.siparis == dbSiparis.satisId).ToList();
-        //        foreach (var item in detays)
-        //        {
-        //            db.tblSiparisDetay.Remove(item);
-        //            db.SaveChanges();
-        //        }
-        //        foreach (var item in s.Urunler)
-        //        {
-        //            tblSiparisDetay siparisDetayKayit = new tblSiparisDetay();
-        //            siparisDetayKayit.Urun = item.Urun.urunId;
-        //            siparisDetayKayit.Adet = item.Adet;
-        //            siparisDetayKayit.siparis = dbSiparis.satisId;
-        //            siparisDetayKayit.Tutar = (double?)item.Tutar;
-        //            db.tblSiparisDetay.Add(siparisDetayKayit);
-        //            db.SaveChanges();
-        //        }
-        //    }
-        //    KargoKontrol();
-        //}
+        private void GirisSepetControl()
+        {
+            int userId = _loginState.IsLoginUser().ID;
+            OrderProduct orderProduct = db.OrderProducts.Where(x => x.UserId == userId && x.BasketId == null).FirstOrDefault();
+            OrderProduct orderProductCreate = new OrderProduct();
+            BasketClass basketClass= (BasketClass)HttpContext.Session["AktifSepet"];
+            if (orderProduct == null)
+            {
+                orderProductCreate.UserId = userId;
+                orderProductCreate.CreateDateTime= DateTime.Now;
+                orderProductCreate.InTheBasket = true;
+                db.OrderProducts.Add(orderProductCreate);
+                db.SaveChanges();
+                basketClass.BasketId = orderProductCreate.BasketId;
+                Session["AktifSepet"] = basketClass;
+            }
+            else
+            {
+                //basketClass.UserId= userId;
+                //basketClass.BasketId= orderProduct.BasketId;
+                //Session["AktifSepet"] = s;
+                //List<tblSiparisDetay> detays = db.tblSiparisDetay.Where(x => x.siparis == dbSiparis.satisId).ToList();
+                //foreach (var item in detays)
+                //{
+                //    db.tblSiparisDetay.Remove(item);
+                //    db.SaveChanges();
+                //}
+                //foreach (var item in s.Urunler)
+                //{
+                //    tblSiparisDetay siparisDetayKayit = new tblSiparisDetay();
+                //    siparisDetayKayit.Urun = item.Urun.urunId;
+                //    siparisDetayKayit.Adet = item.Adet;
+                //    siparisDetayKayit.siparis = dbSiparis.satisId;
+                //    siparisDetayKayit.Tutar = (double?)item.Tutar;
+                //    db.tblSiparisDetay.Add(siparisDetayKayit);
+                //    db.SaveChanges();
+                //}
+            }
+            //KargoKontrol();
+        }
         public ActionResult MiniBasketWidget()
         {
             if (HttpContext.Session["AktifSepet"] != null)
@@ -404,7 +373,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 s.SepeteEkle(basketItem);
                 if (Session["userId"] != null)
                 {
-                    int musteriId = (int)HttpContext.Session["userId"];
+                    int musteriId =_loginState.IsLoginUser().ID;
+                    //GirisSepetControl();
                 }
                 s = (BasketClass)Session["AktifSepet"];
                 basketCount = s.Products.Count;

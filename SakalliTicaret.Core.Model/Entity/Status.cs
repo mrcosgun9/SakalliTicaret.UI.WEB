@@ -9,5 +9,6 @@ namespace SakalliTicaret.Core.Model.Entity
     public class Status:EntityBase
     {
         public string Name { get; set; }
+        public virtual IEnumerable<Basket> Baskets{ get; set; }
     }
 }

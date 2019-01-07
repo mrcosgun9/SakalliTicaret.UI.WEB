@@ -13,5 +13,6 @@ namespace SakalliTicaret.UI.WEB.App_Class
             string characterReplace= Regex.Replace(character, "[^0-9a-zA-Z- ]+", "");
             return characterReplace;
         }
+
     }
 }
