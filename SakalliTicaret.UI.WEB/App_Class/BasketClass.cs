@@ -47,9 +47,17 @@ namespace SakalliTicaret.UI.WEB.App_Class
             else
             {
                 BasketClass s = new BasketClass();
+                s.BasketKey = RandomBasketKey(8);
                 s.Products.Add(basketItem);
                 HttpContext.Current.Session["AktifSepet"] = s;
             }
+        }
+        public static string RandomBasketKey(int length)
+        {
+            string ts = DateTime.Now.ToString("hhmmss");
+            string chars = "ST123456789ABCDEFGHJKLMNOPRSTUIVYZWX";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray()) + ts;
         }
         public void BasketItemRemove(int id)
         {

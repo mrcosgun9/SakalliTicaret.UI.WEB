@@ -20,6 +20,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
         LogClass _logClass = new LogClass();
+        Fonctions _fonctions=new Fonctions();
         // GET: Users
         public ActionResult Index()
         {
@@ -152,7 +153,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 ViewBag.ResultType = "success";
                 ViewBag.ResultMessage = "Giriş İşlemi Başarılı. İyi Alışverişler.";
-               
+               _fonctions.GirisSepetControl();
                 if (ret=="Sepet")
                 {
                     return Redirect("/Sepet/Tamamla/Adres");

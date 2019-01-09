@@ -47,7 +47,6 @@ namespace SakalliTicaret.UI.WEB.App_Class
             _logBasket.CreateUserID = 0;
             _logBasket.Amount = _basket.Amount;
             _logBasket.BasketKey = _basket.BasketKey;
-            _logBasket.ProductId = _basket.ProductId;
             _logBasket.Quantity = _basket.Quantity;
             _logBasket.UserId = _basket.UserId;
             db.LogBaskets.Add(_logBasket);

@@ -15,35 +15,8 @@
             Password: "required"
         }
     });
-$(".basketCreate").click(function myfunction() {
-    var uid = $(this).attr("name");
-    $.ajax({
-        type: "GET",
-        url: "/Basket/Create",
-        data: { productId: uid },
-        success: function myfunction(count) {
-            $("#basketCount").html(count);
-            $.ajax({
-                type: "GET",
-                url: "/Basket/MiniBasketWidget",
-                success: function sVeriGetir(veri) {
-                    $(".basketdiv").html('');
-                    $(".basketdiv").html(veri);
-                    $("#shoppingcart").addClass("shake");
 
-
-                    toastr.success('Ürün Sepete Başarıyla Eklendi');
-
-                }
-            });
-        },
-        error: function myfunction() {
-            toastr.warning('Ürün Sepete Eklenemedi.Bizimle İletişime Geçin Lütfen.');
-        }
-    });
-    $("#shoppingcart").removeClass("shake");
-});
-$("#basketListOpen").click(function () {
+$("#basketListOpen").hover(function () {
     $(".basketdiv").animate({
         width: "toggle"
     });

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
+using SakalliTicaret.UI.WEB.App_Class;
 
 namespace SakalliTicaret.UI.WEB
 {
     public class LoginState
     {
-        private SakalliTicaretDb db;
+        private readonly SakalliTicaretDb db;
         public LoginState()
         {
             db = new SakalliTicaretDb();

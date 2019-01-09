@@ -20,6 +20,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
     {
         SakalliTicaretDb db = new SakalliTicaretDb();
         private LoginState _loginState = new LoginState();
+        private Fonctions _fonctions = new Fonctions();
         [Route("Sepetim")]
         public ActionResult Index()
         {
@@ -57,7 +58,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     return Redirect("Sepetim");
                 }
             }
-         
+
             return View();
         }
         [Route("Sepet/Tamamla/Adres")]
@@ -136,13 +137,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
             return ipAddress;
         }
-        public static string siparisnumarasiuret(int length)
-        {
-            string ts = DateTime.Now.ToString("hhmmss");
-            string chars = "ST123456789ABCDEFGHJKLMNOPRSTUIVYZWX";
-            var random = new Random();
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray()) + ts;
-        }
+
         public static string make_user_basket(object[][] user_basket_arr)
         {
             JavaScriptSerializer ser = new JavaScriptSerializer();
@@ -169,7 +164,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             int payment_amountstr = (int)s.TotalAmount * 100;
             //
             // Sipariş numarası: Her işlemde benzersiz olmalıdır!! Bu bilgi bildirim sayfanıza yapılacak bildirimde geri gönderilir.
-            s.BasketKey = siparisnumarasiuret(8);
+            s.BasketKey = s.BasketKey;
             string merchant_oid = s.BasketKey;
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
@@ -309,46 +304,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         }
         #endregion
 
-        private void GirisSepetControl()
-        {
-            int userId = _loginState.IsLoginUser().ID;
-            OrderProduct orderProduct = db.OrderProducts.Where(x => x.UserId == userId && x.BasketId == null).FirstOrDefault();
-            OrderProduct orderProductCreate = new OrderProduct();
-            BasketClass basketClass= (BasketClass)HttpContext.Session["AktifSepet"];
-            if (orderProduct == null)
-            {
-                orderProductCreate.UserId = userId;
-                orderProductCreate.CreateDateTime= DateTime.Now;
-                orderProductCreate.InTheBasket = true;
-                db.OrderProducts.Add(orderProductCreate);
-                db.SaveChanges();
-                basketClass.BasketId = orderProductCreate.BasketId;
-                Session["AktifSepet"] = basketClass;
-            }
-            else
-            {
-                //basketClass.UserId= userId;
-                //basketClass.BasketId= orderProduct.BasketId;
-                //Session["AktifSepet"] = s;
-                //List<tblSiparisDetay> detays = db.tblSiparisDetay.Where(x => x.siparis == dbSiparis.satisId).ToList();
-                //foreach (var item in detays)
-                //{
-                //    db.tblSiparisDetay.Remove(item);
-                //    db.SaveChanges();
-                //}
-                //foreach (var item in s.Urunler)
-                //{
-                //    tblSiparisDetay siparisDetayKayit = new tblSiparisDetay();
-                //    siparisDetayKayit.Urun = item.Urun.urunId;
-                //    siparisDetayKayit.Adet = item.Adet;
-                //    siparisDetayKayit.siparis = dbSiparis.satisId;
-                //    siparisDetayKayit.Tutar = (double?)item.Tutar;
-                //    db.tblSiparisDetay.Add(siparisDetayKayit);
-                //    db.SaveChanges();
-                //}
-            }
-            //KargoKontrol();
-        }
+
         public ActionResult MiniBasketWidget()
         {
             if (HttpContext.Session["AktifSepet"] != null)
@@ -371,11 +327,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 basketItem.Tax = 0;
                 BasketClass s = new BasketClass();
                 s.SepeteEkle(basketItem);
-                if (Session["userId"] != null)
-                {
-                    int musteriId =_loginState.IsLoginUser().ID;
-                    //GirisSepetControl();
-                }
+                _fonctions.GirisSepetControl();
                 s = (BasketClass)Session["AktifSepet"];
                 basketCount = s.Products.Count;
             }
@@ -385,6 +337,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             return basketCount;
         }
+      
         [Route("Sepet/Temizle")]
         public ActionResult SepetTemizle()
         {
