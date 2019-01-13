@@ -35,5 +35,7 @@ namespace SakalliTicaret.Core.Model.Entity
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
 
+        public virtual IEnumerable<OrderProduct> OrderProducts { get; set; }
+
     }
 }

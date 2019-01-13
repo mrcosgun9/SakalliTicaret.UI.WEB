@@ -16,11 +16,11 @@
         }
     });
 
-$("#basketListOpen").hover(function () {
-    $(".basketdiv").animate({
-        width: "toggle"
-    });
-});
+//$("#basketListOpen").hover(function () {
+//    $(".basketdiv").animate({
+//        width: "toggle"
+//    });
+//});
 $(function () {
     $(":input[data-autocomplete]").each(function () {
         $(this).autocomplete({

@@ -20,7 +20,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
         LogClass _logClass = new LogClass();
-        Fonctions _fonctions=new Fonctions();
+        Functions _functions = new Functions();
         // GET: Users
         public ActionResult Index()
         {
@@ -147,14 +147,14 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [HttpPost]
         [Route("Kullanici/Giris/{ret?}")]
         [ControlLoginPerformed]
-        public ActionResult Login([Bind(Include = "Email,Password")]User user,string ret)
+        public ActionResult Login([Bind(Include = "Email,Password")]User user, string ret)
         {
             if (new LoginState().IsLoginSucces(user.Email, user.Password, false))
             {
                 ViewBag.ResultType = "success";
                 ViewBag.ResultMessage = "Giriş İşlemi Başarılı. İyi Alışverişler.";
-               _fonctions.GirisSepetControl();
-                if (ret=="Sepet")
+                _functions.GirisSepetControl();
+                if (ret == "Sepet")
                 {
                     return Redirect("/Sepet/Tamamla/Adres");
                 }
@@ -167,6 +167,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Kullanici/Cikis")]
         public ActionResult LogOut()
         {
+            Session["LoginUserId"] = null;
             Session["LoginUser"] = null;
             return Redirect("/Anasayfa");
         }
@@ -175,7 +176,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [ControlLogin]
         public ActionResult UserInfo(string Page)
         {
-           
+
             switch (Page)
             {
                 case "Bilgiler":
@@ -185,7 +186,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     {
                         user = loginUser as User;
                     }
-                    return View("_ProfileInfo",user);
+                    return View("_ProfileInfo", user);
                     break;
                 case "Adresler":
                     return View("_AddressList");
@@ -204,6 +205,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
             base.Dispose(disposing);
         }
 
-      
+
     }
 }

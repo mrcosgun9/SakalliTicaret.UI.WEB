@@ -29,7 +29,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 {
                     if (s.Products.Any(x => x.Product.ID == basketItem.Product.ID))
                     {
-                        s.Products.FirstOrDefault(x => x.Product.ID == basketItem.Product.ID).Quantity++;
+                        s.Products.FirstOrDefault(x => x.Product.ID == basketItem.Product.ID).Quantity= s.Products.FirstOrDefault(x => x.Product.ID == basketItem.Product.ID).Quantity+basketItem.Quantity;
                     }
                     else
                     {
@@ -64,7 +64,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             BasketClass s = (BasketClass)HttpContext.Current.Session["AktifSepet"];
             if (s != null)
             {
-                BasketItem si = s.Products.FirstOrDefault(x => x.siparisDetayId == id);
+                BasketItem si = s.Products.FirstOrDefault(x => x.Product.ID == id);
                 s.Products.Remove(si);
                 HttpContext.Current.Session["AktifSepet"] = s;
             }

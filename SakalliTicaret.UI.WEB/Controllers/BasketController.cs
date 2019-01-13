@@ -20,7 +20,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
     {
         SakalliTicaretDb db = new SakalliTicaretDb();
         private LoginState _loginState = new LoginState();
-        private Fonctions _fonctions = new Fonctions();
+        private Functions _functions = new Functions();
         [Route("Sepetim")]
         public ActionResult Index()
         {
@@ -44,7 +44,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 {
                     if (_loginState.IsLogin())
                     {
-                        //GirisSepetControl();
                         return Redirect("/Sepet/Tamamla/Adres");
 
                     }
@@ -327,9 +326,41 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 basketItem.Tax = 0;
                 BasketClass s = new BasketClass();
                 s.SepeteEkle(basketItem);
-                _fonctions.GirisSepetControl();
                 s = (BasketClass)Session["AktifSepet"];
                 basketCount = s.Products.Count;
+                if (_loginState.IsLogin())
+                {
+                    int id = _loginState.IsLoginUser().ID;
+                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.ID==product.ID&&x.UserId==id);
+                    if (orderProduct==null)
+                    {
+                        orderProduct=new OrderProduct();
+                        orderProduct.CreateDateTime = DateTime.Now;
+                        orderProduct.CreateUserID = _loginState.IsLoginUser().ID;
+                        orderProduct.BasketId = s.BasketId;
+                        orderProduct.InTheBasket = true;
+
+                        orderProduct.ProductId = product.ID;
+                        orderProduct.UserId = _loginState.IsLoginUser().ID;
+                        orderProduct.Quantity = s.Products.FirstOrDefault(x => x.Product.ID == productId).Quantity;
+                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.ID == product.ID).Total;
+                        orderProduct.BasketId = s.BasketId;
+                        db.OrderProducts.Add(orderProduct);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.ID == product.ID).Total;
+                        orderProduct.Quantity = orderProduct.Quantity+1;
+                        db.Entry(orderProduct).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                    s = (BasketClass)Session["AktifSepet"];
+                    basket.Amount = s.TotalAmount;
+                    db.Entry(basket).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
             catch (Exception e)
             {
@@ -337,22 +368,21 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             return basketCount;
         }
-      
+
         [Route("Sepet/Temizle")]
         public ActionResult SepetTemizle()
         {
             BasketClass s = new BasketClass();
             s.AllClear();
-            if (Session["userId"] != null)
+            if (_loginState.IsLogin())
             {
-                int userId = Convert.ToInt32(Session["LoginUserId"]);
-                Basket basket = db.Baskets.Where(x => x.UserId == userId && x.BasketKey == null).FirstOrDefault();
-                //List<tblSiparisDetay> detays = db.tblSiparisDetay.Where(x => x.siparis == siparis.satisId).ToList();
-                //foreach (var item in detays)
-                //{
-                //    db.tblSiparisDetay.Remove(item);
-                //    db.SaveChanges();
-                //}
+                Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                List<OrderProduct> detays = db.OrderProducts.Where(x => x.BasketId == basket.ID).ToList();
+                foreach (var item in detays)
+                {
+                    db.OrderProducts.Remove(item);
+                    db.SaveChanges();
+                }
             }
 
             return Redirect("/Sepetim");
@@ -360,13 +390,18 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Sepetim/Sil/{id}")]
         public ActionResult SepetItemSil(int id)
         {
-            Basket basket = db.Baskets.Find(id);
-            if (basket != null)
+            BasketClass s = (BasketClass)Session["AktifSepet"];
+            if (_loginState.IsLogin())
             {
-                db.Baskets.Remove(basket);
+                Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                OrderProduct detays = db.OrderProducts.FirstOrDefault(x => x.ProductId == id && x.BasketId == s.BasketId && x.InTheBasket);
+                db.OrderProducts.Remove(detays);
+                db.SaveChanges();
+                s = (BasketClass)Session["AktifSepet"];
+                basket.Amount = s.TotalAmount;
+                db.Entry(basket).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            BasketClass s = new BasketClass();
             s.BasketItemRemove(id);
             return Redirect("/Sepetim");
         }

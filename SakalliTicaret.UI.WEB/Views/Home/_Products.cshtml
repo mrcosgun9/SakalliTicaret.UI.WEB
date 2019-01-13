@@ -2,26 +2,25 @@
 @using SakalliTicaret.UI.WEB.App_Class
 @model SakalliTicaret.UI.WEB.Models.FilterModel
 
-                @foreach (var item in Model.Products)
-                {
-                    <div class="col-md-3 productStyle">
-                        <div class="card">
-                            <a href='~/Urun/@item.ID/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()'>
-                                <div class="cardimagediv">
-                                    <img class="card-img-top" src="@item.ImageUrl" />
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">@item.Name</h5>
+@foreach (var item in Model.Products)
+{
+    <div class="col-md-3 productStyle">
+        <div class="card">
+            <a href='~/Urun/@item.ID/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()'>
+                <div class="cardimagediv">
+                    <img class="card-img-top" src="@item.ImageUrl" />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
 
 
-                                </div>
-                            </a>
-                            <small stle="float:left;">@item.Price TL</small>
-                            <button name="@item.ID" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                </div>
+            </a>
+            <small stle="float:left;">@item.Price TL</small>
+            <button name="@item.ID" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
-                            @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
-                        </div>
+            @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
+        </div>
 
-                    </div>
-                }
-                                                   
+    </div>
+}
