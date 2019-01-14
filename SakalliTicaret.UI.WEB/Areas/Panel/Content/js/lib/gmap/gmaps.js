@@ -255,7 +255,7 @@ var GMaps = (function(global) {
     }
 
     window.context_menu = window.context_menu || {};
-    window.context_menu[self.el.id] = {};
+    window.context_menu[self.el.Id] = {};
 
     /**
      * Collection of custom controls in the map UI
@@ -356,7 +356,7 @@ var GMaps = (function(global) {
 
     var buildContextMenuHTML = function(control, e) {
       var html = '',
-          options = window.context_menu[self.el.id][control];
+          options = window.context_menu[self.el.Id][control];
 
       for (var i in options){
         if (options.hasOwnProperty(i)) {
@@ -382,7 +382,7 @@ var GMaps = (function(global) {
         var assign_menu_item_action = function(ev){
           ev.preventDefault();
 
-          options[this.id.replace(control + '_', '')].action.apply(self, [e]);
+          options[this.Id.replace(control + '_', '')].action.apply(self, [e]);
           self.hideContextMenu();
         };
 
@@ -438,7 +438,7 @@ var GMaps = (function(global) {
      *   * `action` (function): Function triggered after selecting the context menu item.
      */
     this.setContextMenu = function(options) {
-      window.context_menu[self.el.id][options.control] = {};
+      window.context_menu[self.el.Id][options.control] = {};
 
       var i,
           ul = doc.createElement('ul');
@@ -447,14 +447,14 @@ var GMaps = (function(global) {
         if (options.options.hasOwnProperty(i)) {
           var option = options.options[i];
 
-          window.context_menu[self.el.id][options.control][option.name] = {
+          window.context_menu[self.el.Id][options.control][option.name] = {
             title: option.title,
             action: option.action
           };
         }
       }
 
-      ul.id = 'gmaps_context_menu';
+      ul.Id = 'gmaps_context_menu';
       ul.style.display = 'none';
       ul.style.position = 'absolute';
       ul.style.minWidth = '100px';
@@ -525,7 +525,7 @@ var GMaps = (function(global) {
         options.rightclick.apply(this, [e]);
       }
 
-      if(window.context_menu[self.el.id]['map'] != undefined) {
+      if(window.context_menu[self.el.Id]['map'] != undefined) {
         self.buildContextMenu('map', e);
       }
     });
@@ -655,8 +655,8 @@ GMaps.prototype.createControl = function(options) {
     control.style[option] = options.style[option];
   }
 
-  if (options.id) {
-    control.id = options.id;
+  if (options.Id) {
+    control.Id = options.Id;
   }
 
   if (options.title) {
@@ -835,7 +835,7 @@ GMaps.prototype.createMarker = function(options) {
       options.rightclick.apply(this, [e]);
     }
 
-    if (window.context_menu[self.el.id]['marker'] != undefined) {
+    if (window.context_menu[self.el.Id]['marker'] != undefined) {
       self.buildContextMenu('marker', e);
     }
   });

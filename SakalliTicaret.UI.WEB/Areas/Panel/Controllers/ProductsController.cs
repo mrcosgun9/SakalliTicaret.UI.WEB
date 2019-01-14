@@ -60,7 +60,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 var User = Session["AdminLoginUser"] as User;
                 product.CreateDateTime = DateTime.Now;
-                product.CreateUserID = User.ID;
+                product.CreateUserId = User.Id;
                 if (ProductImg.ContentLength > 0)
                 {
                     //string ImageName = Path.GetFileName(ProductImg.FileName);
@@ -77,7 +77,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -93,7 +93,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -112,7 +112,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 _logClass.ProductLog(product, "Düzenleme");
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
             return View(product);
         }
 

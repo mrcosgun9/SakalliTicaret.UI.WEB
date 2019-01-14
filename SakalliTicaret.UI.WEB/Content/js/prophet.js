@@ -59,7 +59,7 @@ var Message = (function () {
     function Message(text, options, cb) {
         //--- Default values ---
         this._text = text || "Awesome!";
-        this._id = Message.idGen();
+        this._id = Message.IdGen();
         this._type = "default";
         this._duration = 4000; //defaults to 4000 milliseconds
         this._class = " ";
@@ -69,7 +69,7 @@ var Message = (function () {
                 this.cb = options;
             else if (typeof (options) === "object" && !Array.isArray(options)) {
                 this._type = options.type || this._type;
-                this._id = options.id || this._id;
+                this._id = options.Id || this._id;
                 this._duration = options.duration || this._duration;
                 this._class = options.class || this._class;
             }
@@ -79,7 +79,7 @@ var Message = (function () {
         this.init();
         return this;
     }
-    Message.idGen = function () {
+    Message.IdGen = function () {
         return Date.now() % 10000;
     };
     /*NEXTVER: make single clear function in future which clears a specific toast by taking an id as a param. if no id, clears all*/

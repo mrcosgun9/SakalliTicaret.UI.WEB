@@ -35,7 +35,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             int pageCount = filterModel.PageCount ?? 30;
             if (filterModel.Search != null && filterModel.searchCategory != 0)
             {
-                filterModel.Products = db.Products.Where(x => x.Name.Contains(filterModel.Search) && x.CategoryID == filterModel.searchCategory).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                filterModel.Products = db.Products.Where(x => x.Name.Contains(filterModel.Search) && x.CategoryId == filterModel.searchCategory).OrderBy(x => x.Name).ToPagedList(page, pageCount);
             }
             else if (filterModel.Search != null)
             {
@@ -43,11 +43,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             else if (filterModel.searchCategory != 0)
             {
-                filterModel.Products = db.Products.Where(x => x.CategoryID == filterModel.searchCategory).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                filterModel.Products = db.Products.Where(x => x.CategoryId == filterModel.searchCategory).OrderBy(x => x.Name).ToPagedList(page, pageCount);
             }
             else if (filterModel.Category != null)
             {
-                filterModel.Products = db.Products.Where(x => x.CategoryID == filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                filterModel.Products = db.Products.Where(x => x.CategoryId == filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
             }
             else
             {

@@ -54,7 +54,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             if (ModelState.IsValid)
             {
                 categoryProperty.CreateDateTime = DateTime.Now;
-                categoryProperty.CreateUserID = AdminLoginUserId;
+                categoryProperty.CreateUserId = AdminLoginUserId;
                 db.CategoryProperties.Add(categoryProperty);
                 db.SaveChanges();
                 return RedirectToAction("Index");

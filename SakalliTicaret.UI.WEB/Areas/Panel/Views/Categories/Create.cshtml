@@ -15,7 +15,7 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ParentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ParentCategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-12">
                         @Html.DropDownList("ParentId", new SelectList(ViewBag.UstKategoriList, "ID", "Name"), "Üst Kategori Seçiniz", new { @class = "form-control", @id = "ustKategori" })
                         @*@{
@@ -26,13 +26,13 @@
                         <select class="form-control" id="ParentId" name="ParentId">
                             @foreach (var item in categoryList.Where(u => u.ParentId == 0))
                             {
-                                <option value="@item.ID">
+                                <option value="@item.Id">
                                     @item.Name
                                 </option>
-                                foreach (var subItem in categoryList.Where(u => u.ParentId == item.ID))
+                                foreach (var subItem in categoryList.Where(u => u.ParentId == item.Id))
                                 {
                                     i++;
-                                    <option value="@subItem.ID">
+                                    <option value="@subItem.Id">
                                         @for (int j = 0; j < i; j++)
                                         {
                                             deger += "-";
@@ -51,7 +51,7 @@
 
                         <small class="form-text text-muted">Ana Kategori Eklemek İsterseniz Üst Kategori Seçmeyiniz.</small>
                         @*@Html.EditorFor(model => model.ParentId, new { htmlAttributes = new { @class = "form-control" } })*@
-                        @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.ParentCategoryId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

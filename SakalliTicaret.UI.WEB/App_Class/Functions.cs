@@ -27,7 +27,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             BasketClass basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
             if (_loginState.IsLogin())
             {
-                int id = _loginState.IsLoginUser().ID;
+                int id = _loginState.IsLoginUser().Id;
                 basket = db.Baskets.FirstOrDefault(x => x.UserId == id && x.StatusId == 5);
             }
             else
@@ -44,13 +44,13 @@ namespace SakalliTicaret.UI.WEB.App_Class
                     basket.StatusId = 5;
                     if (_loginState.IsLogin())
                     {
-                        basket.UserId = _loginState.IsLoginUser().ID;
-                        basket.CreateUserID = _loginState.IsLoginUser().ID;
+                        basket.UserId = _loginState.IsLoginUser().Id;
+                        basket.CreateUserId = _loginState.IsLoginUser().Id;
                     }
                     else
                     {
                         basket.UserId = -1;
-                        basket.CreateUserID = -1;
+                        basket.CreateUserId = -1;
                     }
                     basket.CreateDateTime = DateTime.Now;
                     basket.Amount = basketClass.TotalAmount;
@@ -62,7 +62,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 else
                 {
                     List<OrderProduct> dbOrderProduct = db.OrderProducts
-                        .Where(x => x.BasketId == basket.ID).ToList();
+                        .Where(x => x.BasketId == basket.Id).ToList();
                     if (dbOrderProduct.Count != 0)
                     {
                         foreach (var item in dbOrderProduct)
@@ -79,8 +79,8 @@ namespace SakalliTicaret.UI.WEB.App_Class
                     }
                     if (_loginState.IsLogin())
                     {
-                        basket.UserId = _loginState.IsLoginUser().ID;
-                        basket.CreateUserID = _loginState.IsLoginUser().ID;
+                        basket.UserId = _loginState.IsLoginUser().Id;
+                        basket.CreateUserId = _loginState.IsLoginUser().Id;
                     }
                     basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                     basket.Amount = basketClass.TotalAmount;
@@ -95,14 +95,14 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 if (basket != null)
                 {
                     List<OrderProduct> dbOrderProduct = db.OrderProducts
-                        .Where(x => x.BasketId == basket.ID).ToList();
+                        .Where(x => x.BasketId == basket.Id).ToList();
                     if (dbOrderProduct.Count != 0)
                     {
                         basketClass = new BasketClass();
                         foreach (var item in dbOrderProduct)
                         {
                             BasketClass.BasketItem basketItem = new BasketClass.BasketItem();
-                            Product product = db.Products.FirstOrDefault(x => x.ID == item.ProductId);
+                            Product product = db.Products.FirstOrDefault(x => x.Id == item.ProductId);
                             basketItem.Product = product;
                             basketItem.Quantity = item.Quantity;
                             basketItem.Tax = 0;
@@ -111,7 +111,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                     }
                     basketClass = (BasketClass) HttpContext.Current.Session["AktifSepet"];
                     basketClass = new BasketClass();
-                    basketClass.BasketId = basket.ID;
+                    basketClass.BasketId = basket.Id;
                     basketClass.BasketKey = basket.BasketKey;
                     basketClass.UserId = basket.UserId;
                    HttpContext.Current.Session["AktifSepet"] = basketClass;
@@ -123,17 +123,17 @@ namespace SakalliTicaret.UI.WEB.App_Class
 
         public void OrderProductControl(Basket basket, BasketClass basketClass)
         {
-            int id = _loginState.IsLoginUser().ID;
+            int id = _loginState.IsLoginUser().Id;
 
             foreach (var item in basketClass.Products)
             {
                 OrderProduct orderProduct = new OrderProduct();
                 orderProduct.CreateDateTime = DateTime.Now;
-                orderProduct.CreateUserID = _loginState.IsLoginUser().ID;
-                orderProduct.BasketId = basket.ID;
+                orderProduct.CreateUserId = _loginState.IsLoginUser().Id;
+                orderProduct.BasketId = basket.Id;
                 orderProduct.InTheBasket = true;
-                orderProduct.ProductId = item.Product.ID;
-                orderProduct.UserId = _loginState.IsLoginUser().ID;
+                orderProduct.ProductId = item.Product.Id;
+                orderProduct.UserId = _loginState.IsLoginUser().Id;
                 orderProduct.Quantity = item.Quantity;
                 orderProduct.Amount = (double)item.Total;
                 db.OrderProducts.Add(orderProduct);

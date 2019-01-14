@@ -1868,7 +1868,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        nodeCount++;
 	        this.parent = null;
 	        this.children = {};
-	        this.id = nodeCount;
+	        this.Id = nodeCount;
 	        this.name = 'n' + nodeCount;
 	        if (typeof name !== 'undefined') {
 	            this.name = name;
@@ -2738,7 +2738,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			// Assign id if is set
 			if (id) {
-				element.attr.id = id[1]
+				element.attr.Id = id[1]
 
 				// Add element to the return object
 				returnObject[id[1]] = element

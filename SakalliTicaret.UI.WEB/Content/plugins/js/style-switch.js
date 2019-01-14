@@ -112,7 +112,7 @@ var customizer = (function(window, undefined) {
             var head  = document.getElementsByTagName('head')[0],
                 link  = document.createElement('link');
 
-            link.id   = cssId;
+            link.Id   = cssId;
             link.rel  = 'stylesheet';
             link.type = 'text/css';
             link.href = url;

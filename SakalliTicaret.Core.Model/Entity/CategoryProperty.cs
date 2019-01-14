@@ -11,7 +11,7 @@ namespace SakalliTicaret.Core.Model.Entity
     {
         [Required]
         [Display(Name = "Kategori")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public Category Category { get; set; }
         [Required]
         [Display(Name = "İsim")]

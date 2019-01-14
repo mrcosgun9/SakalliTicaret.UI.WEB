@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SakallaTicaret.Helper;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
@@ -62,7 +61,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             if (ModelState.IsValid)
             {
                 user.CreateDateTime = DateTime.Now;
-                user.CreateUserID = 0;
+                user.CreateUserId = 0;
                 user.IsActive = true;
                 db.Users.Add(user);
                 db.SaveChanges();

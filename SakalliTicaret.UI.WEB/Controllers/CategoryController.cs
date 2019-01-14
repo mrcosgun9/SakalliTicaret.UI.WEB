@@ -15,7 +15,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Kategori/{id}/{name}")]
         public ActionResult Index(int id, string name)
         {
-            var model = db.Products.Where(x => x.CategoryID == id).ToList();
+            var model = db.Products.Where(x => x.CategoryId == id).ToList();
             return View(model);
         }
     }

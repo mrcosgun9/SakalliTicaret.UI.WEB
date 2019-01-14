@@ -631,7 +631,7 @@ var Microsoft;
                     var self = this;
                     self.ajaxTotalDuration = ApplicationInsights.dateTime.GetDuration(self.requestSentTime, self.responseFinishedTime);
                 };
-                this.id = id;
+                this.Id = id;
             }
             ajaxRecord.prototype.getAbsoluteUrl = function () {
                 return this.requestUrl ? ApplicationInsights.UrlHelper.getAbsoluteUrl(this.requestUrl) : null;
@@ -743,7 +743,7 @@ var Microsoft;
             AjaxMonitor.prototype.sendHandler = function (xhr, content) {
                 xhr.ajaxData.requestSentTime = ApplicationInsights.dateTime.Now();
                 if (!this.appInsights.config.disableCorrelationHeaders && (ApplicationInsights.UrlHelper.parseUrl(xhr.ajaxData.getAbsoluteUrl()).host == this.currentWindowHost)) {
-                    xhr.setRequestHeader("x-ms-request-id", xhr.ajaxData.id);
+                    xhr.setRequestHeader("x-ms-request-id", xhr.ajaxData.Id);
                 }
                 xhr.ajaxData.xhrMonitoringState.sendDone = true;
             };
@@ -799,7 +799,7 @@ var Microsoft;
                     }));
                 }
                 else {
-                    this.appInsights.trackAjax(xhr.ajaxData.id, xhr.ajaxData.getAbsoluteUrl(), xhr.ajaxData.getPathName(), xhr.ajaxData.ajaxTotalDuration, (+(xhr.ajaxData.status)) >= 200 && (+(xhr.ajaxData.status)) < 400, +xhr.ajaxData.status);
+                    this.appInsights.trackAjax(xhr.ajaxData.Id, xhr.ajaxData.getAbsoluteUrl(), xhr.ajaxData.getPathName(), xhr.ajaxData.ajaxTotalDuration, (+(xhr.ajaxData.status)) >= 200 && (+(xhr.ajaxData.status)) < 400, +xhr.ajaxData.status);
                     xhr.ajaxData = null;
                 }
             };
@@ -1107,7 +1107,7 @@ var AI;
             this.applicationBuild = "ai.application.build";
             this.applicationTypeId = "ai.application.typeId";
             this.applicationId = "ai.application.applicationId";
-            this.deviceId = "ai.device.id";
+            this.deviceId = "ai.device.Id";
             this.deviceIp = "ai.device.ip";
             this.deviceLanguage = "ai.device.language";
             this.deviceLocale = "ai.device.locale";
@@ -1124,20 +1124,20 @@ var AI;
             this.deviceMachineName = "ai.device.machineName";
             this.deviceVMName = "ai.device.vmName";
             this.locationIp = "ai.location.ip";
-            this.operationId = "ai.operation.id";
+            this.operationId = "ai.operation.Id";
             this.operationName = "ai.operation.name";
             this.operationParentId = "ai.operation.parentId";
             this.operationRootId = "ai.operation.rootId";
             this.operationSyntheticSource = "ai.operation.syntheticSource";
             this.operationIsSynthetic = "ai.operation.isSynthetic";
             this.operationCorrelationVector = "ai.operation.correlationVector";
-            this.sessionId = "ai.session.id";
+            this.sessionId = "ai.session.Id";
             this.sessionIsFirst = "ai.session.isFirst";
             this.sessionIsNew = "ai.session.isNew";
             this.userAccountAcquisitionDate = "ai.user.accountAcquisitionDate";
             this.userAccountId = "ai.user.accountId";
             this.userAgent = "ai.user.userAgent";
-            this.userId = "ai.user.id";
+            this.userId = "ai.user.Id";
             this.userStoreRegion = "ai.user.storeRegion";
             this.userAuthUserId = "ai.user.authUserId";
             this.userAnonymousUserAcquisitionDate = "ai.user.anonUserAcquisitionDate";
@@ -1196,7 +1196,7 @@ var Microsoft;
             "use strict";
             var Device = (function () {
                 function Device() {
-                    this.id = "browser";
+                    this.Id = "browser";
                     this.type = "Browser";
                 }
                 return Device;
@@ -1248,7 +1248,7 @@ var Microsoft;
             "use strict";
             var Operation = (function () {
                 function Operation() {
-                    this.id = ApplicationInsights.Util.newId();
+                    this.Id = ApplicationInsights.Util.newId();
                     if (window && window.location && window.location.pathname) {
                         this.name = window.location.pathname;
                     }
@@ -1356,7 +1356,7 @@ var Microsoft;
                     this.automaticSession = new Session();
                 }
                 _SessionManager.prototype.update = function () {
-                    if (!this.automaticSession.id) {
+                    if (!this.automaticSession.Id) {
                         this.initializeAutomaticSession();
                     }
                     var now = +new Date;
@@ -1368,11 +1368,11 @@ var Microsoft;
                     }
                     else {
                         this.automaticSession.renewalDate = +new Date;
-                        this.setCookie(this.automaticSession.id, this.automaticSession.acquisitionDate, this.automaticSession.renewalDate);
+                        this.setCookie(this.automaticSession.Id, this.automaticSession.acquisitionDate, this.automaticSession.renewalDate);
                     }
                 };
                 _SessionManager.prototype.backup = function () {
-                    this.setStorage(this.automaticSession.id, this.automaticSession.acquisitionDate, this.automaticSession.renewalDate);
+                    this.setStorage(this.automaticSession.Id, this.automaticSession.acquisitionDate, this.automaticSession.renewalDate);
                 };
                 _SessionManager.prototype.initializeAutomaticSession = function () {
                     var cookie = ApplicationInsights.Util.getCookie('ai_session');
@@ -1385,7 +1385,7 @@ var Microsoft;
                             this.initializeAutomaticSessionWithData(storage);
                         }
                     }
-                    if (!this.automaticSession.id) {
+                    if (!this.automaticSession.Id) {
                         this.automaticSession.isFirst = true;
                         this.renew();
                     }
@@ -1393,7 +1393,7 @@ var Microsoft;
                 _SessionManager.prototype.initializeAutomaticSessionWithData = function (sessionData) {
                     var params = sessionData.split("|");
                     if (params.length > 0) {
-                        this.automaticSession.id = params[0];
+                        this.automaticSession.Id = params[0];
                     }
                     try {
                         if (params.length > 1) {
@@ -1416,10 +1416,10 @@ var Microsoft;
                 };
                 _SessionManager.prototype.renew = function () {
                     var now = +new Date;
-                    this.automaticSession.id = ApplicationInsights.Util.newId();
+                    this.automaticSession.Id = ApplicationInsights.Util.newId();
                     this.automaticSession.acquisitionDate = now;
                     this.automaticSession.renewalDate = now;
-                    this.setCookie(this.automaticSession.id, this.automaticSession.acquisitionDate, this.automaticSession.renewalDate);
+                    this.setCookie(this.automaticSession.Id, this.automaticSession.acquisitionDate, this.automaticSession.renewalDate);
                     if (!ApplicationInsights.Util.canUseLocalStorage()) {
                         ApplicationInsights._InternalLogging.throwInternalNonUserActionable(ApplicationInsights.LoggingSeverity.WARNING, new ApplicationInsights._InternalLogMessage(ApplicationInsights._InternalMessageId.NONUSRACT_BrowserDoesNotSupportLocalStorage, "Browser does not support local storage. Session durations will be inaccurate."));
                     }
@@ -1463,17 +1463,17 @@ var Microsoft;
                     if (cookie) {
                         var params = cookie.split(User.cookieSeparator);
                         if (params.length > 0) {
-                            this.id = params[0];
+                            this.Id = params[0];
                         }
                     }
                     this.config = config;
-                    if (!this.id) {
-                        this.id = ApplicationInsights.Util.newId();
+                    if (!this.Id) {
+                        this.Id = ApplicationInsights.Util.newId();
                         var date = new Date();
                         var acqStr = ApplicationInsights.Util.toISOStringForIE8(date);
                         this.accountAcquisitionDate = acqStr;
                         date.setTime(date.getTime() + 31536000000);
-                        var newCookie = [this.id, acqStr];
+                        var newCookie = [this.Id, acqStr];
                         var cookieDomain = this.config.cookieDomain ? this.config.cookieDomain() : undefined;
                         ApplicationInsights.Util.setCookie(User.userCookieName, newCookie.join(User.cookieSeparator) + ';expires=' + date.toUTCString(), cookieDomain);
                         ApplicationInsights.Util.removeStorage('ai_session');
@@ -2532,7 +2532,7 @@ var Microsoft;
                         ApplicationInsights._InternalLogging.resetInternalMessageCount();
                     }
                     if (this.session) {
-                        if (typeof this.session.id !== "string") {
+                        if (typeof this.session.Id !== "string") {
                             this._sessionManager.update();
                         }
                     }
@@ -2542,7 +2542,7 @@ var Microsoft;
             };
             TelemetryContext.prototype._track = function (envelope) {
                 if (this.session) {
-                    if (typeof this.session.id === "string") {
+                    if (typeof this.session.Id === "string") {
                         this._applySessionContext(envelope, this.session);
                     }
                     else {
@@ -2602,8 +2602,8 @@ var Microsoft;
             TelemetryContext.prototype._applyDeviceContext = function (envelope, deviceContext) {
                 var tagKeys = new AI.ContextTagKeys();
                 if (deviceContext) {
-                    if (typeof deviceContext.id === "string") {
-                        envelope.tags[tagKeys.deviceId] = deviceContext.id;
+                    if (typeof deviceContext.Id === "string") {
+                        envelope.tags[tagKeys.deviceId] = deviceContext.Id;
                     }
                     if (typeof deviceContext.ip === "string") {
                         envelope.tags[tagKeys.deviceIp] = deviceContext.ip;
@@ -2659,8 +2659,8 @@ var Microsoft;
             TelemetryContext.prototype._applyOperationContext = function (envelope, operationContext) {
                 if (operationContext) {
                     var tagKeys = new AI.ContextTagKeys();
-                    if (typeof operationContext.id === "string") {
-                        envelope.tags[tagKeys.operationId] = operationContext.id;
+                    if (typeof operationContext.Id === "string") {
+                        envelope.tags[tagKeys.operationId] = operationContext.Id;
                     }
                     if (typeof operationContext.name === "string") {
                         envelope.tags[tagKeys.operationName] = operationContext.name;
@@ -2684,8 +2684,8 @@ var Microsoft;
             TelemetryContext.prototype._applySessionContext = function (envelope, sessionContext) {
                 if (sessionContext) {
                     var tagKeys = new AI.ContextTagKeys();
-                    if (typeof sessionContext.id === "string") {
-                        envelope.tags[tagKeys.sessionId] = sessionContext.id;
+                    if (typeof sessionContext.Id === "string") {
+                        envelope.tags[tagKeys.sessionId] = sessionContext.Id;
                     }
                     if (typeof sessionContext.isFirst !== "undefined") {
                         envelope.tags[tagKeys.sessionIsFirst] = sessionContext.isFirst;
@@ -2701,8 +2701,8 @@ var Microsoft;
                     if (typeof userContext.agent === "string") {
                         envelope.tags[tagKeys.userAgent] = userContext.agent;
                     }
-                    if (typeof userContext.id === "string") {
-                        envelope.tags[tagKeys.userId] = userContext.id;
+                    if (typeof userContext.Id === "string") {
+                        envelope.tags[tagKeys.userId] = userContext.Id;
                     }
                     if (typeof userContext.authenticatedId === "string") {
                         envelope.tags[tagKeys.userAuthUserId] = userContext.authenticatedId;
@@ -3007,7 +3007,7 @@ var Microsoft;
                         properties: ApplicationInsights.FieldType.Default,
                         resultCode: ApplicationInsights.FieldType.Default
                     };
-                    this.id = id;
+                    this.Id = id;
                     this.name = name;
                     this.commandName = commandName;
                     this.value = value;

@@ -2202,6 +2202,7 @@
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\Products1Controller.cs" />
     <Compile Include="Controllers\UserAddressesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2511,6 +2512,11 @@
     <Content Include="Views\Home\_Products.cshtml" />
     <Content Include="Views\Home\HomeSearch.cshtml" />
     <Content Include="Views\Pages\Contact.cshtml" />
+    <Content Include="Views\Products1\Create.cshtml" />
+    <Content Include="Views\Products1\Delete.cshtml" />
+    <Content Include="Views\Products1\Details.cshtml" />
+    <Content Include="Views\Products1\Edit.cshtml" />
+    <Content Include="Views\Products1\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2523,10 +2529,6 @@
     <Folder Include="Areas\Panel\Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SakallaTicaret.Helper\SakallaTicaret.Helper.csproj">
-      <Project>{ba74a1b9-014e-4447-a871-1e4bd5875a62}</Project>
-      <Name>SakallaTicaret.Helper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">
       <Project>{603134e1-01db-460b-94eb-c9620ded5079}</Project>
       <Name>SakalliTicaret.Core.Model</Name>

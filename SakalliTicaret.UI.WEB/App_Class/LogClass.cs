@@ -34,7 +34,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             _logCategory.CreateUserID = 0;
             _logCategory.Name = _category.Name;
             _logCategory.IsActive = _category.IsActive;
-            _logCategory.ParentId = _category.ParentId;
+            _logCategory.ParentId = _category.ParentCategoryId;
             db.LogCategories.Add(_logCategory);
             db.SaveChanges();
         }
@@ -62,7 +62,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             _logProduct.Name = _prodoct.Name;
             _logProduct.Brand = _prodoct.Brand;
             _logProduct.Category = _prodoct.Category;
-            _logProduct.CategoryID = _prodoct.CategoryID;
+            _logProduct.CategoryID = _prodoct.CategoryId;
             _logProduct.Definition = _prodoct.Definition;
             _logProduct.Description = _prodoct.Description;
             _logProduct.Discount = _prodoct.Discount;

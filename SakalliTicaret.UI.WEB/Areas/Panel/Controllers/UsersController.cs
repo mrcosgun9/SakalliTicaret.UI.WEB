@@ -55,7 +55,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
                 User sessions= Session["AdminLoginUser"] as User;
-                if (sessions != null) _logClass.UserLog(user, "Ekleme", sessions.ID);
+                if (sessions != null) _logClass.UserLog(user, "Ekleme", sessions.Id);
                 return RedirectToAction("Index");
             }
 
@@ -90,7 +90,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     User sessions = Session["AdminLoginUser"] as User;
-                    if (sessions != null) _logClass.UserLog(user, "Düzenleme", sessions.ID);
+                    if (sessions != null) _logClass.UserLog(user, "Düzenleme", sessions.Id);
                     return RedirectToAction("Index");
                 }
                 return View(user);
@@ -126,7 +126,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             User sessions = Session["AdminLoginUser"] as User;
-            if (sessions != null) _logClass.UserLog(user, "Silme", sessions.ID);
+            if (sessions != null) _logClass.UserLog(user, "Silme", sessions.Id);
             return RedirectToAction("Index");
         }
 

@@ -622,7 +622,7 @@ $.extend($.validator, {
 						return false;
 					}
 				} catch(e) {
-					this.settings.debug && window.console && console.log("exception occured when checking element " + element.id
+					this.settings.debug && window.console && console.log("exception occured when checking element " + element.Id
 						 + ", check the '" + rule.method + "' method", e);
 					throw e;
 				}
@@ -743,7 +743,7 @@ $.extend($.validator, {
 			} else {
 				// create label
 				label = $("<" + this.settings.errorElement + "/>")
-					.attr({"for":  this.idOrName(element), generated: true})
+					.attr({"for":  this.IdOrName(element), generated: true})
 					.addClass(this.settings.errorClass)
 					.html(message || "");
 				if ( this.settings.wrapper ) {
@@ -766,14 +766,14 @@ $.extend($.validator, {
 		},
 		
 		errorsFor: function(element) {
-			var name = this.idOrName(element);
+			var name = this.IdOrName(element);
     		return this.errors().filter(function() {
 				return $(this).attr('for') == name;
 			});
 		},
 		
 		idOrName: function(element) {
-			return this.groups[element.name] || (this.checkable(element) ? element.name : element.id || element.name);
+			return this.groups[element.name] || (this.checkable(element) ? element.name : element.Id || element.name);
 		},
 
 		checkable: function( element ) {

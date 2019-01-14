@@ -22,7 +22,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             if (_loginState.IsLogin())
             {
                 User user = _loginState.IsLoginUser();
-                userAddresses = db.UserAddresses.Where(x => x.UserId == user.ID).ToList();
+                userAddresses = db.UserAddresses.Where(x => x.UserId == user.Id).ToList();
             }
 
             return View(userAddresses);
@@ -60,9 +60,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 var loginUser = Session["LoginUser"];
                 User user = loginUser as User;
-                userAddress.UserId = user.ID;
+                userAddress.UserId = user.Id;
                 userAddress.CreateDateTime = DateTime.Now;
-                userAddress.CreateUserID = 0;
+                userAddress.CreateUserId = 0;
                 db.UserAddresses.Add(userAddress);
                 db.SaveChanges();
                 return Redirect("/Sepetim");

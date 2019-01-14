@@ -54,7 +54,7 @@ $(function($) {
 
     // Example of infinite knob, iPod click wheel
     var v, up=0,down=0,i=0
-        ,$idir = $("div.idir")
+        ,$idir = $("div.Idir")
         ,$ival = $("div.ival")
         ,incr = function() { i++; $idir.show().html("+").fadeOut(); $ival.html(i); }
         ,decr = function() { i--; $idir.show().html("-").fadeOut(); $ival.html(i); };

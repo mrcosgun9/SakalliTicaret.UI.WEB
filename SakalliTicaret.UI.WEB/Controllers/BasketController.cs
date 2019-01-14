@@ -28,7 +28,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 User user = _loginState.IsLoginUser();
                 //GirisSepetControl();
-                var model = db.UserAddresses.Where(x => x.UserId == user.ID).ToList();
+                var model = db.UserAddresses.Where(x => x.UserId == user.Id).ToList();
                 List<UserAddress> addresses = model;
                 ViewBag.AddressList = addresses;
             }
@@ -74,8 +74,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 return Redirect("/Kullanici/Giris");
             }
-            var model = db.UserAddresses.Include(u => u.User).Where(x => x.UserId == user.ID).ToList();
-            //var model = db.UserAddresses.Include(x => x.Users).Where(x => x.UserId == user.ID).ToList();
+            var model = db.UserAddresses.Include(u => u.User).Where(x => x.UserId == user.Id).ToList();
+            //var model = db.UserAddresses.Include(x => x.Users).Where(x => x.UserId == user.Id).ToList();
 
             return View(model);
         }
@@ -212,7 +212,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             int i = 0;
             foreach (var item in s.Products)
             {
-                string qStokKodu = item.Product.ID.ToString();
+                string qStokKodu = item.Product.Id.ToString();
                 decimal qFiyat = Convert.ToDecimal(item.Product.Price);
                 int qAdet = Convert.ToInt32(item.Quantity);
                 user_basket[i] = new object[] { qStokKodu, qFiyat, qAdet };
@@ -320,7 +320,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             try
             {
                 BasketClass.BasketItem basketItem = new BasketClass.BasketItem();
-                Product product = db.Products.FirstOrDefault(x => x.ID == productId);
+                Product product = db.Products.FirstOrDefault(x => x.Id == productId);
                 basketItem.Product = product;
                 basketItem.Quantity = 1;
                 basketItem.Tax = 0;
@@ -330,27 +330,27 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 basketCount = s.Products.Count;
                 if (_loginState.IsLogin())
                 {
-                    int id = _loginState.IsLoginUser().ID;
-                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.ID==product.ID&&x.UserId==id);
+                    int id = _loginState.IsLoginUser().Id;
+                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.Id==product.Id&&x.UserId==id);
                     if (orderProduct==null)
                     {
                         orderProduct=new OrderProduct();
                         orderProduct.CreateDateTime = DateTime.Now;
-                        orderProduct.CreateUserID = _loginState.IsLoginUser().ID;
+                        orderProduct.CreateUserId = _loginState.IsLoginUser().Id;
                         orderProduct.BasketId = s.BasketId;
                         orderProduct.InTheBasket = true;
 
-                        orderProduct.ProductId = product.ID;
-                        orderProduct.UserId = _loginState.IsLoginUser().ID;
-                        orderProduct.Quantity = s.Products.FirstOrDefault(x => x.Product.ID == productId).Quantity;
-                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.ID == product.ID).Total;
+                        orderProduct.ProductId = product.Id;
+                        orderProduct.UserId = _loginState.IsLoginUser().Id;
+                        orderProduct.Quantity = s.Products.FirstOrDefault(x => x.Product.Id == productId).Quantity;
+                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.Id == product.Id).Total;
                         orderProduct.BasketId = s.BasketId;
                         db.OrderProducts.Add(orderProduct);
                         db.SaveChanges();
                     }
                     else
                     {
-                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.ID == product.ID).Total;
+                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.Id == product.Id).Total;
                         orderProduct.Quantity = orderProduct.Quantity+1;
                         db.Entry(orderProduct).State = EntityState.Modified;
                         db.SaveChanges();
@@ -377,7 +377,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             if (_loginState.IsLogin())
             {
                 Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
-                List<OrderProduct> detays = db.OrderProducts.Where(x => x.BasketId == basket.ID).ToList();
+                List<OrderProduct> detays = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
                 foreach (var item in detays)
                 {
                     db.OrderProducts.Remove(item);

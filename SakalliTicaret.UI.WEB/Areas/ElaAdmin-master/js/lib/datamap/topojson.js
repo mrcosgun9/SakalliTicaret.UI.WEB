@@ -155,11 +155,11 @@ topojson = (function() {
   function feature(topology, o) {
     var f = {
       type: "Feature",
-      id: o.id,
+      id: o.Id,
       properties: o.properties || {},
       geometry: object(topology, o)
     };
-    if (o.id == null) delete f.id;
+    if (o.Id == null) delete f.Id;
     return f;
   }
 

@@ -224,7 +224,7 @@
 		 */
 		get_field = function(name, result) {
 			if (name === '$score') return result.score;
-			return getattr(self.items[result.id], name, options.nesting);
+			return getattr(self.items[result.Id], name, options.nesting);
 		};
 
 		// parse options
@@ -2153,7 +2153,7 @@
 			// filter out selected items
 			if (settings.hideSelected) {
 				for (i = result.items.length - 1; i >= 0; i--) {
-					if (self.items.indexOf(hash_key(result.items[i].id)) !== -1) {
+					if (self.items.indexOf(hash_key(result.items[i].Id)) !== -1) {
 						result.items.splice(i, 1);
 					}
 				}
@@ -2193,7 +2193,7 @@
 			groups_order = [];
 	
 			for (i = 0; i < n; i++) {
-				option      = self.options[results.items[i].id];
+				option      = self.options[results.items[i].Id];
 				option_html = self.render('option', option);
 				optgroup    = option[self.settings.optgroupField] || '';
 				optgroups   = $.isArray(optgroup) ? optgroup : [optgroup];

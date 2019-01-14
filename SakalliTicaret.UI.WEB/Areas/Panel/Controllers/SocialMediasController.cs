@@ -64,7 +64,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 User user=Session["AdminLoginUser"] as User;
                 socialMedia.CreateDateTime = DateTime.Now;
-                socialMedia.CreateUserID = user.ID;
+                socialMedia.CreateUserId = user.Id;
                 db.SocialMediae.Add(socialMedia);
                 db.SaveChanges();
                 return RedirectToAction("Index");

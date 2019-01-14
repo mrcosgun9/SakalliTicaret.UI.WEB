@@ -794,7 +794,7 @@ function Sizzle( selector, context, results, seed ) {
 							// Support: IE, Opera, Webkit
 							// TODO: identify versions
 							// getElementById can match elements by name instead of ID
-							if ( elem.id === m ) {
+							if ( elem.Id === m ) {
 								results.push( elem );
 								return results;
 							}
@@ -810,7 +810,7 @@ function Sizzle( selector, context, results, seed ) {
 						// getElementById can match elements by name instead of ID
 						if ( newContext && (elem = newContext.getElementById( m )) &&
 							contains( context, elem ) &&
-							elem.id === m ) {
+							elem.Id === m ) {
 
 							results.push( elem );
 							return results;
@@ -1137,7 +1137,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// The broken getElementById methods don't pick up programmatically-set names,
 	// so use a roundabout getElementsByName test
 	support.getById = assert(function( el ) {
-		docElem.appendChild( el ).id = expando;
+		docElem.appendChild( el ).Id = expando;
 		return !document.getElementsByName || !document.getElementsByName( expando ).length;
 	});
 
@@ -1980,7 +1980,7 @@ Expr = Sizzle.selectors = {
 		// Miscellaneous
 		"target": function( elem ) {
 			var hash = window.location && window.location.hash;
-			return hash && hash.slice( 1 ) === elem.id;
+			return hash && hash.slice( 1 ) === elem.Id;
 		},
 
 		"root": function( elem ) {

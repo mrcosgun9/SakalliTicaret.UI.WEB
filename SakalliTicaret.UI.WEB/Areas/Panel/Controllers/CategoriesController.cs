@@ -20,7 +20,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Categories
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(p => p.ParentCategory);
+            var categories = db.Categories.Include(p => p.ParentCategory).Include(p=>p.CategoryProperties);
             return View(categories.ToList());
         }
 
@@ -52,13 +52,13 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             string html = "";
             List<Category> subCategories=new List<Category>();
-            subCategories = db.Categories.Where(x => x.ParentId == parantId).ToList();
+            subCategories = db.Categories.Where(x => x.ParentCategoryId == parantId).ToList();
             //DataRow[] altKategoriler = dt.Select("UstKategoriId=" + ustKategoriId);
             if (subCategories.Count == 0) return html;
             html += "<ul>";
             foreach (var item  in subCategories)
             {
-                int id = item.ID;
+                int id = item.Id;
                 html += "<li>"+@item.Name+"</li>";
                 AgacOlustur(id);
      
@@ -84,7 +84,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 
             var User = Session["AdminLoginUser"] as User;
             category.CreateDateTime = DateTime.Now;
-            category.CreateUserID = User.ID;
+            category.CreateUserId = User.Id;
             if (ModelState.IsValid)
             {
                 db.Categories.Add(category);
@@ -121,7 +121,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             var User = Session["AdminLoginUser"] as User;
             category.UpdateDateTime = DateTime.Now;
-            category.UpdateUserID = User.ID;
+            category.UpdateUserID = User.Id;
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = EntityState.Modified;

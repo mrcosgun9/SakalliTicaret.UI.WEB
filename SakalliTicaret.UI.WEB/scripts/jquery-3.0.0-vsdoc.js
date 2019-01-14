@@ -1646,7 +1646,7 @@
                         if (elem && elem.parentNode) {
                             // Handle the case where IE, Opera, and Webkit return items
                             // by name instead of ID
-                            if (elem.id === m) {
+                            if (elem.Id === m) {
                                 results.push(elem);
                                 return results;
                             }
@@ -1656,7 +1656,7 @@
                     } else {
                         // Context is not a document
                         if (context.ownerDocument && (elem = context.ownerDocument.getElementById(m)) &&
-                            contains(context, elem) && elem.id === m) {
+                            contains(context, elem) && elem.Id === m) {
                             results.push(elem);
                             return results;
                         }

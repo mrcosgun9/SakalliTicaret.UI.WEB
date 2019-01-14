@@ -27,9 +27,9 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 BasketClass s = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                 if (basketItem.Product != null)
                 {
-                    if (s.Products.Any(x => x.Product.ID == basketItem.Product.ID))
+                    if (s.Products.Any(x => x.Product.Id == basketItem.Product.Id))
                     {
-                        s.Products.FirstOrDefault(x => x.Product.ID == basketItem.Product.ID).Quantity= s.Products.FirstOrDefault(x => x.Product.ID == basketItem.Product.ID).Quantity+basketItem.Quantity;
+                        s.Products.FirstOrDefault(x => x.Product.Id == basketItem.Product.Id).Quantity= s.Products.FirstOrDefault(x => x.Product.Id == basketItem.Product.Id).Quantity+basketItem.Quantity;
                     }
                     else
                     {
@@ -64,7 +64,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             BasketClass s = (BasketClass)HttpContext.Current.Session["AktifSepet"];
             if (s != null)
             {
-                BasketItem si = s.Products.FirstOrDefault(x => x.Product.ID == id);
+                BasketItem si = s.Products.FirstOrDefault(x => x.Product.Id == id);
                 s.Products.Remove(si);
                 HttpContext.Current.Session["AktifSepet"] = s;
             }
@@ -76,9 +76,9 @@ namespace SakalliTicaret.UI.WEB.App_Class
         public void BasketItemUpdate(int id, int adet)
         {
             BasketClass s = (BasketClass)HttpContext.Current.Session["AktifSepet"];
-            BasketItem si = s.Products.FirstOrDefault(x => x.Product.ID == id);
-            if (s.Products.Any(x => x.Product.ID == si.Product.ID))
-                s.Products.FirstOrDefault(x => x.Product.ID == si.Product.ID).Quantity = adet;
+            BasketItem si = s.Products.FirstOrDefault(x => x.Product.Id == id);
+            if (s.Products.Any(x => x.Product.Id == si.Product.Id))
+                s.Products.FirstOrDefault(x => x.Product.Id == si.Product.Id).Quantity = adet;
             HttpContext.Current.Session["AktifSepet"] = s;
         }
         public void AllClear()

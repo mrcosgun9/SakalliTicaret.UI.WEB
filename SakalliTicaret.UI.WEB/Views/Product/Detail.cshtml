@@ -94,12 +94,13 @@
                     <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
                 </div>
                 <div class="product-add-cart">
-                    <button name="@Model.ID" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                    <button name="@Model.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
 
                 </div>
                 <div class="product-additional-info">
                     <ul>
+                        <li><b>Kategori:</b>@Model.Category.Name</li>
                         <li><b>Model:</b>@Model.Model</li>
                         <li><b>Marka:</b>@Model.Brand</li>
                         @*<li><b>Category:</b><a href="">@Model.Category.Name</a>, <a href="">Women</a></li>*@
@@ -119,7 +120,7 @@
         <div class="tab-content xt-tab-content">
             <div role="tabpanel" class="tab-pane xt-pane xt-description fade in active" id="description">
                 <h3>Ürün Açıklaması</h3>
-                @*@foreach (var item in Model.Category.CategoryFeatureses)
+                @*@foreach (var item in Model.Category.CategoryProperties)
                 {
                     <b>item.Name</b>
                 }*@

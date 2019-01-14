@@ -287,7 +287,7 @@
     if (opt.disablemutationobserver) ClsMutationObserver = false;
 
     this.doc = opt.doc;
-    this.iddoc = (this.doc && this.doc[0]) ? this.doc[0].id || '' : '';
+    this.Iddoc = (this.doc && this.doc[0]) ? this.doc[0].Id || '' : '';
     this.ispage = /^BODY|HTML/.test((opt.win) ? opt.win[0].nodeName : this.doc[0].nodeName);
     this.haswrapper = (opt.win !== false);
     this.win = opt.win || (this.ispage ? $window : this.doc);
@@ -366,11 +366,11 @@
     this.observerbody = false;  // observer on body for position change
 
     if (opt.scrollbarid !== false) {
-      this.id = opt.scrollbarid;
+      this.Id = opt.scrollbarid;
     } else {
       do {
-        this.id = "ascrail" + (ascrailcounter++);
-      } while (_doc.getElementById(this.id));
+        this.Id = "ascrail" + (ascrailcounter++);
+      } while (_doc.getElementById(this.Id));
     }
 
     this.rail = false;
@@ -650,7 +650,7 @@
     this.hasParent = function (e, id) {
       if (!e) return false;
       var el = e.target || e.srcElement || e || false;
-      while (el && el.id != id) {
+      while (el && el.Id != id) {
         el = el.parentNode || false;
       }
       return (el !== false);
@@ -873,7 +873,7 @@
         self.cursor = cursor;
 
         var rail = $(_doc.createElement('div'));
-        rail.attr('id', self.id);
+        rail.attr('id', self.Id);
         rail.addClass('nicescroll-rails nicescroll-rails-vr');
 
         var v, a, kp = ["left", "right", "top", "bottom"];  //**
@@ -966,7 +966,7 @@
           self.cursorh = cursor;
 
           railh = $(_doc.createElement('div'));
-          railh.attr('id', self.id + '-hr');
+          railh.attr('id', self.Id + '-hr');
           railh.addClass('nicescroll-rails nicescroll-rails-hr');
           railh.height = Math.max(parseFloat(opt.cursorwidth), cursor.outerHeight());
           railh.css({
@@ -1824,7 +1824,7 @@
           });
 
           self.bind(self.win, "focus", function (e) {  // better using native events
-            domfocus = (self.getTarget(e)).id || self.getTarget(e) || false;
+            domfocus = (self.getTarget(e)).Id || self.getTarget(e) || false;
             self.hasfocus = true;
             if (self.canshowonmouseevent) self.noticeCursor();
           });
@@ -1834,7 +1834,7 @@
           });
 
           self.bind(self.win, "mouseenter", function (e) {   // *
-            mousefocus = (self.getTarget(e)).id || self.getTarget(e) || false;
+            mousefocus = (self.getTarget(e)).Id || self.getTarget(e) || false;
             self.hasmousefocus = true;
             if (self.canshowonmouseevent) self.noticeCursor();
           });
@@ -2503,10 +2503,10 @@
       }
 
       if (self.ispage) {
-        de.a = [self.id].concat(de.a);
+        de.a = [self.Id].concat(de.a);
         de.l = [fn].concat(de.l);
       } else {
-        de.a.push(self.id);
+        de.a.push(self.Id);
         de.l.push(fn);        
       }
 
@@ -2516,7 +2516,7 @@
       var de = delegatevents[name]||false;
       if (de&&de.l) {  // quick fix #683
         for (var a=0,l=de.l.length;a<l;a++) {
-          if (de.a[a] === self.id) {
+          if (de.a[a] === self.Id) {
             de.a.splice(a);
             de.l.splice(a);
             if (de.a.length===0) {
@@ -2658,7 +2658,7 @@
       var lst = $.nicescroll;
       lst.each(function (i) {
         if (!this) return;
-        if (this.id === self.id) {
+        if (this.Id === self.Id) {
           delete lst[i];
           for (var b = ++i; b < lst.length; b++ , i++) lst[i] = lst[b];
           lst.length--;

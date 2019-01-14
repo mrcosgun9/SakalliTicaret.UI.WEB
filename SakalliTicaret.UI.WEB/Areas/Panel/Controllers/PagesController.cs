@@ -54,7 +54,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 User user = Session["AdminLoginUser"] as User;
                 page.CreateDateTime = DateTime.Now;
-                page.CreateUserID = user.ID;
+                page.CreateUserId = user.Id;
                 db.Pages.Add(page);
                 db.SaveChanges();
                 return RedirectToAction("Index");

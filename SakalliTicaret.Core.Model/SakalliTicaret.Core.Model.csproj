@@ -71,6 +71,18 @@
     <Compile Include="Entity\Status.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\UserAddress.cs" />
+    <Compile Include="Migrations\201901141938534_Initial.cs" />
+    <Compile Include="Migrations\201901141938534_Initial.Designer.cs">
+      <DependentUpon>201901141938534_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901141947320_CreateUserId.cs" />
+    <Compile Include="Migrations\201901141947320_CreateUserId.Designer.cs">
+      <DependentUpon>201901141947320_CreateUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901142038505_test1.cs" />
+    <Compile Include="Migrations\201901142038505_test1.Designer.cs">
+      <DependentUpon>201901142038505_test1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SakalliTicaretDb.cs" />
@@ -78,6 +90,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901141938534_Initial.resx">
+      <DependentUpon>201901141938534_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901141947320_CreateUserId.resx">
+      <DependentUpon>201901141947320_CreateUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901142038505_test1.resx">
+      <DependentUpon>201901142038505_test1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

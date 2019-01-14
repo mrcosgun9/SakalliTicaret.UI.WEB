@@ -13,12 +13,15 @@ namespace SakalliTicaret.Core.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Eklenme Tarihi")]
         public DateTime CreateDateTime { get; set; }
+
         [Display(Name = "Oluşturan Kullanıcı")]
-        public int CreateUserID { get; set; }
+        public int? CreateUserId { get; set; }
+        public User CreateUser { get; set; }
+
         public virtual IEnumerable<User> Users { get; set; }
         [Display(Name = "Güncellenme Tarihi")]
         public DateTime? UpdateDateTime { get; set; }

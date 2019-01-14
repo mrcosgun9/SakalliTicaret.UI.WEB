@@ -53,7 +53,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 User user = Session["AdminLoginUser"] as User;
 
-                contact.CreateUserID = user.ID;
+                contact.CreateUserId = user.Id;
                 contact.CreateDateTime = DateTime.Now;
                 db.Contacts.Add(contact);
                 db.SaveChanges();
