@@ -1,7 +1,7 @@
-﻿@model SakalliTicaret.Core.Model.Entity.Product
+﻿@model SakalliTicaret.UI.WEB.Models.ProductDetailModel
 
 @{
-    ViewBag.Title = "Sakalli Ticaret | "+Model.Name;
+    ViewBag.Title = "Sakalli Ticaret | "+Model.Product.Name;
     Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
 }
 <div class="col-md-3 left-menu-wrapper">
@@ -23,24 +23,24 @@
                 <div class="tab-content xt-pro-small-image">
                     <!-- Tab panel-->
                     <div role="tabpanel" id="xt-pro-1" class="tab-pane fade">
-                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
-                            <img src="@Model.ImageUrl" class="img-responsive" />
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                            <img src="@Model.Product.ImageUrl" class="img-responsive" />
 
                         </a>
                     </div>
                     <div role="tabpanel" id="xt-pro-2" class="tab-pane fade">
-                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
-                            <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                            <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
                         </a>
                     </div>
                     <div role="tabpanel" id="xt-pro-3" class="tab-pane fade active in">
-                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
-                            <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                            <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
                         </a>
                     </div>
                     <div role="tabpanel" id="xt-pro-4" class="tab-pane fade">
-                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.ImageUrl">
-                            <img src="@Model.ImageUrl" alt="" class="img-responsive">
+                        <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                            <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
                         </a>
                     </div>
                 </div>
@@ -48,22 +48,22 @@
                 <ul id="tablist" class="xt-pro-thumbs-list" role="tablist">
                     <li role="presentation" class="">
                         <a href="#xt-pro-1" role="tab" data-toggle="tab" aria-expanded="false">
-                            <img src="@Model.ImageUrl" alt="product thumbs">
+                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
                         </a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#xt-pro-2" role="tab" data-toggle="tab" aria-expanded="false">
-                            <img src="@Model.ImageUrl" alt="product thumbs">
+                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
                         </a>
                     </li>
                     <li role="presentation" class="active">
                         <a href="#xt-pro-3" role="tab" data-toggle="tab" aria-expanded="true">
-                            <img src="@Model.ImageUrl" alt="product thumbs">
+                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
                         </a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#xt-pro-4" role="tab" data-toggle="tab" aria-expanded="false">
-                            <img src="@Model.ImageUrl" alt="product thumbs">
+                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
                         </a>
                     </li>
                 </ul>
@@ -71,9 +71,9 @@
         </div>
         <div class="col-md-7">
             <div class="each-product-info">
-                <h3>@Model.Name</h3>
-                <span class="single-price"><b>Fiyat:</b> @Model.Price ₺</span>
-                <p>@Model.Description</p>
+                <h3>@Model.Product.Name</h3>
+                <span class="single-price"><b>Fiyat:</b> @Model.Product.Price ₺</span>
+                <p>@Model.Product.Description</p>
                 @*<div class="color-select">
                         Color:
                         <ul>
@@ -94,15 +94,15 @@
                     <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
                 </div>
                 <div class="product-add-cart">
-                    <button name="@Model.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                    <button name="@Model.Product.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
 
                 </div>
                 <div class="product-additional-info">
                     <ul>
-                        <li><b>Kategori:</b>@Model.Category.Name</li>
-                        <li><b>Model:</b>@Model.Model</li>
-                        <li><b>Marka:</b>@Model.Brand</li>
+                        <li><b>Kategori:</b>@Model.Product.Category.Name</li>
+                        <li><b>Model:</b>@Model.Product.Model</li>
+                        <li><b>Marka:</b>@Model.Product.Brand</li>
                         @*<li><b>Category:</b><a href="">@Model.Category.Name</a>, <a href="">Women</a></li>*@
                     </ul>
                 </div>
@@ -120,11 +120,11 @@
         <div class="tab-content xt-tab-content">
             <div role="tabpanel" class="tab-pane xt-pane xt-description fade in active" id="description">
                 <h3>Ürün Açıklaması</h3>
-                @*@foreach (var item in Model.Category.CategoryProperties)
+                @foreach (var item in Model.CategoryProperties)
                 {
-                    <b>item.Name</b>
-                }*@
-                @Html.Raw(Model.Definition)
+                    <b>@item.Name</b>
+                }
+                @Html.Raw(Model.Product.Definition)
             </div>
 
         </div>

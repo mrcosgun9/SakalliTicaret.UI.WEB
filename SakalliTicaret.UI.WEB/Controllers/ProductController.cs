@@ -4,7 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
+using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.Controllers.Base;
+using SakalliTicaret.UI.WEB.Models;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -17,10 +19,13 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Urun/{id}/{title}")]
         public ActionResult Detail(int id, string title)
         {
-            var model = db.Products
-                .Include(p => p.Category).Select(x => x.Category.CategoryProperties).First();
-
-            return View(model);
+            ProductDetailModel detailModel=new ProductDetailModel();
+            detailModel.Product= db.Products
+                .Include(p => p.Category).FirstOrDefault(x => x.Id == id);
+            detailModel.CategoryProperties= db.CategoryProperties.Include(c => c.Category)
+                .Where(x => x.CategoryId == detailModel.Product.CategoryId).ToList();
+            
+            return View(detailModel);
         }
         [Route("Urunler/YeniUrunler")]
         public ActionResult NewProductList()
