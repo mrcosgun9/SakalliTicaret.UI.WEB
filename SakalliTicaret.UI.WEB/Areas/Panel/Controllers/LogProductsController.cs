@@ -18,7 +18,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/LogProducts
         public ActionResult Index()
         {
-            var logProducts = db.LogProducts.Include(l => l.Category);
+            //var logProducts = db.LogProducts.Include(l => l.Category);
+            var logProducts = db.LogProducts;
             return View(logProducts.ToList());
         }
 

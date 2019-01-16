@@ -144,7 +144,7 @@ var JQVMap = function (params) {
     });
 
     path.setFill(this.color);
-    path.Id = map.getCountryId(key);
+    path.id = map.getCountryId(key);
     map.countries[key] = path;
 
     if (this.canvas.mode === 'svg') {
@@ -158,7 +158,7 @@ var JQVMap = function (params) {
 
   jQuery(params.container).delegate(this.canvas.mode === 'svg' ? 'path' : 'shape', 'mouseover mouseout', function (e) {
     var containerPath = e.target,
-      code = e.target.Id.split('_').pop(),
+      code = e.target.id.split('_').pop(),
       labelShowEvent = jQuery.Event('labelShow.jqvmap'),
       regionMouseOverEvent = jQuery.Event('regionMouseOver.jqvmap');
 
@@ -190,7 +190,7 @@ var JQVMap = function (params) {
   jQuery(params.container).delegate(this.canvas.mode === 'svg' ? 'path' : 'shape', 'click', function (regionClickEvent) {
 
     var targetPath = regionClickEvent.target;
-    var code = regionClickEvent.target.Id.split('_').pop();
+    var code = regionClickEvent.target.id.split('_').pop();
     var mapClickEvent = jQuery.Event('regionClick.jqvmap');
 
     code = code.toLowerCase();

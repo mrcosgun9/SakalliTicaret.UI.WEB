@@ -6250,7 +6250,7 @@ module.exports = function(Chart) {
 				for (var i = 0; i < datasetIndex; i++) {
 					var currentDs = datasets[i];
 					var currentDsMeta = chart.getDatasetMeta(i);
-					if (currentDsMeta.bar && currentDsMeta.yAxisID === yScale.Id && chart.isDatasetVisible(i)) {
+					if (currentDsMeta.bar && currentDsMeta.yAxisID === yScale.id && chart.isDatasetVisible(i)) {
 						var currentVal = Number(currentDs.data[index]);
 						base += value < 0 ? Math.min(currentVal, 0) : Math.max(currentVal, 0);
 					}
@@ -6356,7 +6356,7 @@ module.exports = function(Chart) {
 				for (var i = 0; i < datasetIndex; i++) {
 					var ds = me.chart.data.datasets[i];
 					var dsMeta = me.chart.getDatasetMeta(i);
-					if (dsMeta.bar && dsMeta.yAxisID === yScale.Id && me.chart.isDatasetVisible(i)) {
+					if (dsMeta.bar && dsMeta.yAxisID === yScale.id && me.chart.isDatasetVisible(i)) {
 						var stackedVal = Number(ds.data[index]);
 						if (stackedVal < 0) {
 							sumNeg += stackedVal || 0;
@@ -6578,7 +6578,7 @@ module.exports = function(Chart) {
 				for (var i = 0; i < datasetIndex; i++) {
 					var currentDs = datasets[i];
 					var currentDsMeta = chart.getDatasetMeta(i);
-					if (currentDsMeta.bar && currentDsMeta.xAxisID === xScale.Id && chart.isDatasetVisible(i)) {
+					if (currentDsMeta.bar && currentDsMeta.xAxisID === xScale.id && chart.isDatasetVisible(i)) {
 						var currentVal = Number(currentDs.data[index]);
 						base += value < 0 ? Math.min(currentVal, 0) : Math.max(currentVal, 0);
 					}
@@ -6649,7 +6649,7 @@ module.exports = function(Chart) {
 				for (var i = 0; i < datasetIndex; i++) {
 					var ds = me.chart.data.datasets[i];
 					var dsMeta = me.chart.getDatasetMeta(i);
-					if (dsMeta.bar && dsMeta.xAxisID === xScale.Id && me.chart.isDatasetVisible(i)) {
+					if (dsMeta.bar && dsMeta.xAxisID === xScale.id && me.chart.isDatasetVisible(i)) {
 						var stackedVal = Number(ds.data[index]);
 						if (stackedVal < 0) {
 							sumNeg += stackedVal || 0;
@@ -6835,7 +6835,7 @@ module.exports = function(Chart) {
 		},
 		legendCallback: function(chart) {
 			var text = [];
-			text.push('<ul class="' + chart.Id + '-legend">');
+			text.push('<ul class="' + chart.id + '-legend">');
 
 			var data = chart.data;
 			var datasets = data.datasets;
@@ -7334,7 +7334,7 @@ module.exports = function(Chart) {
 				for (i = 0; i < datasetIndex; i++) {
 					ds = chart.data.datasets[i];
 					dsMeta = chart.getDatasetMeta(i);
-					if (dsMeta.type === 'line' && dsMeta.yAxisID === yScale.Id && chart.isDatasetVisible(i)) {
+					if (dsMeta.type === 'line' && dsMeta.yAxisID === yScale.id && chart.isDatasetVisible(i)) {
 						var stackedRightValue = Number(yScale.getRightValue(ds.data[index]));
 						if (stackedRightValue < 0) {
 							sumNeg += stackedRightValue || 0;
@@ -7485,7 +7485,7 @@ module.exports = function(Chart) {
 		aspectRatio: 1,
 		legendCallback: function(chart) {
 			var text = [];
-			text.push('<ul class="' + chart.Id + '-legend">');
+			text.push('<ul class="' + chart.id + '-legend">');
 
 			var data = chart.data;
 			var datasets = data.datasets;
@@ -8297,14 +8297,14 @@ module.exports = function(Chart) {
 		instance.height = height;
 		instance.aspectRatio = height? width / height : null;
 
-		me.Id = helpers.uid();
+		me.id = helpers.uid();
 		me.chart = instance;
 		me.config = config;
 		me.options = config.options;
 		me._bufferedRender = false;
 
 		// Add the chart instance to the global namespace
-		Chart.instances[me.Id] = me;
+		Chart.instances[me.id] = me;
 
 		Object.defineProperty(me, 'data', {
 			get: function() {
@@ -8421,15 +8421,15 @@ module.exports = function(Chart) {
 			var scaleOptions = options.scale;
 
 			helpers.each(scalesOptions.xAxes, function(xAxisOptions, index) {
-				xAxisOptions.Id = xAxisOptions.Id || ('x-axis-' + index);
+				xAxisOptions.id = xAxisOptions.id || ('x-axis-' + index);
 			});
 
 			helpers.each(scalesOptions.yAxes, function(yAxisOptions, index) {
-				yAxisOptions.Id = yAxisOptions.Id || ('y-axis-' + index);
+				yAxisOptions.id = yAxisOptions.id || ('y-axis-' + index);
 			});
 
 			if (scaleOptions) {
-				scaleOptions.Id = scaleOptions.Id || 'scale';
+				scaleOptions.id = scaleOptions.id || 'scale';
 			}
 		},
 
@@ -8466,13 +8466,13 @@ module.exports = function(Chart) {
 				}
 
 				var scale = new scaleClass({
-					id: scaleOptions.Id,
+					id: scaleOptions.id,
 					options: scaleOptions,
 					ctx: me.chart.ctx,
 					chart: me
 				});
 
-				scales[scale.Id] = scale;
+				scales[scale.id] = scale;
 
 				// TODO(SB): I think we should be able to remove this custom case (options.scale)
 				// and consider it as a regular scale part of the "scales"" map only! This would
@@ -8723,9 +8723,9 @@ module.exports = function(Chart) {
 				dataset._meta = {};
 			}
 
-			var meta = dataset._meta[me.Id];
+			var meta = dataset._meta[me.id];
 			if (!meta) {
-				meta = dataset._meta[me.Id] = {
+				meta = dataset._meta[me.id] = {
 					type: null,
 					data: [],
 					dataset: null,
@@ -8788,7 +8788,7 @@ module.exports = function(Chart) {
 
 			Chart.plugins.notify('destroy', [me]);
 
-			delete Chart.instances[me.Id];
+			delete Chart.instances[me.id];
 		},
 
 		toBase64Image: function() {
@@ -9025,10 +9025,10 @@ module.exports = function(Chart) {
 			var dataset = me.getDataset();
 
 			if (meta.xAxisID === null) {
-				meta.xAxisID = dataset.xAxisID || me.chart.options.scales.xAxes[0].Id;
+				meta.xAxisID = dataset.xAxisID || me.chart.options.scales.xAxes[0].id;
 			}
 			if (meta.yAxisID === null) {
-				meta.yAxisID = dataset.yAxisID || me.chart.options.scales.yAxes[0].Id;
+				meta.yAxisID = dataset.yAxisID || me.chart.options.scales.yAxes[0].id;
 			}
 		},
 
@@ -10712,7 +10712,7 @@ module.exports = function() {
 			// Legend callback string
 			legendCallback: function(chart) {
 				var text = [];
-				text.push('<ul class="' + chart.Id + '-legend">');
+				text.push('<ul class="' + chart.id + '-legend">');
 				for (var i = 0; i < chart.data.datasets.length; i++) {
 					text.push('<li><span style="background-color:' + chart.data.datasets[i].backgroundColor + '"></span>');
 					if (chart.data.datasets[i].label) {
@@ -14497,7 +14497,7 @@ module.exports = function(Chart) {
 			var isHorizontal = me.isHorizontal();
 
 			function IDMatches(meta) {
-				return isHorizontal ? meta.xAxisID === me.Id : meta.yAxisID === me.Id;
+				return isHorizontal ? meta.xAxisID === me.id : meta.yAxisID === me.id;
 			}
 
 			// First Calculate the range
@@ -14770,7 +14770,7 @@ module.exports = function(Chart) {
 			var getValueOrDefault = helpers.getValueOrDefault;
 			var isHorizontal = me.isHorizontal();
 			function IDMatches(meta) {
-				return isHorizontal ? meta.xAxisID === me.Id : meta.yAxisID === me.Id;
+				return isHorizontal ? meta.xAxisID === me.id : meta.yAxisID === me.id;
 			}
 
 			// Calculate Range

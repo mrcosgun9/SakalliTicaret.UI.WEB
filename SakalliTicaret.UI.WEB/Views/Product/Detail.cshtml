@@ -1,7 +1,8 @@
-﻿@model SakalliTicaret.UI.WEB.Models.ProductDetailModel
+﻿@using System.Text.RegularExpressions
+@model SakalliTicaret.UI.WEB.Models.ProductDetailModel
 
 @{
-    ViewBag.Title = "Sakalli Ticaret | "+Model.Product.Name;
+    ViewBag.Title = "Sakalli Ticaret | " + Model.Product.Name;
     Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
 }
 <div class="col-md-3 left-menu-wrapper">
@@ -16,7 +17,8 @@
         </nav>
     </div>
 </div>
-<div class="col-md-9">
+
+<div class="col-md-9" style="padding: 0 0 20px 0;">
     <div class="xt-product-inner">
         <div class="col-md-5">
             <div role="tabpanel" class="tab-pane active xt-product-tab">
@@ -24,8 +26,7 @@
                     <!-- Tab panel-->
                     <div role="tabpanel" id="xt-pro-1" class="tab-pane fade">
                         <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
-                            <img src="@Model.Product.ImageUrl" class="img-responsive" />
-
+                            <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
                         </a>
                     </div>
                     <div role="tabpanel" id="xt-pro-2" class="tab-pane fade">
@@ -51,83 +52,272 @@
                             <img src="@Model.Product.ImageUrl" alt="product thumbs">
                         </a>
                     </li>
-                    <li role="presentation" class="">
-                        <a href="#xt-pro-2" role="tab" data-toggle="tab" aria-expanded="false">
-                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
-                        </a>
-                    </li>
-                    <li role="presentation" class="active">
-                        <a href="#xt-pro-3" role="tab" data-toggle="tab" aria-expanded="true">
-                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
-                        </a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="#xt-pro-4" role="tab" data-toggle="tab" aria-expanded="false">
-                            <img src="@Model.Product.ImageUrl" alt="product thumbs">
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </div>
         <div class="col-md-7">
             <div class="each-product-info">
                 <h3>@Model.Product.Name</h3>
-                <span class="single-price"><b>Fiyat:</b> @Model.Product.Price ₺</span>
+                <span class="single-price"><b>Fiyat :</b> @Model.Product.Price ₺</span>
                 <p>@Model.Product.Description</p>
-                @*<div class="color-select">
-                        Color:
-                        <ul>
+                <div class="color-select">
+                    @foreach (var item in Model.PropertyPropertyValueses)
+                    {
+                        @item.CategoryProperty.Name
+                        @item.CategoryPropertyValue.Value<br />
+                    }
+
+                    @*<ul>
                             <li class="red-bg selected"><i class="fa fa-check"></i></li>
                             <li class="green-bg"><i class="fa fa-check"></i></li>
                             <li class="blue-bg"><i class="fa fa-check"></i></li>
-                        </ul>
-                    </div>
-                    <div class="select-size">
-                        Size:
-                        <ul>
-                            <li class="selected">M</li>
-                            <li>L</li>
-                            <li>XL</li>
-                        </ul>
-                    </div>*@
-                <div class="select-quantity">
-                    <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
+                        </ul>*@
                 </div>
+
+                @*<div class="select-quantity">
+                        <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
+                    </div>*@
                 <div class="product-add-cart">
-                    <button name="@Model.Product.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
-
-
+                    <button name="@Model.Product.Id" class="basketCreate" style="float: none;" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                    @*<a href="" class="btn liked "><i class="fa fa-heart-o xt-no-color"></i><i class="fa fa-heart xt-color"></i></a>*@
                 </div>
                 <div class="product-additional-info">
                     <ul>
-                        <li><b>Kategori:</b>@Model.Product.Category.Name</li>
                         <li><b>Model:</b>@Model.Product.Model</li>
+                        <li><b>Kategori:</b><a href="">@Model.Product.Category.Name</a></li>
                         <li><b>Marka:</b>@Model.Product.Brand</li>
-                        @*<li><b>Category:</b><a href="">@Model.Category.Name</a>, <a href="">Women</a></li>*@
                     </ul>
                 </div>
             </div>
         </div>
+        <div style="clear: both"></div>
     </div>
-    <div class="xt-single-item-info margin-t-30">
+    <div class="xt-single-item-info" style="margin: 10px 0 0 0;">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs xt-single-item-tab" role="tablist" id="xt-product-dec-nav">
             <li role="presentation" class="active">
                 <a href="#description" aria-controls="description" role="tab" data-toggle="tab">Açıklama</a>
             </li>
+            <li role="presentation" class="">
+                <a href="#specification" aria-controls="specification" role="tab" data-toggle="tab">Özellikleri</a>
+            </li>
+            @*<li role="presentation" class="">
+                <a href="#review" aria-controls="review" role="tab" data-toggle="tab">Review(3)</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#seller" aria-controls="seller" role="tab" data-toggle="tab">Seller info</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#shopping" aria-controls="shopping" role="tab" data-toggle="tab">Shopping</a>
+            </li>*@
         </ul>
+
         <!-- Tab panes -->
         <div class="tab-content xt-tab-content">
             <div role="tabpanel" class="tab-pane xt-pane xt-description fade in active" id="description">
-                <h3>Ürün Açıklaması</h3>
-                @foreach (var item in Model.CategoryProperties)
-                {
-                    <b>@item.Name</b>
-                }
                 @Html.Raw(Model.Product.Definition)
-            </div>
 
+            </div>
+            <div role="tabpanel" class="tab-pane xt-pane fade" id="specification">
+                <h5>Özellikler</h5>
+            </div>
+            <div role="tabpanel" class="tab-pane xt-pane xt-review fade" id="review">
+                <h3>Product Review</h3>
+                <p>
+                    retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
+                    Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry
+                    richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+                    butcher voluptate nisi qui
+                </p>
+                <ul class="item-review">
+                    <li>
+                        <img src="assets/images/rating.png" alt="">
+                        <h4>Angel Brown</h4>
+                        <p>
+                            Aliquip placeat salvia cillum iphone. Seitan aliquip qfuis cardigan american apparel,
+                            butcher voluptate nisi qui
+                        </p>
+                    </li>
+                    <li>
+                        <img src="assets/images/rating.png" alt="">
+                        <h4>Mark Monster</h4>
+                        <p>
+                            Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+                            butcher voluptate nisi qui
+                        </p>
+                    </li>
+                    <li>
+                        <img src="assets/images/rating.png" alt="">
+                        <h4>Lol Brown</h4>
+                        <p>
+                            Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel,
+                            butcher voluptate nisi qui
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane xt-pane fade" id="seller">
+                aw denim you probably haven't heard of them jean shorts Austin.
+                Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
+                Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi
+            </div>
+            <div role="tabpanel" class="tab-pane xt-pane fade" id="shopping">
+                aw denim you probably haven't heard of them jean shorts Austin.
+                Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
+                Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi
+            </div>
         </div>
     </div>
+
+    <!--end singlw item info -->
+    <div class="xt-feature-product">
+        <div class="section-separator">
+            <div class="section-title">
+                <h2>Benzer Ürünler</h2>
+                <span class="xt-title-bg"></span>
+            </div>
+            <div class="xt-each-feature">
+                @foreach (var item in Model.FeaturedProduct)
+                {
+                    <div class="col-md-3 productStyle">
+                        <div class="card">
+                            <a href='~/Urun/@item.Id/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()'>
+                                <div class="cardimagediv">
+                                    <img class="card-img-top" src="@item.ImageUrl" />
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Name</h5>
+
+
+                                </div>
+                            </a>
+                            <small stle="float:left;">@item.Price TL</small><br/>
+                            <button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+
+                            @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        </div>
+        <!---->
+    </div>
 </div>
+@*<div class="col-md-9">
+        <div class="xt-product-inner">
+            <div class="col-md-5">
+                <div role="tabpanel" class="tab-pane active xt-product-tab">
+                    <div class="tab-content xt-pro-small-image">
+                        <!-- Tab panel-->
+                        <div role="tabpanel" id="xt-pro-1" class="tab-pane fade">
+                            <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                                <img src="@Model.Product.ImageUrl" class="img-responsive" />
+
+                            </a>
+                        </div>
+                        <div role="tabpanel" id="xt-pro-2" class="tab-pane fade">
+                            <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                                <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <div role="tabpanel" id="xt-pro-3" class="tab-pane fade active in">
+                            <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                                <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <div role="tabpanel" id="xt-pro-4" class="tab-pane fade">
+                            <a class="grouped_elements" data-fancybox="gallery" href="@Model.Product.ImageUrl">
+                                <img src="@Model.Product.ImageUrl" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Nav tabs -->
+                    <ul id="tablist" class="xt-pro-thumbs-list" role="tablist">
+                        <li role="presentation" class="">
+                            <a href="#xt-pro-1" role="tab" data-toggle="tab" aria-expanded="false">
+                                <img src="@Model.Product.ImageUrl" alt="product thumbs">
+                            </a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#xt-pro-2" role="tab" data-toggle="tab" aria-expanded="false">
+                                <img src="@Model.Product.ImageUrl" alt="product thumbs">
+                            </a>
+                        </li>
+                        <li role="presentation" class="active">
+                            <a href="#xt-pro-3" role="tab" data-toggle="tab" aria-expanded="true">
+                                <img src="@Model.Product.ImageUrl" alt="product thumbs">
+                            </a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#xt-pro-4" role="tab" data-toggle="tab" aria-expanded="false">
+                                <img src="@Model.Product.ImageUrl" alt="product thumbs">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="each-product-info">
+                    <h3>@Model.Product.Name</h3>
+                    <span class="single-price"><b>Fiyat:</b> @Model.Product.Price ₺</span>
+                    <p>@Model.Product.Description</p>
+                    @*<div class="color-select">
+                            Color:
+                            <ul>
+                                <li class="red-bg selected"><i class="fa fa-check"></i></li>
+                                <li class="green-bg"><i class="fa fa-check"></i></li>
+                                <li class="blue-bg"><i class="fa fa-check"></i></li>
+                            </ul>
+                        </div>
+                        <div class="select-size">
+                            Size:
+                            <ul>
+                                <li class="selected">M</li>
+                                <li>L</li>
+                                <li>XL</li>
+                            </ul>
+                        </div>
+                    <div class="select-quantity">
+                        <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
+                    </div>
+                    <div class="product-add-cart">
+                        <button name="@Model.Product.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+
+
+                    </div>
+                    <div class="product-additional-info">
+                        <ul>
+                            <li><b>Kategori:</b>@Model.Product.Category.Name</li>
+                            <li><b>Model:</b>@Model.Product.Model</li>
+                            <li><b>Marka:</b>@Model.Product.Brand</li>
+                            @*<li><b>Category:</b><a href="">@Model.Category.Name</a>, <a href="">Women</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xt-single-item-info margin-t-30">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs xt-single-item-tab" role="tablist" id="xt-product-dec-nav">
+                <li role="presentation" class="active">
+                    <a href="#description" aria-controls="description" role="tab" data-toggle="tab">Açıklama</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content xt-tab-content">
+                <div role="tabpanel" class="tab-pane xt-pane xt-description fade in active" id="description">
+                    <h3>Ürün Açıklaması</h3>
+                    @foreach (var item in Model.PropertyPropertyValueses)
+                    {
+                        <b>@item.CategoryPropertyValue</b>
+                    }
+                    @Html.Raw(Model.Product.Definition)
+                </div>
+
+            </div>
+        </div>
+    </div>*@
 

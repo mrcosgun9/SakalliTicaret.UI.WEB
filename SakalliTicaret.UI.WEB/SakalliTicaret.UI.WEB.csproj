@@ -2471,7 +2471,6 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutPageBlank.cshtml" />
     <Content Include="Views\Users\CreateSuccess.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Companent\HomeUserInfo.cshtml" />
@@ -2518,6 +2517,7 @@
     <Content Include="Views\Products1\Details.cshtml" />
     <Content Include="Views\Products1\Edit.cshtml" />
     <Content Include="Views\Products1\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageBlank.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

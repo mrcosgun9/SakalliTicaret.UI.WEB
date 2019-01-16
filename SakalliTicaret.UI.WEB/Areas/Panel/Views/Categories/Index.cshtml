@@ -26,15 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CreateUserId)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateUserID)
-        </th>
-        <th>
-           Sayı
-        </th>
+
         <th></th>
     </tr>
 
@@ -53,21 +45,12 @@
                 @Html.DisplayFor(modelItem => item.CreateDateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateUserId)
+                @Html.DisplayFor(modelItem => item.CreateUser.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdateDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateUserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryProperties.Count())
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Düzenle", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Detay", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Sil", "Delete", new { id=item.Id })
             </td>
         </tr>
     }

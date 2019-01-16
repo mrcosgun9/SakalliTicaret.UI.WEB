@@ -41,15 +41,16 @@
 .basketCreate {
     font-size: 0.8em;
     padding: 0 8px;
-    float: right;
-    border: 1px solid #26a69a;
+    /*float: right;*/
+    border: 1px solid #F14F2F;
     background: transparent;
     font-weight: bold;
     transition: all ease-in-out 0.2s;
+
 }
 
     .basketCreate:hover {
-        background: #26a69a;
+        background: #F14F2F;
         color: #fff;
     }
 
@@ -59,7 +60,7 @@
 
     .basketCreate i {
         font-size: 1.2em;
-        color: #26a69a;
+        color: #F14F2F;
         margin: 0 5px 0 0;
     }
 

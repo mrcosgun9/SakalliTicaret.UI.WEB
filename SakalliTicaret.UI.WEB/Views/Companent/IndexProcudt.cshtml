@@ -52,7 +52,7 @@
                 {
                     <div class="col-md-3 productStyle">
                         <div class="card">
-                            <a href="~/Urun/@item.ID/@item.Name.Replace(" ", "").ToLower()">
+                            <a href="~/Urun/@item.Id/@item.Name.Replace(" ", "").ToLower()">
                                 <div class="cardimagediv">
                                     <img class="card-img-top" src="@item.ImageUrl" />
                                 </div>
@@ -63,7 +63,7 @@
                                 </div>
                             </a>
                             <small stle="float:left;">@item.Price TL</small>
-                            <button name="@item.ID" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                            <button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
                             @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
                         </div>

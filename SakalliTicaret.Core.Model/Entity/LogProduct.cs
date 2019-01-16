@@ -13,7 +13,6 @@ namespace SakalliTicaret.Core.Model.Entity
         public string Name { get; set; }
         [Display(Name = "Kategori")]
         public int? CategoryId { get; set; }
-        public Category Category { get; set; }
         [Display(Name = "Marka")]
         public string Brand { get; set; }
         [Display(Name = "Model")]

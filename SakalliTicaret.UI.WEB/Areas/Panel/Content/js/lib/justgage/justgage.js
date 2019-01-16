@@ -17,10 +17,10 @@ JustGage = function(config) {
 
   var node;
 
-  if (config.Id !== null && config.Id !== undefined) {
-    node = document.getElementById(config.Id);
+  if (config.id !== null && config.id !== undefined) {
+    node = document.getElementById(config.id);
     if (!node) {
-      console.log('* justgage: No element with id : %s found', config.Id);
+      console.log('* justgage: No element with id : %s found', config.id);
       return false;
     }
   } else if (config.parentNode !== null && config.parentNode !== undefined) {
@@ -43,7 +43,7 @@ JustGage = function(config) {
   obj.config = {
     // id : string
     // this is container element id
-    id: config.Id,
+    id: config.id,
 
     // value : float
     // value gauge is showing
@@ -270,8 +270,8 @@ JustGage = function(config) {
   obj.originalValue = kvLookup('value', config, dataset, -1, 'float');
 
   // create canvas
-  if (obj.config.Id !== null && (document.getElementById(obj.config.Id)) !== null) {
-    obj.canvas = Raphael(obj.config.Id, "100%", "100%");
+  if (obj.config.id !== null && (document.getElementById(obj.config.id)) !== null) {
+    obj.canvas = Raphael(obj.config.id, "100%", "100%");
   } else if (obj.config.parentNode !== null) {
     obj.canvas = Raphael(obj.config.parentNode, "100%", "100%");
   }
@@ -292,8 +292,8 @@ JustGage = function(config) {
     canvasW = 200;
     canvasH = 150;
   } else {
-    canvasW = getStyle(document.getElementById(obj.config.Id), "width").slice(0, -2) * 1;
-    canvasH = getStyle(document.getElementById(obj.config.Id), "height").slice(0, -2) * 1;
+    canvasW = getStyle(document.getElementById(obj.config.id), "width").slice(0, -2) * 1;
+    canvasH = getStyle(document.getElementById(obj.config.id), "height").slice(0, -2) * 1;
   }
 
   // widget dimensions
@@ -762,7 +762,7 @@ JustGage = function(config) {
 
   if (obj.config.counter === true) {
     //on each animation frame
-    eve.on("raphael.anim.frame." + (obj.level.Id), function() {
+    eve.on("raphael.anim.frame." + (obj.level.id), function() {
       var currentValue = obj.level.attr("pki")[0];
       if (obj.config.reverse) {
         currentValue = (obj.config.max * 1) + (obj.config.min * 1) - (obj.level.attr("pki")[0] * 1);
@@ -780,7 +780,7 @@ JustGage = function(config) {
       currentValue = null;
     });
     //on animation end
-    eve.on("raphael.anim.finish." + (obj.level.Id), function() {
+    eve.on("raphael.anim.finish." + (obj.level.id), function() {
       obj.txtValue.attr({
         "text": obj.originalValue
       });
@@ -788,7 +788,7 @@ JustGage = function(config) {
     });
   } else {
     //on animation start
-    eve.on("raphael.anim.start." + (obj.level.Id), function() {
+    eve.on("raphael.anim.start." + (obj.level.id), function() {
       obj.txtValue.attr({
         "text": obj.originalValue
       });
@@ -944,7 +944,7 @@ JustGage.prototype.refresh = function(val, max) {
 JustGage.prototype.generateShadow = function(svg, defs) {
 
   var obj = this;
-  var sid = "inner-shadow-" + obj.config.Id;
+  var sid = "inner-shadow-" + obj.config.id;
   var gaussFilter, feOffset, feGaussianBlur, feComposite1, feFlood, feComposite2, feComposite3;
 
   // FILTER

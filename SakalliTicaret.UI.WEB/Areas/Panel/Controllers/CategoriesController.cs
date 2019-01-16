@@ -20,7 +20,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Categories
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(p => p.ParentCategory).Include(p => p.CategoryProperties);
+            var categories = db.Categories.Include(p => p.ParentCategory).Include(x=>x.CreateUser);
             return View(categories.ToList());
         }
 
@@ -131,7 +131,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = db.Categories.Include(c=>c.CreateUser).FirstOrDefault(x=>x.Id ==id);
             
 
             if (category == null)
@@ -154,7 +154,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             foreach (var item in product)
             {
                 item.CategoryId = null;
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(item).State = EntityState.Modified;
             }
 
             db.SaveChanges();

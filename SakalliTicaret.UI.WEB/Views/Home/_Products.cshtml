@@ -1,26 +1,37 @@
 ﻿@using System.Text.RegularExpressions
 @using SakalliTicaret.UI.WEB.App_Class
 @model SakalliTicaret.UI.WEB.Models.FilterModel
-
+@{
+    Functions viewFunctions=new Functions();
+}
 @foreach (var item in Model.Products)
 {
     <div class="col-md-3 productStyle">
         <div class="card">
-            <a href='~/Urun/@item.Id/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()'>
+            <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower()) '>
                 <div class="cardimagediv">
+                    <span class="product-tag xt-uppercase">
+                        @{
+                            decimal indirim = Math.Ceiling(item.Price / 100 * item.Discount);
+                        }
+                        %@indirim İndİrİm
+
+                    </span>
                     <img class="card-img-top" src="@item.ImageUrl" />
+
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
+                    <h5 class="card-title" title="@item.Name">
+                        @(item.Name.Length<60?item.Name:item.Name.Substring(0,60))
 
-
+                    </h5>
                 </div>
             </a>
-            <small stle="float:left;">@item.Price TL</small>
+            <small stle="float:left;">@item.Price TL</small><br />
             <button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
             @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
         </div>
 
     </div>
-}
+                            }

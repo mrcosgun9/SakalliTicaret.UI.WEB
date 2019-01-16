@@ -53,9 +53,19 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Property Create
                 categoryPropertyValue.CreateDateTime = DateTime.Now;
                 categoryPropertyValue.CreateUserId = AdminLoginUserId;
                 db.CategoryPropertyValues.Add(categoryPropertyValue);
+                db.SaveChanges();
+                //PropVal Create
+                PropertyPropertyValues propertyPropertyValues = new PropertyPropertyValues();
+                propertyPropertyValues.CategoryPropertyId = categoryPropertyValue.CategoryPropertyId;
+                propertyPropertyValues.CategoryPropertyValueId = categoryPropertyValue.Id;
+                propertyPropertyValues.CreateDateTime = DateTime.Now;
+                propertyPropertyValues.CreateUserId = AdminLoginUserId;
+                db.PropertyPropertyValueses.Add(propertyPropertyValues);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -119,6 +129,11 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             CategoryPropertyValue categoryPropertyValue = db.CategoryPropertyValues.Find(id);
             db.CategoryPropertyValues.Remove(categoryPropertyValue);
+            PropertyPropertyValues propertyPropertyValues =
+                db.PropertyPropertyValueses.FirstOrDefault(
+                    x => x.CategoryPropertyId == categoryPropertyValue.CategoryPropertyId &&
+                         x.CategoryPropertyValueId == categoryPropertyValue.Id);
+            db.PropertyPropertyValueses.Remove(propertyPropertyValues);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -578,7 +578,7 @@ rangy.createModule("DomUtil", function(api, module) {
         if (isCharacterDataNode(node)) {
             return '"' + node.data + '"';
         } else if (node.nodeType == 1) {
-            var idAttr = node.Id ? ' id="' + node.Id + '"' : "";
+            var idAttr = node.id ? ' id="' + node.id + '"' : "";
             return "<" + node.nodeName + idAttr + ">[" + node.childNodes.length + "]";
         } else {
             return node.nodeName;
@@ -1909,7 +1909,7 @@ rangy.createModule("DomUtil", function(api, module) {
     <ul id="ul"><li id="a">| a </li><li id="b"> b |</li></ul>
 
     var range = document.selection.createRange();
-    alert(range.parentElement().Id); // Should alert "ul" but alerts "b"
+    alert(range.parentElement().id); // Should alert "ul" but alerts "b"
 
     This method returns the common ancestor node of the following:
     - the parentElement() of the textRange
@@ -6413,7 +6413,7 @@ wysihtml5.quirks.cleanPastedHTML = (function() {
     }
     if (!newNode) {
       newNode = descendantNode.cloneNode(false);
-      if (newNode.Id) {
+      if (newNode.id) {
         newNode.removeAttribute("id");
       }
       var child;

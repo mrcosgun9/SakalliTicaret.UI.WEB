@@ -1616,9 +1616,9 @@ ul {
         height: 180px;
     }
 
-        .xt-feature .product-img .product-tag {
+    .product-tag {
             position: absolute;
-            top: 20px;
+            top: 10px;
             left: 20px;
             font-size: 10px;
             font-weight: 600;
@@ -2777,7 +2777,7 @@ nav ul.xt-side-menu {
 
     .each-product-info .product-additional-info ul li {
         margin-right: 10px;
-        display: inline;
+    
     }
 
         .each-product-info .product-additional-info ul li b {
@@ -2943,7 +2943,7 @@ nav ul.xt-side-menu {
 
     .xt-single-item-info .xt-tab-content .xt-pane.active {
         border: 1px solid #e1e1e1;
-        border-top-color: transparent;
+        /*border-top-color: transparent;*/
     }
 
     .xt-single-item-info .xt-tab-content .xt-pane.xt-description ul {

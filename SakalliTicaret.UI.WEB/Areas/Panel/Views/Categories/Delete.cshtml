@@ -14,11 +14,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ParentId)
+            @Html.DisplayNameFor(model => model.ParentCategory.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParentId)
+            @Html.DisplayFor(model => model.ParentCategory.Name)
         </dd>
 
         <dt>
@@ -46,28 +46,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreateUserID)
+            @Html.DisplayNameFor(model => model.CreateUser.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreateUserID)
+            @Html.DisplayFor(model => model.CreateUser.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateDateTime)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UpdateDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateUserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdateUserID)
-        </dd>
 
     </dl>
 
