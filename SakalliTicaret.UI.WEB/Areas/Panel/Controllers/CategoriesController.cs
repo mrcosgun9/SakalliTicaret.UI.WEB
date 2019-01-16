@@ -20,7 +20,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Categories
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(p => p.ParentCategory).Include(p=>p.CategoryProperties);
+            var categories = db.Categories.Include(p => p.ParentCategory).Include(p => p.CategoryProperties);
             return View(categories.ToList());
         }
 
@@ -39,29 +39,21 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             return View(category);
         }
 
-        private void KategorileriGetir()
-        {
-            
-        }
 
-        private void CategoryGet()
-        {
-            
-        }
         private string AgacOlustur(int parantId)
         {
             string html = "";
-            List<Category> subCategories=new List<Category>();
+            List<Category> subCategories = new List<Category>();
             subCategories = db.Categories.Where(x => x.ParentCategoryId == parantId).ToList();
             //DataRow[] altKategoriler = dt.Select("UstKategoriId=" + ustKategoriId);
             if (subCategories.Count == 0) return html;
             html += "<ul>";
-            foreach (var item  in subCategories)
+            foreach (var item in subCategories)
             {
                 int id = item.Id;
-                html += "<li>"+@item.Name+"</li>";
+                html += "<li>" + @item.Name + "</li>";
                 AgacOlustur(id);
-     
+
             }
             html += "</ul>";
             return html;
@@ -69,7 +61,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Categories/Create
         public ActionResult Create()
         {
-           
+
             ViewBag.UstKategoriList = db.Categories.ToList();
             return View();
         }
@@ -140,6 +132,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
+            
+
             if (category == null)
             {
                 return HttpNotFound();
@@ -154,6 +148,15 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
+
+            List<Product> product = db.Products.Where(x => x.CategoryId == id).ToList();
+
+            foreach (var item in product)
+            {
+                item.CategoryId = null;
+                db.Entry(product).State = EntityState.Modified;
+            }
+
             db.SaveChanges();
             _logClass.CategoryLog(category, "Silme");
             return RedirectToAction("Index");

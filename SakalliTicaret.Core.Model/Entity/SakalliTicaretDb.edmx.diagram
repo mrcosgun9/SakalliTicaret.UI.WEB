@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="03672e916b4942e18e34c95d82e9e686" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="st1830298_db1234Model.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Baskets" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Categories" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.CategoryProperties" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.CategoryPropertyValues" Width="1.5" PointX="7.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Contacts" Width="1.5" PointX="9.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.LogBaskets" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.LogCategories" Width="1.5" PointX="9.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.LogProducts" Width="1.5" PointX="5.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.LogUsers" Width="1.5" PointX="11.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Messages" Width="1.5" PointX="11.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.OrderPayments" Width="1.5" PointX="7.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.OrderProducts" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Orders" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Pages" Width="1.5" PointX="11.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.PosEntegrations" Width="1.5" PointX="9.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Products" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.SocialMedias" Width="1.5" PointX="11.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Status" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.UserAddresses" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="st1830298_db1234Model.Users" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Baskets_dbo_Status_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Baskets_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_OrderProducts_dbo_Baskets_BasketId" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Categories_dbo_Categories_ParentCategory_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_CategoryProperties_dbo_Categories_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_LogProducts_dbo_Categories_CategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Products_dbo_Categories_CategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_CategoryPropertyValues_dbo_CategoryProperties_CategoryPropertyId" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_OrderPayments_dbo_Orders_OrderID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_OrderProducts_dbo_Orders_OrderID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_OrderProducts_dbo_Products_ProductID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_OrderProducts_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Orders_dbo_Status_StatusID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Orders_dbo_UserAddresses_UserAddressID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_Orders_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="st1830298_db1234Model.FK_dbo_UserAddresses_dbo_Users_UserID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

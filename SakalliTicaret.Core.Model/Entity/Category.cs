@@ -12,10 +12,6 @@ namespace SakalliTicaret.Core.Model.Entity
         // objenin ismi neyse sonuna ID getirmen lazım Foreign Key olması için
         // ya da üstte ki gibi yapabilirsin.
         // = 0 ne için?? 
-
-
-
-
         [Display(Name = "Kategori Adı")]
         public string Name { get; set; }
         [Display(Name = "Aktif")]

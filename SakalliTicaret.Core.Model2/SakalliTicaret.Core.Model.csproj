@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{603134E1-01DB-460B-94EB-C9620DED5079}</ProjectGuid>
+    <ProjectGuid>{38CF172E-B89E-4C63-81CE-021D7D7781D0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SakalliTicaret.Core.Model</RootNamespace>
     <AssemblyName>SakalliTicaret.Core.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,16 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,32 +51,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityBase.cs" />
-    <Compile Include="EntityLogBase.cs" />
-    <Compile Include="Entity\Basket.cs" />
-    <Compile Include="Entity\Category.cs" />
-    <Compile Include="Entity\CategoryProperty.cs" />
-    <Compile Include="Entity\CategoryPropertyValue.cs" />
-    <Compile Include="Entity\Contact.cs" />
-    <Compile Include="Entity\LogBasket.cs" />
-    <Compile Include="Entity\LogCategory.cs" />
-    <Compile Include="Entity\LogProduct.cs" />
+    <Compile Include="Entity\Baskets.cs" />
+    <Compile Include="Entity\Categories.cs" />
+    <Compile Include="Entity\CategoryProperties.cs" />
+    <Compile Include="Entity\CategoryPropertyValues.cs" />
+    <Compile Include="Entity\Contacts.cs" />
+    <Compile Include="Entity\C__MigrationHistory.cs" />
+    <Compile Include="Entity\LogBaskets.cs" />
+    <Compile Include="Entity\LogCategories.cs" />
+    <Compile Include="Entity\LogProducts.cs" />
     <Compile Include="Entity\LogUsers.cs" />
     <Compile Include="Entity\Messages.cs" />
-    <Compile Include="Entity\Order.cs" />
-    <Compile Include="Entity\OrderPayment.cs" />
-    <Compile Include="Entity\OrderProduct.cs" />
-    <Compile Include="Entity\Page.cs" />
-    <Compile Include="Entity\PosEntegration.cs" />
-    <Compile Include="Entity\Product.cs" />
-    <Compile Include="Entity\PropertyPropertyValues.cs" />
-    <Compile Include="Entity\SocialMedia.cs" />
+    <Compile Include="Entity\OrderPayments.cs" />
+    <Compile Include="Entity\OrderProducts.cs" />
+    <Compile Include="Entity\Orders.cs" />
+    <Compile Include="Entity\Pages.cs" />
+    <Compile Include="Entity\PosEntegrations.cs" />
+    <Compile Include="Entity\Products.cs" />
+    <Compile Include="Entity\SakalliTicaretDb.cs" />
+    <Compile Include="Entity\SocialMedias.cs" />
     <Compile Include="Entity\Status.cs" />
-    <Compile Include="Entity\User.cs" />
-    <Compile Include="Entity\UserAddress.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Entity\UserAddresses.cs" />
+    <Compile Include="Entity\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SakalliTicaretDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

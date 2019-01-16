@@ -20,11 +20,16 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult Detail(int id, string title)
         {
             ProductDetailModel detailModel=new ProductDetailModel();
+
             detailModel.Product= db.Products
                 .Include(p => p.Category).FirstOrDefault(x => x.Id == id);
-            detailModel.CategoryProperties= db.CategoryProperties.Include(c => c.Category)
-                .Where(x => x.CategoryId == detailModel.Product.CategoryId).ToList();
-            
+            var propIdList = db.CategoryProperties.Where(x => x.CategoryId == detailModel.Product.CategoryId).Select(x => x.Id).ToList();
+            var deger=db.PropertyPropertyValueses
+                .Include(x => x.CategoryProperty)
+                .Include(x => x.CategoryPropertyValue)
+                .Where(x => propIdList.Contains(x.CategoryPropertyId)).ToList();
+            //detailModel.CategoryProperties= 
+
             return View(detailModel);
         }
         [Route("Urunler/YeniUrunler")]

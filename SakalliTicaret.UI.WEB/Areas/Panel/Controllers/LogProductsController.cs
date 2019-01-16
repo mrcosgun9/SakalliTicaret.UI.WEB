@@ -58,7 +58,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", logProduct.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", logProduct.CategoryId);
             return View(logProduct);
         }
 
@@ -74,7 +74,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", logProduct.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", logProduct.CategoryId);
             return View(logProduct);
         }
 
@@ -91,7 +91,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", logProduct.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", logProduct.CategoryId);
             return View(logProduct);
         }
 

@@ -20,7 +20,7 @@ namespace SakalliTicaret.Core.Model.Entity
         [Display(Name = "Seçilebilir")]
         public bool Eligible { get; set; }
         public virtual IEnumerable<CategoryPropertyValue> CategoryPropertyValues { get; set; }
-        
+        public virtual IEnumerable<PropertyPropertyValues> PropertyPropertyValueses { get; set; }
 
 
 

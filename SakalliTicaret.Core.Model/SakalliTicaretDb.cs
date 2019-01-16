@@ -36,6 +36,8 @@ namespace SakalliTicaret.Core.Model
         public DbSet<PosEntegration> PosEntegrations { get; set; }
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<CategoryPropertyValue> CategoryPropertyValues { get; set; }
+        public DbSet<PropertyPropertyValues> PropertyPropertyValueses { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

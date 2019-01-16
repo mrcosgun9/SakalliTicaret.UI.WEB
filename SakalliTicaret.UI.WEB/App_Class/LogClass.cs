@@ -62,7 +62,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             _logProduct.Name = _prodoct.Name;
             _logProduct.Brand = _prodoct.Brand;
             _logProduct.Category = _prodoct.Category;
-            _logProduct.CategoryID = _prodoct.CategoryId;
+            if (_prodoct.CategoryId != null) _logProduct.CategoryId = (int) _prodoct.CategoryId;
             _logProduct.Definition = _prodoct.Definition;
             _logProduct.Description = _prodoct.Description;
             _logProduct.Discount = _prodoct.Discount;
