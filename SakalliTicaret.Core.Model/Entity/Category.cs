@@ -8,7 +8,7 @@ namespace SakalliTicaret.Core.Model.Entity
     {
 
 
-        public int? ParentId { get; set; }
+        public int? ParentId { get; set; } = 0;
         [Display(Name = "Üst Kategori")]
         public Category ParentCategory { get; set; }
         // objenin ismi neyse sonuna ID getirmen lazım Foreign Key olması için

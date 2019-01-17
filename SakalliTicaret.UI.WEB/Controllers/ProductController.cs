@@ -34,7 +34,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
             detailModel.FeaturedProduct = db.Products
                 .Where(x => x.CategoryId == detailModel.Product.CategoryId && x.Id != id).OrderBy(r => Guid.NewGuid())
-                .Take(5).ToList();
+                .Take(4).ToList();
             return View(detailModel);
         }
         [Route("Urunler/YeniUrunler")]
