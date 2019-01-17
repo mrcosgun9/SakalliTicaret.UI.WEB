@@ -8,11 +8,11 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class Order : EntityBase
     {
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
-        public int UserAddressID { get; set; }
+        public int UserAddressId { get; set; }
         public UserAddress UserAddress { get; set; }
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
         public Status Status { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal TotalTax { get; set; }

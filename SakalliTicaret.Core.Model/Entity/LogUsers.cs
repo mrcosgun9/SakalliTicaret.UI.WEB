@@ -10,7 +10,7 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class LogUsers : EntityLogBase
     {
-        
+
         [Display(Name = "İsim")]
         public string Name { get; set; }
 
@@ -20,6 +20,7 @@ namespace SakalliTicaret.Core.Model.Entity
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        public int CreateUserId { get; set; }
         [Display(Name = "Telefon")]
         public string Telephone { get; set; }
         [Required]

@@ -8,7 +8,7 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class OrderPayment:EntityBase
     {
-        public int OrderID { get; set; }
+        public int OrderId { get; set; }
         public _OrderType OrderType { get; set; }
         public decimal Price { get; set; }
         public string Bank { get; set; }

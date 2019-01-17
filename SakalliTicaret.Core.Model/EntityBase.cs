@@ -26,7 +26,7 @@ namespace SakalliTicaret.Core.Model
         [Display(Name = "Güncellenme Tarihi")]
         public DateTime? UpdateDateTime { get; set; }
         [Display(Name = "Güncelleyen Kullanıcı")]
-        public int? UpdateUserID { get; set; }
+        public int? UpdateUserId { get; set; }
         public virtual IEnumerable<User> UpdateUsers { get; set; }
 
     }

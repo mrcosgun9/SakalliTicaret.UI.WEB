@@ -44,7 +44,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             string html = "";
             List<Category> subCategories = new List<Category>();
-            subCategories = db.Categories.Where(x => x.ParentCategoryId == parantId).ToList();
+            subCategories = db.Categories.Where(x => x.ParentId == parantId).ToList();
             //DataRow[] altKategoriler = dt.Select("UstKategoriId=" + ustKategoriId);
             if (subCategories.Count == 0) return html;
             html += "<ul>";
@@ -113,7 +113,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             var User = Session["AdminLoginUser"] as User;
             category.UpdateDateTime = DateTime.Now;
-            category.UpdateUserID = User.Id;
+            category.UpdateUserId = User.Id;
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = EntityState.Modified;

@@ -6,7 +6,9 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class Category : EntityBase
     {
-        public int? ParentCategoryId { get; set; }
+
+
+        public int? ParentId { get; set; }
         [Display(Name = "Üst Kategori")]
         public Category ParentCategory { get; set; }
         // objenin ismi neyse sonuna ID getirmen lazım Foreign Key olması için
@@ -18,7 +20,7 @@ namespace SakalliTicaret.Core.Model.Entity
         public bool IsActive { get; set; }
         public virtual IEnumerable<Product> Products { get; set; }
         public virtual IEnumerable<CategoryProperty> CategoryProperties { get; set; }
-        public virtual IEnumerable<Category> Categories { get; set; }
+        public virtual IEnumerable<Category> ParentCategories { get; set; }
 
 
     }

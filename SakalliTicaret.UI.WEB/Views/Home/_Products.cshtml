@@ -10,14 +10,19 @@
         <div class="card">
             <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower()) '>
                 <div class="cardimagediv">
-                    <span class="product-tag xt-uppercase">
-                        @{
-                            decimal indirim = Math.Ceiling(item.Price / 100 * item.Discount);
-                        }
-                        %@indirim İndİrİm
+                    @{
+                        decimal indirim = Math.Ceiling(item.Price / 100 * item.Discount);
+                    }
+                    @if (indirim > 0)
+                    {
+                        <span class="product-tag xt-uppercase">
 
-                    </span>
-                    <img class="card-img-top" src="@item.ImageUrl" />
+                            %@indirim İndİrİm
+
+                        </span>
+                    }
+                    
+                    <img class="card-img-top" src="@item.ImageUrl"/>
 
                 </div>
                 <div class="card-body">

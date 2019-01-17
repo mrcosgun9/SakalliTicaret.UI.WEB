@@ -16,7 +16,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             LogUsers _logUsers = new LogUsers();
             _logUsers.Actions = action;
             _logUsers.CreateDateTime = DateTime.Now;
-            _logUsers.CreateUserID = SessionUser;
+            _logUsers.CreateUserId = SessionUser;
             _logUsers.Email = _user.Email;
             _logUsers.LastName = _user.LastName;
             _logUsers.Name = _user.Name;
@@ -34,7 +34,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             _logCategory.CreateUserID = 0;
             _logCategory.Name = _category.Name;
             _logCategory.IsActive = _category.IsActive;
-            _logCategory.ParentId = _category.ParentCategoryId;
+            _logCategory.ParentId = _category.ParentId;
             db.LogCategories.Add(_logCategory);
             db.SaveChanges();
         }
