@@ -18,7 +18,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             if (new LoginState().IsLoginSucces(email, password, true))
             {
-                return Redirect("/Panel/Default/");
+                return Redirect("Portal/Index");
             }
           
             return View();
@@ -27,7 +27,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         public ActionResult LogOut()
         {
             Session["AdminLoginUser"] = null;
-            return Redirect("/Panel/Default/");
+            return Redirect("Portal/Index");
         }
     }
 }
