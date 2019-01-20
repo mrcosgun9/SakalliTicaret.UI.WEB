@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="col-md-9" style="padding: 0 0 20px 0;">
+<div class="col-md-9" style="padding: 0 0 20px 20px;">
     <div class="xt-product-inner">
         <div class="col-md-5">
             <div role="tabpanel" class="tab-pane active xt-product-tab">
@@ -61,19 +61,28 @@
                 <h3>@Model.Product.Name</h3>
                 <span class="single-price"><b>Fiyat :</b> @Model.Product.Price ₺</span>
                 <p>@Model.Product.Description</p>
-                <div class="color-select">
-                    @foreach (var item in Model.PropertyPropertyValueses)
-                    {
-                        @item.CategoryProperty.Name
-                        @item.CategoryPropertyValue.Value<br />
-                    }
 
-                    @*<ul>
-                            <li class="red-bg selected"><i class="fa fa-check"></i></li>
-                            <li class="green-bg"><i class="fa fa-check"></i></li>
-                            <li class="blue-bg"><i class="fa fa-check"></i></li>
-                        </ul>*@
+                @foreach (var item in Model.PropertyPropertyValueses.GroupBy(x => x.CategoryProperty))
+                {    <div class="color-select">
+                    @item.Key.Name
+                    <select style="margin: 0 0 5px 0;">
+                        @foreach (var itemValue in item)
+                        {
+                            <option>
+                                @itemValue.CategoryPropertyValue.Value
+                            </option>
+                        }
+
+                    </select>
                 </div>
+                }
+
+                @*<ul>
+                        <li class="red-bg selected"><i class="fa fa-check"></i></li>
+                        <li class="green-bg"><i class="fa fa-check"></i></li>
+                        <li class="blue-bg"><i class="fa fa-check"></i></li>
+                    </ul>*@
+
 
                 @*<div class="select-quantity">
                         <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
@@ -103,14 +112,14 @@
                 <a href="#specification" aria-controls="specification" role="tab" data-toggle="tab">Özellikleri</a>
             </li>
             @*<li role="presentation" class="">
-                <a href="#review" aria-controls="review" role="tab" data-toggle="tab">Review(3)</a>
-            </li>
-            <li role="presentation" class="">
-                <a href="#seller" aria-controls="seller" role="tab" data-toggle="tab">Seller info</a>
-            </li>
-            <li role="presentation" class="">
-                <a href="#shopping" aria-controls="shopping" role="tab" data-toggle="tab">Shopping</a>
-            </li>*@
+                    <a href="#review" aria-controls="review" role="tab" data-toggle="tab">Review(3)</a>
+                </li>
+                <li role="presentation" class="">
+                    <a href="#seller" aria-controls="seller" role="tab" data-toggle="tab">Seller info</a>
+                </li>
+                <li role="presentation" class="">
+                    <a href="#shopping" aria-controls="shopping" role="tab" data-toggle="tab">Shopping</a>
+                </li>*@
         </ul>
 
         <!-- Tab panes -->
@@ -192,7 +201,7 @@
 
                                 </div>
                             </a>
-                            <small stle="float:left;">@item.Price TL</small><br/>
+                            <small stle="float:left;">@item.Price TL</small><br />
                             <button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
 
                             @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@

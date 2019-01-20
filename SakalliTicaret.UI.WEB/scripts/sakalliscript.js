@@ -16,11 +16,12 @@
         }
     });
 
-//$("#basketListOpen").hover(function () {
-//    $(".basketdiv").animate({
-//        width: "toggle"
-//    });
-//});
+$("#basketListOpen").hover(function () {
+    //$(".basketdiv").animate({
+    //    width: "toggle"
+    //});
+    $(".basketdiv").stop(true, true).fadeToggle("slow", "linear");
+});
 $(function () {
     $(":input[data-autocomplete]").each(function () {
         $(this).autocomplete({
@@ -75,3 +76,35 @@ $(document).ready(function () {
             $(this).children("ul").stop(true, true).slideUp();
         });
 });
+
+
+    $("#uyeOlmadanForm").validate({
+        rules: {
+            Name: "required",
+            LastName: "required",
+            Telephone: {
+                required: true,
+                minlength: 10,
+                maxlength: 11
+            },
+            Email: {
+                required: true,
+                email: true
+            },
+            TCKN: {
+                required: true
+            },
+            Title: {
+                required:true
+            },
+            City: {
+                required:true
+            },
+            Address: {
+                required: true
+            },
+            Phones: {
+                required: true
+            }
+        }
+    });

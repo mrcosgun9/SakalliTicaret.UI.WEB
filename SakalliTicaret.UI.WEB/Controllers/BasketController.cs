@@ -13,6 +13,7 @@ using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
 using Newtonsoft.Json.Utilities;
+using SakalliTicaret.UI.WEB.Models;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -100,6 +101,16 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult BasketCompletePayment()
         {
             BasketClass s = (BasketClass)Session["AktifSepet"];
+            if (s==null)
+            {
+                
+            }
+            else
+            {
+                
+            }
+            NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
+
             posVoid();
             return View();
         }
@@ -145,6 +156,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         }
         private void posVoid()
         {
+
             PosEntegration entegration = db.PosEntegrations.Find(2);
             // ####################### DÜZENLEMESİ ZORUNLU ALANLAR #######################
             //
@@ -155,7 +167,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //
             // Müşterinizin sitenizde kayıtlı veya form vasıtasıyla aldığınız eposta adresi
             User user = _loginState.IsLoginUser();
-            string emailstr = user.Email;
+            NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
+       
+         
             //
             // Tahsil edilecek tutar. 9.99 için 9.99 * 100 = 999 gönderilmelidir.
             BasketClass s = new BasketClass();
@@ -167,10 +181,21 @@ namespace SakalliTicaret.UI.WEB.Controllers
             string merchant_oid = s.BasketKey;
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
-            string user_namestr = user.Name + " " + user.LastName;
+           
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız adres bilgisi
-            string user_addressstr = db.UserAddresses.Find(s.AddressId).Address;
+            string user_addressstr = "";
+            if (user == null)
+            {
+                user = basketModel.User;
+                user_addressstr = basketModel.UserAddress.Address;
+            }
+            else
+            {
+                user_addressstr = db.UserAddresses.Find(s.AddressId).Address;
+            }
+            string emailstr = user.Email;
+            string user_namestr = user.Name + " " + user.LastName;
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız telefon bilgisi
             string user_phonestr = user.Telephone;
@@ -190,7 +215,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
             //string user_ip = GetIPAddress();
 
-            string user_ip = "88.230.228.31";
+            string user_ip = "78.190.115.121";
             //if (user_ip == "" || user_ip == null)
             //{
             //    user_ip = Request.ServerVariables["REMOTE_ADDR"];

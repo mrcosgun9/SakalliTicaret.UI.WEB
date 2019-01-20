@@ -1,79 +1,37 @@
 ﻿@model SakalliTicaret.UI.WEB.App_Class.BasketClass
-
-    <div class="basketBaslik">
-        Sepetim
-    </div>
-    <div class="basketItem">
-        <ul>
-            @if (Model != null)
-            {
-                foreach (var item in Model.Products)
-                {
-                    <li>
-                        <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ","").ToLower()">
-                            <div class="basketimagediv">
-                                <img src="@item.Product.ImageUrl" alt="">
-
-                            </div>
-                            <div class="basketProductInfo">
-                                <h3>@item.Product.Name</h3>
-                                <span class="cart-price">@item.Product.Price ₺ x @item.Quantity = @item.Total</span>
-
-                            </div>
-                            <div style="clear: both"></div>
-                        </a>
-
-                    </li>
-
-                }
-            }
-        </ul>
-    </div>
-   
-    <div class="basketfooter">
-        <a href="/Sepetim">
-            Sepete Git
-        </a>
-    </div>
-
-@*<ul>
-        <li class="dropdown">
-            <a href="/Sepetim" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                <i class="fa flaticon-shopping-cart"></i>
-            </a>
-            <ul class="dropdown-menu xt-cart-items">
+<div class="basketminicontainer">
+    <div class="basketdiv">
+        <div class="basketItem">
+            <ul>
                 @if (Model != null)
                 {
                     foreach (var item in Model.Products)
                     {
                         <li>
-                            <a href="">
-                                <img src="@item.Product.ImageUrl" alt="">
-                                <h3>@item.Product.Name</h3>
-                                <span class="cart-price">@item.Product.Price ₺ x @item.Quantity = @item.Total</span>
+                            <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ","").ToLower()">
+                                <div class="basketimagediv">
+                                    <img src="@item.Product.ImageUrl" alt="">
+
+                                </div>
+                                <div class="basketProductInfo">
+                                    <h3 title="@item.Product.Name">@(item.Product.Name.Length < 25 ? item.Product.Name : item.Product.Name.Substring(0, 25) + "...")</h3>
+                                    <span class="cart-price">@item.Product.Price ₺ x @item.Quantity = @item.Total</span>
+
+                                </div>
+                                <div style="clear: both"></div>
                             </a>
+
                         </li>
+
                     }
-
-
-                }
-                else
-                {
-                    <li>
-                        <a href="">
-                            <h3>Sepetinizde Ürün Bulunmamakta!</h3>
-                        </a>
-                    </li>
                 }
             </ul>
-        </li>
-    </ul>
-    @if (Model != null)
-    {
-        <span class="xt-item-count">@Model.Products.Count</span>
-    }
-    else
-    {
-        <span class="xt-item-count">0</span>
+        </div>
+        <div class="basketfooter">
+            <a href="/Sepetim">
+                Sepete Git
+            </a>
+        </div>
 
-    }*@
+    </div>
+</div>

@@ -27,8 +27,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
 
             detailModel.PropertyPropertyValueses = db.PropertyPropertyValueses
-                .Include(x => x.CategoryProperty)
-                .Include(x => x.CategoryPropertyValue)
+                .Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue)
                 .Where(x => propIdList.Contains(x.CategoryPropertyId) && x.CategoryProperty.Eligible).ToList();
 
 

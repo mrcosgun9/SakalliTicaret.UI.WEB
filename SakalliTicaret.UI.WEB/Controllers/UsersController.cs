@@ -10,6 +10,7 @@ using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
 using SakalliTicaret.UI.WEB.Controllers.Base;
+using SakalliTicaret.UI.WEB.Models;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -194,6 +195,33 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     break;
             }
             return View();
+        }
+        [Route("UyeOlmadanOnayla")]
+        public ActionResult NotUserBasketSuccess()
+        {
+            NotUserBasketModel model = new NotUserBasketModel();
+            model.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+            if (model.BasketClass.Products.Count == 0)
+            {
+                return Redirect("/Sepetim");
+            }
+            return View(model);
+        }
+        [Route("UyeOlmadanOnayla")]
+        [HttpPost]
+        public ActionResult NotUserBasketSuccess(NotUserBasketModel basketModel)
+        {
+            basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+            Session["NotUser"] = basketModel;
+            try
+            {
+                return Redirect("Sepet/Tamamla/Ödeme");
+            }
+            catch (Exception e)
+            {
+                 return View();
+            }
+           
         }
         protected override void Dispose(bool disposing)
         {

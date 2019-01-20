@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" title="@item.Name">
-                        @(item.Name.Length<60?item.Name:item.Name.Substring(0,60))
+                        @(item.Name.Length<42?item.Name:item.Name.Substring(0,42)+"...")
 
                     </h5>
                 </div>

@@ -1,0 +1,168 @@
+﻿@model SakalliTicaret.UI.WEB.Models.NotUserBasketModel
+@{
+    ViewBag.Title = "NotUserBasketSuccess";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("NotUserBasketSuccess", "Users", FormMethod.Post,new {@id="uyeOlmadanForm"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <h4>Üye Olmadan Devam Et</h4>
+                    <hr />
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.User.Name)
+
+                        @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.LastName)
+                        @Html.EditorFor(model => model.User.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.Email)
+
+                        @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.Telephone)
+
+                        @Html.EditorFor(model => model.User.Telephone, new { htmlAttributes = new { @class = "form-control phone_us" } })
+                        @Html.ValidationMessageFor(model => model.User.Telephone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.TCKN)
+
+                        @Html.EditorFor(model => model.User.TCKN, new { htmlAttributes = new { @class = "form-control phone_us" } })
+                        @Html.ValidationMessageFor(model => model.User.TCKN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <h4>Adres Bilgileriniz</h4>
+                <hr />
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserAddress.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        @Html.EditorFor(model => model.UserAddress.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserAddress.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserAddress.City, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        @Html.EditorFor(model => model.UserAddress.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserAddress.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserAddress.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        @Html.TextAreaFor(model => model.UserAddress.Address, new { @class = "form-control", @style = "max-width:100%;max-height:100px;" })
+                        @Html.ValidationMessageFor(model => model.UserAddress.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserAddress.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        @Html.TextBoxFor(model => model.UserAddress.Phone, new { @class = "form-control", @style = "max-width:100%;max-height:100px;" })
+                        @Html.ValidationMessageFor(model => model.UserAddress.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr />
+                </div>
+                <h4>Sipariş Detayı</h4>
+                <hr />
+                <div class="col-md-12 basketlist">
+                    <div class="baslikborder">Sepet</div>
+                    <table class="table-fill">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Resim</th>
+                                <th>Adı</th>
+                                <th>Birim Fiyat</th>
+                                <th>Adet</th>
+                                <th>Top. Fiyat</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-hover">
+                            @{
+                                int i = 1;
+                            }
+                            @foreach (var item in Model.BasketClass.Products)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td class="text-left">
+
+                                    <div class="sepetimage">
+                                        <img src="@item.Product.ImageUrl" />
+                                    </div>
+                                </td>
+                                <td class="text-left">
+                                    <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ","").ToLower()" target="_blank">
+                                        @item.Product.Name
+                                    </a>
+                                </td>
+
+
+                                <td class="text-left">@item.Product.Price ₺</td>
+                                <td class="text-left">@item.Quantity</td>
+                                <td class="text-left">@item.Total ₺</td>
+                                <td class="text-left">
+                                    <a href="Sepetim/Sil/@item.Product.Id">
+                                        <i class="fa fa-minus-circle" style="color:#b22222"></i>
+                                        @*<i class="material-icons sepetsil" name="@item.Urun.urunId">cancel</i>*@
+                                    </a>
+                                </td>
+                            </tr>
+                            i = i + 1;
+                        }
+                        </tbody>
+                    </table>
+                    <div class="sepetozet text-right margin-t-20 margin-b-20">
+                        <div><b>Toplam:</b>@Model.BasketClass.Products.Count Ürün</div>
+                        <div>
+                            <b>Toplam Tutar:</b>@Model.BasketClass.SubTotal
+                        </div>
+                        @*<a class="btn btn-danger" href="Sepet/Temizle">Temizle</a>*@
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="form-group text-center">
+                        <input type="submit" value="SİPARİŞİ TAMAMLA" class="btn btn-fill btn-block" />
+                    </div>
+                </div>
+                                }
+        </div>
+    </div>
+
+</div>

@@ -1273,6 +1273,7 @@
     <Content Include="Areas\Panel\Views\CategoryPropertyValues\Edit.cshtml" />
     <Content Include="Areas\Panel\Views\CategoryPropertyValues\Index.cshtml" />
     <Content Include="Areas\Panel\Views\Portal\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\Portal\ContactEdit.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1364,6 +1365,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\NotUserBasketModel.cs" />
     <Compile Include="Models\ProductDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1554,6 +1556,7 @@
     <Content Include="Views\Products1\Edit.cshtml" />
     <Content Include="Views\Products1\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPageBlank.cshtml" />
+    <Content Include="Views\Users\NotUserBasketSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

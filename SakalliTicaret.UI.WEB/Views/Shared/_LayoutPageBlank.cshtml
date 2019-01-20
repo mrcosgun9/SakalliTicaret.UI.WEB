@@ -98,12 +98,13 @@
                             <a href="/Sepetim">
                                 <div id="basketListOpen">
                                     <i class="fa flaticon-shopping-cart animated" id="shoppingcart"></i>
+                                    @{Html.RenderAction("MiniBasketWidget", "Basket");}
                                 </div>
                                 <span class="xt-item-count">
                                     <b id="basketCount">0</b>
                                 </span>
                             </a>
-                           
+                            @*<a href="~/Views/Basket/MiniBasketWidget.cshtml">~/Views/Basket/MiniBasketWidget.cshtml</a>*@
                         </div>
                     </div>
                 </div>
@@ -156,19 +157,19 @@
                 }
 
                 @RenderBody()
-               
+
             </div>
         </div>
     </div>
-    <div class="basketdiv">
-        @{Html.RenderAction("MiniBasketWidget", "Basket");}
-    </div>
+    @*<div class="basketdiv">
+            @{Html.RenderAction("MiniBasketWidget", "Basket");}
+        </div>*@
     @{Html.RenderAction("FooterSocialMedia", "Companent");}
     @{Html.RenderAction("HomeFooter", "Companent");}
 
     <script src="~/Content/plugins/js/jquery-1.11.3.min.js"></script>
 
-@Scripts.Render("~/bundles/script")
+    @Scripts.Render("~/bundles/script")
     @{
         BasketClass basketClass = (BasketClass)Session["AktifSepet"];
         int basketcount = 0;
@@ -194,8 +195,8 @@
                         type: "GET",
                         url: "/Basket/MiniBasketWidget",
                         success: function sVeriGetir(veri) {
-                            $(".basketdiv").html('');
-                            $(".basketdiv").html(veri);
+                            $(".basketminicontainer").html('');
+                            $(".basketminicontainer").html(veri);
                             $("#shoppingcart").addClass("shake");
 
 
