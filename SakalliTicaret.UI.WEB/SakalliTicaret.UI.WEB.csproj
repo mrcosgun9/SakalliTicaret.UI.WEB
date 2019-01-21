@@ -844,8 +844,6 @@
     <Content Include="Areas\Panel\Content\js\lib\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.html5.min.js" />
     <Content Include="Areas\Panel\Content\js\lib\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.print.min.js" />
     <Content Include="Areas\Panel\Content\js\lib\datatables\cdn.datatables.net\buttons\1.2.2\js\dataTables.buttons.min.js" />
-    <Content Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\pdfmake.min.js" />
-    <Content Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\vfs_fonts.js" />
     <Content Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\google\code-prettify\master\loader\run_prettify2102.js" />
     <Content Include="Areas\Panel\Content\js\lib\datatables\cdnjs.cloudflare.com\ajax\libs\jqueryui-touch-punch\0.2.3\jquery.ui.touch-punch.min.js" />
     <Content Include="Areas\Panel\Content\js\lib\datatables\cdnjs.cloudflare.com\ajax\libs\jszip\2.5.0\jszip.min.js" />
@@ -1566,6 +1564,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\" />
     <Folder Include="Areas\Panel\Models\" />
   </ItemGroup>
   <ItemGroup>

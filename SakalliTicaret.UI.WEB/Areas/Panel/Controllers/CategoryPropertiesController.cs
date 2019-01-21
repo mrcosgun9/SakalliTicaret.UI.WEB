@@ -117,9 +117,28 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CategoryProperty categoryProperty = db.CategoryProperties.Find(id);
-            db.CategoryProperties.Remove(categoryProperty);
-            db.SaveChanges();
+            try
+            {
+                CategoryProperty categoryProperty = db.CategoryProperties.Find(id);
+                List<CategoryPropertyValue> categoryPropertyValue =
+                    db.CategoryPropertyValues.Where(x => x.CategoryPropertyId == id).ToList();
+                foreach (var item in categoryPropertyValue)
+                {
+                    db.CategoryPropertyValues.Remove(item);
+                  
+                    PropertyPropertyValues propertyPropertyValues =
+                        db.PropertyPropertyValueses.FirstOrDefault(x => x.CategoryPropertyId == categoryProperty.Id &&
+                                                                        x.CategoryPropertyValueId == item.Id);
+                    db.PropertyPropertyValueses.Remove(propertyPropertyValues);
+                }
+                db.CategoryProperties.Remove(categoryProperty);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+           
             return RedirectToAction("Index");
         }
 

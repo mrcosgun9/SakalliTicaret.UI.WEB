@@ -68,7 +68,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 
                     //// save image in folder
                     //ProductImg.SaveAs(physicalPath);
-                    product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300); ;
+                    product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300); 
 
                 }
                 db.Products.Add(product);
