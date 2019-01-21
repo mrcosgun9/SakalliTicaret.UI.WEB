@@ -48,7 +48,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,Content,IsActive,DropDownMenu,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] Page page)
+        public ActionResult Create([Bind(Include = "ID,Title,Description,Content,IsActive,DropDownMenu,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Page page)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,Content,IsActive,DropDownMenu,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] Page page)
+        public ActionResult Edit([Bind(Include = "ID,Title,Description,Content,IsActive,DropDownMenu,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Page page)
         {
             if (ModelState.IsValid)
             {

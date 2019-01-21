@@ -50,7 +50,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CategoryID,Brand,Model,ImageUrl,Description,Definition,Price,Tax,Discount,Stock,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserID")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,CategoryID,Brand,Model,ImageUrl,Description,Definition,Price,Tax,Discount,Stock,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CategoryID,Brand,Model,ImageUrl,Description,Definition,Price,Tax,Discount,Stock,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserID")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,CategoryID,Brand,Model,ImageUrl,Description,Definition,Price,Tax,Discount,Stock,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Product product)
         {
             if (ModelState.IsValid)
             {

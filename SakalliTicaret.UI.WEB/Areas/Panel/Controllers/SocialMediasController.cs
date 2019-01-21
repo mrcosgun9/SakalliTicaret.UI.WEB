@@ -58,7 +58,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Icon,Name,Url,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] SocialMedia socialMedia)
+        public ActionResult Create([Bind(Include = "ID,Icon,Name,Url,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] SocialMedia socialMedia)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Icon,Name,Url,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] SocialMedia socialMedia)
+        public ActionResult Edit([Bind(Include = "ID,Icon,Name,Url,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] SocialMedia socialMedia)
         {
             if (ModelState.IsValid)
             {

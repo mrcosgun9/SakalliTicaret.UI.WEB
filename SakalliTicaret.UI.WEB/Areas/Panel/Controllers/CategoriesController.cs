@@ -71,7 +71,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] Category category)
+        public ActionResult Create([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Category category)
         {
 
             var User = Session["AdminLoginUser"] as User;
@@ -109,7 +109,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] Category category)
+        public ActionResult Edit([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Category category)
         {
             var User = Session["AdminLoginUser"] as User;
             category.UpdateDateTime = DateTime.Now;

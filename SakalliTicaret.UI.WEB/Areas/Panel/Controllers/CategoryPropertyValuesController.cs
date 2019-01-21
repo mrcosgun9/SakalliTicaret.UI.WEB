@@ -49,7 +49,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CategoryPropertyId,Value,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] CategoryPropertyValue categoryPropertyValue)
+        public ActionResult Create([Bind(Include = "ID,CategoryPropertyId,Value,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] CategoryPropertyValue categoryPropertyValue)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CategoryPropertyId,Value,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] CategoryPropertyValue categoryPropertyValue)
+        public ActionResult Edit([Bind(Include = "ID,CategoryPropertyId,Value,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] CategoryPropertyValue categoryPropertyValue)
         {
             if (ModelState.IsValid)
             {

@@ -29,7 +29,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ContactEdit([Bind(Include = "ID,Phone,Phone1,Mail,Mail2,Adrress,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID,IframeUrl")] Contact contact)
+        public ActionResult ContactEdit([Bind(Include = "ID,Phone,Phone1,Mail,Mail2,Adrress,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId,IframeUrl")] Contact contact)
         {
             if (ModelState.IsValid)
             {

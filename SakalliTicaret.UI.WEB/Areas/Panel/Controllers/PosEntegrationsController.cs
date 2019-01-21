@@ -47,7 +47,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,StoreCode,UserName,Password,Installments,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] PosEntegration posEntegration)
+        public ActionResult Create([Bind(Include = "ID,StoreCode,UserName,Password,Installments,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] PosEntegration posEntegration)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StoreCode,UserName,Password,Installments,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] PosEntegration posEntegration)
+        public ActionResult Edit([Bind(Include = "ID,StoreCode,UserName,Password,Installments,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] PosEntegration posEntegration)
         {
             if (ModelState.IsValid)
             {

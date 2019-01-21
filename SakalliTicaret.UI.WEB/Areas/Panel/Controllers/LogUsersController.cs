@@ -47,7 +47,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,LastName,Email,Telephone,Password,TCKN,Adress,CreateDateTime,CreateUserID,Actions")] LogUsers logUsers)
+        public ActionResult Create([Bind(Include = "ID,Name,LastName,Email,Telephone,Password,TCKN,Adress,CreateDateTime,CreateUserId,Actions")] LogUsers logUsers)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,LastName,Email,Telephone,Password,TCKN,Adress,CreateDateTime,CreateUserID,Actions")] LogUsers logUsers)
+        public ActionResult Edit([Bind(Include = "ID,Name,LastName,Email,Telephone,Password,TCKN,Adress,CreateDateTime,CreateUserId,Actions")] LogUsers logUsers)
         {
             if (ModelState.IsValid)
             {
