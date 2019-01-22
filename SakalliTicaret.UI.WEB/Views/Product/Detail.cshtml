@@ -65,10 +65,10 @@
                 @foreach (var item in Model.PropertyPropertyValueses.GroupBy(x => x.CategoryProperty))
                 {    <div class="color-select">
                     @item.Key.Name
-                    <select style="margin: 0 0 5px 0;">
+                    <select style="margin: 0 0 5px 0;" class="productproperties" name="@item.Key.Name" id="@item.Key.Id">
                         @foreach (var itemValue in item)
                         {
-                            <option>
+                            <option value="@itemValue.CategoryPropertyValue.Id">
                                 @itemValue.CategoryPropertyValue.Value
                             </option>
                         }

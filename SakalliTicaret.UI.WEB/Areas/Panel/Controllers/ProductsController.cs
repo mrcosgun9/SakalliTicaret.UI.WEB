@@ -17,7 +17,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
         LogClass _logClass = new LogClass();
-        private Functions _functions=new Functions();
+        private Functions _functions = new Functions();
         // GET: Panel/Products
         public ActionResult Index()
         {
@@ -55,26 +55,36 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "ID,Name,CategoryID,Brand,Model,ImageUrl,Description,Definition,Price,Tax,Discount,Stock,IsActive,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] Product product, HttpPostedFileBase ProductImg)
         {
-          
-            if (ModelState.IsValid)
+            try
             {
-                var User = Session["AdminLoginUser"] as User;
-                product.CreateDateTime = DateTime.Now;
-                product.CreateUserId = User.Id;
-                if (ProductImg.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    //string ImageName = Path.GetFileName(ProductImg.FileName);
-                    //string physicalPath = Server.MapPath("~/Content/Images/Products/" + ImageName);
+                    var User = Session["AdminLoginUser"] as User;
+                    product.CreateDateTime = DateTime.Now;
+                    product.CreateUserId = User.Id;
+                    if (ProductImg != null)
+                    {
+                        //string ImageName = Path.GetFileName(ProductImg.FileName);
+                        //string physicalPath = Server.MapPath("~/Content/Images/Products/" + ImageName);
 
-                    //// save image in folder
-                    //ProductImg.SaveAs(physicalPath);
-                    product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300); 
-
+                        //// save image in folder
+                        //ProductImg.SaveAs(physicalPath);
+                        product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300);
+                    }
+                    else
+                    {
+                        product.ImageUrl = "/Content/Images/Products/resimyok.jpg";
+                    }
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    //_logClass.ProductLog(product, "Ekleme");
+                    return RedirectToAction("Index");
                 }
-                db.Products.Add(product);
-                db.SaveChanges();
-                _logClass.ProductLog(product, "Ekleme");
-                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ViewBag.hata = e.Message;
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
@@ -138,11 +148,15 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
-            if (System.IO.File.Exists(Server.MapPath(product.ImageUrl)))
-                System.IO.File.Delete(Server.MapPath(product.ImageUrl));
+            if (product.ImageUrl != "/Content/Images/Products/resimyok.jpg")
+            {
+                if (System.IO.File.Exists(Server.MapPath(product.ImageUrl)))
+                    System.IO.File.Delete(Server.MapPath(product.ImageUrl));
+            }
+
             db.Products.Remove(product);
             db.SaveChanges();
-            _logClass.ProductLog(product, "Silme");
+            //_logClass.ProductLog(product, "Silme");
             return RedirectToAction("Index");
         }
 

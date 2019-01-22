@@ -185,10 +185,29 @@
         });
         $(".basketCreate").click(function myfunction() {
             var uid = $(this).attr("name");
+            var pId = $(".productproperties");
+            var pList = [];
+            var pIdValList = [];
+
+            for (var i = 0; i < pId.length; i++) {
+
+
+                pList.push(pId[i].id);
+                pIdValList.push(pId[i].options[pId[i].selectedIndex].value);
+            }
+            console.log(pList);
+            console.log(pIdValList);
             $.ajax({
                 type: "GET",
                 url: "/Basket/Create",
-                data: { productId: uid },
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                traditional: true,
+                data: {
+                    productId: uid,
+                    pList:pList,
+                    pValList: pIdValList
+                },
                 success: function myfunction(count) {
                     $("#basketCount").html(count);
                     $.ajax({

@@ -65,13 +65,13 @@ namespace SakalliTicaret.UI.WEB.App_Class
             if (_prodoct.CategoryId != null) _logProduct.CategoryId = (int) _prodoct.CategoryId;
             _logProduct.Definition = _prodoct.Definition;
             _logProduct.Description = _prodoct.Description;
-            _logProduct.Discount = _prodoct.Discount;
+            _logProduct.Discount = (decimal) _prodoct.Discount;
             _logProduct.ImageUrl = _prodoct.ImageUrl;
             _logProduct.IsActive = _prodoct.IsActive;
             _logProduct.Model = _prodoct.Model;
             _logProduct.Price = _prodoct.Price;
-            _logProduct.Stock = _prodoct.Stock;
-            _logProduct.Tax = _prodoct.Tax;
+            _logProduct.Stock = (int) _prodoct.Stock;
+            _logProduct.Tax = (decimal) _prodoct.Tax;
             db.LogProducts.Add(_logProduct);
             db.SaveChanges();
         }

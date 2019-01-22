@@ -9,6 +9,7 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class Product : EntityBase
     {
+        [Required]
         [Display(Name = "Başlık")]
         public string Name { get; set; }
         [Display(Name = "Kategori")]
@@ -20,18 +21,23 @@ namespace SakalliTicaret.Core.Model.Entity
         public string Model { get; set; }
         [Display(Name = "Resim")]
         public string ImageUrl { get; set; }
+        [Required]
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
         [Display(Name = "Detaylı Açıklama")]
         public string Definition { get; set; }
+
+        [Required]
         [Display(Name = "Fiyat")]
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = 0;
         [Display(Name = "Vergi")]
-        public decimal Tax { get; set; }
+        public decimal? Tax { get; set; }
+
         [Display(Name = "İndirim")]
-        public decimal Discount { get; set; }
+        public decimal Discount { get; set; } = 0;
+
         [Display(Name = "Stok")]
-        public int Stock { get; set; }
+        public int Stock { get; set; } = 0;
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
 

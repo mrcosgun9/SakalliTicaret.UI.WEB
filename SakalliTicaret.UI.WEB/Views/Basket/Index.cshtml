@@ -24,9 +24,11 @@ else
                     <th>#</th>
                     <th>Resim</th>
                     <th>Adı</th>
+
                     <th>Birim Fiyat</th>
                     <th>Adet</th>
                     <th>Top. Fiyat</th>
+                  
                     <th></th>
                 </tr>
             </thead>
@@ -47,11 +49,20 @@ else
                             </div>
                         </td>
                         <td class="text-left">
-                            <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ","").ToLower()" target="_blank">
-                                @item.Product.Name
+                            <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ", "").ToLower()" target="_blank">
+                                @item.Product.Name<br/>
+                                <ul class="basketproperylist">
+                                    @foreach (var property in @item.PropertyPropertyValueses)
+                                    {
+                                        <li>
+                                            <b>@property.CategoryProperty.Name :</b> @property.CategoryPropertyValue.Value 
+                                        </li>
+                                    }
+                                </ul>
+                            
                             </a>
                         </td>
-
+                     
 
                         <td class="text-left">@item.Product.Price ₺</td>
                         <td class="text-left">@item.Quantity</td>

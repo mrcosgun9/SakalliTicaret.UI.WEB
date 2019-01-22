@@ -29,7 +29,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 {
                     if (s.Products.Any(x => x.Product.Id == basketItem.Product.Id))
                     {
-                        s.Products.FirstOrDefault(x => x.Product.Id == basketItem.Product.Id).Quantity= s.Products.FirstOrDefault(x => x.Product.Id == basketItem.Product.Id).Quantity+basketItem.Quantity;
+                        s.Products.FirstOrDefault(x => x.Product.Id == basketItem.Product.Id).Quantity = s.Products.FirstOrDefault(x => x.Product.Id == basketItem.Product.Id).Quantity + basketItem.Quantity;
                     }
                     else
                     {
@@ -153,10 +153,8 @@ namespace SakalliTicaret.UI.WEB.App_Class
             }
 
             public int siparisDetayId { get; set; }
-            //public int musteriId { get; set; }
-            //public DateTime sepetTarih { get; set; }
-            //public int sepetId { get; set; }
-            //public int adresId { get; set; }
+
+            public List<PropertyPropertyValues> PropertyPropertyValueses { get; set; }
         }
     }
 }

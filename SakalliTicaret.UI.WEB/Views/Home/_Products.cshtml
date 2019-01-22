@@ -8,7 +8,7 @@
 {
     <div class="col-md-3 productStyle">
         <div class="card">
-            <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower()) '>
+            <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())'>
                 <div class="cardimagediv">
                     @{
                         decimal indirim = Math.Ceiling(item.Price / 100 * item.Discount);
@@ -33,7 +33,8 @@
                 </div>
             </a>
             <small stle="float:left;">@item.Price TL</small><br />
-            <button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+            @*<button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>İncele</button>*@
+            <a href="~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())" class="incele" type="submit"><i class="fa fa-search"></i>İncele</a>
 
             @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
         </div>

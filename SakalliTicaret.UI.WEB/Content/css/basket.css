@@ -111,3 +111,14 @@
 .sepetbos {
     text-align: center;
 }
+
+.basketproperylist li {
+    display: inline-block;
+    border-left: 1px solid #ddd;
+    padding: 0 3px;
+    margin: 5px 0 0 0;
+}
+
+    .basketproperylist li:first-child {
+        border: 0;
+    }

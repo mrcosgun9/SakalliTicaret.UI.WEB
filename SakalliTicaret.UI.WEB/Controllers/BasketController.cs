@@ -25,6 +25,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Sepetim")]
         public ActionResult Index()
         {
+
             if (_loginState.IsLogin())
             {
                 User user = _loginState.IsLoginUser();
@@ -33,6 +34,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 List<UserAddress> addresses = model;
                 ViewBag.AddressList = addresses;
             }
+
             return View((BasketClass)HttpContext.Session["AktifSepet"]);
         }
         [Route("Sepet/Tamamla")]
@@ -101,13 +103,13 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult BasketCompletePayment()
         {
             BasketClass s = (BasketClass)Session["AktifSepet"];
-            if (s==null)
+            if (s == null)
             {
-                
+
             }
             else
             {
-                
+
             }
             NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
 
@@ -168,8 +170,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
             // Müşterinizin sitenizde kayıtlı veya form vasıtasıyla aldığınız eposta adresi
             User user = _loginState.IsLoginUser();
             NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
-       
-         
+
+
             //
             // Tahsil edilecek tutar. 9.99 için 9.99 * 100 = 999 gönderilmelidir.
             BasketClass s = new BasketClass();
@@ -181,7 +183,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             string merchant_oid = s.BasketKey;
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
-           
+
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız adres bilgisi
             string user_addressstr = "";
@@ -339,7 +341,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         }
 
         #region Sepet İşlemleri
-        public int Create(int productId)
+        public int Create(int productId, List<int> pList, List<int> pValList)
         {
             int basketCount = 0;
             try
@@ -349,6 +351,17 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 basketItem.Product = product;
                 basketItem.Quantity = 1;
                 basketItem.Tax = 0;
+                List<PropertyPropertyValues> propertyPropertyValues = new List<PropertyPropertyValues>();
+                for (int i = 0; i < pList.Count; i++)
+                {
+                    int pId = pList[i];
+                    int pVal = pValList[i];
+                    PropertyPropertyValues dbpropertyPropertyValues = db.PropertyPropertyValueses.Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue).FirstOrDefault(x => x.CategoryPropertyId == pId && x.CategoryPropertyValueId == pVal);
+                    propertyPropertyValues.Add(dbpropertyPropertyValues);
+                }
+                basketItem.PropertyPropertyValueses = propertyPropertyValues;
+                //basketItem.CategoryPropertyList = pList;
+                //basketItem.CategoryPropertyValues = pValList;
                 BasketClass s = new BasketClass();
                 s.SepeteEkle(basketItem);
                 s = (BasketClass)Session["AktifSepet"];
@@ -356,10 +369,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 if (_loginState.IsLogin())
                 {
                     int id = _loginState.IsLoginUser().Id;
-                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.Id==product.Id&&x.UserId==id);
-                    if (orderProduct==null)
+                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.Id == product.Id && x.UserId == id);
+                    if (orderProduct == null)
                     {
-                        orderProduct=new OrderProduct();
+                        orderProduct = new OrderProduct();
                         orderProduct.CreateDateTime = DateTime.Now;
                         orderProduct.CreateUserId = _loginState.IsLoginUser().Id;
                         orderProduct.BasketId = s.BasketId;
@@ -376,7 +389,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     else
                     {
                         orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.Id == product.Id).Total;
-                        orderProduct.Quantity = orderProduct.Quantity+1;
+                        orderProduct.Quantity = orderProduct.Quantity + 1;
                         db.Entry(orderProduct).State = EntityState.Modified;
                         db.SaveChanges();
                     }
