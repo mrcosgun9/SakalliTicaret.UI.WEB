@@ -4,8 +4,8 @@
 
 @foreach (var item in Model.Where(u => u.ParentId == 0 || u.ParentId == null))
 {
-    <li>
-        <a href="/Anasayfa/@item.Id/@item.Name.ToLower().Trim()">
+    <li id="@item.Id">
+        <a href="/Anasayfa/Kategori/@item.Id/@item.Name.ToLower().Trim()">
             <i class="fa fa-circle"></i>
             <strong>
                 @item.Name

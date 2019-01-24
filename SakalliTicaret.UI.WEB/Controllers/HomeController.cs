@@ -17,7 +17,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         private SakalliTicaretDb db = new SakalliTicaretDb();
         // GET: Home
         [Route("Anasayfa/{Page?}")]
-        [Route("Anasayfa/{Category?}/{categoryName?}")]
+        [Route("Anasayfa/Kategori/{Category?}/{categoryName?}")]
         [Route]
         public ActionResult Index(FilterModel filterModel,string categoryName)
         {
@@ -47,7 +47,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             else if (filterModel.Category != null)
             {
-                filterModel.Products = db.Products.Where(x => x.CategoryId == filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                filterModel.Products = db.Products.Include(x=>x.Category).Where(x => x.CategoryId == filterModel.Category||x.Category.ParentId==filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
             }
             else
             {

@@ -5,66 +5,67 @@
     Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
 }
 <div class="col-12">
-<div class="card">
-<h2>Sil</h2>
+    <div class="card">
+        <h2>Sil</h2>
 
-<h3>Silmek İstediğinize Emin Misiniz?</h3>
-<div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ParentCategory.Name)
-        </dt>
+        <h4>
+            Kategoriye ve kategorinin alt kategorisine bağlı ürünler kategorisiz hale gelicektir.<br />
+            Kategoriye bağlı alt kategoriler silinecektir.<br />
+            Kategoriyi silmek istediğinize emin misiniz?
+        </h4>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.ParentCategory.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.ParentCategory.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.IsActive)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDateTime)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreateDateTime)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDateTime)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CreateDateTime)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateUser.Name)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreateUser.Name)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateUser.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CreateUser.Name)
+                </dd>
 
 
 
-    </dl>
+            </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Sil" class="btn btn-default" /> |
-            @Html.ActionLink("Kategori Listesi", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Sil" class="btn btn-default" /> |
+                    @Html.ActionLink("Kategori Listesi", "Index")
+                </div>
+            }
         </div>
-    }
-</div>
-</div>
+    </div>
 </div>

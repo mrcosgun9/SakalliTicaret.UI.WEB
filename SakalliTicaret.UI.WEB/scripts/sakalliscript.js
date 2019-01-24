@@ -66,16 +66,16 @@ $(document).ready(function () {
     $('.selectonfocus').mask("00/00/0000", { selectOnFocus: true });
 });
 
-$(document).ready(function () {
-    $("nav ul.xt-side-menu li").hover(
-        function () {
-            $(this).children("ul").stop(true, true).slideDown();
+//$(document).ready(function () {
+//    $("nav ul.xt-side-menu li").hover(
+//        function () {
+//            $(this).children("ul").stop(true, true).slideDown();
 
-        },
-        function () {
-            $(this).children("ul").stop(true, true).slideUp();
-        });
-});
+//        },
+//        function () {
+//            $(this).children("ul").stop(true, true).slideUp();
+//        });
+//});
 
 
     $("#uyeOlmadanForm").validate({

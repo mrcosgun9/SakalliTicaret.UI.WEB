@@ -7,7 +7,7 @@
 <div class="col-12">
     <div class="card">
         @using (Html.BeginForm("Create", "Products", FormMethod.Post,
-                                                new { enctype = "multipart/form-data" }))
+                                                        new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @ViewBag.hata
@@ -44,7 +44,7 @@
                     <div class="col-md-12">
                         @Html.LabelFor(model => model.Definition, htmlAttributes: new { @class = "control-label" })
 
-                        @Html.TextAreaFor(model => model.Definition, new {@id = "editor1"})
+                        @Html.TextAreaFor(model => model.Definition, new { @id = "editor1" })
                         @Html.ValidationMessageFor(model => model.Definition, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-4">
@@ -70,6 +70,10 @@
                             @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
                         </div>
+                    </div>
+                    <div class="col-12" id="categoryProp">
+
+                      
                     </div>
                 </div>
                 <div class="row">
@@ -138,3 +142,62 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        
+        $("#CategoryId").on('change', function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("CategoryPropertyGet", "Products", new { area = "Panel" })",
+                data: '{id: "' + this.value + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $('#categoryProp').html(response);
+
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+            //$.ajax({
+            //    type: "GET",
+            //    url: "/Products/CategoryPropertyGet",
+            //    contentType: 'application/json; charset=utf-8',
+            //    dataType: 'json',
+            //    traditional: true,
+            //    data: {
+            //        id: this.value
+            //    },
+            //    success: function myfunction(veri) {
+            //        $("#categoryProp").html(veri);
+                   
+            //    },
+            //    error: function myfunction() {
+            //        alert("hata");
+            //    }
+            //});
+            //$.ajax({
+            //    type: "POST",
+            //    url: "CategoryPropertyGet",
+            //    data: {
+            //        id: this.value
+            //    },
+            //    dataType: 'json',
+            //    contentType: 'application/json; charset=utf-8',
+            //    success: function (data) {
+            //        console.log(data);
+            //    },
+            //    error: function myfunction() {
+            //        console.log("hata");
+            //    }
+            //});
+
+        });
+
+
+    </script>
+}

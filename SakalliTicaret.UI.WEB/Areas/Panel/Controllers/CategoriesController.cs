@@ -148,9 +148,16 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
+            List<CategoryProperty> categoryProperty = db.CategoryProperties.Where(x => x.CategoryId == id).ToList();
+            List<CategoryPropertyValue> categoryPropertyValues = new List<CategoryPropertyValue>();
+            foreach (var categoryProp in categoryProperty)
+            {
+                db.Database.ExecuteSqlCommand("delete from PropertyPropertyValues where CategoryPropertyId=" + categoryProp.Id);
 
+                db.Database.ExecuteSqlCommand("delete from CategoryPropertyValues where CategoryPropertyId=" + categoryProp.Id);
+            }
+            db.Database.ExecuteSqlCommand("delete from CategoryProperties where CategoryId=" + category.Id);
             List<Product> product = db.Products.Where(x => x.CategoryId == id).ToList();
-
             foreach (var item in product)
             {
                 item.CategoryId = null;

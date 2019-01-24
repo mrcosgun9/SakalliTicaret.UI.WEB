@@ -1272,6 +1272,7 @@
     <Content Include="Areas\Panel\Views\CategoryPropertyValues\Index.cshtml" />
     <Content Include="Areas\Panel\Views\Portal\Index.cshtml" />
     <Content Include="Areas\Panel\Views\Portal\ContactEdit.cshtml" />
+    <Content Include="Areas\Panel\Views\Products\CategoryPropertyGet.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />

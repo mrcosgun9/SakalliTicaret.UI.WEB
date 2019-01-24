@@ -159,6 +159,19 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             //_logClass.ProductLog(product, "Silme");
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult CategoryPropertyGet(int id)
+        {
+            List<CategoryProperty> categoryProperties = db.CategoryProperties.Where(x => x.CategoryId == id).ToList();
+            List<PropertyPropertyValues> propertyPropertyValues =new List<PropertyPropertyValues>();
+            foreach (var item in categoryProperties)
+            {
+             propertyPropertyValues.Add(db.PropertyPropertyValueses.Where(x => x.CategoryPropertyId == item.Id).Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue).FirstOrDefault());   
+            }
+        
+              
+            return PartialView("CategoryPropertyGet",propertyPropertyValues);
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -180,8 +180,18 @@
     }
     <script src="~/scripts/sakalliscript.js"></script>
     <script>
-        $(function () {
+        function getPathVariable(variable) {
+            var path = window.location.pathname;
+            var parts = path.substr(1).split('/'), value;
+            return parts[parts.indexOf(variable) + 1];
+        }
+
+
+        $(function() {
             $("#basketCount").html(@basketcount);
+            var kId = getPathVariable('Kategori');
+            var icerik = $('#' + kId + ' .xt-dropdown').slideDown();
+
         });
         $(".basketCreate").click(function myfunction() {
             var uid = $(this).attr("name");
@@ -205,7 +215,7 @@
                 traditional: true,
                 data: {
                     productId: uid,
-                    pList:pList,
+                    pList: pList,
                     pValList: pIdValList
                 },
                 success: function myfunction(count) {
