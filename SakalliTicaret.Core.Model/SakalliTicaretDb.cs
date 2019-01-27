@@ -37,6 +37,8 @@ namespace SakalliTicaret.Core.Model
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<CategoryPropertyValue> CategoryPropertyValues { get; set; }
         public DbSet<PropertyPropertyValues> PropertyPropertyValueses { get; set; }
+        public DbSet<ProductProperty> ProductProperties{ get; set; }
+        public DbSet<ProductImages> ProductImageses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

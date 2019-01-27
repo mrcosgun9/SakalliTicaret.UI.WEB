@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.ProductImages>
+
+@{
+    ViewBag.Title = "MultipleImageUpload";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/dropzone/dropzone.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 col-md-6 m-b-20">
+                            <img src="@item.ImagesUrl" class="img-responsive radius">
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h4 class="card-title">Ürüne Ait Resim Bulunamadı.</h4>
+
+                }
+            </div>
+       
+        </div>
+    </div>
+</div>
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Toplu Resim Yükleme</h4>
+            <form action="/Products/ImageUpload" class="dropzone" id="dropzoneJsForm"></form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    Dropzone.options.dropzoneForm =
+    {
+        init: function () {
+            this.on("complete", function (data) {
+                //var res = eval('(' + data.xhr.responseText + ')');
+                var res = JSON.parse(data.xhr.responseText);
+            });
+        }
+    };
+</script>

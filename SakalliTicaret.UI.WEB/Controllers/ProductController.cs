@@ -23,6 +23,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
             detailModel.Product = db.Products
                 .Include(p => p.Category).FirstOrDefault(x => x.Id == id);
+            detailModel.ProductProperties = db.ProductProperties.Where(x => x.ProductId == id).Include(x=>x.Product).Include(x=>x.PropertyPropertyValues).ToList();
+
             var propIdList = db.CategoryProperties.Where(x => x.CategoryId == detailModel.Product.CategoryId).Select(x => x.Id).ToList();
 
 
@@ -34,6 +36,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             detailModel.FeaturedProduct = db.Products
                 .Where(x => x.CategoryId == detailModel.Product.CategoryId && x.Id != id).OrderBy(r => Guid.NewGuid())
                 .Take(4).ToList();
+
+            detailModel.ProductImageses = db.ProductImageses.Where(x => x.ProductId == id).ToList();
+
             return View(detailModel);
         }
         [Route("Urunler/YeniUrunler")]

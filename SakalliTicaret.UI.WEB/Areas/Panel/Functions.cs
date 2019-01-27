@@ -7,15 +7,15 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel
 {
     public class Functions
     {
-        public string ImageUpload(HttpPostedFileBase fu, int Ksize)
+        public string ImageUpload(HttpPostedFileBase fu, int Ksize,string filePath)
         {
             System.Drawing.Image orjinalFoto = null;
             HttpPostedFileBase jpeg_image_upload = fu;
             orjinalFoto = System.Drawing.Image.FromStream(jpeg_image_upload.InputStream);
-            ImageResize(orjinalFoto, Ksize,ImageName(fu.FileName,"jpg"));
+            ImageResize(orjinalFoto, Ksize,ImageName(fu.FileName,"jpg"),filePath);
             return ImageName(fu.FileName, "jpg");
         }
-        protected static void ImageResize(System.Drawing.Image orjinalFoto, int boyut, string dosyaAdi)
+        protected static void ImageResize(System.Drawing.Image orjinalFoto, int boyut, string dosyaAdi,string filePath)
         {
             System.Drawing.Bitmap islenmisFotograf = null;
             System.Drawing.Graphics grafik = null;
@@ -45,7 +45,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel
             eParams.Param[0] = new System.Drawing.Imaging.EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 95L);
 
             grafik.DrawImage(orjinalFoto, paste_x, paste_y, new_width, new_height);
-            islenmisFotograf.Save(HttpContext.Current.Server.MapPath("~/Content/Images/Products/" + dosyaAdi), codec, eParams);
+            islenmisFotograf.Save(HttpContext.Current.Server.MapPath(filePath + dosyaAdi), codec, eParams);
         }
         private string ImageName(string baslik, string uzanti)
         {

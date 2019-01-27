@@ -67,6 +67,8 @@
     <Compile Include="Entity\Page.cs" />
     <Compile Include="Entity\PosEntegration.cs" />
     <Compile Include="Entity\Product.cs" />
+    <Compile Include="Entity\ProductImages.cs" />
+    <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Entity\PropertyPropertyValues.cs" />
     <Compile Include="Entity\SocialMedia.cs" />
     <Compile Include="Entity\Status.cs" />

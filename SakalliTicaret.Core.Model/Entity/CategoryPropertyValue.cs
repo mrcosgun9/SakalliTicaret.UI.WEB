@@ -9,12 +9,14 @@ namespace SakalliTicaret.Core.Model.Entity
 {
     public class CategoryPropertyValue : EntityBase
     {
-        
+
         public int CategoryPropertyId { get; set; }
         public CategoryProperty CategoryProperty { get; set; }
         [Required]
         [Display(Name = "Değer")]
         public string Value { get; set; }
-       
+
+        public bool IsSelected { get; set; }
+
     }
 }
