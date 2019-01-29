@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
+using SakalliTicaret.UI.WEB.Areas.Panel.Models;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
@@ -21,7 +22,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Products
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
+            var products = db.Products.Include(p => p.Category).OrderByDescending(x => x.Id);
             return View(products.ToList());
         }
 
@@ -75,12 +76,12 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                     List<PropertyPropertyValues> propertyPropertyValues = new List<PropertyPropertyValues>();
                     for (int i = 0; i < SelectedProperty.Length; i++)
                     {
-                        ProductProperty productProperty=new ProductProperty();
+                        ProductProperty productProperty = new ProductProperty();
                         productProperty.ProductId = product.Id;
-                        productProperty.CreateDateTime=DateTime.Now;
+                        productProperty.CreateDateTime = DateTime.Now;
                         productProperty.CreateUserId = User.Id;
                         int propId = SelectedProperty[i];
-                        productProperty.PropertyPropertyValuesId =db.PropertyPropertyValueses.FirstOrDefault(x => x.CategoryPropertyValueId ==propId ).Id;
+                        productProperty.PropertyPropertyValuesId = db.PropertyPropertyValueses.FirstOrDefault(x => x.CategoryPropertyValueId == propId).Id;
                         db.ProductProperties.Add(productProperty);
                     }
 
@@ -121,13 +122,26 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit( Product product, HttpPostedFileBase ProductImg, int[] SelectedProperty)
+        public ActionResult Edit(Product product, HttpPostedFileBase ProductImg, int[] SelectedProperty)
         {
             if (ModelState.IsValid)
             {
+                var User = Session["AdminLoginUser"] as User;
                 db.Entry(product).State = EntityState.Modified;
+                db.ProductProperties.RemoveRange(db.ProductProperties.Where(x => x.ProductId == product.Id));
                 db.SaveChanges();
-                _logClass.ProductLog(product, "Düzenleme");
+                for (int i = 0; i < SelectedProperty.Length; i++)
+                {
+                    ProductProperty productProperty = new ProductProperty();
+                    productProperty.ProductId = product.Id;
+                    productProperty.CreateDateTime = DateTime.Now;
+                    productProperty.CreateUserId = User.Id;
+                    int propId = SelectedProperty[i];
+                    productProperty.PropertyPropertyValuesId = db.PropertyPropertyValueses.FirstOrDefault(x => x.CategoryPropertyValueId == propId).Id;
+                    db.ProductProperties.Add(productProperty);
+                }
+                db.SaveChanges();
+                //_logClass.ProductLog(product, "Düzenleme");
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
@@ -161,7 +175,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 if (System.IO.File.Exists(Server.MapPath(product.ImageUrl)))
                     System.IO.File.Delete(Server.MapPath(product.ImageUrl));
             }
-
+            db.ProductProperties.RemoveRange(db.ProductProperties.Where(x => x.ProductId == product.Id));
             db.Products.Remove(product);
             db.SaveChanges();
             //_logClass.ProductLog(product, "Silme");
@@ -170,21 +184,34 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [HttpPost]
         public ActionResult CategoryPropertyGet(int id)
         {
+            int pid = -1;
+            try
+            {
+                string strid = Request.UrlReferrer.Segments[4];
+                pid = Convert.ToInt16(strid);
+            }
+            catch (Exception e)
+            {
+
+
+            }
+
             //List<CategoryProperty> categoryProperties = db.CategoryProperties.Where(x => x.CategoryId == id).ToList();
             //List<PropertyPropertyValues> propertyPropertyValues =new List<PropertyPropertyValues>();
             //foreach (var item in categoryProperties)
             //{
             // propertyPropertyValues.Add(db.PropertyPropertyValueses.Where(x => x.CategoryPropertyId == item.Id).Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue).FirstOrDefault());   
             //}
+            ProductPropertiesModel propertiesModel = new ProductPropertiesModel();
             var propIdList = db.CategoryProperties.Where(x => x.CategoryId == id).Select(x => x.Id).ToList();
-            List<PropertyPropertyValues> PropertyPropertyValueses = db.PropertyPropertyValueses
+            propertiesModel.PropertyPropertyValueses = db.PropertyPropertyValueses
                .Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue)
                .Where(x => propIdList.Contains(x.CategoryPropertyId) && x.CategoryProperty.Eligible).ToList();
-            
-            List<ProductProperty> productProperties =new List<ProductProperty>();
-            productProperties = db.ProductProperties.Where(x => x.ProductId == id).ToList();
 
-            return PartialView("CategoryPropertyGet", PropertyPropertyValueses);
+            propertiesModel.ProductProperties = db.ProductProperties.Where(x => x.ProductId == pid).ToList();
+
+
+            return PartialView("CategoryPropertyGet", propertiesModel);
         }
 
         public ActionResult MultipleImageUpload(int id)
@@ -193,10 +220,20 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             return View(productImages);
         }
 
+        public ActionResult ImagesRemove(int id)
+        {
+            ProductImages productImages = db.ProductImageses.FirstOrDefault(x=>x.Id==id);
+            if (System.IO.File.Exists(Server.MapPath(productImages.ImagesUrl)))
+                System.IO.File.Delete(Server.MapPath(productImages.ImagesUrl));
+            db.ProductImageses.Remove(productImages);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult ImageUpload()
         {
+
             var User = Session["AdminLoginUser"] as User;
-            int pid =Convert.ToInt16(Request.UrlReferrer.Segments[4]);
+            int pid = Convert.ToInt16(Request.UrlReferrer.Segments[4]);
             bool isSavedSuccessfully = true;
             string fName = "";
             try
@@ -217,7 +254,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 
                         ProductImages productImages = new ProductImages();
                         productImages.ProductId = pid;
-                        productImages.CreateDateTime=DateTime.Now;
+                        productImages.CreateDateTime = DateTime.Now;
                         productImages.CreateUserId = User.Id;
                         productImages.ImagesUrl = "/Content/Images/Products/" + _functions.ImageUpload(file, 1000, "~/Content/Images/Products/");
                         db.ProductImageses.Add(productImages);

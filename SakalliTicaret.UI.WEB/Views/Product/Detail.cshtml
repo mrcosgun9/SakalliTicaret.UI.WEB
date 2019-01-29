@@ -62,7 +62,7 @@
                 <h3>@Model.Product.Name</h3>
                 <span class="single-price"><b>Fiyat :</b> @Model.Product.Price ₺</span>
                 <p>@Model.Product.Description</p>
-                @if (Model.PropertyPropertyValueses != null)
+                @*@if (Model.PropertyPropertyValueses != null)
                 {
                     foreach (var item in Model.PropertyPropertyValueses.GroupBy(x => x.CategoryProperty))
                     {    <div class="color-select">
@@ -78,13 +78,13 @@
                     </select>
                 </div>
                     }
-                }
-                @*@if (Model.ProductProperties != null)
+                }*@
+                @if (Model.ProductProperties != null)
                 {
-                    foreach (var item in Model.ProductProperties.GroupBy(x => x.PropertyPropertyValues))
+                    foreach (var item in Model.ProductProperties.GroupBy(x => x.PropertyPropertyValues.CategoryProperty))
                     {    <div class="color-select">
-                             @item.Key.CategoryProperty.Name
-                             <select style="margin: 0 0 5px 0;" class="productproperties" name="@item.Key.CategoryProperty.Name" id="@item.Key.Id">
+                             @item.Key.Name
+                             <select style="margin: 0 0 5px 0;" class="productproperties" name="@item.Key.Name" id="@item.Key.Id">
                                  @foreach (var itemValue in item)
                                  {
                                      <option value="@itemValue.PropertyPropertyValues.Id">
@@ -95,7 +95,7 @@
                              </select>
                          </div>
                     }
-                }*@
+                }
 
                 @*<ul>
                         <li class="red-bg selected"><i class="fa fa-check"></i></li>

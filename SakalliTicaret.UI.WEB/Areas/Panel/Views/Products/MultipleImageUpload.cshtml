@@ -10,14 +10,17 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <div class="row">
+            @*<div class="row">
                 @if (Model != null)
                 {
                     foreach (var item in Model)
                     {
-                        <div class="col-lg-3 col-md-6 m-b-20">
-                            <img src="@item.ImagesUrl" class="img-responsive radius">
+                        <div class="col-lg-1 col-md-2 m-b-20" style="height: 120px; overflow: hidden">
+                            <i class="fa fa-times"></i>
+                            <img src="@item.ImagesUrl" class="img-responsive radius" style="width: 100%;">
+
                         </div>
+
                     }
                 }
                 else
@@ -25,6 +28,44 @@
                     <h4 class="card-title">Ürüne Ait Resim Bulunamadı.</h4>
 
                 }
+            </div>*@
+            <div class="row">
+                @if (Model.Count() != 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        @*<div class="col-lg-1 col-md-2 m-b-20" style="height: 120px; overflow: hidden">
+                            <i class="fa fa-times"></i>
+                            <img src="@item.ImagesUrl" class="img-responsive radius" style="width: 100%;">
+
+                        </div>*@
+                        <div class="col-sm-2">
+                            <a href="/Panel/Products/ImagesRemove?id=@item.Id" class="float-right color-danger">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <img src="@item.ImagesUrl" alt="attachment" class="img-thumbnail img-responsive">
+
+                        </div>
+
+                    }
+                }
+                else
+                {
+                    <div class="col-12 text-center">
+                        <h4 class="card-title">Ürüne Ait Resim Bulunamadı.</h4>    
+                    </div>
+                    
+
+                }
+                @*<div class="col-sm-2">
+                    <a href="#"> <img src="images/attached-files/img-1.jpg" alt="attachment" class="img-thumbnail img-responsive"> </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="#"> <img src="images/attached-files/img-2.jpg" alt="attachment" class="img-thumbnail img-responsive"> </a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="#"> <img src="images/attached-files/img-3.jpg" alt="attachment" class="img-thumbnail img-responsive"> </a>
+                </div>*@
             </div>
        
         </div>

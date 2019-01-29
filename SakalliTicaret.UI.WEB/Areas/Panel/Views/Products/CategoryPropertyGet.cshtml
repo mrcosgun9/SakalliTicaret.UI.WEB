@@ -1,25 +1,41 @@
-﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.PropertyPropertyValues>
+﻿@model SakalliTicaret.UI.WEB.Areas.Panel.Models.ProductPropertiesModel
 <div class="row">
     <div class="col-12">
         <label class="control-label" for="Price">Ürün Özellikleri</label>
 
     </div>
-    @foreach (var item in Model.GroupBy(x => x.CategoryProperty))
+    @*@foreach (var item in Model.PropertyPropertyValueses.GroupBy(x => x.CategoryPropertyId))
+        {
+            <div class="col-2">
+
+
+                @item.Key.Name :<br />
+                @foreach (var itemValue in item)
+                    {
+
+                    <input type="checkbox" name="SelectedProperty" value="@itemValue.Id" /> @itemValue.CategoryPropertyValue.Value<br />
+                }
+
+            </div>
+        }*@
+    @foreach (var item in Model.PropertyPropertyValueses.GroupBy(x => x.CategoryPropertyValue.CategoryProperty))
     {
         <div class="col-2">
-
-
-            @item.Key.Name :<br />
+            @item.Key.Name<br/>
             @foreach (var itemValue in item)
+            {
+                bool whatever = Model.ProductProperties.Any(u => u.PropertyPropertyValuesId== itemValue.CategoryPropertyValue.Id);
+                if (whatever)
                 {
-                @*@itemValue.CategoryPropertyValue.Value
-                    @Html.CheckBox(itemValue.CategoryPropertyValue.Value)*@
-                <input type="checkbox" name="SelectedProperty" value="@itemValue.Id" /> @itemValue.CategoryPropertyValue.Value<br />
+                    <input type="checkbox" name="SelectedProperty" value="@itemValue.CategoryPropertyValue.Id" checked="checked"/> @itemValue.CategoryPropertyValue.Value<br />
+                }
+                else
+                {
+                    <input type="checkbox" name="SelectedProperty" value="@itemValue.CategoryPropertyValue.Id" /> @itemValue.CategoryPropertyValue.Value<br />
+                }
             }
-
         </div>
     }
-
 
 
 </div>

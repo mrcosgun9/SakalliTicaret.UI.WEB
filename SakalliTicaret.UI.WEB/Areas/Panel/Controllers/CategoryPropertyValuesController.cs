@@ -127,6 +127,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             CategoryPropertyValue categoryPropertyValue = db.CategoryPropertyValues.Find(id);
             db.CategoryPropertyValues.Remove(categoryPropertyValue);
             PropertyPropertyValues propertyPropertyValues =

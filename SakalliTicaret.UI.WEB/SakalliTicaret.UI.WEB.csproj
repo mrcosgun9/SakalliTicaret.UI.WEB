@@ -1354,6 +1354,7 @@
     <Compile Include="Areas\Panel\Controllers\UsersController.cs" />
     <Compile Include="Areas\Panel\Functions.cs" />
     <Compile Include="App_Class\LoginState.cs" />
+    <Compile Include="Areas\Panel\Models\ProductPropertiesModel.cs" />
     <Compile Include="Areas\Panel\PanelAreaRegistration.cs" />
     <Compile Include="Areas\Panel\Controllers\LogBasketsController.cs" />
     <Compile Include="Areas\Panel\Controllers\LogCategoriesController.cs" />
@@ -1575,7 +1576,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\" />
-    <Folder Include="Areas\Panel\Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">

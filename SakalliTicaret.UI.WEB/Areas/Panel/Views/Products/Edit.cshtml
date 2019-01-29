@@ -6,7 +6,7 @@
 }
 <div class="col-12">
     <div class="card">
-        @using (Html.BeginForm("Create", "Products", FormMethod.Post,
+        @using (Html.BeginForm("Edit", "Products", FormMethod.Post,
                 new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
@@ -23,6 +23,11 @@
                             <input type="file" name="ProductImg" accept="image/*" />
                             @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a target="_blank" href="/Panel/Products/MultipleImageUpload/@Model.Id" title="Toplu Resim Girişi" class="link"><i class="fa fa-file-image-o"></i>Toplu Resim Listesi/Girişi</a> 
                     </div>
                 </div>
                 <div class="row">
@@ -125,13 +130,13 @@
                         </div>
                     </div>
                 </div>
-
+                @Html.HiddenFor(model=>model.CreateDateTime)
 
 
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Ekle" class="btn btn-default" />
+                        <input type="submit" value="Düzenle" class="btn btn-default" />
                     </div>
                 </div>
             </div>
