@@ -127,8 +127,14 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             if (ModelState.IsValid)
             {
                 var User = Session["AdminLoginUser"] as User;
+                if (ProductImg != null && product.ImageUrl == "/Content/Images/Products/resimyok.jpg")
+                {
+                    product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
+                }
+
                 db.Entry(product).State = EntityState.Modified;
                 db.ProductProperties.RemoveRange(db.ProductProperties.Where(x => x.ProductId == product.Id));
+
                 db.SaveChanges();
                 for (int i = 0; i < SelectedProperty.Length; i++)
                 {
@@ -222,7 +228,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 
         public ActionResult ImagesRemove(int id)
         {
-            ProductImages productImages = db.ProductImageses.FirstOrDefault(x=>x.Id==id);
+            ProductImages productImages = db.ProductImageses.FirstOrDefault(x => x.Id == id);
             if (System.IO.File.Exists(Server.MapPath(productImages.ImagesUrl)))
                 System.IO.File.Delete(Server.MapPath(productImages.ImagesUrl));
             db.ProductImageses.Remove(productImages);

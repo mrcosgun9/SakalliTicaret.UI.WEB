@@ -7,7 +7,7 @@
 <div class="col-12">
     <div class="card">
         @using (Html.BeginForm("Edit", "Products", FormMethod.Post,
-                new { enctype = "multipart/form-data" }))
+                    new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @ViewBag.hata
@@ -18,16 +18,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label" })<br />
-
-                            <input type="file" name="ProductImg" accept="image/*" />
-                            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                            <img src="@Model.ImageUrl"/><br/>
+                            @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new {@class = "control-label"})<br/>
+                            <input type="file" name="ProductImg" accept="image/*"/>
+                            @Html.ValidationMessageFor(model => model.ImageUrl, "", new {@class = "text-danger"})
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <a target="_blank" href="/Panel/Products/MultipleImageUpload/@Model.Id" title="Toplu Resim Girişi" class="link"><i class="fa fa-file-image-o"></i>Toplu Resim Listesi/Girişi</a> 
+                        <a target="_blank" href="/Panel/Products/MultipleImageUpload/@Model.Id" title="Toplu Resim Girişi" class="link"><i class="fa fa-file-image-o"></i>Toplu Resim Listesi/Girişi</a>
                     </div>
                 </div>
                 <div class="row">
@@ -130,7 +130,8 @@
                         </div>
                     </div>
                 </div>
-                @Html.HiddenFor(model=>model.CreateDateTime)
+                @Html.HiddenFor(model => model.CreateDateTime)
+                @Html.HiddenFor(model => model.ImageUrl)
 
 
 

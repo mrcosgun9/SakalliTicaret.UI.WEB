@@ -1576,6 +1576,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\" />
+    <Folder Include="Areas\Panel\Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">
@@ -1588,6 +1589,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,13 +11,13 @@
             <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())'>
                 <div class="cardimagediv">
                     @{
-                        decimal indirim = Math.Ceiling(item.Price / 100 * item.Discount);
+                        decimal indirim = Math.Ceiling(item.Discount * 100 / item.Price);
                     }
                     @if (indirim > 0)
                     {
                         <span class="product-tag xt-uppercase">
 
-                            %@indirim İndİrİm
+                            %@indirim İNDİRİM
 
                         </span>
                     }
