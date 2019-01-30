@@ -114,7 +114,11 @@
                     <div class="product-additional-info">
                         <ul>
                             <li><b>Model:</b>@Model.Product.Model</li>
-                            <li><b>Kategori:</b><a href="">@Model.Product.Category.Name</a></li>
+                            @if (Model.Product.Category != null)
+                            {
+                                <li><b>Kategori:</b><a href="">@Model.Product.Category.Name</a></li>
+
+                            }
                             <li><b>Marka:</b>@Model.Product.Brand</li>
                         </ul>
                     </div>

@@ -131,7 +131,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             }
             else
             {
-                
+
                 if (basket != null)
                 {
                     List<OrderProduct> dbOrderProduct = db.OrderProducts
@@ -149,12 +149,12 @@ namespace SakalliTicaret.UI.WEB.App_Class
                             basketClass?.SepeteEkle(basketItem);
                         }
                     }
-                    basketClass = (BasketClass) HttpContext.Current.Session["AktifSepet"];
+                    basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                     basketClass = new BasketClass();
                     basketClass.BasketId = basket.Id;
                     basketClass.BasketKey = basket.BasketKey;
                     basketClass.UserId = basket.UserId;
-                   HttpContext.Current.Session["AktifSepet"] = basketClass;
+                    HttpContext.Current.Session["AktifSepet"] = basketClass;
                 }
 
 
@@ -164,7 +164,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
         public void OrderProductControl(Basket basket, BasketClass basketClass)
         {
             int id = _loginState.IsLoginUser().Id;
-
+           
             foreach (var item in basketClass.Products)
             {
                 OrderProduct orderProduct = new OrderProduct();
@@ -179,6 +179,24 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 db.OrderProducts.Add(orderProduct);
                 db.SaveChanges();
             }
+          
+            var basketItem = basketClass.BasketItems.Select(x => x.PropertyPropertyValueses);
+            foreach (var item in basketItem)
+            {
+                if (item.Count > 0)
+                {
+                    OrderProductProperty productProperty = new OrderProductProperty();
+                    foreach (var propertyValuese in item)
+                    {
+                        productProperty.OrderProductId = orderProduct.Id;
+                        productProperty.ProductPropertyId = propertyValuese.Id;
+                    }
+                    db.SaveChanges();
+                    //productProperty.OrderProductId=item.
+                }
+            }
+   
+
         }
     }
 }

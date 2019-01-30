@@ -352,13 +352,17 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 basketItem.Quantity = 1;
                 basketItem.Tax = 0;
                 List<PropertyPropertyValues> propertyPropertyValues = new List<PropertyPropertyValues>();
-                for (int i = 0; i < pList.Count; i++)
+                if (pList!=null)
                 {
-                    int pId = pList[i];
-                    int pVal = pValList[i];
-                    PropertyPropertyValues dbpropertyPropertyValues = db.PropertyPropertyValueses.Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue).FirstOrDefault(x => x.CategoryPropertyId == pId && x.CategoryPropertyValueId == pVal);
-                    propertyPropertyValues.Add(dbpropertyPropertyValues);
+                    for (int i = 0; i < pList.Count; i++)
+                    {
+                        int pId = pList[i];
+                        int pVal = pValList[i];
+                        PropertyPropertyValues dbpropertyPropertyValues = db.PropertyPropertyValueses.Include(x => x.CategoryProperty).Include(x => x.CategoryPropertyValue).FirstOrDefault(x => x.CategoryPropertyId == pId && x.CategoryPropertyValueId == pVal);
+                        propertyPropertyValues.Add(dbpropertyPropertyValues);
+                    }
                 }
+            
                 basketItem.PropertyPropertyValueses = propertyPropertyValues;
                 //basketItem.CategoryPropertyList = pList;
                 //basketItem.CategoryPropertyValues = pValList;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel
@@ -33,6 +34,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel
         public bool IsLogin { get; private set; }
         public int AdminLoginUserId { get; private set; }
         public User AdminLoginUser { get; private set; }
+
+         public SakalliTicaretDb db = new SakalliTicaretDb();
         protected override void Initialize(RequestContext requestContext)
         {
             if (requestContext.HttpContext.Session["AdminLoginUserId"] != null)

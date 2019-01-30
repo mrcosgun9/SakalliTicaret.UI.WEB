@@ -1274,6 +1274,7 @@
     <Content Include="Areas\Panel\Views\Portal\ContactEdit.cshtml" />
     <Content Include="Areas\Panel\Views\Products\CategoryPropertyGet.cshtml" />
     <Content Include="Areas\Panel\Views\Products\MultipleImageUpload.cshtml" />
+    <Content Include="Areas\Panel\Views\BasketAndOrders\Index.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1337,6 +1338,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Panel\AdminControlerBase.cs" />
+    <Compile Include="Areas\Panel\Controllers\BasketAndOrdersController.cs" />
     <Compile Include="Areas\Panel\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Panel\Controllers\CategoryPropertiesController.cs" />
     <Compile Include="Areas\Panel\Controllers\CategoryPropertyValuesController.cs" />

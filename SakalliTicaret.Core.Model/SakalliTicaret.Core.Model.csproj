@@ -64,6 +64,7 @@
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\OrderPayment.cs" />
     <Compile Include="Entity\OrderProduct.cs" />
+    <Compile Include="Entity\OrderProductProperty.cs" />
     <Compile Include="Entity\Page.cs" />
     <Compile Include="Entity\PosEntegration.cs" />
     <Compile Include="Entity\Product.cs" />

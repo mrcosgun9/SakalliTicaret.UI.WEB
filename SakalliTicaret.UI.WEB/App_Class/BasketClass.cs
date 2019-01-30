@@ -119,7 +119,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 return Amount;
             }
         }
-        private List<BasketItem> BasketItems = new List<BasketItem>();
+        public List<BasketItem> BasketItems = new List<BasketItem>();
         public List<BasketItem> Products
         {
             get

@@ -1,0 +1,66 @@
+﻿@using System.Text.RegularExpressions
+@model IEnumerable<SakalliTicaret.Core.Model.Entity.Basket>
+
+@{
+    ViewBag.Title = "MRCPanel | Sipariş Listesi";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+<div class="col-12">
+    <div class="card">
+        <p>
+            <a href="/Panel/Products/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Ürün Ekle</a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BasketKey)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Name) @Html.DisplayNameFor(model => model.User.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDateTime)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.BasketKey)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Name)
+                        @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDateTime)
+                    </td>
+                    <td>
+                        @*<a target="_blank" href="~/Urun/@item.Id/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()" title="Ürünü Göster"><i class="fa fa-arrow-right"></i></a> |
+                        <a href="/Panel/Products/MultipleImageUpload/@item.Id" title="Toplu Resim Girişi"><i class="fa fa-file-image-o"></i></a> |
+                        <a href="/Panel/Products/Edit/@item.Id" title="Düzenle"><i class="fa fa-refresh"></i></a> |*@
+                        <a href="/Panel/Products/Details/@item.Id" title="Detay"><i class="fa fa-eye"></i></a> |
+                        @*<a href="/Panel/Products/Delete/@item.Id" title="Sil"><i class="fa fa-trash"></i></a>*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
