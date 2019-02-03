@@ -134,7 +134,11 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 db.PropertyPropertyValueses.FirstOrDefault(
                     x => x.CategoryPropertyId == categoryPropertyValue.CategoryPropertyId &&
                          x.CategoryPropertyValueId == categoryPropertyValue.Id);
-            db.PropertyPropertyValueses.Remove(propertyPropertyValues);
+            if (propertyPropertyValues!=null)
+            {
+                db.PropertyPropertyValueses.Remove(propertyPropertyValues);
+
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

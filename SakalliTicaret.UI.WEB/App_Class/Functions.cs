@@ -134,6 +134,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
 
                 if (basket != null)
                 {
+                  
                     List<OrderProduct> dbOrderProduct = db.OrderProducts
                         .Where(x => x.BasketId == basket.Id).ToList();
                     if (dbOrderProduct.Count != 0)
@@ -146,11 +147,13 @@ namespace SakalliTicaret.UI.WEB.App_Class
                             basketItem.Product = product;
                             basketItem.Quantity = item.Quantity;
                             basketItem.Tax = 0;
-                            basketClass?.SepeteEkle(basketItem);
+                            //todo:Ürün özellikleri veri tabanından sepete aktarılacak                            
+                            basketClass.SepeteEkle(basketItem);
                         }
                     }
-                    basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
-                    basketClass = new BasketClass();
+                    basketClass = (BasketClass) HttpContext.Current.Session["AktifSepet"];
+                    //basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
+                    //basketClass = new BasketClass();
                     basketClass.BasketId = basket.Id;
                     basketClass.BasketKey = basket.BasketKey;
                     basketClass.UserId = basket.UserId;
@@ -164,7 +167,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
         public void OrderProductControl(Basket basket, BasketClass basketClass)
         {
             int id = _loginState.IsLoginUser().Id;
-           
+
             foreach (var item in basketClass.Products)
             {
                 OrderProduct orderProduct = new OrderProduct();
@@ -178,24 +181,40 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 orderProduct.Amount = (double)item.Total;
                 db.OrderProducts.Add(orderProduct);
                 db.SaveChanges();
-            }
-          
-            var basketItem = basketClass.BasketItems.Select(x => x.PropertyPropertyValueses);
-            foreach (var item in basketItem)
-            {
-                if (item.Count > 0)
+                if (item.PropertyPropertyValueses != null)
                 {
-                    OrderProductProperty productProperty = new OrderProductProperty();
-                    foreach (var propertyValuese in item)
+                    foreach (var propertyValuese in item.PropertyPropertyValueses)
                     {
+                        OrderProductProperty productProperty = new OrderProductProperty();
                         productProperty.OrderProductId = orderProduct.Id;
-                        productProperty.ProductPropertyId = propertyValuese.Id;
+                        productProperty.PropertyPropertyValuesId = propertyValuese.Id;
+                        productProperty.CreateDateTime = DateTime.Now;
+                        productProperty.CreateUserId = _loginState.IsLoginUser().Id;
+                        db.OrderProductProperties.Add(productProperty);
+                        db.SaveChanges();
                     }
-                    db.SaveChanges();
-                    //productProperty.OrderProductId=item.
                 }
+
+
+
             }
-   
+
+            //var basketItem = basketClass.BasketItems.Select(x => x.PropertyPropertyValueses);
+            //foreach (var item in basketItem)
+            //{
+            //    if (item.Count > 0)
+            //    {
+            //        OrderProductProperty productProperty = new OrderProductProperty();
+            //        foreach (var propertyValuese in item)
+            //        {
+            //            //productProperty.OrderProductId = orderProduct.Id;
+            //            //productProperty.ProductPropertyId = propertyValuese.Id;
+            //        }
+            //        db.SaveChanges();
+            //        //productProperty.OrderProductId=item.
+            //    }
+            //}
+
 
         }
     }

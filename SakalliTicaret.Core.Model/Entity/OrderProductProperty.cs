@@ -10,7 +10,7 @@ namespace SakalliTicaret.Core.Model.Entity
     {
         public int OrderProductId { get; set; }
         public OrderProduct OrderProduct { get; set; }
-        public int ProductPropertyId { get; set; }
-        public ProductProperty ProductProperty { get; set; }
+        public int PropertyPropertyValuesId { get; set; }
+        public PropertyPropertyValues PropertyPropertyValues { get; set; }
     }
 }

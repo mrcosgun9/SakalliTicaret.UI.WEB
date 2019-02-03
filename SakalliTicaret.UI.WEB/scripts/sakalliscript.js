@@ -20,7 +20,7 @@ $("#basketListOpen").hover(function () {
     //$(".basketdiv").animate({
     //    width: "toggle"
     //});
-    $(".basketdiv").stop(true, true).fadeToggle("slow", "linear");
+    //$(".basketdiv").stop(true, true).fadeToggle("slow", "linear");
 });
 $(function () {
     $(":input[data-autocomplete]").each(function () {

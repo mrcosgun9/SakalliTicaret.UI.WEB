@@ -11,6 +11,8 @@ using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
 using SakalliTicaret.UI.WEB.Controllers.Base;
 using SakalliTicaret.UI.WEB.Models;
+using SakalliTicaret.Helper;
+using SakalliTicaret.Helper.MailOperations;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -21,6 +23,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         private SakalliTicaretDb db = new SakalliTicaretDb();
         LogClass _logClass = new LogClass();
         Functions _functions = new Functions();
+
         // GET: Users
         public ActionResult Index()
         {
@@ -61,14 +64,27 @@ namespace SakalliTicaret.UI.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.CreateDateTime = DateTime.Now;
-                user.CreateUserId = 0;
-                user.IsActive = true;
-                db.Users.Add(user);
-                db.SaveChanges();
-                _logClass.UserLog(user, "Ekleme", LoginUserId);
-                return Redirect("/Kullanici/KayitBasarili");
-
+                User dbuser = db.Users.FirstOrDefault(x => x.Email == user.Email);
+                if (dbuser==null)
+                {
+                    EncodeDecode encodeDecode = new EncodeDecode();
+                    SendMail sendMail = new SendMail();
+                    user.CreateDateTime = DateTime.Now;
+                    user.IsActive = true;
+                    user.UserKey = encodeDecode.EnCode(user.Email);
+                    user.IsMailSuccess = false;
+                    string verifyUrl = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) +
+                                       "/MailOnayla?Id=" + user.UserKey;
+                    sendMail.MailSender("Sakalli Ticaret | Üyelik Aktivasyonu", "Üyelik Aktivasyonu İçin Aşağıdaki Linke Tıklayınız<br><br><br><a href='" + verifyUrl + "'>Aktivasyın Linki</a>", user.Email);
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return Redirect("/Kullanici/KayitBasarili");
+                }
+                else
+                {
+                    ViewBag.ResultType = "danger";
+                    ViewBag.ResultMessage = "Mail Adresi Zaten Sistemde Kayıtlı.";
+                }
             }
 
             return View(user);
@@ -219,9 +235,35 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             catch (Exception e)
             {
-                 return View();
+                return View();
             }
-           
+
+        }
+        [Route("MailOnayla")]
+        public ActionResult MailConfirmation(string Id)
+        {
+            User user = db.Users.FirstOrDefault(x => x.UserKey == Id);
+            if (user!=null)
+            {
+                user.IsMailSuccess = true;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MailSuccess");
+            }
+            else
+            {
+                return RedirectToAction("MailUnsuccess");
+            }
+        }
+        [Route("MailOnaylaBasarili")]
+        public ActionResult MailSuccess()
+        {
+            return View();
+        }
+        [Route("MailOnaylaBasarisiz")]
+        public ActionResult MailUnsuccess()
+        {
+            return View();
         }
         protected override void Dispose(bool disposing)
         {

@@ -28,18 +28,15 @@ namespace SakalliTicaret.Core.Model
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<SocialMedia> SocialMediae { get; set; }
         public DbSet<Page> Pages { get; set; }
-        public DbSet<LogUsers> LogUsers { get; set; }
-        public DbSet<LogBasket> LogBaskets { get; set; }
-        public DbSet<LogCategory> LogCategories { get; set; }
-        public DbSet<LogProduct> LogProducts { get; set; }
         public DbSet<Messages> Messageses { get; set; }
         public DbSet<PosEntegration> PosEntegrations { get; set; }
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<CategoryPropertyValue> CategoryPropertyValues { get; set; }
         public DbSet<PropertyPropertyValues> PropertyPropertyValueses { get; set; }
-        public DbSet<ProductProperty> ProductProperties{ get; set; }
+        public DbSet<ProductProperty> ProductProperties { get; set; }
         public DbSet<ProductImages> ProductImageses { get; set; }
         public DbSet<OrderProductProperty> OrderProductProperties { get; set; }
+        public DbSet<MailSetting> MailSettings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

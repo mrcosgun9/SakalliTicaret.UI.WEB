@@ -36,6 +36,8 @@ namespace SakalliTicaret.Core.Model.Entity
         public bool IsActive { get; set; }
         [Display(Name = "Yönetici")]
         public bool IsAdmin { get; set; }
+        public string UserKey { get; set; }
+        public bool IsMailSuccess { get; set; } = false;
         public virtual IEnumerable<UserAddress> UserAddress { get; set; }
     }
 }

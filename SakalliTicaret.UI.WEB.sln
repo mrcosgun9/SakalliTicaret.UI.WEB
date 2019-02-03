@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakalliTicaret.UI.WEB", "Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakalliTicaret.Core.Model", "SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj", "{603134E1-01DB-460B-94EB-C9620DED5079}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakalliTicaret.Helper", "SakalliTicaret.Helper\SakalliTicaret.Helper.csproj", "{A7BC6793-8711-468E-B7AC-593CBD2B31E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{603134E1-01DB-460B-94EB-C9620DED5079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{603134E1-01DB-460B-94EB-C9620DED5079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{603134E1-01DB-460B-94EB-C9620DED5079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7BC6793-8711-468E-B7AC-593CBD2B31E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7BC6793-8711-468E-B7AC-593CBD2B31E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7BC6793-8711-468E-B7AC-593CBD2B31E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7BC6793-8711-468E-B7AC-593CBD2B31E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

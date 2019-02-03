@@ -26,7 +26,7 @@
                  {
                      <li>
                          @*@Html.RadioButtonFor(m => m.SelectedAnswer, "Answer1")*@
-                         @Html.RadioButton("ID", item.ID, new {@id = item.ID})
+                         @Html.RadioButton("ID", item.Id, new {@id = item.Id})
                          <div class="addresslistitem">
                              <b>@item.Title</b> - @item.User.Name @item.User.LastName
                          </div>

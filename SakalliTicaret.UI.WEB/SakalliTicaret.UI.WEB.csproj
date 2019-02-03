@@ -1275,6 +1275,7 @@
     <Content Include="Areas\Panel\Views\Products\CategoryPropertyGet.cshtml" />
     <Content Include="Areas\Panel\Views\Products\MultipleImageUpload.cshtml" />
     <Content Include="Areas\Panel\Views\BasketAndOrders\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\Settings\MailSettings.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1345,22 +1346,19 @@
     <Compile Include="Areas\Panel\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Panel\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Panel\Controllers\LoginController.cs" />
-    <Compile Include="Areas\Panel\Controllers\LogUsersController.cs" />
     <Compile Include="Areas\Panel\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Panel\Controllers\PagesController.cs" />
     <Compile Include="Areas\Panel\Controllers\PartialController.cs" />
     <Compile Include="Areas\Panel\Controllers\PortalController.cs" />
     <Compile Include="Areas\Panel\Controllers\PosEntegrationsController.cs" />
     <Compile Include="Areas\Panel\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Panel\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Panel\Controllers\SocialMediasController.cs" />
     <Compile Include="Areas\Panel\Controllers\UsersController.cs" />
     <Compile Include="Areas\Panel\Functions.cs" />
     <Compile Include="App_Class\LoginState.cs" />
     <Compile Include="Areas\Panel\Models\ProductPropertiesModel.cs" />
     <Compile Include="Areas\Panel\PanelAreaRegistration.cs" />
-    <Compile Include="Areas\Panel\Controllers\LogBasketsController.cs" />
-    <Compile Include="Areas\Panel\Controllers\LogCategoriesController.cs" />
-    <Compile Include="Areas\Panel\Controllers\LogProductsController.cs" />
     <Compile Include="Controllers\Base\BaseControler.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -1568,6 +1566,8 @@
     <Content Include="Views\Products1\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPageBlank.cshtml" />
     <Content Include="Views\Users\NotUserBasketSuccess.cshtml" />
+    <Content Include="Views\Users\MailSuccess.cshtml" />
+    <Content Include="Views\Users\MailUnsuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1584,6 +1584,10 @@
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">
       <Project>{603134e1-01db-460b-94eb-c9620ded5079}</Project>
       <Name>SakalliTicaret.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SakalliTicaret.Helper\SakalliTicaret.Helper.csproj">
+      <Project>{a7bc6793-8711-468e-b7ac-593cbd2b31e1}</Project>
+      <Name>SakalliTicaret.Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
