@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
+using WebGrease.Css.ImageAssemblyAnalysis.LogModel;
 
 namespace SakalliTicaret.UI.WEB.App_Class
 {
@@ -134,7 +135,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
 
                 if (basket != null)
                 {
-                  
+
                     List<OrderProduct> dbOrderProduct = db.OrderProducts
                         .Where(x => x.BasketId == basket.Id).ToList();
                     if (dbOrderProduct.Count != 0)
@@ -147,11 +148,18 @@ namespace SakalliTicaret.UI.WEB.App_Class
                             basketItem.Product = product;
                             basketItem.Quantity = item.Quantity;
                             basketItem.Tax = 0;
+                            //var productPropertyList = db.prod.Include(x=>x.PropertyPropertyValues).Where(x => x.OrderProductId == item.Id).ToList();
+                            //basketItem.PropertyPropertyValueses = productPropertyList;
+                            //foreach (var productProperty in productPropertyList)
+                            //{
+                            //    basketItem.PropertyPropertyValueses.Add(productProperty.PropertyPropertyValues);
+
+                            //}
                             //todo:Ürün özellikleri veri tabanından sepete aktarılacak                            
                             basketClass.SepeteEkle(basketItem);
                         }
                     }
-                    basketClass = (BasketClass) HttpContext.Current.Session["AktifSepet"];
+                    basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                     //basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                     //basketClass = new BasketClass();
                     basketClass.BasketId = basket.Id;

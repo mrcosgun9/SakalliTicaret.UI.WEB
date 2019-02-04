@@ -18,5 +18,10 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             var basket = db.Baskets.Include(x => x.User).Include(x => x.Status).OrderByDescending(x => x.Id).ToList();
             return View(basket);
         }
+        public ActionResult Detail(int id)
+        {
+            var basket = db.Baskets.Include(x => x.User).Include(x => x.Status).OrderByDescending(x => x.Id).ToList();
+            return View(basket);
+        }
     }
 }
