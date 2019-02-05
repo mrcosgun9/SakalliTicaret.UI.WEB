@@ -15,13 +15,13 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ParentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ParentCategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-12">
-                        @Html.DropDownList("ParentId", new SelectList(ViewBag.UstKategoriList, "ID", "Name"), "Üst Kategori Seçiniz", new { @class = "form-control", @id = "ustKategori" })
+                        @Html.DropDownList("ParentCategoryId", new SelectList(ViewBag.UstKategoriList, "ID", "Name"), "Üst Kategori Seçiniz", new { @class = "form-control", @id = "ustKategori" })
                     
 
                         <small class="form-text text-muted">Ana Kategori Eklemek İsterseniz Üst Kategori Seçmeyiniz.</small>
-                        @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.ParentCategoryId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

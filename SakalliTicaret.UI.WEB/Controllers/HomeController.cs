@@ -47,7 +47,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             else if (filterModel.Category != null)
             {
-                filterModel.Products = db.Products.Include(x=>x.Category).Where(x => x.CategoryId == filterModel.Category||x.Category.ParentId==filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
+                filterModel.Products = db.Products.Include(x=>x.Category).Where(x => x.CategoryId == filterModel.Category||x.Category.ParentCategoryId == filterModel.Category).OrderBy(x => x.Name).ToPagedList(page, pageCount);
             }
             else
             {

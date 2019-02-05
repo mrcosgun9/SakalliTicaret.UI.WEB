@@ -1276,6 +1276,7 @@
     <Content Include="Areas\Panel\Views\Products\MultipleImageUpload.cshtml" />
     <Content Include="Areas\Panel\Views\BasketAndOrders\Index.cshtml" />
     <Content Include="Areas\Panel\Views\Settings\MailSettings.cshtml" />
+    <Content Include="Areas\Panel\Views\BasketAndOrders\Detail.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />

@@ -2,7 +2,7 @@
 @model IEnumerable<SakalliTicaret.Core.Model.Entity.Category>
 
 
-@foreach (var item in Model.Where(u => u.ParentId == 0 || u.ParentId == null))
+@foreach (var item in Model.Where(u => u.ParentCategoryId == 0 || u.ParentCategoryId == null))
 {
     <li id="@item.Id">
         <a href="/Anasayfa/Kategori/@item.Id/@item.Name.ToLower().Trim()">
@@ -13,15 +13,14 @@
             </strong>
         </a>
         @{
-            var subModel = Model.Where(u => u.ParentId == item.Id).ToList();
+            var subModel = Model.Where(u => u.ParentCategoryId == item.Id).ToList();
         }
         @if (subModel.Count != 0)
         {
             <ul class="xt-dropdown">
-                @foreach (var subItem in Model.Where(u => u.ParentId == item.Id))
+                @foreach (var subItem in Model.Where(u => u.ParentCategoryId == item.Id))
                 {
                     <li>
-
                         <a href="/Anasayfa/Kategori/@subItem.Id/@subItem.Name.ToLower().Trim()"><i class="fa fa-angle-right"></i>@subItem.Name</a>
                     </li>
                 }

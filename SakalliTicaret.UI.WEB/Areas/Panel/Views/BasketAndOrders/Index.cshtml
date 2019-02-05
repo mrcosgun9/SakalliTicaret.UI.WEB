@@ -55,7 +55,7 @@
                         @*<a target="_blank" href="~/Urun/@item.Id/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()" title="Ürünü Göster"><i class="fa fa-arrow-right"></i></a> |
                         <a href="/Panel/Products/MultipleImageUpload/@item.Id" title="Toplu Resim Girişi"><i class="fa fa-file-image-o"></i></a> |
                         <a href="/Panel/Products/Edit/@item.Id" title="Düzenle"><i class="fa fa-refresh"></i></a> |*@
-                        <a href="/Panel/Products/Details/@item.Id" title="Detay"><i class="fa fa-eye"></i></a> |
+                        <a href="/Panel/BasketAndOrders/Detail?id=@item.Id" title="Detay"><i class="fa fa-eye"></i></a>
                         @*<a href="/Panel/Products/Delete/@item.Id" title="Sil"><i class="fa fa-trash"></i></a>*@
                     </td>
                 </tr>

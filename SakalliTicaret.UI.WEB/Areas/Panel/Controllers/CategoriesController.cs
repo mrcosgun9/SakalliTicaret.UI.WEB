@@ -44,7 +44,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             string html = "";
             List<Category> subCategories = new List<Category>();
-            subCategories = db.Categories.Where(x => x.ParentId == parantId).ToList();
+            subCategories = db.Categories.Where(x => x.ParentCategoryId == parantId).ToList();
             //DataRow[] altKategoriler = dt.Select("UstKategoriId=" + ustKategoriId);
             if (subCategories.Count == 0) return html;
             html += "<ul>";
@@ -71,7 +71,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Category category)
+        public ActionResult Create(Category category)
         {
 
             var User = Session["AdminLoginUser"] as User;
@@ -109,7 +109,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ParentId,Name,IsActive,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] Category category)
+        public ActionResult Edit(Category category)
         {
             var User = Session["AdminLoginUser"] as User;
             category.UpdateDateTime = DateTime.Now;
