@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
+using SakalliTicaret.UI.WEB.Areas.Panel.Models;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
@@ -20,8 +21,13 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         }
         public ActionResult Detail(int id)
         {
-            var basket = db.OrderProducts.Include(x => x.User).Include(x=>x.Product).OrderByDescending(x => x.Id).ToList();
-            return View(basket);
+            BasketDetailModel basketDetailModel =new BasketDetailModel();
+
+            basketDetailModel.OrderProducts= db.OrderProducts.Include(x => x.User).Include(x => x.Product).OrderByDescending(x => x.Id).ToList();
+
+            basketDetailModel.Basket = db.Baskets.FirstOrDefault(x => x.Id == id);
+
+            return View(basketDetailModel);
         }
     }
 }

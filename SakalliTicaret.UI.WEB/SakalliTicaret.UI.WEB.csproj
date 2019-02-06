@@ -1358,6 +1358,7 @@
     <Compile Include="Areas\Panel\Controllers\UsersController.cs" />
     <Compile Include="Areas\Panel\Functions.cs" />
     <Compile Include="App_Class\LoginState.cs" />
+    <Compile Include="Areas\Panel\Models\BasketDetailModel.cs" />
     <Compile Include="Areas\Panel\Models\ProductPropertiesModel.cs" />
     <Compile Include="Areas\Panel\PanelAreaRegistration.cs" />
     <Compile Include="Controllers\Base\BaseControler.cs" />

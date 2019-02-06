@@ -95,6 +95,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 s.AddressId = ID;
                 Session["AktifSepet"] = s;
+                Basket basket = db.Baskets.FirstOrDefault(x => x.Id == s.BasketId);
+                if (basket!=null)
+                {
+                    db.Entry(basket).State = EntityState.Modified;
+                }
                 return Redirect("/Sepet/Tamamla/Ödeme");
             }
             return View();
