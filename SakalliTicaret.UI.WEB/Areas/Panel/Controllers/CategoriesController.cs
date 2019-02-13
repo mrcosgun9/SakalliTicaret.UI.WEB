@@ -17,13 +17,57 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
         LogClass _logClass = new LogClass();
+        string cat_list = "";
         // GET: Panel/Categories
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(p => p.ParentCategory).Include(x => x.CreateUser);
-            return View(categories.ToList());
-        }
+            //var categories = db.Categories.Include(p => p.ParentCategory).Include(x => x.CreateUser).Where(x=>x.IsActive==false).OrderBy(x => x.Id);
 
+            //foreach (var item in categories)
+            //{
+            //    Categories(item.ParentCategoryId);
+            //}
+            Categories(0);
+            ViewBag.KategoriList = cat_list;
+
+            return View();
+
+
+
+        }
+        void Categories(int topCatID)
+        {
+            List<Category> altKategoriler = new List<Category>();
+
+            int? parentId = 0;
+            if (topCatID==0)
+            {
+                parentId = null;
+            }
+            else
+            {
+                parentId = topCatID;
+            }
+            altKategoriler = db.Categories.Where(w => w.ParentCategoryId == parentId).ToList();
+
+
+            if (altKategoriler.Count == 0)
+                return;
+
+            cat_list += "<ol class='dd-list'>";
+            foreach (var item in altKategoriler)
+            {
+
+                cat_list += "<li class='dd-itemdd3-item' data-id='"+item.Id+"'>" +
+                    "<div class='dd3-content'>"+item.Name+"" +
+                    "<div style='float:right;'><a href='/Panel/Categories/Edit/"+item.Id+ "'><i class='fa fa-refresh'></i></a> | " +
+                    "<a href='/Panel/Categories/Delete/" + item.Id + "'><i class='fa fa-trash'></i></a> | " +
+                    "<a href='/Panel/Categories/Details/" + item.Id + "'><i class='fa fa-eye'></i></a></div></div>";
+                Categories((int)item.Id);
+                cat_list += "</li>";
+            }
+            cat_list += "</ol>";
+        }
         // GET: Panel/Categories/Details/5
         public ActionResult Details(int? id)
         {

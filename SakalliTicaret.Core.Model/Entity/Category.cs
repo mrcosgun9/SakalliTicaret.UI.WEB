@@ -7,7 +7,7 @@ namespace SakalliTicaret.Core.Model.Entity
     public class Category : EntityBase
     {
 
-
+        [Display(Name = "Üst Kategori")]
         public int? ParentCategoryId { get; set; }
         [Display(Name = "Üst Kategori")]
         public Category ParentCategory { get; set; }
