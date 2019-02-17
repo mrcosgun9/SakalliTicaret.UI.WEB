@@ -62,3 +62,14 @@
         </div>
     </div>
 </div>
+@section scripts
+{
+    <script>
+        $(function() {
+            $(".adreslist li:first input").attr('checked', 'checked');
+        });
+        $(".adreslist li").click(function() {
+            $(this).children("input").attr('checked', 'checked');
+        });
+    </script>
+}

@@ -115,6 +115,10 @@ namespace SakalliTicaret.UI.WEB.App_Class
                             basketItem.Tax = 0;
                             basketClass.SepeteEkle(basketItem);
                             db.OrderProducts.Remove(item);
+                            OrderProductProperty orderProductProperty =new OrderProductProperty();
+                            orderProductProperty =
+                                db.OrderProductProperties.FirstOrDefault(x => x.OrderProductId == item.Id);
+                            db.OrderProductProperties.Remove(orderProductProperty);
                             db.SaveChanges();
                         }
                     }
@@ -162,6 +166,10 @@ namespace SakalliTicaret.UI.WEB.App_Class
                     basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                     //basketClass = (BasketClass)HttpContext.Current.Session["AktifSepet"];
                     //basketClass = new BasketClass();
+                    if (basketClass==null)
+                    {
+                        basketClass = new BasketClass();
+                    }
                     basketClass.BasketId = basket.Id;
                     basketClass.BasketKey = basket.BasketKey;
                     basketClass.UserId = basket.UserId;

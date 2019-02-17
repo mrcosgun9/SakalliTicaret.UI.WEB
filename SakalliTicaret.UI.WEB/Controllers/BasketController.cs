@@ -443,6 +443,13 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
                 OrderProduct detays = db.OrderProducts.FirstOrDefault(x => x.ProductId == id && x.BasketId == s.BasketId && x.InTheBasket);
                 db.OrderProducts.Remove(detays);
+                OrderProductProperty productProperty =
+                    db.OrderProductProperties.FirstOrDefault(x => x.OrderProductId == detays.Id);
+                if (productProperty!=null)
+                {
+                    db.OrderProductProperties.Remove(productProperty);
+
+                }
                 db.SaveChanges();
                 s = (BasketClass)Session["AktifSepet"];
                 basket.Amount = s.TotalAmount;

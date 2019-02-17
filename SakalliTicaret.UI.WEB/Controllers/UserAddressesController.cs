@@ -65,7 +65,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 userAddress.CreateUserId = 0;
                 db.UserAddresses.Add(userAddress);
                 db.SaveChanges();
-                return Redirect("/Sepetim");
+                return Redirect("/Sepet/Tamamla/Adres");
             }
 
             ViewBag.UserId = new SelectList(db.Users, "ID", "Name", userAddress.UserId);
