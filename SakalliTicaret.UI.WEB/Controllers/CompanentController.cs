@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
+using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.Controllers.Base;
 using SakalliTicaret.UI.WEB.Models;
 
@@ -15,7 +17,20 @@ namespace SakalliTicaret.UI.WEB.Controllers
         // GET: Companent
         public ActionResult SliderMenu()
         {
-            var Category = db.Categories.OrderBy(x => x.Name).ToList();
+            List<Category> Category;
+            var categoryId = RouteData.Values["Category"];
+            if (categoryId != null)
+            {
+                int cId = Convert.ToInt16(categoryId);
+                Category = db.Categories.Where(x => x.ParentCategoryId == cId).OrderBy(x => x.Name).ToList();
+                Category parentCategory = db.Categories.Find(cId);
+                ViewBag.ParentCategory = parentCategory;
+
+            }
+            else
+            {
+                Category = db.Categories.Where(x=>x.ParentCategoryId==null).OrderBy(x => x.Name).ToList();
+            }
             return View(Category);
         }
 

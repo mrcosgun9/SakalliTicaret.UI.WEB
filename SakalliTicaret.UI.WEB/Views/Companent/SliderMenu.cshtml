@@ -1,8 +1,36 @@
 ﻿
+@using System.Text.RegularExpressions
+@using SakalliTicaret.Core.Model.Entity
 @model IEnumerable<SakalliTicaret.Core.Model.Entity.Category>
 
+@if (@ViewBag.ParentCategory != null)
+{
+    Category parentCategory = ViewBag.ParentCategory;
 
-@foreach (var item in Model.Where(u => u.ParentCategoryId == 0 || u.ParentCategoryId == null))
+    <li style="margin: 0 0 0 -10px;">
+        @{
+            string returnUrl = "";
+            if (parentCategory.ParentCategoryId == null || parentCategory.ParentCategoryId == 0)
+            {
+                returnUrl = "/Anasayfa";
+            }
+            else
+            {
+                returnUrl = "/Anasayfa/Kategori/" + parentCategory.ParentCategoryId + "/" + (Regex.Replace(parentCategory.Name, @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*", "").Trim().ToLower());
+            }
+        }
+
+        <a href="@returnUrl">
+            <i class="fa fa-arrow-left"></i>
+            <strong>
+                @parentCategory.Name
+            </strong>
+
+        </a>
+    </li>
+            }
+
+@foreach (var item in Model)
 {
     <li id="@item.Id">
         <a href="/Anasayfa/Kategori/@item.Id/@item.Name.ToLower().Trim()">
@@ -12,25 +40,25 @@
 
             </strong>
         </a>
-        @{
-            var subModel = Model.Where(u => u.ParentCategoryId == item.Id).ToList();
-        }
-        @if (subModel.Count != 0)
-        {
-            <ul class="xt-dropdown">
+        @*@{
+                var subModel = Model.Where(u => u.ParentCategoryId == item.Id).ToList();
+            }
+            @if (subModel.Count != 0)
+            {*@
+        @*<ul class="xt-dropdown">
                 @foreach (var subItem in Model.Where(u => u.ParentCategoryId == item.Id))
                 {
                     <li>
                         <a href="/Anasayfa/Kategori/@subItem.Id/@subItem.Name.ToLower().Trim()"><i class="fa fa-angle-right"></i>@subItem.Name</a>
                     </li>
                 }
-            </ul>
-        }
+            </ul>*@
+        @*}*@
 
     </li>
 
 
-            }
+}
 
 @*@foreach (var item in Model)
     {

@@ -9,7 +9,7 @@ using SakalliTicaret.Core.Model.Entity;
 
 namespace SakalliTicaret.UI.WEB.Areas.Panel
 {
-    public class AdminControlerBase:Controller
+    public class AdminControlerBase : Controller
     {
         //public bool IsLogin { get; private set; }
         //public int AdminLoginUserId { get; private set; }
@@ -35,7 +35,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel
         public int AdminLoginUserId { get; private set; }
         public User AdminLoginUser { get; private set; }
 
-         public SakalliTicaretDb db = new SakalliTicaretDb();
+        public SakalliTicaretDb db = new SakalliTicaretDb();
         protected override void Initialize(RequestContext requestContext)
         {
             if (requestContext.HttpContext.Session["AdminLoginUserId"] != null)
@@ -50,8 +50,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel
 
                 requestContext.HttpContext.Response.Redirect("/Panel/Login");
             }
-            
+
         }
-       
-}
+
+    }
 }

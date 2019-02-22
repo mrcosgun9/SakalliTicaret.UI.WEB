@@ -40,7 +40,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             List<Category> altKategoriler = new List<Category>();
 
             int? parentId = 0;
-            if (topCatID==0)
+            if (topCatID == 0)
             {
                 parentId = null;
             }
@@ -48,7 +48,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 parentId = topCatID;
             }
-            altKategoriler = db.Categories.Where(w => w.ParentCategoryId == parentId).ToList();
+            altKategoriler = db.Categories.Where(w => w.ParentCategoryId == parentId).Include(x => x.Products).ToList();
 
 
             if (altKategoriler.Count == 0)
@@ -58,9 +58,11 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             foreach (var item in altKategoriler)
             {
 
-                cat_list += "<li class='dd-itemdd3-item' data-id='"+item.Id+"'>" +
-                    "<div class='dd3-content'>"+item.Name+"" +
-                    "<div style='float:right;'><a href='/Panel/Categories/Edit/"+item.Id+ "'><i class='fa fa-refresh'></i></a> | " +
+                cat_list += "<li class='dd-itemdd3-item' data-id='" + item.Id + "'>" +
+                    "<div class='dd3-content'>" + item.Name +
+                    "<div style='float:right;'>" +
+                            "<span class='label label-rouded label-primary'>"+item.Products.Count+"</span> | " +
+                            "<a href='/Panel/Categories/Edit/" + item.Id + "'><i class='fa fa-refresh'></i></a> | " +
                     "<a href='/Panel/Categories/Delete/" + item.Id + "'><i class='fa fa-trash'></i></a> | " +
                     "<a href='/Panel/Categories/Details/" + item.Id + "'><i class='fa fa-eye'></i></a></div></div>";
                 Categories((int)item.Id);
@@ -75,7 +77,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = db.Categories.Include(p => p.ParentCategory).Include(x => x.CreateUser).Include(x => x.Products).FirstOrDefault(x => x.Id == id);
             if (category == null)
             {
                 return HttpNotFound();

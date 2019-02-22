@@ -363,6 +363,8 @@
     <Content Include="Areas\Panel\ckeditor\skins\moono\images\close.png" />
     <Content Include="Areas\Panel\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Areas\Panel\ckeditor\styles.js" />
+    <Content Include="Areas\Panel\Content\Chosen\chosen-sprite.png" />
+    <Content Include="Areas\Panel\Content\Chosen\chosen.min.css" />
     <Content Include="Areas\Panel\Content\css\animate.css" />
     <Content Include="Areas\Panel\Content\css\helper.css" />
     <Content Include="Areas\Panel\Content\css\lib\amchart\export.css" />
@@ -802,6 +804,7 @@
     <Content Include="Areas\Panel\Content\images\users\profile.png" />
     <Content Include="Areas\Panel\Content\images\video-cam.png" />
     <Content Include="Areas\Panel\Content\images\watch.jpg" />
+    <Content Include="Areas\Panel\Content\js\chosen.jquery.min.js" />
     <Content Include="Areas\Panel\Content\js\custom.min.js" />
     <Content Include="Areas\Panel\Content\js\jquery.slimscroll.js" />
     <Content Include="Areas\Panel\Content\js\lib\barRating\barRating.init.js" />
