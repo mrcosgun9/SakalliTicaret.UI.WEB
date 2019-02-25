@@ -1573,6 +1573,7 @@
     <Content Include="Views\Users\NotUserBasketSuccess.cshtml" />
     <Content Include="Views\Users\MailSuccess.cshtml" />
     <Content Include="Views\Users\MailUnsuccess.cshtml" />
+    <Content Include="Views\Users\_Baskets.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -65,7 +65,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             if (ModelState.IsValid)
             {
                 User dbuser = db.Users.FirstOrDefault(x => x.Email == user.Email);
-                if (dbuser==null)
+                if (dbuser == null)
                 {
                     EncodeDecode encodeDecode = new EncodeDecode();
                     SendMail sendMail = new SendMail();
@@ -192,21 +192,26 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [ControlLogin]
         public ActionResult UserInfo(string Page)
         {
-
+            var loginUser = Session["LoginUser"];
+            User user = null;
+            if (loginUser != null)
+            {
+                user = loginUser as User;
+            }
+            else
+            {
+                return Redirect("/Anasayfa");
+            }
             switch (Page)
             {
                 case "Bilgiler":
-                    var loginUser = Session["LoginUser"];
-                    User user = null;
-                    if (loginUser != null)
-                    {
-                        user = loginUser as User;
-                    }
+
                     return View("_ProfileInfo", user);
-                    break;
                 case "Adresler":
                     return View("_AddressList");
-                    break;
+                case "Siparislerim":
+                    var basket = db.Baskets.Include(x => x.Status).Where(x => x.UserId == user.Id).OrderByDescending(x => x.Id).ToList();
+                    return View("_Baskets", basket);
                 default:
                     break;
             }
@@ -243,7 +248,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult MailConfirmation(string Id)
         {
             User user = db.Users.FirstOrDefault(x => x.UserKey == Id);
-            if (user!=null)
+            if (user != null)
             {
                 user.IsMailSuccess = true;
                 db.Entry(user).State = EntityState.Modified;

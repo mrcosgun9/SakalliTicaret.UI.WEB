@@ -13,7 +13,16 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Settings
         public ActionResult MailSettings()
         {
-            var mailSettings = db.MailSettings.First();
+            MailSetting mailSettings=new MailSetting();
+            try
+            {
+                mailSettings = db.MailSettings.First();
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+       
             return View(mailSettings);
 
         }
