@@ -23,6 +23,6 @@ namespace SakalliTicaret.Core.Model.Entity
         public int? UserAddressId { get; set; }
         public UserAddress UserAddress { get; set; }
 
-        public virtual IEnumerable<OrderProduct> OrderProducts { get; set; }
+        public virtual List<OrderProduct> OrderProducts { get; set; }
     }
 }

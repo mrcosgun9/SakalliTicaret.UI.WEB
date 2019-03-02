@@ -15,28 +15,84 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Sipariş No</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Alıcı</th>
+            <th scope="col">Sipariş Özeti</th>
+            <th scope="col">Toplam</th>
+            <th scope="col">Detay</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>asd</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>qwet</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>twitter</td>
-        </tr>
+        @{
+            int i = 0;
+        }
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <th scope="row">@i</th>
+                <td>@item.BasketKey</td>
+                <td>@item.User.Name @item.User.LastName</td>
+                <td>@item.OrderProducts.Count()</td>
+                <td>@item.Amount</td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary" style="line-height: 10px; padding: 5px 13px;" data-toggle="modal" id="basketDetail" data-id="@item.Id" data-target="#exampleModalCenter">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+
     </tbody>
 </table>
+
+@*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<script>
+    $("#basketDetail").click(function () {
+        alert("Handler for .click() called.");
+    });
+    //$('#basketDetail').on('hidden.bs.modal',
+    //    function(e) {
+    //        console.log("test");
+    //    });
+    $("#basketDetail").click(function () {
+        alert("test");
+    });
+    //$('#basketDetail').on('click', function (evt) {
+    //    alert("test");
+    //});
+
+    //$.ajax({
+    //    type: 'GET',
+    //    url: "Users/BasketDetail",
+    //    data: { 'id': $("#ddlTransType").val().trim() },
+    //    dataType: 'json',
+    //    success: function (result) {
+    //        var list = result.list;
+    //        $.each(list, function (index, value) {
+    //            alert(value);
+    //        });
+    //    },
+    //    error: function (e) {
+    //        alert("Error:Unable to load data from server");
+    //    }
+    //});
+</script>

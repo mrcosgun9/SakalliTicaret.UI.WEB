@@ -13,6 +13,7 @@ using SakalliTicaret.UI.WEB.Controllers.Base;
 using SakalliTicaret.UI.WEB.Models;
 using SakalliTicaret.Helper;
 using SakalliTicaret.Helper.MailOperations;
+using SakalliTicaret.UI.WEB.Areas.Panel.Models;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -210,7 +211,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 case "Adresler":
                     return View("_AddressList");
                 case "Siparislerim":
-                    var basket = db.Baskets.Include(x => x.Status).Where(x => x.UserId == user.Id).OrderByDescending(x => x.Id).ToList();
+                    var basket = db.Baskets.Include(x=>x.User).Include(x=>x.OrderProducts).Include(x => x.Status).Where(x => x.UserId == user.Id).OrderByDescending(x => x.Id).ToList();
                     return View("_Baskets", basket);
                 default:
                     break;
@@ -227,6 +228,18 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 return Redirect("/Sepetim");
             }
             return View(model);
+        }
+        public ActionResult BasketDetail(int id)
+        {
+            BasketDetailModel basketDetailModel = new BasketDetailModel();
+
+            basketDetailModel.OrderProducts = db.OrderProducts.Include(x => x.User).Include(x => x.Product).OrderByDescending(x => x.Id).ToList();
+
+            basketDetailModel.Basket = db.Baskets.FirstOrDefault(x => x.Id == id);
+            return Json(new
+            {
+                list = basketDetailModel.OrderProducts
+            }, JsonRequestBehavior.AllowGet);
         }
         [Route("UyeOlmadanOnayla")]
         [HttpPost]
