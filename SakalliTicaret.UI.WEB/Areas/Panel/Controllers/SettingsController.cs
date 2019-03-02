@@ -10,6 +10,40 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
     public class SettingsController : AdminControlerBase
     {
+        public ActionResult Settings()
+        {
+            return View();
+        }
+        public ActionResult GoogleSettings()
+        {
+            Settings settings = new Settings();
+            try
+            {
+                settings = db.Settings.First();
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+
+            return View(settings);
+        }
+        [HttpPost]
+        public ActionResult GoogleSettings(Settings setting)
+        {
+            if (setting.Id == 0)
+            {
+                setting.CreateDateTime = DateTime.Now;
+                db.Settings.Add(setting);
+            }
+            else
+            {
+                db.Entry(setting).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+            var dbSetting = db.Settings.First();
+            return View(dbSetting);
+        }
         // GET: Panel/Settings
         public ActionResult MailSettings()
         {

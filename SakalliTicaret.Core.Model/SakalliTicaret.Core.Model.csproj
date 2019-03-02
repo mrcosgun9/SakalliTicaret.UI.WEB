@@ -72,6 +72,7 @@
     <Compile Include="Entity\ProductImages.cs" />
     <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Entity\PropertyPropertyValues.cs" />
+    <Compile Include="Entity\Settings.cs" />
     <Compile Include="Entity\SocialMedia.cs" />
     <Compile Include="Entity\Status.cs" />
     <Compile Include="Entity\User.cs" />

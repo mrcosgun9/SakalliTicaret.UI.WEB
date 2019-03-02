@@ -1280,6 +1280,8 @@
     <Content Include="Areas\Panel\Views\BasketAndOrders\Index.cshtml" />
     <Content Include="Areas\Panel\Views\Settings\MailSettings.cshtml" />
     <Content Include="Areas\Panel\Views\BasketAndOrders\Detail.cshtml" />
+    <Content Include="Areas\Panel\Views\Settings\GoogleSettings.cshtml" />
+    <Content Include="Areas\Panel\Views\Settings\Settings.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
