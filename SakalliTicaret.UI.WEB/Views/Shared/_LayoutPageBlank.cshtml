@@ -240,14 +240,8 @@
             $("#shoppingcart").removeClass("shake");
         });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70132213-5"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+    @{Html.RenderAction("Script", "Companent");}
 
-        gtag('config', 'UA-70132213-5');
-    </script>
 
     @RenderSection("scripts", false)
 </body>

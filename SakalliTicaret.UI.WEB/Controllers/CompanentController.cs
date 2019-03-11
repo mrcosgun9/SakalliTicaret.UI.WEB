@@ -67,6 +67,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
             var model = db.Pages.Where(x => x.IsActive).ToList();
             return View(model);
         }
-
+        public ActionResult Script()
+        {
+            Settings settings = db.Settings.First();
+            return View(settings);
+        }
     }
 }

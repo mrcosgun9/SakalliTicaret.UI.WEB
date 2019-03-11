@@ -118,7 +118,11 @@ namespace SakalliTicaret.UI.WEB.App_Class
                             OrderProductProperty orderProductProperty =new OrderProductProperty();
                             orderProductProperty =
                                 db.OrderProductProperties.FirstOrDefault(x => x.OrderProductId == item.Id);
-                            db.OrderProductProperties.Remove(orderProductProperty);
+                            if (orderProductProperty!=null)
+                            {
+                                db.OrderProductProperties.Remove(orderProductProperty);
+
+                            }
                             db.SaveChanges();
                         }
                     }

@@ -29,6 +29,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             return View(settings);
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult GoogleSettings(Settings setting)
         {
             if (setting.Id == 0)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SakalliTicaret.Core.Model;
+using SakalliTicaret.Core.Model.Entity;
 
 namespace SakalliTicaret.UI.WEB.Controllers
 {
@@ -17,6 +18,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             return View(Category);
         }
 
+      
      
     }
 }

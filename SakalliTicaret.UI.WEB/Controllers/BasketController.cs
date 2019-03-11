@@ -220,13 +220,13 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            //string user_ip = GetIPAddress();
+            string user_ip = GetIPAddress();
 
-            string user_ip = "78.190.115.121";
-            //if (user_ip == "" || user_ip == null)
-            //{
-            //    user_ip = Request.ServerVariables["REMOTE_ADDR"];
-            //}
+            //string user_ip = "78.190.114.62";
+            if (user_ip == "" || user_ip == null)
+            {
+                user_ip = Request.ServerVariables["REMOTE_ADDR"];
+            }
             //
             // ÖRNEK $user_basket oluşturma - Ürün adedine göre object'leri çoğaltabilirsiniz
             //foreach (var item in s.Urunler)
@@ -438,25 +438,38 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult SepetItemSil(int id)
         {
             BasketClass s = (BasketClass)Session["AktifSepet"];
-            if (_loginState.IsLogin())
+            try
             {
-                Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
-                OrderProduct detays = db.OrderProducts.FirstOrDefault(x => x.ProductId == id && x.BasketId == s.BasketId && x.InTheBasket);
-                db.OrderProducts.Remove(detays);
-                OrderProductProperty productProperty =
-                    db.OrderProductProperties.FirstOrDefault(x => x.OrderProductId == detays.Id);
-                if (productProperty!=null)
+             
+                if (_loginState.IsLogin())
                 {
-                    db.OrderProductProperties.Remove(productProperty);
+                    Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                    OrderProduct detays = db.OrderProducts.FirstOrDefault(x => x.ProductId == id && x.BasketId == s.BasketId && x.InTheBasket);
+                    if (detays != null)
+                    {
+                        db.OrderProducts.Remove(detays);
+                        OrderProductProperty productProperty =
+                            db.OrderProductProperties.FirstOrDefault(x => x.OrderProductId == detays.Id);
+                        if (productProperty != null)
+                        {
+                            db.OrderProductProperties.Remove(productProperty);
 
+                        }
+                    }
+
+                    db.SaveChanges();
+                    s = (BasketClass)Session["AktifSepet"];
+                    basket.Amount = s.TotalAmount;
+                    db.Entry(basket).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
-                s = (BasketClass)Session["AktifSepet"];
-                basket.Amount = s.TotalAmount;
-                db.Entry(basket).State = EntityState.Modified;
-                db.SaveChanges();
+                s.BasketItemRemove(id);
+               
             }
-            s.BasketItemRemove(id);
+            catch (Exception e)
+            {
+                s.AllClear();
+            }
             return Redirect("/Sepetim");
         }
 
