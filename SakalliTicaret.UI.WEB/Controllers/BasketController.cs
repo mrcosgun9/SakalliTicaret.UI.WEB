@@ -100,11 +100,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 {
                     db.Entry(basket).State = EntityState.Modified;
                 }
-                return Redirect("/Sepet/Tamamla/Ödeme");
+                return Redirect("/Sepet/Tamamla/Odeme");
             }
             return View();
         }
-        [Route("Sepet/Tamamla/Ödeme")]
+        [Route("Sepet/Tamamla/Odeme")]
         public ActionResult BasketCompletePayment()
         {
             BasketClass s = (BasketClass)Session["AktifSepet"];
@@ -220,9 +220,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            string user_ip = GetIPAddress();
+            //string user_ip = GetIPAddress();
 
-            //string user_ip = "78.190.114.62";
+            string user_ip = "78.186.172.90";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
@@ -280,8 +280,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //
             // Türkçe için tr veya İngilizce için en gönderilebilir. Boş gönderilirse tr geçerli olur.
             string lang = "tr";
-
-
             // Gönderilecek veriler oluşturuluyor
             NameValueCollection data = new NameValueCollection();
             data["merchant_id"] = merchant_id;
@@ -314,6 +312,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             data["timeout_limit"] = timeout_limit;
             data["currency"] = currency;
             data["lang"] = lang;
+            string qToken = null;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             using (WebClient client = new WebClient())
             {
@@ -321,9 +320,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 byte[] result = client.UploadValues("https://www.paytr.com/odeme/api/get-token", "POST", data);
                 string ResultAuthTicket = Encoding.UTF8.GetString(result);
                 dynamic json = JValue.Parse(ResultAuthTicket);
-
+                qToken = json.token;
+                string durum = json.status;
                 if (json.status == "success")
                 {
+                    Session["qToken"] = qToken;
                     ViewBag.Src = "https://www.paytr.com/odeme/guvenli/" + json.token + "";
                 }
                 else
@@ -475,5 +476,34 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
 
         #endregion
+
+        [Route("Sepet/Tamamla/Odeme/Sonuc")]
+        public ActionResult BasketPaymentResult()
+        {
+            PosEntegration entegration = db.PosEntegrations.Find(2);
+            string merchant_id = entegration.StoreCode;
+            string merchant_key = entegration.UserName;
+            string merchant_salt = entegration.Password;
+            string merchant_oid = Request.Form["merchant_oid"];
+            string status = Request.Form["status"];
+            string total_amount = Request.Form["total_amount"];
+            string hash = Request.Form["hash"];
+            string installment_count = Request.Form["installment_count"];
+            string Birlestir = string.Concat(merchant_oid, merchant_salt, status, total_amount);
+            HMACSHA256 hmac = new HMACSHA256(Encoding.UTF8.GetBytes(merchant_key));
+            byte[] b = hmac.ComputeHash(Encoding.UTF8.GetBytes(Birlestir));
+            string token = null;
+            token = Convert.ToBase64String(b);
+            //if (hash != token)
+            //{
+            //    Response.Write("PAYTR notification failed: bad hash");
+            //    return;
+            //}
+            if (status == "success")
+            {
+                Response.Write("OK");
+            }
+            return View();
+        }
     }
 }

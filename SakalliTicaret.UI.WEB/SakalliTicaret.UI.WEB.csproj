@@ -1602,6 +1602,7 @@
     <Content Include="Views\Users\MailUnsuccess.cshtml" />
     <Content Include="Views\Users\_Baskets.cshtml" />
     <Content Include="Views\Companent\Script.cshtml" />
+    <Content Include="Views\Basket\BasketPaymentResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

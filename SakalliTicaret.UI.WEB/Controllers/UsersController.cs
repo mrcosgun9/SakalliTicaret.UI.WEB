@@ -249,7 +249,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             Session["NotUser"] = basketModel;
             try
             {
-                return Redirect("Sepet/Tamamla/Ödeme");
+                return Redirect("Sepet/Tamamla/Odeme");
             }
             catch (Exception e)
             {
