@@ -141,17 +141,21 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 db.ProductProperties.RemoveRange(db.ProductProperties.Where(x => x.ProductId == product.Id));
 
                 db.SaveChanges();
-                for (int i = 0; i < SelectedProperty.Length; i++)
+                if (SelectedProperty!=null)
                 {
-                    ProductProperty productProperty = new ProductProperty();
-                    productProperty.ProductId = product.Id;
-                    productProperty.CreateDateTime = DateTime.Now;
-                    productProperty.CreateUserId = User.Id;
-                    int propId = SelectedProperty[i];
-                    productProperty.PropertyPropertyValuesId = db.PropertyPropertyValueses.FirstOrDefault(x => x.CategoryPropertyValueId == propId).Id;
-                    db.ProductProperties.Add(productProperty);
+                    for (int i = 0; i < SelectedProperty.Length; i++)
+                    {
+                        ProductProperty productProperty = new ProductProperty();
+                        productProperty.ProductId = product.Id;
+                        productProperty.CreateDateTime = DateTime.Now;
+                        productProperty.CreateUserId = User.Id;
+                        int propId = SelectedProperty[i];
+                        productProperty.PropertyPropertyValuesId = db.PropertyPropertyValueses.FirstOrDefault(x => x.CategoryPropertyValueId == propId).Id;
+                        db.ProductProperties.Add(productProperty);
+                    }
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
+             
                 //_logClass.ProductLog(product, "Düzenleme");
                 return RedirectToAction("Index");
             }
