@@ -1492,7 +1492,7 @@ ul {
 
     .mean-container .mean-bar::before {
         color: #000;
-        content: "All Category";
+        content: "Kategoriler";
         font-size: 25px;
         font-weight: 600;
         left: 20px;

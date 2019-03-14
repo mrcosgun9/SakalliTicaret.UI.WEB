@@ -6,8 +6,8 @@
 }
 @foreach (var item in Model.Products)
 {
-    <div class="col-md-3 productStyle">
-        <div class="card">
+    <div class="col-md-3 col-sm-6 col-xs-12 productStyle ml-2 margin-b-15">
+        <div class="card" style="border: 1px solid #ddd;border-radius: 3px;   padding-bottom :10px ;  ">
             <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())'>
                 <div class="cardimagediv">
                     @{
@@ -25,14 +25,14 @@
                     <img class="card-img-top" src="@item.ImageUrl"/>
 
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="padding: 0 0 0 10px; box-sizing: border-box;">
                     <h5 class="card-title" title="@item.Name">
                         @(item.Name.Length<42?item.Name:item.Name.Substring(0,42)+"...")
 
                     </h5>
                 </div>
             </a>
-            <small stle="float:left;">@item.Price TL</small><br />
+            <small style="margin: 0 0 0 10px; box-sizing: border-box;">@item.Price TL</small><br />
             @*<button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>İncele</button>*@
             <a href="~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())" class="incele" type="submit"><i class="fa fa-search"></i>İncele</a>
 

@@ -5026,7 +5026,7 @@ a.badge-secondary:hover, a.badge-secondary:focus {
 
 .badge-success {
   color: #fff;
-  background-color: #28a745;
+  background-color: #28a745 !important;
 }
 
 a.badge-success:hover, a.badge-success:focus {

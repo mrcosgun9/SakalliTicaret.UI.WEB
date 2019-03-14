@@ -435,25 +435,28 @@
     margin-bottom: 20px;
   }
   .xt-shop-category {
-    margin: 15px 0;
+    margin: 20px 0;
   }
   .xt-show-item {
     margin: 0 auto;
-    float: none;
+    /*float: none;*/
     overflow: hidden;
     margin-top: 20px;
     margin-bottom: 20px;
   }
   .xt-cart {
     position: relative;
-    display: none;
   }
   .xt-cart .xt-item-count {
     top: 0px;
-    right: 20px;
+      left: 27px;
   }
   .xt-header-search .btn-search {
-    padding: 7px;
+      padding: 2px 5px;
+  }
+  .selectize-input {
+      padding-top: 5px !important;
+      font-size: 10px !important;
   }
   .xt-header-search .form-control {
     text-align: left;

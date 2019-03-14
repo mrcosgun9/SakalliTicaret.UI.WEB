@@ -60,7 +60,16 @@
         <div class="col-md-7">
             <div class="each-product-info">
                 <h3>@Model.Product.Name</h3>
-                <span class="single-price"><b>Fiyat :</b> @Model.Product.Price ₺</span>
+                @if (Model.Product.Discount != 0)
+                {
+                    <span class="single-price"><b>Fiyat :</b><del>@Model.Product.Price ₺</del> yerine <b> @(Model.Product.Price - Model.Product.Discount) ₺</b></span><br/>
+                    <span class="badge badge-success">İndirim: Kazancınız @Model.Product.Discount</span>
+                }
+                else
+                {
+                    <span class="single-price"><b>Fiyat :</b>@Model.Product.Price ₺</span>
+
+                }
                 <p>@Model.Product.Description</p>
                 @*@if (Model.PropertyPropertyValueses != null)
                 {
