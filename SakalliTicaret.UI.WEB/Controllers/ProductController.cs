@@ -48,7 +48,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Urunler/YeniUrunler")]
         public ActionResult NewProductList()
         {
-            var model = db.Products.OrderBy(x => x.Id).ToList().Take(30);
+            var model = db.Products.OrderByDescending(x => x.Id).ToList().Take(30);
             return View(model);
         }
     }

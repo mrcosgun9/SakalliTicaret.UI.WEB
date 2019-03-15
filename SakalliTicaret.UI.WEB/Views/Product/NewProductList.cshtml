@@ -1,53 +1,57 @@
-﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.Product>
+﻿@using SakalliTicaret.UI.WEB.App_Class
+@model IEnumerable<SakalliTicaret.Core.Model.Entity.Product>
+@{
+    Functions viewFunctions = new Functions();
+}
 @{
     ViewBag.Title = "Sakalli Ticaret | Yeni Ürünler";
 
     Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
 }
-
-
-<div class="col-md-12">
-
-    @foreach (var item in Model)
+@if (Model != null)
+{
+    foreach (var item in Model)
     {
-        <div class="col-md-3 col-sm-3">
-            <div class="xt-feature">
-                <div class="product-img">
-                    <a href="~/Product/Detail?id=@item.Id">
-                        <img src="@item.ImageUrl" class="img-responsive"/>
+        <div class="col-md-3 col-sm-6 col-xs-12 productStyle ml-2 margin-b-15">
+            <div class="card" style="border: 1px solid #ddd;border-radius: 3px;   padding-bottom :10px ;  ">
+                <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())'>
+                    <div class="cardimagediv">
+                        @{
+                            decimal indirim = Math.Ceiling(item.Discount * 100 / item.Price);
+                        }
+                        @if (indirim > 0)
+                        {
+                            <span class="product-tag xt-uppercase">
 
-                    </a>
+                                %@indirim İNDİRİM
 
-                </div>
-                <div class="product-info">
-                    <div class="product-title">
-                        <span class="category xt-uppercase">@item.Name</span>
-                        <span class="name xt-semibold">@item.Model Model</span>
+                            </span>
+                        }
+                    
+                        <img class="card-img-top" src="@item.ImageUrl"/>
+
                     </div>
-                    <div class="price-tag pull-right">
-                        @*<span class="old-price"><del>$280</del></span>*@
-                        <span class="new-price xt-semibold">@item.Price ₺</span>
+                    <div class="card-body" style="padding: 0 0 0 10px; box-sizing: border-box;">
+                        <h5 class="card-title" title="@item.Name">
+                            @(item.Name.Length<42?item.Name:item.Name.Substring(0,42)+"...")
+
+                        </h5>
                     </div>
-                    <div class="xt-featured-caption">
-                        <div class="product-title">
-                            <span class="category xt-uppercase">@item.Name</span>
-                            <span class="name xt-semibold">@item.Model Model</span>
-                        </div>
-                        <div class="price-tag pull-right">
-                            @*<span class="old-price"><del>$280</del></span>*@
-                            <span class="new-price xt-semibold">@item.Price ₺</span>
-                        </div>
-                        <div class="add-cart">
-                            <a href="" class="btn btn-fill">Sepete Ekle</a>
-                            @*<ul class="reaction">
-                                <li><a href=""><i class="fa fa-search"></i></a></li>
-                                <li><a href=""><i class="fa fa-heart-o"></i></a></li>
-                                <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
-                            </ul>*@
-                        </div>
-                    </div>
-                </div>
+                </a>
+                <small style="margin: 0 0 0 10px; box-sizing: border-box;">@item.Price TL</small><br />
+                @*<button name="@item.Id" class="basketCreate" type="submit"><i class="fa fa-cart-plus"></i>İncele</button>*@
+                <a href="~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())" class="incele" type="submit"><i class="fa fa-search"></i>İncele</a>
+
+                @*<a href="#" class="btn btn-primary btn-block"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>*@
             </div>
+
         </div>
     }
-</div>
+
+}
+else
+{
+    <div class="alert alert-dark" role="alert">
+        Üzgünüz! Aradığınız kriterlere uygun ürün bulunamadı.
+    </div>
+}
