@@ -20,6 +20,7 @@
 </div>
 <div class="col-md-9">
     <div class="xt-feature-product">
+        @{Html.RenderAction("Slider", "Companent");}
         <div class="section-separator">
             <div class="xt-filter-nav padding-bottom-60">
                 @*<div class="col-md-2 col-sm-2 col-xs-6">
@@ -82,10 +83,10 @@
                         <nav aria-label="Page navigation">
                             @Html.PagedListPager(Model.Products, page => Url.Action("Index", new RouteValueDictionary
                             {
-                                {"Page",page},
-                                {"PageRanking",Model.PageRanking},
-                                {"Category",Model.Category},
-                                {"PageCount",Model.PageCount}
+                                {"Page", page},
+                                {"PageRanking", Model.PageRanking},
+                                {"Category", Model.Category},
+                                {"PageCount", Model.PageCount}
                             }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "urunDiv" }))
                         </nav>
                     </div>

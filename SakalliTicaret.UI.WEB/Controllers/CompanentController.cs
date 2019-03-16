@@ -72,5 +72,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
             Settings settings = db.Settings.First();
             return View(settings);
         }
+
+        public ActionResult Slider()
+        {
+            return View();
+        }
     }
 }

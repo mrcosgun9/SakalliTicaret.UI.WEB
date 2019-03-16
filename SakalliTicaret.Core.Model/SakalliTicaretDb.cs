@@ -6,14 +6,14 @@ namespace SakalliTicaret.Core.Model
 {
     public class SakalliTicaretDb : DbContext
     {
-        public SakalliTicaretDb() : base("Data Source=sql2012.isimtescil.net;Initial Catalog=st1830298_db1234;Persist Security Info=True;User ID=st1830298_usr123;Password=Cr729ce_")
-        {
-
-        }
-        //public SakalliTicaretDb() : base("Data Source=.;Initial Catalog=st1830298_db1234;Integrated Security=True")
+        //public SakalliTicaretDb() : base("Data Source=sql2012.isimtescil.net;Initial Catalog=st1830298_db1234;Persist Security Info=True;User ID=st1830298_usr123;Password=Cr729ce_")
         //{
 
         //}
+        public SakalliTicaretDb() : base("Data Source=.;Initial Catalog=st1830298_db1234;Integrated Security=True")
+        {
+
+        }
 
 
         public DbSet<User> Users { get; set; }
@@ -38,6 +38,7 @@ namespace SakalliTicaret.Core.Model
         public DbSet<OrderProductProperty> OrderProductProperties { get; set; }
         public DbSet<MailSetting> MailSettings { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

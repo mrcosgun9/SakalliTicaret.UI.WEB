@@ -1307,6 +1307,11 @@
     <Content Include="Areas\Panel\Views\BasketAndOrders\Detail.cshtml" />
     <Content Include="Areas\Panel\Views\Settings\GoogleSettings.cshtml" />
     <Content Include="Areas\Panel\Views\Settings\Settings.cshtml" />
+    <Content Include="Areas\Panel\Views\Sliders\Create.cshtml" />
+    <Content Include="Areas\Panel\Views\Sliders\Delete.cshtml" />
+    <Content Include="Areas\Panel\Views\Sliders\Details.cshtml" />
+    <Content Include="Areas\Panel\Views\Sliders\Edit.cshtml" />
+    <Content Include="Areas\Panel\Views\Sliders\Index.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1384,6 +1389,7 @@
     <Compile Include="Areas\Panel\Controllers\PosEntegrationsController.cs" />
     <Compile Include="Areas\Panel\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Panel\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Panel\Controllers\SlidersController.cs" />
     <Compile Include="Areas\Panel\Controllers\SocialMediasController.cs" />
     <Compile Include="Areas\Panel\Controllers\UsersController.cs" />
     <Compile Include="Areas\Panel\Functions.cs" />
@@ -1603,6 +1609,7 @@
     <Content Include="Views\Users\_Baskets.cshtml" />
     <Content Include="Views\Companent\Script.cshtml" />
     <Content Include="Views\Basket\BasketPaymentResult.cshtml" />
+    <Content Include="Views\Companent\Slider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1614,6 +1621,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\" />
     <Folder Include="Areas\Panel\Views\Order\" />
+    <Folder Include="Content\Images\Sliders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">

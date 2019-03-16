@@ -1,0 +1,91 @@
+﻿@model SakalliTicaret.Core.Model.Entity.Slider
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Slider</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateUser.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateUser.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRedirect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRedirect)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateUserId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
