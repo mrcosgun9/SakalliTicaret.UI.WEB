@@ -73,9 +73,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
             return View(settings);
         }
 
-        public ActionResult Slider()
+        public ActionResult SliderPage()
         {
-            return View();
+            List<Slider> slider = db.Sliders.Take(3).ToList();
+            return View(slider);
         }
     }
 }

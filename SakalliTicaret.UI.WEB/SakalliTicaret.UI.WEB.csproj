@@ -1609,7 +1609,7 @@
     <Content Include="Views\Users\_Baskets.cshtml" />
     <Content Include="Views\Companent\Script.cshtml" />
     <Content Include="Views\Basket\BasketPaymentResult.cshtml" />
-    <Content Include="Views\Companent\Slider.cshtml" />
+    <Content Include="Views\Companent\SliderPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
