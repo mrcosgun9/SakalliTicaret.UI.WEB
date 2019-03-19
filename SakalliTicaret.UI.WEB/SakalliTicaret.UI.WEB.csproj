@@ -1018,6 +1018,10 @@
     <Content Include="Content\css\iconfont.css" />
     <Content Include="Content\css\prophet.css" />
     <Content Include="Content\css\StyleSheet.css" />
+    <Content Include="Content\Images\Sliders\bisiklet_yedek_parca-987x322.jpg_19_3_2019_9_42.jpg" />
+    <Content Include="Content\Images\Sliders\dariusz-sankowski-46479-unsplash.jpg_16_3_2019_20_32.jpg" />
+    <Content Include="Content\Images\Sliders\mikhail-pavstyuk-8436-unsplash.jpg_16_3_2019_20_46.jpg" />
+    <Content Include="Content\Images\kargo.jpeg" />
     <Content Include="Content\js\prophet.js" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
@@ -1621,7 +1625,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\" />
     <Folder Include="Areas\Panel\Views\Order\" />
-    <Folder Include="Content\Images\Sliders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">

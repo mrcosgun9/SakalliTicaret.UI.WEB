@@ -6,7 +6,7 @@
 }
 @foreach (var item in Model.Products)
 {
-    <div class="col-md-3 col-sm-6 col-xs-12 productStyle ml-2 margin-b-15">
+    <div class="col-md-3 col-sm-6 col-xs-6 productStyle margin-b-15">
         <div class="card" style="border: 1px solid #ddd;border-radius: 3px;   padding-bottom :10px ;  ">
             <a href='~/Urun/@item.Id/@viewFunctions.UrlClear(item.Name.ToLower())'>
                 <div class="cardimagediv">

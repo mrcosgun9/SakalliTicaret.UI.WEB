@@ -492,6 +492,13 @@
 |===================
 */
 @media only screen and (max-width: 420px) {
+    .productStyle {
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+    }
+    .productStyle .card-body .card-title {
+        font-size: 0.8em;
+    }
   .xt-feature .xt-featured-caption .add-cart .reaction {
     margin-left: 15px;
   }
@@ -512,13 +519,13 @@
     display: none;
   }
   .flexslider .slides > li {
-    display: none;
+
     height: 590px;
     padding: 0 20px;
-    background: #000;
+   
   }
   .flexslider .slides img {
-    display: none;
+    /*display: none;*/
   }
   .xt-each-deal {
     margin-top: 15px;
