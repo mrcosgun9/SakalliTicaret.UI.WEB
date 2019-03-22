@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "PageError";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+<div id="notfound">
+    <div class="notfound">
+        <div class="notfound-404">
+            <h1>@Response.StatusCode</h1>
+        </div>
+        <p>@Html.Raw(Response.StatusDescription)</p>
+        <a href="/Anasayfa">Anasayfa</a>
+    </div>
+</div>

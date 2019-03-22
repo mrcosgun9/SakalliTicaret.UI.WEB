@@ -1405,6 +1405,7 @@
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CompanentController.cs" />
+    <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
@@ -1614,6 +1615,7 @@
     <Content Include="Views\Companent\Script.cshtml" />
     <Content Include="Views\Basket\BasketPaymentResult.cshtml" />
     <Content Include="Views\Companent\SliderPage.cshtml" />
+    <Content Include="Views\ErrorPage\PageError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
