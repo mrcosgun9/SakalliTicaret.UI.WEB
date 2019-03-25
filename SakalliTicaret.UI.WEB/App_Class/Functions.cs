@@ -54,7 +54,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 strReturn = new System.Text.RegularExpressions.Regex("[^a-zA-Z0-9+]").Replace(strReturn, "");
                 strReturn = strReturn.Trim();
                 strReturn = strReturn.Replace("+", "-");
-                return strReturn;
+                return strReturn.ToLower();
             }
             catch (Exception ex)
             {

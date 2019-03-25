@@ -1316,6 +1316,7 @@
     <Content Include="Areas\Panel\Views\Sliders\Details.cshtml" />
     <Content Include="Areas\Panel\Views\Sliders\Edit.cshtml" />
     <Content Include="Areas\Panel\Views\Sliders\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\Products\_PanelProducts.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />

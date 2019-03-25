@@ -11,7 +11,7 @@ using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
 using SakalliTicaret.UI.WEB.Areas.Panel.Models;
-
+using PagedList;
 namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
     public class ProductsController : AdminControlerBase
@@ -20,10 +20,28 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         LogClass _logClass = new LogClass();
         private Functions _functions = new Functions();
         // GET: Panel/Products
-        public ActionResult Index()
+        public ActionResult Index(string search,int? page)
         {
-            var products = db.Products.Include(p => p.Category).OrderByDescending(x => x.Id);
-            return View(products.ToList());
+            page = page ?? 1;
+            int pageCount = 20;
+            IPagedList<Product> products;
+            if (search!=null)
+            {
+                products = db.Products.Where(x => x.Name.Contains(search)).Include(p => p.Category).OrderByDescending(x => x.Id).ToPagedList((int)page, pageCount);
+            }
+            else
+            {
+                products = db.Products.Include(p => p.Category).OrderByDescending(x => x.Id).ToPagedList((int)page, pageCount);
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_PanelProducts", products);
+            }
+            else
+            {
+                return View(products);
+            }
+          
         }
 
         // GET: Panel/Products/Details/5

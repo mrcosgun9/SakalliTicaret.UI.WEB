@@ -1,0 +1,99 @@
+﻿@using System.Text.RegularExpressions
+@model PagedList.IPagedList<SakalliTicaret.Core.Model.Entity.Product>
+<div class="col-12 col-sm-12 col-md-12" id="urunDiv">
+    <div class="card">
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <a href="/Panel/Products/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Ürün Ekle</a>
+                @using (Html.BeginForm("Index", "Products", FormMethod.Post, new { @class = "form-inline float-right" }))
+                {
+                    <input class="form-control mr-sm-2 input-sm" type="search" placeholder="Ara" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Ara</button>
+                }
+            </div>
+
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Resim
+                </th>
+                <th>
+                    Kategori
+                </th>
+                <th>
+                    Başlık
+                </th>
+                <th>
+                    Marka
+                </th>
+                <th style="width: 200px;">
+                    Model
+                </th>
+                <th>
+                    Fiyat
+                </th>
+
+                <th>
+                    İndirim
+                </th>
+                <th>
+                    Stok
+                </th>
+                <th>
+                    Aktif
+                </th>
+
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.ImageUrl" width="100" />
+
+                    </td>
+                    <td style="max-width: 120px;">
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td style="max-width: 230px;">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+
+                    <td>
+                        <a target="_blank" href="~/Urun/@item.Id/@Regex.Replace(item.Name, @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*", "").ToLower()" title="Ürünü Göster"><i class="fa fa-arrow-right"></i></a> |
+                        <a href="/Panel/Products/MultipleImageUpload/@item.Id" title="Toplu Resim Girişi"><i class="fa fa-file-image-o"></i></a> |
+                        <a href="/Panel/Products/Edit/@item.Id" title="Düzenle"><i class="fa fa-refresh"></i></a> |
+                        <a href="/Panel/Products/Details/@item.Id" title="Detay"><i class="fa fa-eye"></i></a> |
+                        <a href="/Panel/Products/Delete/@item.Id" title="Sil"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
