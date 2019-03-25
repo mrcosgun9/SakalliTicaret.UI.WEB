@@ -16,6 +16,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/BasketAndOrders
         public ActionResult Index()
         {
+            ViewBag.StatusList = db.Statuses.ToList();
             var basket = db.Baskets.Include(x => x.User).Include(x => x.Status).OrderByDescending(x => x.Id).ToList();
             return View(basket);
         }

@@ -7,7 +7,7 @@
 }
 <div class="col-12">
     <div class="card">
-       
+
         <table class="table">
             <tr>
                 <th>
@@ -31,28 +31,39 @@
             @foreach (var item in Model)
             {
                 <tr>
-                     <td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.BasketKey)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.User.Name)
                         @Html.DisplayFor(modelItem => item.User.LastName)
                     </td>
-                 
+
                     <td>
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status.Name)
+                        @* <div class="row">
+                            <div class="col-8">
+                                @Html.DropDownListFor(n => item.StatusId, new SelectList(ViewBag.StatusList, "Id", "Name", item.StatusId), new {@class = "form-control"})
+
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <input type="button" class="btn btn-primary btn-sm" value="Uygula"/>
+                                                    </div>
+                                                </div>*@
+                        @*@Html.DropDownListFor(modelItem => item.StatusId, new SelectList(ViewBag.StatusList, "Id", "Name"))*@
+                        @*@Html.DropDownListFor(m => m., Model.ProductList, "- Please select -", new { @class = "form-control" })*@
+                        @Html.DisplayFor(modelItem=>item.Status.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateDateTime)
                     </td>
                     <td>
                         @*<a target="_blank" href="~/Urun/@item.Id/@Regex.Replace(item.Name,  @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*","").ToLower()" title="Ürünü Göster"><i class="fa fa-arrow-right"></i></a> |
-                        <a href="/Panel/Products/MultipleImageUpload/@item.Id" title="Toplu Resim Girişi"><i class="fa fa-file-image-o"></i></a> |
-                        <a href="/Panel/Products/Edit/@item.Id" title="Düzenle"><i class="fa fa-refresh"></i></a> |*@
+                            <a href="/Panel/Products/MultipleImageUpload/@item.Id" title="Toplu Resim Girişi"><i class="fa fa-file-image-o"></i></a> |
+                            <a href="/Panel/Products/Edit/@item.Id" title="Düzenle"><i class="fa fa-refresh"></i></a> |*@
                         <a href="/Panel/BasketAndOrders/Detail?id=@item.Id" title="Detay"><i class="fa fa-eye"></i></a>
                         @*<a href="/Panel/Products/Delete/@item.Id" title="Sil"><i class="fa fa-trash"></i></a>*@
                     </td>

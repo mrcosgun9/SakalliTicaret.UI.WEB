@@ -11,6 +11,8 @@ namespace SakalliTicaret.Core.Model.Entity
     {
         [Display(Name = "Sipariş Durumu")]
         public string Name { get; set; }
+        [Display(Name = "Sonraki Adım")]
+        public int NextStatus { get; set; }
         public virtual IEnumerable<Basket> Baskets{ get; set; }
     }
 }
