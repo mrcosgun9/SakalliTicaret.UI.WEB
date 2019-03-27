@@ -190,4 +190,13 @@ body {
     .notfound .notfound-404 h1 {
         font-size: 122px;
     }
+    .basketdiv {
+        display: none !important;
+    }
+    .flexslider .slides > li {
+        height: 240px
+    }
+    .flexslider .slides img {
+        height: 240px
+    }
 }

@@ -98,7 +98,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 Basket basket = db.Baskets.FirstOrDefault(x => x.Id == s.BasketId);
                 if (basket!=null)
                 {
+                    basket.UserAddressId = ID;
                     db.Entry(basket).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
                 return Redirect("/Sepet/Tamamla/Odeme");
             }
@@ -164,7 +166,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         private void posVoid()
         {
 
-            PosEntegration entegration = db.PosEntegrations.Find(2);
+            PosEntegration entegration = db.PosEntegrations.FirstOrDefault();
             // ####################### DÜZENLEMESİ ZORUNLU ALANLAR #######################
             //
             // API Entegrasyon Bilgileri - Mağaza paneline giriş yaparak BİLGİ sayfasından alabilirsiniz.

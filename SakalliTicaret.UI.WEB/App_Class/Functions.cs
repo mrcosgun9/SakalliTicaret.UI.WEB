@@ -69,7 +69,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
             if (_loginState.IsLogin())
             {
                 int id = _loginState.IsLoginUser().Id;
-                basket = db.Baskets.FirstOrDefault(x => x.UserId == id && x.StatusId == 5);
+                basket = db.Baskets.FirstOrDefault(x => x.UserId == id && x.StatusId == 1);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 {
 
                     basket = new Basket();
-                    basket.StatusId = 5;
+                    basket.StatusId = 1;
                     if (_loginState.IsLogin())
                     {
                         basket.UserId = _loginState.IsLoginUser().Id;

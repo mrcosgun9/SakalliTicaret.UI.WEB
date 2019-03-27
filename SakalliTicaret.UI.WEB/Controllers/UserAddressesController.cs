@@ -62,7 +62,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 User user = loginUser as User;
                 userAddress.UserId = user.Id;
                 userAddress.CreateDateTime = DateTime.Now;
-                userAddress.CreateUserId = 0;
                 db.UserAddresses.Add(userAddress);
                 db.SaveChanges();
                 return Redirect("/Sepet/Tamamla/Adres");

@@ -49,7 +49,6 @@ namespace SakalliTicaret.UI.WEB.App_Start
                    "~/Content/css/style.css",
                    "~/Content/css/responsive.css",
                    "~/Content/css/style.css",
-                   "~/Content/css/responsive.css",
                    "~/Content/css/prophet.css",
                    "~/Content/css/basket.css",
                    "~/Content/toastr.css",

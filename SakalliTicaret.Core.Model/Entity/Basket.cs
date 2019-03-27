@@ -24,5 +24,6 @@ namespace SakalliTicaret.Core.Model.Entity
         public UserAddress UserAddress { get; set; }
 
         public virtual List<OrderProduct> OrderProducts { get; set; }
+        public virtual List<UserAddress> UserAddresses { get; set; }
     }
 }
