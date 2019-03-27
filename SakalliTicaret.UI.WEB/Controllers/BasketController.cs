@@ -95,7 +95,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 s.AddressId = ID;
                 Session["AktifSepet"] = s;
-                Basket basket = db.Baskets.FirstOrDefault(x => x.Id == s.BasketId);
+                Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
                 if (basket!=null)
                 {
                     basket.UserAddressId = ID;
@@ -224,7 +224,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
             //string user_ip = GetIPAddress();
 
-            string user_ip = "78.186.172.90";
+            string user_ip = "88.230.225.78";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
@@ -337,8 +337,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
         }
         #endregion
-
-
         public ActionResult MiniBasketWidget()
         {
             if (HttpContext.Session["AktifSepet"] != null)
@@ -347,7 +345,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             return PartialView();
         }
-
         #region Sepet İşlemleri
         public int Create(int productId, List<int> pList, List<int> pValList)
         {
@@ -478,7 +475,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
 
         #endregion
-
         [Route("Sepet/Tamamla/Odeme/Sonuc")]
         public ActionResult BasketPaymentResult()
         {
@@ -503,8 +499,30 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //}
             if (status == "success")
             {
+                BasketClass s = new BasketClass();
+                s = (BasketClass)Session["AktifSepet"];
+                Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                basket.StatusId = 2;
+                db.Entry(basket).State = EntityState.Modified;
+                db.SaveChanges();
                 Response.Write("OK");
             }
+            return View();
+        }
+        [Route("Sepetim/OdemeTamamlandi")]
+        public ActionResult PaymentSuccessful()
+        {
+            BasketClass s = new BasketClass();
+            s = (BasketClass)Session["AktifSepet"];
+            Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+            basket.StatusId = 2;
+            db.Entry(basket).State = EntityState.Modified;
+            db.SaveChanges();
+            return View();
+        }
+        [Route("Sepetim/OdemeHata")]
+        public ActionResult PaymentError()
+        {
             return View();
         }
     }
