@@ -224,7 +224,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
             //string user_ip = GetIPAddress();
 
-            string user_ip = "78.186.172.90";
+            string user_ip = "88.230.225.78";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];

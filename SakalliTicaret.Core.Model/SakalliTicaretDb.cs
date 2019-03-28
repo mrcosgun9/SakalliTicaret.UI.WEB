@@ -9,6 +9,7 @@ namespace SakalliTicaret.Core.Model
         //public SakalliTicaretDb() : base("Data Source=sql2012.isimtescil.net;Initial Catalog=st1830298_db1234;Persist Security Info=True;User ID=st1830298_usr123;Password=Cr729ce_")
         //{
 
+
         //}
         public SakalliTicaretDb() : base("Data Source=.;Initial Catalog=st1830298_db1234;Integrated Security=True")
         {

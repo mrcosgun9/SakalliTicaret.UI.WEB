@@ -150,7 +150,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             if (ModelState.IsValid)
             {
                 var User = Session["AdminLoginUser"] as User;
-                if (ProductImg != null && product.ImageUrl == "/Content/Images/Products/resimyok.jpg")
+                if (ProductImg != null || product.ImageUrl == "/Content/Images/Products/resimyok.jpg")
                 {
                     product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
                 }

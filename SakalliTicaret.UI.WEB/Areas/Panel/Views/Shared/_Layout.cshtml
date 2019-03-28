@@ -157,6 +157,7 @@
                     </ul>
                 </div>
             </nav>
+
         </div>
         @Html.Partial("~/Areas/Panel/Views/Partial/Menu.cshtml");
         <div class="page-wrapper">
@@ -208,5 +209,8 @@
 
     </script>
 @RenderSection("scripts", false)
+<script>
+    $('#myModal').modal('toggle')
+</script>
 </body>
 </html>
