@@ -26,7 +26,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 
             basketDetailModel.OrderProducts= db.OrderProducts.Include(x => x.User).Include(x => x.Product).OrderByDescending(x => x.Id).ToList();
 
-            basketDetailModel.Basket = db.Baskets.FirstOrDefault(x => x.Id == id);
+            basketDetailModel.Basket = db.Baskets.Include(x=>x.UserAddress).FirstOrDefault(x => x.Id == id);
 
             return View(basketDetailModel);
         }
