@@ -27,7 +27,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             IPagedList<Product> products;
             if (search!=null)
             {
-                products = db.Products.Where(x => x.Name.Contains(search)).Include(p => p.Category).OrderByDescending(x => x.Id).ToPagedList((int)page, pageCount);
+                products = db.Products.Where(x => x.Name.Contains(search)||x.ImageUrl.Contains(search)||x.Category.Name.Contains(search)).Include(p => p.Category).OrderByDescending(x => x.Id).ToPagedList((int)page, pageCount);
             }
             else
             {
@@ -83,7 +83,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                     product.CreateUserId = User.Id;
                     if (ProductImg != null)
                     {
-                        product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
+                        product.ImageUrl = _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
+                       product.ImageUrl =  _functions.ImageUpload(ProductImg, 900, "~/Content/Images/Products/Great/");
                     }
                     else
                     {
@@ -152,7 +153,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 var User = Session["AdminLoginUser"] as User;
                 if (ProductImg != null || product.ImageUrl == "/Content/Images/Products/resimyok.jpg")
                 {
-                    product.ImageUrl = "/Content/Images/Products/" + _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
+                    product.ImageUrl =  _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
+                    product.ImageUrl =  _functions.ImageUpload(ProductImg, 900, "~/Content/Images/Products/Great/");
                 }
 
                 db.Entry(product).State = EntityState.Modified;
@@ -289,7 +291,8 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                         productImages.ProductId = pid;
                         productImages.CreateDateTime = DateTime.Now;
                         productImages.CreateUserId = User.Id;
-                        productImages.ImagesUrl = "/Content/Images/Products/" + _functions.ImageUpload(file, 1000, "~/Content/Images/Products/");
+                        productImages.ImagesUrl = _functions.ImageUpload(file, 300, "~/Content/Images/Products/");
+                        productImages.ImagesUrl = _functions.ImageUpload(file, 900, "~/Content/Images/Products/Great/");
                         db.ProductImageses.Add(productImages);
                     }
                 }

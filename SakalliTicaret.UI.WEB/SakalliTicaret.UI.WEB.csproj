@@ -1630,6 +1630,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Panel\Content\js\lib\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\" />
     <Folder Include="Areas\Panel\Views\Order\" />
+    <Folder Include="Content\Images\Products\Great\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SakalliTicaret.Core.Model\SakalliTicaret.Core.Model.csproj">
