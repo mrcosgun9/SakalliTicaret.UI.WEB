@@ -1,25 +1,24 @@
-﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.SocialMedia>
+﻿@model IEnumerable<SakalliTicaret.Core.Model.Entity.CargoCompany>
 
 @{
-    ViewBag.Title = "Sosyl Medya İşlemleri";
+    ViewBag.Title = "Kargo Firmaları";
     Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
 }
-
 <div class="col-12">
     <div class="card">
         <p>
-            <a href="/Panel/SocialMedias/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Sosyal Medya Ekle</a>
+            <a href="/Panel/CargoCompanies/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Kargo Firması Ekle</a>
         </p>
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Icon)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Url)
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CreateDateTime)
@@ -32,15 +31,13 @@
             {
                 <tr>
                     <td>
-                        <i class="fa @item.Icon"></i>
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        <a target="_blank" href="@item.Url">
-                            <i class="fa fa-link"></i>
-                        </a>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateDateTime)

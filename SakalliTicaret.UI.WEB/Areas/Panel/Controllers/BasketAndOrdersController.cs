@@ -16,7 +16,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/BasketAndOrders
         public ActionResult Index()
         {
-            ViewBag.StatusList = db.Statuses.ToList();
+
             var basket = db.Baskets.Include(x => x.User).Include(x => x.Status).OrderByDescending(x => x.Id).ToList();
             return View(basket);
         }
@@ -34,14 +34,36 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         public ActionResult StatusEdit(int Id)
         {
             Basket basket = db.Baskets.Include(x => x.Status).FirstOrDefault(x => x.Id == Id);
+            if (basket.StatusId == 2)
+            {
+        
+            }
             if (basket.StatusId == 3)
             {
-
+                return Redirect("/Panel/BasketAndOrders/BaketCargoEdit/" + basket.Id);
             }
-            else if (basket.StatusId == 4)
-            {
+            basket.StatusId = basket.Status.NextStatus;
+            db.Entry(basket).State = EntityState.Modified;
+            db.SaveChanges();
+            return Redirect("/Panel/BasketAndOrders/Index");
+        }
 
-            }
+        public ActionResult BaketCargoEdit(int id)
+        {
+            ViewBag.CargoCompany = db.CargoCompanies.ToList();
+            ViewBag.BasketId = id;
+            BasketCargo cargoCompany = db.BasketCargoes.FirstOrDefault(x => x.BasketId == id);
+            return View(cargoCompany);
+        }
+        [HttpPost]
+        public ActionResult BaketCargoEdit(BasketCargo basketCargo)
+        {
+            Basket basket = db.Baskets.Include(x => x.Status).FirstOrDefault(x => x.Id == basketCargo.BasketId);
+            basketCargo.CreateUserId = AdminLoginUserId;
+            basketCargo.CreateDateTime = DateTime.Now;
+
+            db.BasketCargoes.Add(basketCargo);
+
             basket.StatusId = basket.Status.NextStatus;
             db.Entry(basket).State = EntityState.Modified;
             db.SaveChanges();

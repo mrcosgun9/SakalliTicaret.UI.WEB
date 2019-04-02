@@ -60,16 +60,27 @@
                         @if (item.StatusId == 2)
                         {
                             <a href="/BasketAndOrders/StatusEdit/@item.Id" title="Siparişler Hazırlanıyor">
-                                <i class="fa fa-check-circle"></i>
+                                <i class="fa fa-archive"></i>
                             </a>
                         }
                         else if (item.StatusId == 3)
                         {
-                            <a href="#" title="Kargoya Verildi">
-                                <i class="fa fa-truck"></i>
+                            <a href="/BasketAndOrders/StatusEdit/@item.Id" title="Kargoya Verildi">
+                                <i class="fa fa-check-circle"></i>
 
                             </a>
 
+                        }
+                        else if (item.StatusId == 4)
+                        {
+                            <a href="/BasketAndOrders/StatusEdit/@item.Id" title="Ürünler Kargoda">
+                                <i class="fa fa-truck"></i>
+
+                            </a>
+                        }
+                        else if (item.StatusId == 5)
+                        {
+                                <i class="fa fa-check color-success"></i>
                         }
                     </td>
                     <td>

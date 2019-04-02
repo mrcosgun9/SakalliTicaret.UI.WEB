@@ -1317,6 +1317,12 @@
     <Content Include="Areas\Panel\Views\Sliders\Edit.cshtml" />
     <Content Include="Areas\Panel\Views\Sliders\Index.cshtml" />
     <Content Include="Areas\Panel\Views\Products\_PanelProducts.cshtml" />
+    <Content Include="Areas\Panel\Views\BasketAndOrders\BaketCargoEdit.cshtml" />
+    <Content Include="Areas\Panel\Views\CargoCompanies\Create.cshtml" />
+    <Content Include="Areas\Panel\Views\CargoCompanies\Delete.cshtml" />
+    <Content Include="Areas\Panel\Views\CargoCompanies\Details.cshtml" />
+    <Content Include="Areas\Panel\Views\CargoCompanies\Edit.cshtml" />
+    <Content Include="Areas\Panel\Views\CargoCompanies\Index.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1381,6 +1387,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Panel\AdminControlerBase.cs" />
     <Compile Include="Areas\Panel\Controllers\BasketAndOrdersController.cs" />
+    <Compile Include="Areas\Panel\Controllers\CargoCompaniesController.cs" />
     <Compile Include="Areas\Panel\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Panel\Controllers\CategoryPropertiesController.cs" />
     <Compile Include="Areas\Panel\Controllers\CategoryPropertyValuesController.cs" />

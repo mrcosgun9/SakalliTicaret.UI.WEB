@@ -52,6 +52,8 @@
     <Compile Include="EntityBase.cs" />
     <Compile Include="EntityLogBase.cs" />
     <Compile Include="Entity\Basket.cs" />
+    <Compile Include="Entity\BasketCargo.cs" />
+    <Compile Include="Entity\CargoCompany.cs" />
     <Compile Include="Entity\Category.cs" />
     <Compile Include="Entity\CategoryProperty.cs" />
     <Compile Include="Entity\CategoryPropertyValue.cs" />

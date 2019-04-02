@@ -40,11 +40,15 @@ namespace SakalliTicaret.Core.Model
         public DbSet<MailSetting> MailSettings { get; set; }
         public DbSet<Settings> Settings { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<CargoCompany> CargoCompanies { get; set; }
+        public DbSet<BasketCargo> BasketCargoes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
         }
+
+
     }
 }
