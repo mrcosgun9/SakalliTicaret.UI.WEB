@@ -30,10 +30,8 @@
 .productStyle {
     display: inline-block;
     position: relative;
-  
     /*margin: 0 0 10px  10px;*/
-  
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
     .productStyle .card-body .card-title {
@@ -49,7 +47,6 @@
     background: transparent;
     font-weight: bold;
     transition: all ease-in-out 0.2s;
-
 }
 
     .basketCreate:hover {
@@ -78,20 +75,20 @@
     margin: 0 0 0 10px;
 }
 
-.incele:hover {
-    background: #F14F2F;
-    color: #fff;
-}
+    .incele:hover {
+        background: #F14F2F;
+        color: #fff;
+    }
 
-.incele:hover i {
-    color: #fff;
-}
+        .incele:hover i {
+            color: #fff;
+        }
 
-.incele i {
-    font-size: 1.2em;
-    color: #F14F2F;
-    margin: 0 5px 0 0;
-}
+    .incele i {
+        font-size: 1.2em;
+        color: #F14F2F;
+        margin: 0 5px 0 0;
+    }
 
 
 .kategoriBaslik {
@@ -117,14 +114,14 @@ body {
     /*background-color: #222;*/
 }
 
-#notfound .notfound {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
+    #notfound .notfound {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
 
 .notfound {
     max-width: 490px;
@@ -133,53 +130,53 @@ body {
     line-height: 1.4;
 }
 
-.notfound .notfound-404 {
-    height: 158px;
-    line-height: 153px;
-}
+    .notfound .notfound-404 {
+        height: 158px;
+        line-height: 153px;
+    }
 
-.notfound .notfound-404 h1 {
-    font-family: 'Josefin Sans', sans-serif;
-    color: #222;
-    font-size: 220px;
-    letter-spacing: 10px;
-    margin: 0px;
-    font-weight: 700;
-    text-shadow: 2px 2px 0px #c9c9c9, -2px -2px 0px #c9c9c9;
-}
+        .notfound .notfound-404 h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            color: #222;
+            font-size: 220px;
+            letter-spacing: 10px;
+            margin: 0px;
+            font-weight: 700;
+            text-shadow: 2px 2px 0px #c9c9c9, -2px -2px 0px #c9c9c9;
+        }
 
-.notfound .notfound-404 h1>span {
-    text-shadow: 2px 2px 0px #F14F2F, -2px -2px 0px #F14F2F, 0px 0px 8px #F14F2F;
-}
+            .notfound .notfound-404 h1 > span {
+                text-shadow: 2px 2px 0px #F14F2F, -2px -2px 0px #F14F2F, 0px 0px 8px #F14F2F;
+            }
 
-.notfound p {
-    font-family: 'Josefin Sans', sans-serif;
-    color: #222;
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: 0px;
-    margin-bottom: 15px;
-}
+    .notfound p {
+        font-family: 'Josefin Sans', sans-serif;
+        color: #222;
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 0px;
+        margin-bottom: 15px;
+    }
 
-.notfound a {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    text-transform: uppercase;
-    background: transparent;
-    color: #222;
-    border: 2px solid #222;
-    display: inline-block;
-    padding: 10px 25px;
-    font-weight: 700;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-}
+    .notfound a {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 14px;
+        text-decoration: none;
+        text-transform: uppercase;
+        background: transparent;
+        color: #222;
+        border: 2px solid #222;
+        display: inline-block;
+        padding: 10px 25px;
+        font-weight: 700;
+        -webkit-transition: 0.2s all;
+        transition: 0.2s all;
+    }
 
-.notfound a:hover {
-    color: #F14F2F;
-    border-color: #F14F2F;
-}
+        .notfound a:hover {
+            color: #F14F2F;
+            border-color: #F14F2F;
+        }
 
 @media only screen and (max-width: 480px) {
     .notfound .notfound-404 {
@@ -187,16 +184,26 @@ body {
         line-height: 122px;
     }
 
-    .notfound .notfound-404 h1 {
-        font-size: 122px;
-    }
+        .notfound .notfound-404 h1 {
+            font-size: 122px;
+        }
+
     .basketdiv {
         display: none !important;
     }
+
     .flexslider .slides > li {
-        height: 240px
+        height: 161px;
     }
+
     .flexslider .slides img {
-        height: 240px
+        height: 161px;
+    }
+
+    .flex-direction-nav {
+        display: none;
+    }
+    .section-separator {
+        padding-top: 0 !important;
     }
 }
