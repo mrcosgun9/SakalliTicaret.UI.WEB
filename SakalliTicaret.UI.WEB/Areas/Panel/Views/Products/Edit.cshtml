@@ -18,7 +18,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <img src="@Model.ImageUrl"/><br/>
+
+                            <img src="~/Content/Images/Products/@Model.ImageUrl"/><br/>
+                            @Model.ImageUrl<br />
                             @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new {@class = "control-label"})<br/>
                             <input type="file" name="ProductImg" accept="image/*"/>
                             @Html.ValidationMessageFor(model => model.ImageUrl, "", new {@class = "text-danger"})
@@ -133,11 +135,11 @@
                 @Html.HiddenFor(model => model.CreateDateTime)
                 @Html.HiddenFor(model => model.ImageUrl)
 
-
+                <input type="hidden" value="@ViewBag.returnUrl" id="returnUrl" name="returnUrl"/>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Düzenle" class="btn btn-default" />
+                        <input type="submit" value="Düzenle" class="btn btn-default" accesskey="s" />
                     </div>
                 </div>
             </div>

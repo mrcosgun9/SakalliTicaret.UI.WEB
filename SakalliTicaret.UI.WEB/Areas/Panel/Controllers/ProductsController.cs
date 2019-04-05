@@ -20,14 +20,14 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         LogClass _logClass = new LogClass();
         private Functions _functions = new Functions();
         // GET: Panel/Products
-        public ActionResult Index(string search,int? page)
+        public ActionResult Index(string search, int? page)
         {
             page = page ?? 1;
             int pageCount = 20;
             IPagedList<Product> products;
-            if (search!=null)
+            if (search != null)
             {
-                products = db.Products.Where(x => x.Name.Contains(search)||x.ImageUrl.Contains(search)||x.Category.Name.Contains(search)).Include(p => p.Category).OrderByDescending(x => x.Id).ToPagedList((int)page, pageCount);
+                products = db.Products.Where(x => x.Name.Contains(search) || x.ImageUrl.Contains(search) || x.Category.Name.Contains(search)).Include(p => p.Category).OrderByDescending(x => x.Id).ToPagedList((int)page, pageCount);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return View(products);
             }
-          
+
         }
 
         // GET: Panel/Products/Details/5
@@ -84,7 +84,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                     if (ProductImg != null)
                     {
                         product.ImageUrl = _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
-                       product.ImageUrl =  _functions.ImageUpload(ProductImg, 900, "~/Content/Images/Products/Great/");
+                        product.ImageUrl = _functions.ImageUpload(ProductImg, 900, "~/Content/Images/Products/Great/");
                     }
                     else
                     {
@@ -93,7 +93,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                     db.Products.Add(product);
                     db.SaveChanges();
                     List<PropertyPropertyValues> propertyPropertyValues = new List<PropertyPropertyValues>();
-                    if (SelectedProperty!=null)
+                    if (SelectedProperty != null)
                     {
                         for (int i = 0; i < SelectedProperty.Length; i++)
                         {
@@ -107,11 +107,12 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                         }
                         db.SaveChanges();
                     }
-                   
 
-                    
+
+
                     //_logClass.ProductLog(product, "Ekleme");
                     return RedirectToAction("Index");
+
                 }
             }
             catch (Exception e)
@@ -127,6 +128,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // GET: Panel/Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.returnUrl = Request.UrlReferrer.PathAndQuery;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -136,6 +138,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
             return View(product);
         }
@@ -146,22 +149,22 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(Product product, HttpPostedFileBase ProductImg, int[] SelectedProperty)
+        public ActionResult Edit(Product product, HttpPostedFileBase ProductImg, int[] SelectedProperty, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 var User = Session["AdminLoginUser"] as User;
                 if (ProductImg != null || product.ImageUrl == "/Content/Images/Products/resimyok.jpg")
                 {
-                    product.ImageUrl =  _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
-                    product.ImageUrl =  _functions.ImageUpload(ProductImg, 900, "~/Content/Images/Products/Great/");
+                    product.ImageUrl = _functions.ImageUpload(ProductImg, 300, "~/Content/Images/Products/");
+                    product.ImageUrl = _functions.ImageUpload(ProductImg, 900, "~/Content/Images/Products/Great/");
                 }
 
                 db.Entry(product).State = EntityState.Modified;
                 db.ProductProperties.RemoveRange(db.ProductProperties.Where(x => x.ProductId == product.Id));
 
                 db.SaveChanges();
-                if (SelectedProperty!=null)
+                if (SelectedProperty != null)
                 {
                     for (int i = 0; i < SelectedProperty.Length; i++)
                     {
@@ -175,9 +178,9 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                     }
                     db.SaveChanges();
                 }
-             
+
                 //_logClass.ProductLog(product, "Düzenleme");
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryId);
             return View(product);

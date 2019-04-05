@@ -5,6 +5,14 @@
     Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
 }
 
+@Html.PagedListPager(Model, page => Url.Action("Index", new RouteValueDictionary
+    {
+        {"Page", page},
+        {"PageCount", 30}
+    }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "urunDiv" }
+    ))
+
+
 @if (Model != null)
 {
     @Html.Partial("_PanelProducts", Model)
