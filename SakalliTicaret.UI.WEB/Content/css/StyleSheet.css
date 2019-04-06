@@ -203,7 +203,17 @@ body {
     .flex-direction-nav {
         display: none;
     }
+
     .section-separator {
         padding-top: 0 !important;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+        padding: 9px 6px;
+        font-size: 12px;
+    }
+
+    .xt-show-item label {
+        font-size: 13px;
     }
 }

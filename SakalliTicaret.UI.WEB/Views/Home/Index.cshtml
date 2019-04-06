@@ -33,20 +33,27 @@
                             <a href=""><i class="fa fa-navicon"></i></a>
                         </div>
                     </div>*@
-                <div class="col-md-6 col-sm-6"></div>
-                <div class="col-md-2 col-sm-2 col-xs-5 xt-show-item">
+                @*<div class="col-md-4 col-sm-4"></div>*@
+                <div class="col-md-5 col-sm-5 col-xs-7 xt-show-item">
                     <label>Adet: </label>
-                    <div class="xt-select xt-search-opt xt-item-view-count">
-                        <select class="xt-category-search select-beast">
-                            <option>30</option>
-                            <option>60</option>
-                            <option>90</option>
-                            <option>120</option>
-                            <option>150</option>
-                        </select>
-                    </div>
+                    <ul class="pagination">
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#urunDiv" href="/?PageCount=30">30</a></li>
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#urunDiv" href="/?PageCount=60">60</a></li>
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#urunDiv" href="/?PageCount=90">90</a></li>
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#urunDiv" href="/?PageCount=120">120</a></li>
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#urunDiv" href="/?PageCount=150">150</a></li>
+                    </ul>
+                    @*<div class="xt-select xt-search-opt xt-item-view-count">
+                            <select class="xt-category-search select-beast">
+                                <option>30</option>
+                                <option>60</option>
+                                <option>90</option>
+                                <option>120</option>
+                                <option>150</option>
+                            </select>
+                        </div>*@
                 </div>
-                <div class="form-group xt-shop-category col-md-4 col-sm-4 col-xs-7">
+                <div class="form-group xt-shop-category col-md-4 col-sm-4 col-xs-5">
                     <div class="xt-select xt-search-opt">
                         @Html.DropDownList("PageRanking", (IEnumerable<SelectListItem>)ViewBag.PageRanking, new { @onchange = "getProduct()", @id = "drSiralama", @class = "xt-category-search select-beast block" })
                         @*<select class="xt-category-search select-beast">
