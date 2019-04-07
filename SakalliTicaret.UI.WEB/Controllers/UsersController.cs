@@ -65,7 +65,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                User dbuser = db.Users.FirstOrDefault(x => x.Email == user.Email);
+                User dbuser = db.Users.FirstOrDefault(x => x.Email == user.Email&&x.IsAdmin==false);
                 if (dbuser == null)
                 {
                     EncodeDecode encodeDecode = new EncodeDecode();

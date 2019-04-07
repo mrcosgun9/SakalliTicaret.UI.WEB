@@ -216,4 +216,24 @@ body {
     .xt-show-item label {
         font-size: 13px;
     }
+    .mean-container .mean-bar::before {
+        font-size: 16px;
+    }
+    .mean-container a.meanmenu-reveal {
+        padding: 28px 13px 11px 13px;
+    }
+    .mean-container .mean-nav {
+        margin-top: 40px;
+    }
+    .mean-container .mean-nav ul li a {
+        padding: 4px 14px;
+        font-size: 13px;
+    }
+    .mean-container .mean-nav ul li a .fa {
+        font-size: 10px;
+    }
+    .mean-container .mean-bar {
+        min-height: 0;
+    }
+
 }
