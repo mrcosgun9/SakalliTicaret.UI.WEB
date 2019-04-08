@@ -36,24 +36,6 @@
             <div class="container">
                 <div class="xt-language col-md-6 col-sm-6 col-xs-12">
                     <div class="each-nav">
-                        @*<ul>
-                                <li class="dropdown">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English <span class="fa fa-angle-down"></span> </a>
-                                    <ul class="dropdown-menu xt-lang-dropdown">
-                                        <li><a href="">France</a></li>
-                                        <li><a href="causes-list.html">Bangla</a></li>
-                                        <li><a href="causes-details.html">Swidesh</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">USD <span class="fa fa-angle-down"></span> </a>
-                                    <ul class="dropdown-menu xt-lang-dropdown">
-                                        <li><a href="">USD</a></li>
-                                        <li><a href="causes-list.html">EURO</a></li>
-                                        <li><a href="causes-details.html">Riyal</a></li>
-                                    </ul>
-                                </li>
-                            </ul>*@
                     </div>
                 </div>
 
@@ -67,19 +49,19 @@
             <nav class="navbar navbar-fixed-top nav-scroll">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="navbar-header">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span aria-hidden="true" class="icon"></span>
+                            </button>
+                            <a class="navbar-brand" href="/Anasayfa">
+                                <img src="~/Content/Images/sakalli logo-01.png" class="img-responsive" />
+                            </a>
+                        </div>
 
-                                <a class="navbar-brand" href="/Anasayfa">
-                                    <img src="~/Content/Images/sakalli logo-01.png" class="img-responsive" />
-                                </a>
-                            </div>
-
-                            <div class="collapse navbar-collapse" id="js-navbar-menu">
-                                <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
-                                    @{Html.RenderAction("HomeTopMenu", "Companent");}
-                                </ul>
-                            </div>
+                        <div class="collapse navbar-collapse" id="js-navbar-menu">
+                            <ul class="nav navbar-nav navbar-right ep-mobile-menu" id="navbar-nav">
+                                @{Html.RenderAction("HomeTopMenu", "Companent");}
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -110,7 +92,7 @@
             </div>
         </div>
     </header>
-    
+
     <div class="menu-spacing">
         <div class="container">
             <div class="row">

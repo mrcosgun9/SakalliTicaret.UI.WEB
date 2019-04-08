@@ -49,6 +49,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 strReturn = strReturn.Replace(":", "");
                 strReturn = strReturn.Replace("/", "");
                 strReturn = strReturn.Replace("\"", "-");
+                strReturn = strReturn.Replace(".", "-");
                 strReturn = strReturn.Replace(tırnak.ToString(), "");
                 strReturn = strReturn.Trim();
                 strReturn = new System.Text.RegularExpressions.Regex("[^a-zA-Z0-9+]").Replace(strReturn, "");
