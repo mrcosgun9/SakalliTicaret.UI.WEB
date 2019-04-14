@@ -61,7 +61,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [ValidateAntiForgeryToken]
         [Route("Kullanici/Kayit")]
         [ControlLoginPerformed]
-        public ActionResult Create([Bind(Include = "ID,Name,LastName,Email,ImageUrl,Telephone,Password,TCKN,IsActive,IsAdmin,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {

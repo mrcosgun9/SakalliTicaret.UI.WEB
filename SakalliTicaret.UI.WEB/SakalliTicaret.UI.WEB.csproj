@@ -1323,6 +1323,8 @@
     <Content Include="Areas\Panel\Views\CargoCompanies\Details.cshtml" />
     <Content Include="Areas\Panel\Views\CargoCompanies\Edit.cshtml" />
     <Content Include="Areas\Panel\Views\CargoCompanies\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\MailDesign\Index.cshtml" />
+    <Content Include="Areas\Panel\Views\MailDesign\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1742,6 +1744,7 @@
     <Compile Include="Areas\Panel\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Panel\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Panel\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Panel\Controllers\MailDesignController.cs" />
     <Compile Include="Areas\Panel\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Panel\Controllers\PagesController.cs" />
     <Compile Include="Areas\Panel\Controllers\PartialController.cs" />

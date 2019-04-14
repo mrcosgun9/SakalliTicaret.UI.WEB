@@ -62,6 +62,7 @@
     <Compile Include="Entity\LogCategory.cs" />
     <Compile Include="Entity\LogProduct.cs" />
     <Compile Include="Entity\LogUsers.cs" />
+    <Compile Include="Entity\MailDesign.cs" />
     <Compile Include="Entity\MailSetting.cs" />
     <Compile Include="Entity\Messages.cs" />
     <Compile Include="Entity\Order.cs" />
