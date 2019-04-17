@@ -36,21 +36,17 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Slider slider, HttpPostedFileBase sliderImg)
+        [ValidateInput(false)]
+        public ActionResult Edit(MailDesign mailDesign)
         {
             if (ModelState.IsValid)
             {
                 var User = Session["AdminLoginUser"] as User;
-                if (sliderImg != null || slider.ImageUrl == "/Content/Images/Products/resimyok.jpg")
-                {
-                    slider.ImageUrl = "/Content/Images/Sliders/" + _functions.ImageUpload(sliderImg, 700, "~/Content/Images/Sliders/");
-                }
-
-                db.Entry(slider).State = EntityState.Modified;
+                db.Entry(mailDesign).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(slider);
+            return View(mailDesign);
         }
 
     }
