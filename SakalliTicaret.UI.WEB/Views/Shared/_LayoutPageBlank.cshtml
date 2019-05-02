@@ -1,4 +1,5 @@
-﻿@using SakalliTicaret.UI.WEB.App_Class
+﻿@using SakalliTicaret.Core.Model
+@using SakalliTicaret.UI.WEB.App_Class
 <!DOCTYPE html>
 
 <html>
@@ -24,11 +25,36 @@
     @Styles.Render("~/bundles/css")
     <title>Sakalli Ticaret | @ViewBag.Title</title>
     @RenderSection("AdditionalMeta", false)
+
 </head>
 <body>
+    @{
+        SakalliTicaretDb db =new SakalliTicaretDb();
+        string themaColor = db.Settings.First().ThemaColor;
+    }
+    <style>
+       .main-color-bg ,.pagination > .active > a,.btn.btn-fill{
+           background:#@themaColor;
+       }
+       .incele i,.footer-contact ul li .fa,.footer-widget ul li a .fa,.footer-widget-2 h4,.footer-widget-2 .fa,.footer-widget ul li a:hover,.xt-social ul li a:hover,.each-product-info .single-price ,.xt-single-item-info .xt-single-item-tab li a:hover{
+           color: #@themaColor;
+       }
+       .navbar-nav li.active a,.xt-cart .xt-item-count,nav ul.xt-side-menu > li > a i ,.navbar-nav > li > a:hover,.basketCreate i {
+           color: #@themaColor !important;
+       }
+       li.active a {
+           color: #fff;
+       }
+       .basketfooter,.incele:hover,.product-tag ,.basketCreate:hover{
+           background:#@themaColor;
+       }
+       .incele,.pagination > .active > a,.basketCreate {
+           border-color: #@themaColor;
+       }
+    </style>
     <!--
     |========================
-    |  HEADER
+    | HEADER
     |========================
     -->
     <header id="xt-home" class="xt-header">
@@ -54,7 +80,9 @@
                                 <span aria-hidden="true" class="icon"></span>
                             </button>
                             <a class="navbar-brand" href="/Anasayfa">
-                                <img src="~/Content/Images/sakalli logo-01.png" class="img-responsive" />
+
+                                <img src="~/Content/Images/sakallilogo.png" class="img-responsive" />
+                                @*<img src="~/Content/Images/sakalli logo-01.png" class="img-responsive"/>*@
                             </a>
                         </div>
 
@@ -113,7 +141,7 @@
         <div class="container">
             <div class="row">
                 @if (ViewBag.ResultType != null)
-                {
+            {
                     <div class="alert alert-@ViewBag.ResultType" role="alert">
                         @ViewBag.ResultMessage
                     </div>

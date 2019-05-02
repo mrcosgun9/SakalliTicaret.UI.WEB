@@ -832,6 +832,7 @@
     <Content Include="Areas\Panel\Content\js\chosen.jquery.min.js" />
     <Content Include="Areas\Panel\Content\js\custom.min.js" />
     <Content Include="Areas\Panel\Content\js\jquery.slimscroll.js" />
+    <Content Include="Areas\Panel\Content\js\jscolor.js" />
     <Content Include="Areas\Panel\Content\js\lib\barRating\barRating.init.js" />
     <Content Include="Areas\Panel\Content\js\lib\barRating\jquery.barrating.js" />
     <Content Include="Areas\Panel\Content\js\lib\bootstrap\css\bootstrap.min.css" />
@@ -1018,6 +1019,7 @@
     <Content Include="Content\css\iconfont.css" />
     <Content Include="Content\css\prophet.css" />
     <Content Include="Content\css\StyleSheet.css" />
+    <Content Include="Content\Images\sakallilogo.png" />
     <Content Include="Content\Images\Sliders\bisiklet_yedek_parca-987x322.jpg_19_3_2019_9_42.jpg" />
     <Content Include="Content\Images\Sliders\dariusz-sankowski-46479-unsplash.jpg_16_3_2019_20_32.jpg" />
     <Content Include="Content\Images\Sliders\mikhail-pavstyuk-8436-unsplash.jpg_16_3_2019_20_46.jpg" />

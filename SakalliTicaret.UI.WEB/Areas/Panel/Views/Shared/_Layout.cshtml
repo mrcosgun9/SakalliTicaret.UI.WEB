@@ -13,6 +13,7 @@
     <link href="~/Areas/Panel/Content/css/style.css" rel="stylesheet">
     <link href="~/Areas/Panel/Content/Chosen/chosen.min.css" rel="stylesheet" />
     <script src="~/scripts/ckeditor/themes/default/theme.js"></script>
+
 </head>
 <body class="fix-header fix-sidebar">
 
@@ -202,24 +203,25 @@
     <script src="~/scripts/ckeditor/ckeditor.js"></script>
     @*<script src="~/Areas/Panel/ckeditor/ckeditor.js"></script>*@
     <script src="~/Areas/Panel/Content/js/chosen.jquery.min.js"></script>
-@*<script type="text/javascript">
+    <script src="~/Areas/Panel/Content/js/jscolor.js"></script>
+    @*<script type="text/javascript">
+            var editor = CKEDITOR.instances['editor1'];
+            if (editor) { editor.destroy(true); }
+            CKEDITOR.replace('editor1', {
+                enterMode: CKEDITOR.ENTER_BR,
+            });
+
+        </script>*@
+    <script>
         var editor = CKEDITOR.instances['editor1'];
         if (editor) { editor.destroy(true); }
         CKEDITOR.replace('editor1', {
             enterMode: CKEDITOR.ENTER_BR,
         });
-
-    </script>*@
-<script>
-    var editor = CKEDITOR.instances['editor1'];
-    if (editor) { editor.destroy(true); }
-    CKEDITOR.replace('editor1', {
-        enterMode: CKEDITOR.ENTER_BR,
-    });
-</script>
-@RenderSection("scripts", false)
-<script>
-    $('#myModal').modal('toggle')
-</script>
+    </script>
+    @RenderSection("scripts", false)
+    <script>
+        $('#myModal').modal('toggle')
+    </script>   
 </body>
 </html>

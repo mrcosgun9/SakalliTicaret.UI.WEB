@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
 {
     public class SettingsController : AdminControlerBase
     {
+        private Functions _functions = new Functions();
         public ActionResult Settings()
         {
             return View();
@@ -39,6 +41,13 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             }
             else
             {
+                //if (logoImage != null)
+                //{
+                //    string dosyaYolu = Path.GetFileName(logoImage.FileName);
+                //    var yuklemeYeri = Path.Combine(Server.MapPath("~/Dosyalar"), dosyaYolu);
+                //    logoImage.SaveAs(yuklemeYeri);
+                //}
+             
                 db.Entry(setting).State = EntityState.Modified;
             }
             db.SaveChanges();

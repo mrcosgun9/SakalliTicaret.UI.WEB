@@ -12,12 +12,34 @@
 
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.GoogleAnalytics, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.GoogleAnalytics, htmlAttributes: new { @class = "control-label col-md-12" })
                     <div class="col-md-12">
-                        @Html.TextAreaFor(model => model.GoogleAnalytics, new { @class = "form-control",@style="height:150px;" })
+                        @Html.TextAreaFor(model => model.GoogleAnalytics, new { @class = "form-control", @style = "height:150px;" })
                         @Html.ValidationMessageFor(model => model.GoogleAnalytics, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="row">
+                    @*<div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                <input type="file" name="logoImage" accept="image/*" />
+                                @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                                <small id="emailHelp" class="form-text text-muted">210 x 34 Boutunda veya Katlarında Yükleme Yapınız.</small>
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ThemaColor, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.ThemaColor, new { htmlAttributes = new { @class = "form-control jscolor" } })
+                                @Html.ValidationMessageFor(model => model.ThemaColor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
 
                 @Html.HiddenFor(model => model.CreateUser)
                 @Html.HiddenFor(model => model.CreateDateTime)
