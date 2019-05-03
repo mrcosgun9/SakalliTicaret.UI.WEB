@@ -1,7 +1,11 @@
-﻿@model SakalliTicaret.UI.WEB.Models.NotUserBasketModel
+﻿@using SakalliTicaret.UI.WEB.App_Class
+@model SakalliTicaret.UI.WEB.Models.NotUserBasketModel
 @{
     ViewBag.Title = "NotUserBasketSuccess";
     Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+@{
+    Functions viewFunctions = new Functions();
 }
 <div class="col-md-12">
     <div class="card">
@@ -9,7 +13,7 @@
 
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("NotUserBasketSuccess", "Users", FormMethod.Post,new {@id="uyeOlmadanForm"}))
+            @using (Html.BeginForm("NotUserBasketSuccess", "Users", FormMethod.Post, new { @id = "uyeOlmadanForm" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -115,36 +119,36 @@
                                 int i = 1;
                             }
                             @foreach (var item in Model.BasketClass.Products)
-                        {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td class="text-left">
+                            {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td class="text-left">
 
-                                    <div class="sepetimage">
-                                        <img src="@item.Product.ImageUrl" />
-                                    </div>
-                                </td>
-                                <td class="text-left">
-                                    <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ","").ToLower()" target="_blank">
-                                        @item.Product.Name
-                                    </a>
-                                </td>
+                                        <div class="sepetimage">
+                                            <img class="card-img-top" src="/Content/Images/Products/@item.Product.ImageUrl" />
+                                        </div>
+                                    </td>
+                                    <td class="text-left">
+                                        <a href="~/Urun/@item.Product.Id/@viewFunctions.UrlClear(item.Product.Name.ToLower())" class="incele" type="submit">
+                                            @item.Product.Name
+                                        </a>
+                                    </td>
 
 
-                                <td class="text-left">@item.Product.Price ₺</td>
-                                <td class="text-left">@item.Quantity</td>
-                                <td class="text-left">@item.Total ₺</td>
-                                <td class="text-left">
-                                    <a href="Sepetim/Sil/@item.Product.Id">
-                                        <i class="fa fa-minus-circle" style="color:#b22222"></i>
-                                        @*<i class="material-icons sepetsil" name="@item.Urun.urunId">cancel</i>*@
-                                    </a>
-                                </td>
-                            </tr>
-                            i = i + 1;
-                        }
+                                    <td class="text-left">@item.Product.Price ₺</td>
+                                    <td class="text-left">@item.Quantity</td>
+                                    <td class="text-left">@item.Total ₺</td>
+                                    <td class="text-left">
+                                        <a href="Sepetim/Sil/@item.Product.Id">
+                                            <i class="fa fa-minus-circle" style="color:#b22222"></i>
+                                            @*<i class="material-icons sepetsil" name="@item.Urun.urunId">cancel</i>*@
+                                        </a>
+                                    </td>
+                                </tr>
+                                i = i + 1;
+                            }
                         </tbody>
                     </table>
                     <div class="sepetozet text-right margin-t-20 margin-b-20">

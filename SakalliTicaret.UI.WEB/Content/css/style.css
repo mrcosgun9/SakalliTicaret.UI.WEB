@@ -1214,7 +1214,7 @@ ul {
 }
 
     .navbar-brand > img {
-        max-width: 209px;
+        max-width: 330px;
     }
 
 .navbar-right {
@@ -3089,15 +3089,20 @@ nav ul.xt-side-menu {
             background-color: #F14F2F;
         }
 
+
 .cardimagediv {
     min-height: 160px;
     height: 180px;
     overflow: hidden;
 
     text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center; 
 }
 
-    .cardimagediv img {
-        height: 100%;
-        width: 100%;
-    }
+.cardimagediv img {
+    /*height: 100%;*/
+    width: 100%;
+}
+
