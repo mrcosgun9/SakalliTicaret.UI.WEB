@@ -18,6 +18,7 @@
             <th scope="col">Alıcı</th>
             <th scope="col">Sipariş Özeti</th>
             <th scope="col">Toplam</th>
+            <th scope="col">Durumu</th>
             <th scope="col">Detay</th>
         </tr>
     </thead>
@@ -34,10 +35,16 @@
                 <td>@item.User.Name @item.User.LastName</td>
                 <td>@item.OrderProducts.Count()</td>
                 <td>@item.Amount</td>
+                <td>@item.Status.Name</td>
                 <td>
-                    <button type="button" class="btn btn-outline-primary" style="line-height: 10px; padding: 5px 13px;" data-toggle="modal" id="basketDetail" data-id="@item.Id" data-target="#exampleModalCenter">
+                    <a href="/SiparisDetayi/@item.Id">
+                        <i class="fa fa-eye">
+                            
+                        </i>
+                    </a>
+                    @*<button type="button" class="btn btn-outline-primary" style="line-height: 10px; padding: 5px 13px;" data-toggle="modal" id="basketDetail" data-id="@item.Id" data-target="#exampleModalCenter">
                         <i class="fa fa-eye"></i>
-                    </button>
+                    </button>*@
                 </td>
             </tr>
         }

@@ -229,6 +229,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             return View(model);
         }
+        [Route("SiparisDetayi/{id}")]
         public ActionResult BasketDetail(int id)
         {
             BasketDetailModel basketDetailModel = new BasketDetailModel();
@@ -236,10 +237,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             basketDetailModel.OrderProducts = db.OrderProducts.Include(x => x.User).Include(x => x.Product).OrderByDescending(x => x.Id).ToList();
 
             basketDetailModel.Basket = db.Baskets.FirstOrDefault(x => x.Id == id);
-            return Json(new
-            {
-                list = basketDetailModel.OrderProducts
-            }, JsonRequestBehavior.AllowGet);
+            return View(basketDetailModel);
         }
         [Route("UyeOlmadanOnayla")]
         [HttpPost]
@@ -283,6 +281,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         {
             return View();
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

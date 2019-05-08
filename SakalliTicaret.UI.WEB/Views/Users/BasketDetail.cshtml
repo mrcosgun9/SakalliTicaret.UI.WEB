@@ -1,0 +1,108 @@
+﻿@model SakalliTicaret.UI.WEB.Areas.Panel.Models.BasketDetailModel
+@{
+    ViewBag.Title = "Sipariş Detayları";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+<div class="col-12">
+
+    <div class="card">
+        <div class="card-title">
+            <h4>Kalem Bilgileri</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover ">
+                    @*<thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrderProducts.)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Product.Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Amount)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                        </tr>
+                        </thead>*@
+                    <tbody>
+                        @foreach (var item in Model.OrderProducts)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        @if (Model.Basket.UserAddress != null)
+        {
+            <div class="card-title">
+                <h4>Adres Bilgileri</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Başlık
+                                </th>
+                                <th>
+                                    Şehir
+                                </th>
+                                <th>
+                                    Telefon
+                                </th>
+                                <th>
+                                    Adres
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    @Model.Basket.UserAddress.Title
+                                </td>
+                                <td>
+                                    @Model.Basket.UserAddress.City
+                                </td>
+                                <td>
+                                    @Model.Basket.UserAddress.Phone
+
+                                </td>
+                                <td>
+                                    @Model.Basket.UserAddress.Address
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        }
+
+    </div>
+    <!-- /# card -->
+</div>

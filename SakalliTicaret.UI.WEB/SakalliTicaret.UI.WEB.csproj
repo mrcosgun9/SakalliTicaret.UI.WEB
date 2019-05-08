@@ -1980,6 +1980,7 @@
     <Content Include="Views\ErrorPage\PageError.cshtml" />
     <Content Include="Views\Basket\PaymentSuccessful.cshtml" />
     <Content Include="Views\Basket\PaymentError.cshtml" />
+    <Content Include="Views\Users\BasketDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
