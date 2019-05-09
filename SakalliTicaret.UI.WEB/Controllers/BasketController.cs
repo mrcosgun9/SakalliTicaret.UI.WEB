@@ -96,7 +96,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 s.AddressId = ID;
                 Session["AktifSepet"] = s;
                 Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
-                if (basket!=null)
+                if (basket != null)
                 {
                     basket.UserAddressId = ID;
                     db.Entry(basket).State = EntityState.Modified;
@@ -222,8 +222,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            string user_ip = GetIPAddress();
-            //string user_ip = "88.230.136.125";
+            //string user_ip = GetIPAddress();
+            string user_ip = "88.230.132.160";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
@@ -356,7 +356,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 basketItem.Quantity = 1;
                 basketItem.Tax = 0;
                 List<PropertyPropertyValues> propertyPropertyValues = new List<PropertyPropertyValues>();
-                if (pList!=null)
+                if (pList != null)
                 {
                     for (int i = 0; i < pList.Count; i++)
                     {
@@ -366,7 +366,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                         propertyPropertyValues.Add(dbpropertyPropertyValues);
                     }
                 }
-            
+
                 basketItem.PropertyPropertyValueses = propertyPropertyValues;
                 //basketItem.CategoryPropertyList = pList;
                 //basketItem.CategoryPropertyValues = pValList;
@@ -377,8 +377,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 if (_loginState.IsLogin())
                 {
                     int id = _loginState.IsLoginUser().Id;
+                    Basket userBasket = db.Baskets.FirstOrDefault(x => x.UserId == id && x.StatusId == 1);
                     OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.Id == product.Id && x.UserId == id);
-                    if (orderProduct == null)
+                    if (userBasket == null)
                     {
                         orderProduct = new OrderProduct();
                         orderProduct.CreateDateTime = DateTime.Now;
@@ -439,7 +440,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             BasketClass s = (BasketClass)Session["AktifSepet"];
             try
             {
-             
+
                 if (_loginState.IsLogin())
                 {
                     Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
@@ -463,7 +464,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     db.SaveChanges();
                 }
                 s.BasketItemRemove(id);
-               
+
             }
             catch (Exception e)
             {
