@@ -212,18 +212,18 @@ namespace SakalliTicaret.UI.WEB.Controllers
             // Başarılı ödeme sonrası müşterinizin yönlendirileceği sayfa
             // !!! Bu sayfa siparişi onaylayacağınız sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
             // !!! Siparişi onaylayacağız sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-            string merchant_ok_url = "http://www.sakalliticaret.com/Sepetim/OdemeTamamlandi";
+            string merchant_ok_url = "http://sakalliticaret.com/Sepetim/OdemeTamamlandi";
             //
             // Ödeme sürecinde beklenmedik bir hata oluşması durumunda müşterinizin yönlendirileceği sayfa
             // !!! Bu sayfa siparişi iptal edeceğiniz sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
             // !!! Siparişi iptal edeceğiniz sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-            string merchant_fail_url = "http://www.sakalliticaret.com/Sepetim/OdemeHata";
+            string merchant_fail_url = "http://sakalliticaret.com/Sepetim/OdemeHata";
             string user_basketstr = "";
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            //string user_ip = GetIPAddress();
-            string user_ip = "88.230.132.160";
+            string user_ip = GetIPAddress();
+            //string user_ip = "88.230.140.128";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
@@ -378,9 +378,16 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 {
                     int id = _loginState.IsLoginUser().Id;
                     Basket userBasket = db.Baskets.FirstOrDefault(x => x.UserId == id && x.StatusId == 1);
-                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.Id == product.Id && x.UserId == id);
+                    OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(x => x.Product.Id == product.Id && x.UserId == id && x.InTheBasket);
                     if (userBasket == null)
                     {
+                        //Basket newBasket=new Basket();
+                        //newBasket.UserId = id;
+                        //newBasket.StatusId = 1;
+                        //newBasket.CreateUserId = id;
+                        _functions.GirisSepetControl();
+
+
                         orderProduct = new OrderProduct();
                         orderProduct.CreateDateTime = DateTime.Now;
                         orderProduct.CreateUserId = _loginState.IsLoginUser().Id;
@@ -397,9 +404,26 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     }
                     else
                     {
-                        orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.Id == product.Id).Total;
-                        orderProduct.Quantity = orderProduct.Quantity + 1;
-                        db.Entry(orderProduct).State = EntityState.Modified;
+                        if (orderProduct != null)
+                        {
+                            orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.Id == product.Id).Total;
+                            orderProduct.Quantity = orderProduct.Quantity + 1;
+                            db.Entry(orderProduct).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            orderProduct = new OrderProduct();
+                            orderProduct.CreateDateTime = DateTime.Now;
+                            orderProduct.CreateUserId = _loginState.IsLoginUser().Id;
+                            orderProduct.BasketId = userBasket.Id;
+                            orderProduct.InTheBasket = true;
+
+                            orderProduct.ProductId = product.Id;
+                            orderProduct.UserId = _loginState.IsLoginUser().Id;
+                            orderProduct.Quantity = s.Products.FirstOrDefault(x => x.Product.Id == productId).Quantity;
+                            orderProduct.Amount = (double)s.Products.FirstOrDefault(x => x.Product.Id == product.Id).Total;
+                            db.OrderProducts.Add(orderProduct);
+                        }
                         db.SaveChanges();
                     }
                     Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
@@ -512,13 +536,28 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Sepetim/OdemeTamamlandi")]
         public ActionResult PaymentSuccessful()
         {
-            BasketClass s = new BasketClass();
-            s = (BasketClass)Session["AktifSepet"];
-            Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
-            basket.StatusId = 2;
-            db.Entry(basket).State = EntityState.Modified;
-            db.SaveChanges();
-            Session.Remove("AktifSepet");
+            try
+            {
+                BasketClass s = new BasketClass();
+                s = (BasketClass)Session["AktifSepet"];
+                Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
+                basket.StatusId = 2;
+                db.Entry(basket).State = EntityState.Modified;
+                List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                foreach (var item in orderProducts)
+                {
+                    item.InTheBasket = false;
+                    db.Entry(item).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                Session.Remove("AktifSepet");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+          
             return View();
         }
         [Route("Sepetim/OdemeHata")]
