@@ -91,10 +91,11 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.UserAddress.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
 
-                        @Html.TextBoxFor(model => model.UserAddress.Phone, new { @class = "form-control", @style = "max-width:100%;max-height:100px;" })
+                        @Html.TextBoxFor(model => model.UserAddress.Phone, new { @class = "form-control phone_us", @style = "max-width:100%;max-height:100px;" })
                         @Html.ValidationMessageFor(model => model.UserAddress.Phone, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                 @Html.HiddenFor(x=>x.User.Password)
                 <div class="col-md-12">
                     <hr />
                 </div>
@@ -170,3 +171,38 @@
     </div>
 
 </div>
+@section scripts
+{
+    <script>
+        $("#uyeOlmadanForm").validate({
+            rules: {
+                Name: "required",
+                LastName: "required",
+                Telephone: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 11
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                TCKN: {
+                    required: true
+                },
+                Title: {
+                    required: true
+                },
+                City: {
+                    required: true
+                },
+                Address: {
+                    required: true
+                },
+                Phones: {
+                    required: true
+                }
+            }
+        });
+    </script>
+}

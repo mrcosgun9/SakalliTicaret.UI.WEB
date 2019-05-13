@@ -65,7 +65,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                User dbuser = db.Users.FirstOrDefault(x => x.Email == user.Email&&x.IsAdmin==false);
+                User dbuser = db.Users.FirstOrDefault(x => x.Email == user.Email && x.IsAdmin == false);
                 if (dbuser == null)
                 {
                     EncodeDecode encodeDecode = new EncodeDecode();
@@ -211,7 +211,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 case "Adresler":
                     return View("_AddressList");
                 case "Siparislerim":
-                    var basket = db.Baskets.Include(x=>x.User).Include(x=>x.OrderProducts).Include(x => x.Status).Where(x => x.UserId == user.Id).OrderByDescending(x => x.Id).ToList();
+                    var basket = db.Baskets.Include(x => x.User).Include(x => x.OrderProducts).Include(x => x.Status).Where(x => x.UserId == user.Id).OrderByDescending(x => x.Id).ToList();
                     return View("_Baskets", basket);
                 default:
                     break;
@@ -243,16 +243,28 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [HttpPost]
         public ActionResult NotUserBasketSuccess(NotUserBasketModel basketModel)
         {
+            basketModel.User.Password = _functions.RandomKey(12);
+            if (ModelState.IsValid)
+            {
+                basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+                Session["NotUser"] = basketModel;
+                try
+                {
+                    return Redirect("Sepet/Tamamla/Odeme");
+                }
+                catch (Exception e)
+                {
+                    return View();
+                }
+            }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
-            Session["NotUser"] = basketModel;
-            try
+            if (basketModel.BasketClass.Products.Count == 0)
             {
-                return Redirect("Sepet/Tamamla/Odeme");
+                return Redirect("/Sepetim");
             }
-            catch (Exception e)
-            {
-                return View();
-            }
+            
+            return View(basketModel);
 
         }
         [Route("MailOnayla")]

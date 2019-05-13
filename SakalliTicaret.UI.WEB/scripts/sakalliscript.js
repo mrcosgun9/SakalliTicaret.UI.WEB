@@ -78,33 +78,4 @@ $(document).ready(function () {
 //});
 
 
-    $("#uyeOlmadanForm").validate({
-        rules: {
-            Name: "required",
-            LastName: "required",
-            Telephone: {
-                required: true,
-                minlength: 10,
-                maxlength: 11
-            },
-            Email: {
-                required: true,
-                email: true
-            },
-            TCKN: {
-                required: true
-            },
-            Title: {
-                required:true
-            },
-            City: {
-                required:true
-            },
-            Address: {
-                required: true
-            },
-            Phones: {
-                required: true
-            }
-        }
-    });
+   

@@ -13,12 +13,16 @@ namespace SakalliTicaret.Core.Model.Entity
         public int UserId { get; set; }
         public User User { get; set; }
         [Display(Name = "Başlık")]
+        [Required]
         public string Title { get; set; }
         [Display(Name = "Şehir")]
+        [Required]
         public string City { get; set; }
         [Display(Name = "Adres")]
+        [Required]
         public string Address { get; set; }
         [Display(Name = "Telefon")]
+        [Required]
         public string Phone { get; set; }
         [Display(Name = "Aktif")]
         public bool IsActice { get; set; }

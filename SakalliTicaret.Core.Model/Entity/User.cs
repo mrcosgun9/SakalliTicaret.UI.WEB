@@ -26,6 +26,7 @@ namespace SakalliTicaret.Core.Model.Entity
         [Display(Name = "Resim")]
         public string ImageUrl { get; set; }
         [Display(Name = "Telefon")]
+        [Required]
         public string Telephone { get; set; }
         [Required]
         [Display(Name = "Şifre")]

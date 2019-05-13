@@ -15,6 +15,15 @@ namespace SakalliTicaret.UI.WEB.App_Class
         SakalliTicaretDb db = new SakalliTicaretDb();
         private LoginState _loginState = new LoginState();
 
+
+        public string RandomKey(int length)
+        {
+            string ts = DateTime.Now.ToString("hhmmss");
+            string chars = "ST123456789ABCDEFGHJKLMNOPRSTUIVYZWX";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray()) + ts;
+        }
+
         public string CharactertReplace(string character)
         {
             string characterReplace = Regex.Replace(character, "[^0-9a-zA-Z- ]+", "");
