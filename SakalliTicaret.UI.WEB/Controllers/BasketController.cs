@@ -555,7 +555,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+         
             }
           
             return View();

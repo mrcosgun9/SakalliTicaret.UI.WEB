@@ -93,8 +93,10 @@
 
                         @Html.TextBoxFor(model => model.UserAddress.Phone, new { @class = "form-control phone_us", @style = "max-width:100%;max-height:100px;" })
                         @Html.ValidationMessageFor(model => model.UserAddress.Phone, "", new { @class = "text-danger" })
+                        
                     </div>
                 </div>
+                <input type="hidden" name="User.Password" id="Password" value="@viewFunctions.RandomKey(12)"/>
                  @Html.HiddenFor(x=>x.User.Password)
                 <div class="col-md-12">
                     <hr />

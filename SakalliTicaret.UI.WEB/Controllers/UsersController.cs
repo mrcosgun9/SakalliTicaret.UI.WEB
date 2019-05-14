@@ -244,9 +244,40 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult NotUserBasketSuccess(NotUserBasketModel basketModel)
         {
             basketModel.User.Password = _functions.RandomKey(12);
+            basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
             if (ModelState.IsValid)
             {
-                basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+                User user = basketModel.User;
+                user.CreateDateTime=DateTime.Now;
+                db.Users.Add(user);
+                db.SaveChanges();
+                UserAddress userAddress = basketModel.UserAddress;
+                userAddress.CreateDateTime=DateTime.Now;
+                db.UserAddresses.Add(userAddress);
+                db.SaveChanges();
+                Basket basket = new Basket();
+                basket.BasketKey = basketModel.BasketClass.BasketKey;
+                basket.StatusId = 1;
+                basket.UserId = user.Id;
+                basket.Amount = basketModel.BasketClass.TotalAmount;
+                basket.UserAddressId = userAddress.Id;
+                basket.CreateDateTime=DateTime.Now;
+                db.Baskets.Add(basket);
+                db.SaveChanges();
+                foreach (var item in basketModel.BasketClass.BasketItems)
+                {
+                    OrderProduct orderProduct = new OrderProduct();
+                    orderProduct.UserId = user.Id;
+                    orderProduct.BasketId = basket.Id;
+                    orderProduct.InTheBasket = true;
+                    orderProduct.ProductId = item.Product.Id;
+                    orderProduct.Amount = (double) item.Total;
+                    orderProduct.Quantity = item.Quantity;
+                    orderProduct.CreateDateTime=DateTime.Now;
+                    orderProduct.CreateUserId = user.Id;
+                    db.OrderProducts.Add(orderProduct);
+                    db.SaveChanges();
+                }
                 Session["NotUser"] = basketModel;
                 try
                 {
