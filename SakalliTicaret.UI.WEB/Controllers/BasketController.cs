@@ -223,7 +223,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
             string user_ip = GetIPAddress();
-            //string user_ip = "88.230.140.128";
+            //string user_ip = "88.230.143.21";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
@@ -523,12 +523,12 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //}
             if (status == "success")
             {
-                BasketClass s = new BasketClass();
-                s = (BasketClass)Session["AktifSepet"];
-                Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
-                basket.StatusId = 2;
-                db.Entry(basket).State = EntityState.Modified;
-                db.SaveChanges();
+                //BasketClass s = new BasketClass();
+                //s = (BasketClass)Session["AktifSepet"];
+                //Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                //basket.StatusId = 2;
+                //db.Entry(basket).State = EntityState.Modified;
+                //db.SaveChanges();
                 Response.Write("OK");
             }
             return View();
