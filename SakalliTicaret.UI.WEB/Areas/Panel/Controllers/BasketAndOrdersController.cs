@@ -24,7 +24,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         {
             BasketDetailModel basketDetailModel = new BasketDetailModel();
 
-            basketDetailModel.OrderProducts = db.OrderProducts.Include(x => x.User).Include(x => x.Product).OrderByDescending(x => x.Id).ToList();
+            basketDetailModel.OrderProducts = db.OrderProducts.Include(x => x.User).Include(x => x.Product).OrderByDescending(x => x.Id).Where(x => x.BasketId == id).ToList();
 
             basketDetailModel.Basket = db.Baskets.Include(x => x.UserAddress).FirstOrDefault(x => x.Id == id);
 
@@ -36,7 +36,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             Basket basket = db.Baskets.Include(x => x.Status).FirstOrDefault(x => x.Id == Id);
             if (basket.StatusId == 2)
             {
-        
+
             }
             if (basket.StatusId == 3)
             {

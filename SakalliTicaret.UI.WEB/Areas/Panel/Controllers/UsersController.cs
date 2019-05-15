@@ -15,11 +15,41 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
     public class UsersController : AdminControlerBase
     {
         private SakalliTicaretDb db = new SakalliTicaretDb();
-        LogClass _logClass=new LogClass();
+        LogClass _logClass = new LogClass();
         // GET: Panel/Users
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Users.ToList());
+            List<User> user = new List<User>();
+
+                switch (id)
+                {
+                    case 1:
+                        //Admin Kullanıcıları
+                        user = db.Users.Where(x => x.IsAdmin).ToList();
+                        break;
+                    case 2:
+                        //Engellenen Admin Kullanıcıları
+                        user = db.Users.Where(x => x.IsAdmin && x.IsActive==false).ToList();
+                        break;
+                    case 3:
+                        //Müşteriler
+                        user = db.Users.Where(x => x.IsAdmin==false).ToList();
+                        break;
+                    case 4:
+                        //Engellenen Müşteriler
+                        user = db.Users.Where(x => x.IsActive==false && x.IsAdmin==false).ToList();
+                        break;
+                    case 5:
+                        //Aktif Müşteriler
+                        user = db.Users.Where(x => x.IsActive && x.IsAdmin == false).ToList();
+                        break;
+                    default:
+                        user = db.Users.ToList();
+                        break;
+                }
+        
+            
+            return View(user);
         }
 
         // GET: Panel/Users/Details/5
@@ -54,7 +84,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                User sessions= Session["AdminLoginUser"] as User;
+                User sessions = Session["AdminLoginUser"] as User;
                 if (sessions != null) _logClass.UserLog(user, "Ekleme", sessions.Id);
                 return RedirectToAction("Index");
             }
@@ -81,7 +111,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "ID,Name,LastName,Email,ImageUrl,Telephone,Password,TCKN,IsActive,IsAdmin,CreateDateTime,CreateUserID,UpdateDateTime,UpdateUserID")] User user)
+        public ActionResult Edit(User user)
         {
             try
             {
