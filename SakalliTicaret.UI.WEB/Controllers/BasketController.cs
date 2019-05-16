@@ -165,16 +165,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
         }
         private void posVoid()
         {
-
             PosEntegration entegration = db.PosEntegrations.FirstOrDefault();
-            // ####################### DÜZENLEMESİ ZORUNLU ALANLAR #######################
-            //
-            // API Entegrasyon Bilgileri - Mağaza paneline giriş yaparak BİLGİ sayfasından alabilirsiniz.
+          
             string merchant_id = entegration.StoreCode;
             string merchant_key = entegration.UserName;
             string merchant_salt = entegration.Password;
-            //
-            // Müşterinizin sitenizde kayıtlı veya form vasıtasıyla aldığınız eposta adresi
             User user = _loginState.IsLoginUser();
             NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
 
@@ -222,8 +217,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            string user_ip = GetIPAddress();
-            //string user_ip = "88.230.143.21";
+            //string user_ip = GetIPAddress();
+            string user_ip = "78.186.172.90";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
