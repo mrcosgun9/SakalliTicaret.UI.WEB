@@ -461,7 +461,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     db.OrderProducts.Remove(item);
                     db.SaveChanges();
                 }
-               
+
             }
             Session.Remove("AktifSepet");
             return Redirect("/Sepetim");
@@ -531,32 +531,45 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //}
             if (status == "success")
             {
+
+                BasketClass s = new BasketClass();
+                s = (BasketClass)Session["AktifSepet"];
+                Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
                 try
                 {
-                    BasketClass s = new BasketClass();
-                    s = (BasketClass)Session["AktifSepet"];
-                    Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
+
                     basket.StatusId = 2;
                     db.Entry(basket).State = EntityState.Modified;
                     db.SaveChanges();
-                    List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                }
+                catch (Exception e)
+                {
+                    SendMail sendMail = new SendMail();
+                    sendMail.MailSender("Statu Düzenleme Hatası", "Statu Düzenleme Hatası<br><br>" + e.InnerException + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
+
+                }
+
+                try
+                {
+
+                    List<OrderProduct> orderProducts =
+                        db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
                     foreach (var item in orderProducts)
                     {
+                        ProductOperations productOperations = new ProductOperations();
+                        productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, basket.UserId);
                         item.InTheBasket = false;
                         db.Entry(item).State = EntityState.Modified;
                         db.SaveChanges();
                     }
                     db.SaveChanges();
-                    Session.Remove("AktifSepet");
                 }
                 catch (Exception e)
                 {
                     SendMail sendMail = new SendMail();
-                    sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Ödeme Yapıldı Sepet Kapatılamadı<br><br>" + e.InnerException + "<br>" + e.Message, "mrcosgun9@gmail.com");
-
-                    Console.WriteLine(e);
-
+                    sendMail.MailSender("Kalem Kapatma Hatası", "Kalem Kapatma Hatası<br><br>" + e.InnerException + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
                 }
+                Session.Remove("AktifSepet");
 
                 Response.Write("OK");
             }
@@ -565,35 +578,6 @@ namespace SakalliTicaret.UI.WEB.Controllers
         [Route("Sepetim/OdemeTamamlandi")]
         public ActionResult PaymentSuccessful()
         {
-            try
-            {
-                BasketClass s = new BasketClass();
-                s = (BasketClass)Session["AktifSepet"];
-                Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
-                basket.StatusId = 2;
-                db.Entry(basket).State = EntityState.Modified;
-                db.SaveChanges();
-                List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
-                foreach (var item in orderProducts)
-                {
-                    ProductOperations productOperations=new ProductOperations();
-                    productOperations.ProductOperationsCreate(item.ProductId,3,"Satış No:"+item.Basket.BasketKey+" - Adet:"+item.Quantity,basket.UserId);
-                    item.InTheBasket = false;
-                    db.Entry(item).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                db.SaveChanges();
-                Session.Remove("AktifSepet");
-            }
-            catch (Exception e)
-            {
-                SendMail sendMail = new SendMail();
-                sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Ödeme Yapıldı Sepet Kapatılamadı<br><br>" + e.InnerException + "<br>" + e.Message, "mrcosgun9@gmail.com");
-
-                Console.WriteLine(e);
-
-            }
-
             return View();
         }
         [Route("Sepetim/OdemeHata")]
