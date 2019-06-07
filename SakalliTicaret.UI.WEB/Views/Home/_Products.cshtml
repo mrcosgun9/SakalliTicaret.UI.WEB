@@ -21,10 +21,22 @@
                     @if (indirim > 0)
                     {
                         <span class="product-tag xt-uppercase">
-
                             %@indirim İNDİRİM
-
                         </span>
+                    }
+                    @{
+                        if (item.Stock <= 0)
+                        {
+                            <span class="product-tag xt-uppercase" style="background: #778899">
+                                Ürün Stokta Yok
+                            </span>
+                        }
+                        else if (!item.IsActive)
+                        {
+                            <span class="product-tag xt-uppercase" style="background: #778899">
+                                Ürün Satışa Kapalı
+                            </span>
+                        }
                     }
 
                     <img class="card-img-top" src="/Content/Images/Products/@item.ImageUrl" />

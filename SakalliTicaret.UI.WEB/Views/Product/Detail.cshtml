@@ -145,7 +145,25 @@
                                     <input type="number" step="1" name="quantity" value="1" title="Qty" class="input-text qty text" size="4">
                                 </div>*@
                             <div class="product-add-cart">
-                                <button name="@Model.Product.Id" class="basketCreate" style="float: none;" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                                @{
+                                    if (Model.Product.Stock <= 0)
+                                    {
+                                        <span class="product-tag xt-uppercase" style="background: #778899">
+                                            Ürün Stokta Yok
+                                        </span>
+                                    }
+                                    else if (!Model.Product.IsActive)
+                                    {
+                                        <span class="product-tag xt-uppercase" style="background: #778899">
+                                            Ürün Satışa Kapalı
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <button name="@Model.Product.Id" class="basketCreate" style="float: none;" type="submit"><i class="fa fa-cart-plus"></i>Sepete Ekle</button>
+                                    }
+                                }
+                              
                                 @*<a href="" class="btn liked "><i class="fa fa-heart-o xt-no-color"></i><i class="fa fa-heart xt-color"></i></a>*@
                             </div>
                             <div class="product-additional-info">

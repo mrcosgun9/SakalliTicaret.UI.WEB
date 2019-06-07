@@ -79,6 +79,7 @@
     <Compile Include="Entity\Slider.cs" />
     <Compile Include="Entity\SocialMedia.cs" />
     <Compile Include="Entity\Status.cs" />
+    <Compile Include="Entity\ProductTransaction.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\UserAddress.cs" />
     <Compile Include="Migrations\201901170642523_test.cs" />

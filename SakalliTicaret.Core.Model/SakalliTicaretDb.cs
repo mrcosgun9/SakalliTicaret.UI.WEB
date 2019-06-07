@@ -41,6 +41,8 @@ namespace SakalliTicaret.Core.Model
         public DbSet<CargoCompany> CargoCompanies { get; set; }
         public DbSet<BasketCargo> BasketCargoes { get; set; }
         public DbSet<MailDesign> MailDesigns { get; set; }
+        public DbSet<ProductTransaction> ProductTransactions { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

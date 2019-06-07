@@ -320,6 +320,12 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
                 });
             }
         }
+
+        public ActionResult ProductOperationsList()
+        {
+          
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

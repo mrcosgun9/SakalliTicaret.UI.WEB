@@ -13,6 +13,8 @@ using SakalliTicaret.Core.Model;
 using SakalliTicaret.Core.Model.Entity;
 using SakalliTicaret.UI.WEB.App_Class;
 using Newtonsoft.Json.Utilities;
+using SakalliTicaret.Helper.MailOperations;
+using SakalliTicaret.Helper.ProductOperations;
 using SakalliTicaret.UI.WEB.Models;
 
 namespace SakalliTicaret.UI.WEB.Controllers
@@ -94,8 +96,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
             else
             {
                 s.AddressId = ID;
-                Session["AktifSepet"] = s;
+
                 Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+                s.BasketId = basket.Id;
+                Session["AktifSepet"] = s;
                 if (basket != null)
                 {
                     basket.UserAddressId = ID;
@@ -166,7 +170,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         private void posVoid()
         {
             PosEntegration entegration = db.PosEntegrations.FirstOrDefault();
-          
+
             string merchant_id = entegration.StoreCode;
             string merchant_key = entegration.UserName;
             string merchant_salt = entegration.Password;
@@ -176,12 +180,20 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
             //
             // Tahsil edilecek tutar. 9.99 için 9.99 * 100 = 999 gönderilmelidir.
+            Basket basket = new Basket();
+
             BasketClass s = new BasketClass();
             s = (BasketClass)Session["AktifSepet"];
+
             int payment_amountstr = (int)s.TotalAmount * 100;
             //
             // Sipariş numarası: Her işlemde benzersiz olmalıdır!! Bu bilgi bildirim sayfanıza yapılacak bildirimde geri gönderilir.
-            s.BasketKey = s.BasketKey;
+
+            basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
+            s.BasketId = basket.Id;
+            Session["AktifSepet"] = s;
+            s = (BasketClass)Session["AktifSepet"];
+
             string merchant_oid = s.BasketKey;
             //
             // Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
@@ -217,8 +229,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //        
             // !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
             // buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
-            //string user_ip = GetIPAddress();
-            string user_ip = "78.186.172.90";
+            string user_ip = GetIPAddress();
+            //string user_ip = "78.186.172.90";
             if (user_ip == "" || user_ip == null)
             {
                 user_ip = Request.ServerVariables["REMOTE_ADDR"];
@@ -258,7 +270,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             string timeout_limit = "30";
             //
             // Hata mesajlarının ekrana basılması için entegrasyon ve test sürecinde 1 olarak bırakın. Daha sonra 0 yapabilirsiniz.
-            string debug_on = "1";
+            string debug_on = "0";
             //
             // Mağaza canlı modda iken test işlem yapmak için 1 olarak gönderilebilir.
             string test_mode = "1";
@@ -449,8 +461,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     db.OrderProducts.Remove(item);
                     db.SaveChanges();
                 }
+               
             }
-
+            Session.Remove("AktifSepet");
             return Redirect("/Sepetim");
         }
         [Route("Sepetim/Sil/{id}")]
@@ -518,12 +531,33 @@ namespace SakalliTicaret.UI.WEB.Controllers
             //}
             if (status == "success")
             {
-                //BasketClass s = new BasketClass();
-                //s = (BasketClass)Session["AktifSepet"];
-                //Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
-                //basket.StatusId = 2;
-                //db.Entry(basket).State = EntityState.Modified;
-                //db.SaveChanges();
+                try
+                {
+                    BasketClass s = new BasketClass();
+                    s = (BasketClass)Session["AktifSepet"];
+                    Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
+                    basket.StatusId = 2;
+                    db.Entry(basket).State = EntityState.Modified;
+                    db.SaveChanges();
+                    List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                    foreach (var item in orderProducts)
+                    {
+                        item.InTheBasket = false;
+                        db.Entry(item).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
+                    Session.Remove("AktifSepet");
+                }
+                catch (Exception e)
+                {
+                    SendMail sendMail = new SendMail();
+                    sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Ödeme Yapıldı Sepet Kapatılamadı<br><br>" + e.InnerException + "<br>" + e.Message, "mrcosgun9@gmail.com");
+
+                    Console.WriteLine(e);
+
+                }
+
                 Response.Write("OK");
             }
             return View();
@@ -538,21 +572,28 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
                 basket.StatusId = 2;
                 db.Entry(basket).State = EntityState.Modified;
+                db.SaveChanges();
                 List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
                 foreach (var item in orderProducts)
                 {
+                    ProductOperations productOperations=new ProductOperations();
+                    productOperations.ProductOperationsCreate(item.ProductId,3,"Satış No:"+item.Basket.BasketKey+" - Adet:"+item.Quantity,basket.UserId);
                     item.InTheBasket = false;
                     db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
                 db.SaveChanges();
                 Session.Remove("AktifSepet");
             }
             catch (Exception e)
             {
+                SendMail sendMail = new SendMail();
+                sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Ödeme Yapıldı Sepet Kapatılamadı<br><br>" + e.InnerException + "<br>" + e.Message, "mrcosgun9@gmail.com");
+
                 Console.WriteLine(e);
-         
+
             }
-          
+
             return View();
         }
         [Route("Sepetim/OdemeHata")]
