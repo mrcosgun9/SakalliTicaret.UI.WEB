@@ -35,10 +35,17 @@ namespace SakalliTicaret.Core.Model.Entity
         public string TCKN { get; set; }
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
+
         [Display(Name = "Yönetici")]
-        public bool IsAdmin { get; set; }
+        public bool IsAdmin { get; set; } = false;
         public string UserKey { get; set; }
         public bool IsMailSuccess { get; set; } = false;
+        public UserCreateMethod CreateMethod { get; set; } = UserCreateMethod.UserCreate;
         public virtual IEnumerable<UserAddress> UserAddress { get; set; }
+    }
+    public enum UserCreateMethod
+    {
+        NotUserCreate = 0,
+        UserCreate = 1
     }
 }

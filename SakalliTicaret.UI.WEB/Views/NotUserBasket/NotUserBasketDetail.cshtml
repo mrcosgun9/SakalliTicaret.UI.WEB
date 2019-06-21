@@ -1,0 +1,86 @@
+﻿@model SakalliTicaret.UI.WEB.Models.NotUserBasketModel
+@{
+    ViewBag.Title = "NotUserBasketDetail";
+    Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12">
+            <h4>Üye Olmadan Devam Et</h4>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.User.Name)
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.Name">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.LastName)
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.LastName">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Email)
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.Email">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.Telephone)
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.Telephone">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.User.TCKN)
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.TCKN">
+            </div>
+        </div>
+        <input type="hidden" name="User.Password" id="Password" value="@Model.User.Password" />
+        @Html.HiddenFor(x => x.User.Password)
+        <hr/>
+
+        <h4>Adres Bilgileriniz</h4>
+        <hr/>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddress.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.Title">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddress.City, htmlAttributes: new {@class = "control-label col-md-2"})
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.City">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddress.Address, htmlAttributes: new {@class = "control-label col-md-2"})
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.Address">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserAddress.Phone, htmlAttributes: new {@class = "control-label col-md-2"})
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.Phone">
+            </div>
+        </div>
+        <div class="col-md-12">
+
+            <div class="form-group text-right">
+                <input type="submit" name="BtnPrevious" value="Geri" class="btn btn-danger float-left"/>
+                <input type="submit" name="BtnNext" value="İleri" class="btn btn-success"/>
+            </div>
+        </div>
+    </div>
+</div>

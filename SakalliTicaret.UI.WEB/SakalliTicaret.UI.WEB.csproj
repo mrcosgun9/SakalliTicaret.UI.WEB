@@ -116,6 +116,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -1769,6 +1770,7 @@
     <Compile Include="Controllers\CompanentController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotUserBasketController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -1981,6 +1983,9 @@
     <Content Include="Views\Basket\PaymentSuccessful.cshtml" />
     <Content Include="Views\Basket\PaymentError.cshtml" />
     <Content Include="Views\Users\BasketDetail.cshtml" />
+    <Content Include="Views\NotUserBasket\Index.cshtml" />
+    <Content Include="Views\NotUserBasket\NotUserBasketAddress.cshtml" />
+    <Content Include="Views\NotUserBasket\NotUserBasketDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
