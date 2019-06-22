@@ -1,7 +1,11 @@
-﻿@model SakalliTicaret.UI.WEB.Models.NotUserBasketModel
+﻿@using SakalliTicaret.UI.WEB.App_Class
+@model SakalliTicaret.UI.WEB.Models.NotUserBasketModel
 @{
     ViewBag.Title = "NotUserBasketDetail";
     Layout = "~/Views/Shared/_LayoutPageBlank.cshtml";
+}
+@{
+    Functions viewFunctions = new Functions();
 }
 <div class="col-md-12">
     <div class="card">
@@ -10,77 +14,141 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="col-md-12">
+
+        <div class="col-md-6">
             <h4>Üye Olmadan Devam Et</h4>
             <hr />
-        </div>
-        <div class="col-md-12">
             <div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.User.Name) :
+                    <label>@Model.User.Name</label>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.User.LastName) :
+                    <label>@Model.User.LastName</label>
+                </div>
+            </div>
 
-                @Html.LabelFor(model => model.User.Name)
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.Name">
-            </div>
-        </div>
-        <div class="col-md-12">
             <div class="form-group">
-                @Html.LabelFor(model => model.User.LastName)
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.LastName">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.User.Email) :
+                    <label>@Model.User.Email</label>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.User.Telephone) :
+                    <label>@Model.User.Telephone</label>
+                </div>
             </div>
-        </div>
-        <div class="col-md-12">
             <div class="form-group">
-                @Html.LabelFor(model => model.User.Email)
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.Email">
+                <div class="col-md-12">
+
+                    @Html.LabelFor(model => model.User.TCKN) :
+                    <label>@Model.User.TCKN</label>
+                </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.User.Telephone)
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.Telephone">
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.User.TCKN)
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.User.TCKN">
-            </div>
-        </div>
+
+
         <input type="hidden" name="User.Password" id="Password" value="@Model.User.Password" />
         @Html.HiddenFor(x => x.User.Password)
-        <hr/>
+        <div class="col-md-6">
+            <h4>Adres Bilgileriniz</h4>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-12">
 
-        <h4>Adres Bilgileriniz</h4>
-        <hr/>
-        <div class="col-md-2">
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserAddress.Title, htmlAttributes: new {@class = "control-label col-md-2"})
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.Title">
+                    @Html.LabelFor(model => model.UserAddress.Title, htmlAttributes: new { @class = "control-label" }) :
+                    <label>@Model.UserAddress.Title</label>
+                </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserAddress.City, htmlAttributes: new {@class = "control-label col-md-2"})
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.City">
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserAddress.Address, htmlAttributes: new {@class = "control-label col-md-2"})
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.Address">
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserAddress.Phone, htmlAttributes: new {@class = "control-label col-md-2"})
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value="@Model.UserAddress.Phone">
-            </div>
-        </div>
-        <div class="col-md-12">
 
-            <div class="form-group text-right">
-                <input type="submit" name="BtnPrevious" value="Geri" class="btn btn-danger float-left"/>
-                <input type="submit" name="BtnNext" value="İleri" class="btn btn-success"/>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.UserAddress.City, htmlAttributes: new { @class = "control-label" }) :
+                    <label>@Model.UserAddress.City</label>
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.UserAddress.Phone, htmlAttributes: new { @class = "control-label" }) :
+                    <label>@Model.UserAddress.Phone</label>
+                </div>
             </div>
+            <div class="form-group">
+                <div class="col-md-12">
+
+                    @Html.LabelFor(model => model.UserAddress.Address, htmlAttributes: new { @class = "control-label" }) :
+                    <label>@Model.UserAddress.Address</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 basketlist">
+            <div class="baslikborder">Sepet</div>
+            <table class="table-fill">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Resim</th>
+                        <th>Adı</th>
+                        <th>Birim Fiyat</th>
+                        <th>Adet</th>
+                        <th>Top. Fiyat</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-hover">
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var item in Model.BasketClass.Products)
+                    {
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td class="text-left">
+
+                                <div class="sepetimage">
+                                    <img class="card-img-top" src="/Content/Images/Products/@item.Product.ImageUrl" />
+                                </div>
+                            </td>
+                            <td class="text-left">
+                                <a href="~/Urun/@item.Product.Id/@viewFunctions.UrlClear(item.Product.Name.ToLower())" class="incele">
+                                    @item.Product.Name
+                                </a>
+                            </td>
+
+
+                            <td class="text-left">@item.Product.Price ₺</td>
+                            <td class="text-left">@item.Quantity</td>
+                            <td class="text-left">@item.Total ₺</td>
+                            <td class="text-left">
+                                <a href="Sepetim/Sil/@item.Product.Id">
+                                    <i class="fa fa-minus-circle" style="color: #b22222"></i>
+                                    @*<i class="material-icons sepetsil" name="@item.Urun.urunId">cancel</i>*@
+                                </a>
+                            </td>
+                        </tr>
+                        i = i + 1;
+                    }
+                </tbody>
+            </table>
+            <div class="sepetozet text-right margin-t-20 margin-b-20">
+                <div>
+                    <b>Toplam:</b>@Model.BasketClass.Products.Count Ürün
+                </div>
+                <div>
+                    <b>Toplam Tutar:</b>@Model.BasketClass.SubTotal
+                </div>
+                @*<a class="btn btn-danger" href="Sepet/Temizle">Temizle</a>*@
+            </div>
+        </div>
+        <div class="col-md-12">
+            @using (Html.BeginForm("NotUserBasketDetail", "NotUserBasket", FormMethod.Post))
+            {
+                <div class="form-group text-right">
+                    <input type="submit" name="BtnPrevious" value="Geri" class="btn btn-danger float-left" />
+                    <input type="submit" name="BtnNext" value="Ödemeye Geç" class="btn btn-success" />
+                </div>
+            }
         </div>
     </div>
 </div>

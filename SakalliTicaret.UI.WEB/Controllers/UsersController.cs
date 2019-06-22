@@ -218,17 +218,17 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
             return View();
         }
-        [Route("UyeOlmadanOnayla")]
-        public ActionResult NotUserBasketSuccess()
-        {
-            NotUserBasketModel model = new NotUserBasketModel();
-            model.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
-            if (model.BasketClass.Products.Count == 0)
-            {
-                return Redirect("/Sepetim");
-            }
-            return View(model);
-        }
+        //[Route("UyeOlmadanOnayla")]
+        //public ActionResult NotUserBasketSuccess()
+        //{
+        //    NotUserBasketModel model = new NotUserBasketModel();
+        //    model.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+        //    if (model.BasketClass.Products.Count == 0)
+        //    {
+        //        return Redirect("/Sepetim");
+        //    }
+        //    return View(model);
+        //}
         [Route("SiparisDetayi/{id}")]
         public ActionResult BasketDetail(int id)
         {
@@ -239,65 +239,65 @@ namespace SakalliTicaret.UI.WEB.Controllers
             basketDetailModel.Basket = db.Baskets.FirstOrDefault(x => x.Id == id);
             return View(basketDetailModel);
         }
-        [Route("UyeOlmadanOnayla")]
-        [HttpPost]
-        public ActionResult NotUserBasketSuccess(NotUserBasketModel basketModel)
-        {
-            basketModel.User.Password = _functions.RandomKey(12);
-            basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
-            if (ModelState.IsValid)
-            {
-                User user = basketModel.User;
-                user.CreateDateTime=DateTime.Now;
-                db.Users.Add(user);
-                db.SaveChanges();
-                UserAddress userAddress = basketModel.UserAddress;
-                userAddress.CreateDateTime=DateTime.Now;
-                db.UserAddresses.Add(userAddress);
-                db.SaveChanges();
-                Basket basket = new Basket();
-                basket.BasketKey = basketModel.BasketClass.BasketKey;
-                basket.StatusId = 1;
-                basket.UserId = user.Id;
-                basket.Amount = basketModel.BasketClass.TotalAmount;
-                basket.UserAddressId = userAddress.Id;
-                basket.CreateDateTime=DateTime.Now;
-                db.Baskets.Add(basket);
-                db.SaveChanges();
-                foreach (var item in basketModel.BasketClass.BasketItems)
-                {
-                    OrderProduct orderProduct = new OrderProduct();
-                    orderProduct.UserId = user.Id;
-                    orderProduct.BasketId = basket.Id;
-                    orderProduct.InTheBasket = true;
-                    orderProduct.ProductId = item.Product.Id;
-                    orderProduct.Amount = (double) item.Total;
-                    orderProduct.Quantity = item.Quantity;
-                    orderProduct.CreateDateTime=DateTime.Now;
-                    orderProduct.CreateUserId = user.Id;
-                    db.OrderProducts.Add(orderProduct);
-                    db.SaveChanges();
-                }
-                Session["NotUser"] = basketModel;
-                try
-                {
-                    return Redirect("Sepet/Tamamla/Odeme");
-                }
-                catch (Exception e)
-                {
-                    return View();
-                }
-            }
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
-            if (basketModel.BasketClass.Products.Count == 0)
-            {
-                return Redirect("/Sepetim");
-            }
+        //[Route("UyeOlmadanOnayla")]
+        //[HttpPost]
+        //public ActionResult NotUserBasketSuccess(NotUserBasketModel basketModel)
+        //{
+        //    basketModel.User.Password = _functions.RandomKey(12);
+        //    basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+        //    if (ModelState.IsValid)
+        //    {
+        //        User user = basketModel.User;
+        //        user.CreateDateTime=DateTime.Now;
+        //        db.Users.Add(user);
+        //        db.SaveChanges();
+        //        UserAddress userAddress = basketModel.UserAddress;
+        //        userAddress.CreateDateTime=DateTime.Now;
+        //        db.UserAddresses.Add(userAddress);
+        //        db.SaveChanges();
+        //        Basket basket = new Basket();
+        //        basket.BasketKey = basketModel.BasketClass.BasketKey;
+        //        basket.StatusId = 1;
+        //        basket.UserId = user.Id;
+        //        basket.Amount = basketModel.BasketClass.TotalAmount;
+        //        basket.UserAddressId = userAddress.Id;
+        //        basket.CreateDateTime=DateTime.Now;
+        //        db.Baskets.Add(basket);
+        //        db.SaveChanges();
+        //        foreach (var item in basketModel.BasketClass.BasketItems)
+        //        {
+        //            OrderProduct orderProduct = new OrderProduct();
+        //            orderProduct.UserId = user.Id;
+        //            orderProduct.BasketId = basket.Id;
+        //            orderProduct.InTheBasket = true;
+        //            orderProduct.ProductId = item.Product.Id;
+        //            orderProduct.Amount = (double) item.Total;
+        //            orderProduct.Quantity = item.Quantity;
+        //            orderProduct.CreateDateTime=DateTime.Now;
+        //            orderProduct.CreateUserId = user.Id;
+        //            db.OrderProducts.Add(orderProduct);
+        //            db.SaveChanges();
+        //        }
+        //        Session["NotUser"] = basketModel;
+        //        try
+        //        {
+        //            return Redirect("Sepet/Tamamla/Odeme");
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return View();
+        //        }
+        //    }
+        //    var errors = ModelState.Values.SelectMany(v => v.Errors);
+        //    basketModel.BasketClass = (BasketClass)HttpContext.Session["AktifSepet"];
+        //    if (basketModel.BasketClass.Products.Count == 0)
+        //    {
+        //        return Redirect("/Sepetim");
+        //    }
             
-            return View(basketModel);
+        //    return View(basketModel);
 
-        }
+        //}
         [Route("MailOnayla")]
         public ActionResult MailConfirmation(string Id)
         {

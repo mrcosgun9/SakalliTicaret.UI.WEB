@@ -122,7 +122,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
 
             }
-            NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
+            NotUserBasketModel basketModel = Session["NotUserBasketModel"] as NotUserBasketModel;
 
             posVoid();
             return View();
@@ -175,7 +175,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             string merchant_key = entegration.UserName;
             string merchant_salt = entegration.Password;
             User user = _loginState.IsLoginUser();
-            NotUserBasketModel basketModel = Session["NotUser"] as NotUserBasketModel;
+            NotUserBasketModel basketModel = Session["NotUserBasketModel"] as NotUserBasketModel;
 
 
             //
@@ -535,40 +535,40 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 BasketClass s = new BasketClass();
                 s = (BasketClass)Session["AktifSepet"];
                 Basket basket = db.Baskets.Where(x => x.BasketKey == s.BasketKey).First();
-                try
-                {
+                //try
+                //{
 
-                    basket.StatusId = 2;
-                    db.Entry(basket).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    SendMail sendMail = new SendMail();
-                    sendMail.MailSender("Statu Düzenleme Hatası", "Statu Düzenleme Hatası<br><br>" + e.InnerException + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
+                //    basket.StatusId = 2;
+                //    db.Entry(basket).State = EntityState.Modified;
+                //    db.SaveChanges();
+                //}
+                //catch (Exception e)
+                //{
+                //    SendMail sendMail = new SendMail();
+                //    sendMail.MailSender("Statu Düzenleme Hatası", "Statu Düzenleme Hatası<br><br>" + e.InnerException + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
 
-                }
+                //}
 
-                try
-                {
+                //try
+                //{
 
-                    List<OrderProduct> orderProducts =
-                        db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
-                    foreach (var item in orderProducts)
-                    {
-                        ProductOperations productOperations = new ProductOperations();
-                        productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, basket.UserId);
-                        item.InTheBasket = false;
-                        db.Entry(item).State = EntityState.Modified;
-                        db.SaveChanges();
-                    }
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    SendMail sendMail = new SendMail();
-                    sendMail.MailSender("Kalem Kapatma Hatası", "Kalem Kapatma Hatası<br><br>" + e.InnerException + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
-                }
+                //    List<OrderProduct> orderProducts =
+                //        db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                //    foreach (var item in orderProducts)
+                //    {
+                //        ProductOperations productOperations = new ProductOperations();
+                //        productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, basket.UserId);
+                //        item.InTheBasket = false;
+                //        db.Entry(item).State = EntityState.Modified;
+                //        db.SaveChanges();
+                //    }
+                //    db.SaveChanges();
+                //}
+                //catch (Exception e)
+                //{
+                //    SendMail sendMail = new SendMail();
+                //    sendMail.MailSender("Kalem Kapatma Hatası", "Kalem Kapatma Hatası<br><br>" + e.InnerException + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
+                //}
                 Session.Remove("AktifSepet");
 
                 Response.Write("OK");
