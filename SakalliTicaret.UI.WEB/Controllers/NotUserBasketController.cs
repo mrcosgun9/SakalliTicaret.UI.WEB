@@ -44,7 +44,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     if (ModelState.IsValid)
                     {
                         NotUserBasketModel getUser = GetUser();
-                        userControl = db.Users.FirstOrDefault(x => x.Email == user.Email);
+                        userControl = db.Users.FirstOrDefault(x => x.Email == user.Email && x.Telephone==x.Telephone);
                         if (userControl != null)
                         {
                             user.Id = userControl.Id;

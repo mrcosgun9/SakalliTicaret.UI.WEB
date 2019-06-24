@@ -21,43 +21,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             return View(db.PosEntegrations.ToList());
         }
 
-        // GET: Panel/PosEntegrations/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PosEntegration posEntegration = db.PosEntegrations.Find(id);
-            if (posEntegration == null)
-            {
-                return HttpNotFound();
-            }
-            return View(posEntegration);
-        }
 
-        // GET: Panel/PosEntegrations/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Panel/PosEntegrations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,StoreCode,UserName,Password,Installments,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] PosEntegration posEntegration)
-        {
-            if (ModelState.IsValid)
-            {
-                db.PosEntegrations.Add(posEntegration);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(posEntegration);
-        }
 
         // GET: Panel/PosEntegrations/Edit/5
         public ActionResult Edit(int? id)
@@ -79,41 +43,15 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StoreCode,UserName,Password,Installments,CreateDateTime,CreateUserId,UpdateDateTime,UpdateUserId")] PosEntegration posEntegration)
+        public ActionResult Edit(PosEntegration posEntegration)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(posEntegration).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(posEntegration);
             }
             return View(posEntegration);
-        }
-
-        // GET: Panel/PosEntegrations/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PosEntegration posEntegration = db.PosEntegrations.Find(id);
-            if (posEntegration == null)
-            {
-                return HttpNotFound();
-            }
-            return View(posEntegration);
-        }
-
-        // POST: Panel/PosEntegrations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PosEntegration posEntegration = db.PosEntegrations.Find(id);
-            db.PosEntegrations.Remove(posEntegration);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

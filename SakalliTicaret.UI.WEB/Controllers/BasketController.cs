@@ -273,7 +273,15 @@ namespace SakalliTicaret.UI.WEB.Controllers
             string debug_on = "0";
             //
             // Mağaza canlı modda iken test işlem yapmak için 1 olarak gönderilebilir.
-            string test_mode = "1";
+            string test_mode = "0";
+            if (entegration.TestModule)
+            {
+                test_mode = "1";
+            }
+            else
+            {
+                test_mode = "0";
+            }
             //
             // Taksit yapılmasını istemiyorsanız, sadece tek çekim sunacaksanız 1 yapın
             string no_installment = "1";
@@ -451,9 +459,10 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult SepetTemizle()
         {
             BasketClass s = new BasketClass();
-            s.AllClear();
+           
             if (_loginState.IsLogin())
             {
+                s = (BasketClass)Session["AktifSepet"];
                 Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
                 List<OrderProduct> detays = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
                 foreach (var item in detays)
@@ -463,6 +472,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 }
 
             }
+            s.AllClear();
             Session.Remove("AktifSepet");
             return Redirect("/Sepetim");
         }
@@ -537,70 +547,44 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 try
                 {
+                    Basket dbBasket = db.Baskets.FirstOrDefault(x => x.BasketKey == merchant_oid);
+                    dbBasket.StatusId = 2;
+                    db.Entry(dbBasket).State = EntityState.Modified;
                     basketTransactions.Status = status;
                     basketTransactions.CreateDateTime = DateTime.Now;
-                    if (basketModel != null|| basketModel.User!=null)
+                    basketTransactions.UserId = dbBasket.UserId;
+                    basketTransactions.BasketKey = dbBasket.BasketKey;
+                    basketTransactions.BasketId = dbBasket.Id;
+                    basketTransactions.Description = "Ödeme İşlemi Başarıyla Gerçekleştirildi.";
+                    basketTransactions.CreateUserId = dbBasket.UserId;
+                    db.BasketTransactionses.Add(basketTransactions);
+                    List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                    foreach (var item in orderProducts)
                     {
-                        if (basketModel.User != null || basketModel.BasketClass != null || basketModel.UserAddress != null)
-                        {
-                            basketTransactions.UserId = basketModel.User.Id;
-                            basketTransactions.BasketKey = basketModel.BasketClass.BasketKey;
-                            basketTransactions.BasketId = basketModel.BasketClass.BasketId;
-                            basketTransactions.Description = "Ödeme İşlemi Başarıyla Gerçekleştirildi.";
-                            basketTransactions.CreateUserId = basketModel.User.Id;
-                            basket = db.Baskets.FirstOrDefault(x => x.Id == basketModel.BasketClass.BasketId);
-                            basket.StatusId = 2;
-                            db.Entry(basket).State = EntityState.Modified;
-                            List<OrderProduct> orderProducts =
-                                db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
-                            foreach (var item in orderProducts)
-                            {
-                                ProductOperations productOperations = new ProductOperations();
-                                productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, basket.UserId);
-                                item.InTheBasket = false;
-                                db.Entry(item).State = EntityState.Modified;
-                            }
-                            db.SaveChanges();
-                            Session.Remove("NotUserBasketModel");
-                        }
+                        //ProductOperations productOperations = new ProductOperations();
+                        //productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, dbBasket.UserId);
+                        Product product = db.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                        product.Stock = product.Stock - item.Quantity;
+                        db.Entry(product).State=EntityState.Modified;
+                        item.InTheBasket = false;
+                        db.Entry(item).State = EntityState.Modified;
                     }
-                    else
-                    {
-                        BasketClass s = new BasketClass();
-                        s = (BasketClass)Session["AktifSepet"];
-                        basketTransactions.UserId = s.UserId;
-                        basketTransactions.BasketKey = s.BasketKey;
-                        basketTransactions.BasketId = s.BasketId;
-                        basketTransactions.Description = "Ödeme İşlemi Başarıyla Gerçekleştirildi.";
-                        basketTransactions.CreateUserId = _loginState.IsLoginUser().Id;
-                        basket = db.Baskets.FirstOrDefault(x => x.Id == s.BasketId);
-                        basket.StatusId = 2;
-                        db.Entry(basket).State = EntityState.Modified;
-                        List<OrderProduct> orderProducts =
-                            db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
-                        foreach (var item in orderProducts)
-                        {
-                            ProductOperations productOperations = new ProductOperations();
-                            productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, basket.UserId);
-                            item.InTheBasket = false;
-                            db.Entry(item).State = EntityState.Modified;
-                        }
-                        db.SaveChanges();
-                    }
+                    db.SaveChanges();
 
+                    Session.Remove("NotUserBasketModel");
                     Session.Remove("AktifSepet");
                 }
                 catch (Exception e)
                 {
                     SendMail sendMail = new SendMail();
-                    sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Sayfadan gelen hata:<br><br>"+e.InnerException+"<br><br>"+e.Source+"<br><br>"+e.Message, "mrcosgun9@gmail.com");
+                    sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Sayfadan gelen hata:<br>" + "Sipariş Numarası:" + merchant_oid + e.InnerException + "<br><br>" + e.Source + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
 
                 }
 
 
                 Response.Write("OK");
             }
-      
+
             return View();
         }
         [Route("Sepetim/OdemeTamamlandi")]

@@ -17,5 +17,8 @@ namespace SakalliTicaret.Core.Model.Entity
         public string Password { get; set; }
         [Display(Name = "Taksit")]
         public int Installments { get; set; }
+
+        [Display(Name = "Test Modülü")]
+        public bool TestModule { get; set; } = false;
     }
 }
