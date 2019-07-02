@@ -10,36 +10,38 @@
         <p>
             <a href="CategoryPropertyValues/Create" class="btn btn-success btn-sm m-b-10 m-l-5">Özellik Değeri Ekle</a>
         </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CategoryProperty.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Value)
-                </th>
-           
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <div class="table-responsive">
+            <table class="table">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CategoryProperty.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Value)
-                    </td>
-                   
-                    
-                    <td>
-                        @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Sil", "Delete", new { id = item.Id })
-                    </td>
-                </tr>
-            }
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoryProperty.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Value)
+                    </th>
 
-        </table>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryProperty.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
+
+
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
 </div>

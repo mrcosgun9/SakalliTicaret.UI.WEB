@@ -14,43 +14,43 @@
             </div>
 
         </div>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>
+                        Resim
+                    </th>
+                    <th>
+                        Kategori
+                    </th>
+                    <th>
+                        Başlık
+                    </th>
+                    <th>
+                        Marka
+                    </th>
+                    <th style="width: 200px;">
+                        Model
+                    </th>
+                    <th>
+                        Fiyat
+                    </th>
 
-        <table class="table">
-            <tr>
-                <th>
-                    Resim
-                </th>
-                <th>
-                    Kategori
-                </th>
-                <th>
-                    Başlık
-                </th>
-                <th>
-                    Marka
-                </th>
-                <th style="width: 200px;">
-                    Model
-                </th>
-                <th>
-                    Fiyat
-                </th>
-
-                <th>
-                    İndirim
-                </th>
-                <th>
-                    Stok
-                </th>
-                <th>
-                    Aktif
-                </th>
+                    <th>
+                        İndirim
+                    </th>
+                    <th>
+                        Stok
+                    </th>
+                    <th>
+                        Aktif
+                    </th>
 
 
-                <th></th>
-            </tr>
+                    <th></th>
+                </tr>
 
-            @foreach (var item in Model)
+                @foreach (var item in Model)
             {
                 <tr>
                     <td>
@@ -84,7 +84,7 @@
                         @Html.DisplayFor(modelItem => item.IsActive)
                     </td>
 
-                    <td>
+                    <td  style="min-width: 140px;">
                         <a target="_blank" href="~/Urun/@item.Id/@Regex.Replace(item.Name, @"(\s+|@|&|'|\(|\)|<|>|#)", "").Replace("*", "").ToLower()" title="Ürünü Göster"><i class="fa fa-arrow-right"></i></a> |
                         <a href="/Panel/Products/MultipleImageUpload/@item.Id" title="Toplu Resim Girişi"><i class="fa fa-file-image-o"></i></a> |
                         <a href="/Panel/Products/Edit/@item.Id" title="Düzenle"><i class="fa fa-refresh"></i></a> |
@@ -92,8 +92,9 @@
                         <a href="/Panel/Products/Delete/@item.Id" title="Sil"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
-            }
+                }
 
-        </table>
+            </table>
+        </div>
     </div>
 </div>
