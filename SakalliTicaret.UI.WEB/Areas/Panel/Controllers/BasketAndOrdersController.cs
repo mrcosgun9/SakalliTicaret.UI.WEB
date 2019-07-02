@@ -14,10 +14,13 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
     {
 
         // GET: Panel/BasketAndOrders
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-
-            var basket = db.Baskets.Include(x => x.User).Include(x => x.Status).OrderByDescending(x => x.Id).ToList();
+            if (id==null)
+            {
+                id = 2;
+            }
+            var basket = db.Baskets.Include(x => x.User).Include(x => x.Status).OrderByDescending(x => x.Id).Where(x=>x.StatusId==id).ToList();
             return View(basket);
         }
         public ActionResult Detail(int id)

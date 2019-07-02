@@ -1151,8 +1151,10 @@
     <Content Include="Content\plugins\js\style-switch.js" />
     <Content Include="Content\plugins\js\validator.min.js" />
     <Content Include="Content\plugins\js\wow.min.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -1329,6 +1331,9 @@
     <Content Include="Areas\Panel\Views\CargoCompanies\Index.cshtml" />
     <Content Include="Areas\Panel\Views\MailDesign\Index.cshtml" />
     <Content Include="Areas\Panel\Views\MailDesign\Edit.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\stpublish.pubxml" />
     <Content Include="scripts\bootstrap.bundle.js" />
     <Content Include="scripts\bootstrap.bundle.min.js" />
@@ -1702,6 +1707,9 @@
     <Content Include="scripts\bootstrap.bundle.min.js.map" />
     <Content Include="scripts\bootstrap.bundle.js.map" />
     <Content Include="scripts\ckeditor\ckeditor.pack" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-3.0.0.js" />
@@ -1986,6 +1994,9 @@
     <Content Include="Views\NotUserBasket\Index.cshtml" />
     <Content Include="Views\NotUserBasket\NotUserBasketAddress.cshtml" />
     <Content Include="Views\NotUserBasket\NotUserBasketDetail.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Companent\DiscountProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

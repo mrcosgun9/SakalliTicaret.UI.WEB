@@ -105,7 +105,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult Search(string term)
         {
             var data = db.Products.Where(m => m.Name.Contains(term))
-                .Select(m => new { label = m.Name });
+                .Select(m => new { label = m.Name }).Take(10);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

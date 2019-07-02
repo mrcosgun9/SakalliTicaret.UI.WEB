@@ -146,7 +146,7 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 get
                 {
                     decimal Amount;
-                    Amount = (decimal)Product.Price;
+                    Amount = (decimal)Product.Price-Product.Discount;
                     return (decimal)((decimal)(Quantity) * (decimal)Amount * (decimal)(1 - Tax));
                 }
                 set { throw new NotImplementedException(); }

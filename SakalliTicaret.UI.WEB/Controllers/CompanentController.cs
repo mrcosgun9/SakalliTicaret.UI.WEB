@@ -78,5 +78,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
             List<Slider> slider = db.Sliders.Take(3).ToList();
             return View(slider);
         }
+
+        public ActionResult DiscountProduct()
+        {
+            List<Product> list = db.Products.Where(x => x.Discount > 0).OrderBy(x=>x.Discount).Take(4).ToList();
+            return View(list);
+        }
     }
 }

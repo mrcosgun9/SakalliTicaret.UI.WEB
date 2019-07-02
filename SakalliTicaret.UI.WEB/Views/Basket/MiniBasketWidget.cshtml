@@ -1,4 +1,8 @@
-﻿@model SakalliTicaret.UI.WEB.App_Class.BasketClass
+﻿@using SakalliTicaret.UI.WEB.App_Class
+@model SakalliTicaret.UI.WEB.App_Class.BasketClass
+@{
+    Functions viewFunctions = new Functions();
+}
 <div class="basketminicontainer">
     <div class="basketdiv">
         <div class="basketItem">
@@ -8,15 +12,25 @@
                     foreach (var item in Model.Products)
                     {
                         <li>
-                            <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ","").ToLower()">
+                            <a href='~/Urun/@item.Product.Id/@viewFunctions.UrlClear(item.Product.Name.ToLower())'>
                                 <div class="basketimagediv">
                                     <img src="/Content/Images/Products/@item.Product.ImageUrl" alt="">
 
                                 </div>
                                 <div class="basketProductInfo">
                                     <h3 title="@item.Product.Name">@(item.Product.Name.Length < 25 ? item.Product.Name : item.Product.Name.Substring(0, 25) + "...")</h3>
-                                    <span class="cart-price">@item.Product.Price ₺ x @item.Quantity = @item.Total</span>
-
+                                    @{
+                                        decimal fiyat = 0;
+                                    }
+                                    @if (item.Product.Discount > 0)
+                                    {
+                                        fiyat = item.Product.Price - item.Product.Discount;
+                                    }
+                                    else
+                                    {
+                                        fiyat = item.Product.Price;
+                                    }
+                                    <span class="cart-price">@fiyat ₺ x @item.Quantity = @item.Total</span>
                                 </div>
                                 <div style="clear: both"></div>
                             </a>

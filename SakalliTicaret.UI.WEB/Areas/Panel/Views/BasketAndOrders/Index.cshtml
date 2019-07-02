@@ -5,9 +5,24 @@
     ViewBag.Title = "MRCPanel | Sipariş Listesi";
     Layout = "~/Areas/Panel/Views/Shared/_Layout.cshtml";
 }
+
+
+
+      
 <div class="col-12">
     <div class="card">
-
+        <div class="row">
+            <div class="col-12">
+                <p class="float-right">
+                    <a href="/Panel/BasketAndOrders/Index/1" class="btn btn-success btn-sm m-b-10 m-l-5">Sepette</a>
+                    <a href="/Panel/BasketAndOrders/Index/2" class="btn btn-success btn-sm m-b-10 m-l-5">Ödeme Yapıldı</a>
+                    <a href="/Panel/BasketAndOrders/Index/3" class="btn btn-success btn-sm m-b-10 m-l-5">Ürün Hazırlanıyor</a>
+                    <a href="/Panel/BasketAndOrders/Index/4" class="btn btn-success btn-sm m-b-10 m-l-5">Kargoya Verildi</a>
+                    <a href="/Panel/BasketAndOrders/Index/5" class="btn btn-success btn-sm m-b-10 m-l-5">Teslim Edildi</a>
+                </p>
+            </div>
+        </div>
+        
         <table class="table">
             <tr>
                 <th>
