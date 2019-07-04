@@ -1772,6 +1772,7 @@
     <Compile Include="Areas\Panel\Models\BasketDetailModel.cs" />
     <Compile Include="Areas\Panel\Models\ProductPropertiesModel.cs" />
     <Compile Include="Areas\Panel\PanelAreaRegistration.cs" />
+    <Compile Include="Content\MailDesignsController.cs" />
     <Compile Include="Controllers\Base\BaseControler.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -1994,9 +1995,8 @@
     <Content Include="Views\NotUserBasket\Index.cshtml" />
     <Content Include="Views\NotUserBasket\NotUserBasketAddress.cshtml" />
     <Content Include="Views\NotUserBasket\NotUserBasketDetail.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Companent\DiscountProduct.cshtml" />
+    <Content Include="Views\MailDesigns\PaymentSuccessMail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

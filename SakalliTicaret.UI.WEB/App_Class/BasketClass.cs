@@ -131,7 +131,10 @@ namespace SakalliTicaret.UI.WEB.App_Class
                 BasketItems = value;
             }
         }
+
+        
         public int UserId { get; set; }
+        public User User { get; set; }
         public int AddressId { get; set; }
         public int BasketId { get; set; }
         public string BasketKey { get; set; }
