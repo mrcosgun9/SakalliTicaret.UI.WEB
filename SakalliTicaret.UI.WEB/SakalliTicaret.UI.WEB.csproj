@@ -1779,6 +1779,7 @@
     <Compile Include="Controllers\CompanentController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailDesignsController.cs" />
     <Compile Include="Controllers\NotUserBasketController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PartialController.cs" />

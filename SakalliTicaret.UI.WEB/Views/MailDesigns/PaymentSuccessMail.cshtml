@@ -1,6 +1,9 @@
-﻿@using SakalliTicaret.UI.WEB.App_Class
+﻿@using SakalliTicaret.Core.Model
+@using SakalliTicaret.Core.Model.Entity
+@using SakalliTicaret.UI.WEB.App_Class
+@model SakalliTicaret.UI.WEB.App_Class.BasketClass
 @{
-    BasketClass basketClass = (BasketClass)Session["AktifSepet"];
+
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -229,8 +232,8 @@
                                     <td align="center" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
 
                                         <div style="line-height: 24px">
-                                            Merhaba @basketClass. Bizi Tercih Ettiğiniz İçin Teşekkür Ederiz.<br />
-                                            Sipariş Numaran - - - - - / Sipariş Tarihi - - - - - <br />
+                                            Merhaba @Model.User.Name @Model.User.LastName Bizi Tercih Ettiğiniz İçin Teşekkür Ederiz.<br />
+                                            Sipariş Numaranız @Model.BasketKey / Sipariş Tarihi @DateTime.Now.ToString("MM/dd/yyyy") <br />
                                             Aşağıda Siparişinizle Alakalı Detayları Görebilirsiniz.
                                         </div>
                                     </td>
@@ -246,15 +249,15 @@
                             <h4>Adres Bilgileriniz</h4><hr />
                             <table width="590" class="container590">
                                 <tr>
-                                    <td width="50%"><b>Başlık</b>:İş Adresi</td>
-                                    <td width="50%"><b>Şehir</b>:İzmir</td>
+                                    <td width="50%"><b>Başlık</b>:@Model.UserAddress.Title</td>
+                                    <td width="50%"><b>Şehir</b>:@Model.UserAddress.City</td>
                                 </tr>
                                 <tr>
-                                    <td width="50%"><b>Telefon</b>:0545 446 6940</td>
+                                    <td width="50%"><b>Telefon</b>:@Model.UserAddress.Phone</td>
                                 </tr>
                                 <tr width="100%">
                                     <td colspan="2">
-                                        <b>Adres</b>:Dokuz Eylül Ünüversitesi Tınaz Tepe Yerleşkesi Depark Beta Binası Ofis Z03 Metadata Bilişim Buca/İzmir
+                                        <b>Adres</b>:@Model.UserAddress.Address
                                     </td>
                                 </tr>
                             </table>
@@ -268,9 +271,9 @@
                     </tr>
                     <tr>
                         <td align="center" class="section-img">
-                            <div class="row">
+                        
 
-                                <div class="col-md-12 basketlist">
+                                <div class="basketlist">
 
                                     <table class="table-fill">
                                         <thead>
@@ -285,62 +288,48 @@
                                             </tr>
                                         </thead>
                                         <tbody class="table-hover">
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td class="text-left">
-                                                    <div class="sepetimage">
-                                                        <img src="http://sakalliticaret.com/Content/Images/Products/40.jpg_8_4_2019_20_14.jpg" width="100">
-                                                    </div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <a href="Urun/1516/ybrfrenbalatsı" target="_blank">
-                                                        YBR Fren Balatsı <br>
-                                                        <ul class="basketproperylist"></ul>
+                                           @foreach (var item in Model.Products)
+                                           {
+                                               <tr>
+                                                   <td>
+                                                       
+                                                   </td>
+                                                   <td class="text-left">
+                                                       <div class="sepetimage">
+                                                           @{
+                                                               string productImage = "http://sakalliticaret.com" + item.Product.ImageUrl;
+                                                           }
+                                                           <img src="@productImage" width="100"/>
 
-                                                    </a>
-                                                </td>
+                                                       </div>
+                                                   </td>
+                                                   <td class="text-left">
+                                                       <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ", "").ToLower()" target="_blank">
+                                                           @item.Product.Name <br>
+                                                           <ul class="basketproperylist"></ul>
 
-                                                <td class="text-left">39,00 ₺</td>
-                                                <td class="text-left">1</td>
-                                                <td class="text-left">39,00 ₺</td>
+                                                       </a>
+                                                   </td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td class="text-left">
-                                                    <div class="sepetimage">
-                                                        <img src="http://sakalliticaret.com/Content/Images/Products/41.jpg_5_4_2019_10_18.jpg" width="100">
-                                                    </div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <a href="http://sakalliticaret.com/Urun/1684/yamahaybrfarbraketieskimodelyuvarlakfarauyumlu" target="_blank">
-                                                        Yamaha Ybr Far Braketi Eski Model Yuvarlak Fara Uyumlu<br>
-                                                        <ul class="basketproperylist"></ul>
+                                                   <td class="text-left">@item.Product.Price ₺</td>
+                                                   <td class="text-left">@item.Quantity</td>
+                                                   <td class="text-left">@item.Total ₺</td>
 
-                                                    </a>
-                                                </td>
+                                               </tr>
+                                           }
 
-                                                <td class="text-left">65,00 ₺</td>
-                                                <td class="text-left">1</td>
-                                                <td class="text-left">65,00 ₺</td>
-
-                                            </tr>
                                         </tbody>
                                     </table>
                                     <div class="sepetozet text-right margin-t-20 margin-b-20">
-                                        <div><b>Toplam:</b>2 Ürün</div>
+                                        <div><b>Toplam:</b>@Model.Products.Count Ürün</div>
                                         <div>
-                                            <b>Toplam Tutar:</b>104,00
+                                            <b>Toplam Tutar:</b>@Model.SubTotal ₺
                                         </div>
 
                                     </div>
                                 </div>
 
-                            </div>
+                          
                         </td>
                     </tr>
 
