@@ -247,5 +247,6 @@ namespace SakalliTicaret.UI.WEB.App_Class
 
 
         }
+
     }
 }

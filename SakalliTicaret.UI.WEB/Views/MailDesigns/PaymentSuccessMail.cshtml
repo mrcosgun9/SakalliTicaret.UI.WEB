@@ -1,7 +1,7 @@
 ﻿@using SakalliTicaret.Core.Model
 @using SakalliTicaret.Core.Model.Entity
 @using SakalliTicaret.UI.WEB.App_Class
-@model SakalliTicaret.UI.WEB.App_Class.BasketClass
+@model Basket
 @{
 
 }
@@ -203,10 +203,27 @@
                     <tr>
                         <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;"
                             class="main-header">
-
-                            <div style="line-height: 35px">
-                                Teşekkürler,  <span style="color: #e8353b;">siparişinizi aldık! </span>
-                            </div>
+                            @{
+                                if (Model.StatusId == 2)
+                                {
+                                    <div style="line-height: 35px">
+                                        Teşekkürler,  <span style="color: #e8353b;">Siparişinizi Aldık! </span>
+                                    </div>
+                                }
+                                if (Model.StatusId == 3)
+                                {
+                                    <div style="line-height: 35px">
+                                        Ürünler Onaylandı,  <span style="color: #e8353b;">Kargo Hazırlanıyor. </span>
+                                    </div>
+                                }
+                                if(Model.StatusId==4)
+                                {
+                                    <div style="line-height: 35px">
+                                        Ürünler,  <span style="color: #e8353b;">Kargoya Verildi! </span>
+                                    </div>
+                                }
+                            }
+                            
                         </td>
                     </tr>
                     <tr>
@@ -288,7 +305,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="table-hover">
-                                           @foreach (var item in Model.Products)
+                                           @foreach (var item in Model.OrderProducts)
                                            {
                                                <tr>
                                                    <td>
@@ -304,7 +321,7 @@
                                                        </div>
                                                    </td>
                                                    <td class="text-left">
-                                                       <a href="Urun/@item.Product.Id/@item.Product.Name.Replace(" ", "").ToLower()" target="_blank">
+                                                       <a href="http://sakalliticaret.com/Urun/@item.Product.Id/@item.Product.Name.Replace(" ", "").ToLower()" target="_blank">
                                                            @item.Product.Name <br>
                                                            <ul class="basketproperylist"></ul>
 
@@ -313,7 +330,7 @@
 
                                                    <td class="text-left">@item.Product.Price ₺</td>
                                                    <td class="text-left">@item.Quantity</td>
-                                                   <td class="text-left">@item.Total ₺</td>
+                                                   <td class="text-left">@item.Amount ₺</td>
 
                                                </tr>
                                            }
@@ -321,9 +338,9 @@
                                         </tbody>
                                     </table>
                                     <div class="sepetozet text-right margin-t-20 margin-b-20">
-                                        <div><b>Toplam:</b>@Model.Products.Count Ürün</div>
+                                        <div><b>Toplam:</b>@Model.OrderProducts.Count Ürün</div>
                                         <div>
-                                            <b>Toplam Tutar:</b>@Model.SubTotal ₺
+                                            <b>Toplam Tutar:</b>@Model.Amount ₺
                                         </div>
 
                                     </div>

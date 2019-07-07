@@ -459,7 +459,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
         public ActionResult SepetTemizle()
         {
             BasketClass s = new BasketClass();
-           
+
             if (_loginState.IsLogin())
             {
                 s = (BasketClass)Session["AktifSepet"];
@@ -547,7 +547,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 try
                 {
-                    Basket dbBasket = db.Baskets.FirstOrDefault(x => x.BasketKey == merchant_oid);
+                    Basket dbBasket = db.Baskets.Include(x => x.User).FirstOrDefault(x => x.BasketKey == merchant_oid);
                     dbBasket.StatusId = 2;
                     db.Entry(dbBasket).State = EntityState.Modified;
                     basketTransactions.Status = status;
@@ -565,11 +565,15 @@ namespace SakalliTicaret.UI.WEB.Controllers
                         //productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, dbBasket.UserId);
                         Product product = db.Products.FirstOrDefault(x => x.Id == item.ProductId);
                         product.Stock = product.Stock - item.Quantity;
-                        db.Entry(product).State=EntityState.Modified;
+                        db.Entry(product).State = EntityState.Modified;
                         item.InTheBasket = false;
                         db.Entry(item).State = EntityState.Modified;
                     }
                     db.SaveChanges();
+
+                    MailSayfasiGet(merchant_oid);
+                    SendMail sendMail = new SendMail();
+                    sendMail.MailSender("Ödemeniz başarıyla tamamlandı", MailSayfasiGet(merchant_oid), dbBasket.User.Email);
 
                     Session.Remove("NotUserBasketModel");
                     Session.Remove("AktifSepet");
@@ -586,6 +590,18 @@ namespace SakalliTicaret.UI.WEB.Controllers
             }
 
             return View();
+        }
+
+        public string MailSayfasiGet(string basketKey)
+        {
+            string adres = Request.Url.Authority + "/OdemeOnay/" + basketKey;
+            if (adres.StartsWith("localhost"))
+                adres = "Http://" + adres;
+            WebRequest req = WebRequest.Create(adres);
+            WebResponse res = req.GetResponse();
+            System.IO.StreamReader data = new System.IO.StreamReader(res.GetResponseStream(), System.Text.Encoding.UTF8);
+            string mail_body = data.ReadToEnd();
+            return mail_body;
         }
         [Route("Sepetim/OdemeTamamlandi")]
         public ActionResult PaymentSuccessful()
