@@ -8,29 +8,29 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-header">
-            
+
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Create","Users",FormMethod.Post,new {@id="UserCreate"}))
+            @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @id = "UserCreate" }))
             {
                 @Html.AntiForgeryToken()
 
 
-                 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="col-md-12">
                     <h4>Üye Olun</h4>
-                    <hr/>
+                    <hr />
                 </div>
-                    <div class="col-md-12">
+                <div class="col-md-12">
                     <div class="form-group">
-                     
-                            @Html.LabelFor(model => model.Name)
 
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                        </div>
+                        @Html.LabelFor(model => model.Name)
+
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
+                </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             @Html.LabelFor(model => model.LastName)
@@ -41,39 +41,47 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Email)
-                       
+
                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Telephone)
-                       
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Telephone)
+
                             @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control phone_us" } })
                             @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-12">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Password)
-                       
-                            @Html.PasswordFor(model => model.Password, new {@class = "form-control"  })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TCKN)
+
+                            @Html.EditorFor(model => model.TCKN, new { htmlAttributes = new { @class = "form-control tckn" } })
+                            @Html.ValidationMessageFor(model => model.TCKN, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password)
+
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-12"> 
+                    <div class="col-md-12">
                         <div class="form-group text-center">
                             <input type="submit" value="Kayıt Ol" class="btn btn-fill btn-block" />
                         </div>
                     </div>
-               
+
             }
             <div class="col-md-12">
                 <hr />
             </div>
             <div class="col-md-12">
-                
+
                 <div class="form-group text-center">
                     <a href="/Kullanici/Giris" class="btn btn-fill btn-block">Giriş Yap</a>
                     @*<input type="submit" value="Giriş Yap" class="btn btn-fill btn-block"/>*@
@@ -81,6 +89,6 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 <div class="col-md-4"></div>

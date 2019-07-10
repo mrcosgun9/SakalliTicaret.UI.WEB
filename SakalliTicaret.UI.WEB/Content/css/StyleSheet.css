@@ -216,6 +216,7 @@ body {
 
     .xt-show-item label {
         font-size: 13px;
+        width: 38px;
     }
 
     .mean-container .mean-bar::before {

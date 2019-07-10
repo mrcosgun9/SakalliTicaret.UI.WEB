@@ -464,7 +464,7 @@ namespace SakalliTicaret.UI.WEB.Controllers
             {
                 s = (BasketClass)Session["AktifSepet"];
                 Basket basket = db.Baskets.FirstOrDefault(x => x.BasketKey == s.BasketKey);
-                List<OrderProduct> detays = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                List<OrderProduct> detays = db.OrderProducts.Where(x => x.BasketId == basket.Id && x.InTheBasket).ToList();
                 foreach (var item in detays)
                 {
                     db.OrderProducts.Remove(item);
@@ -563,9 +563,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     {
                         //ProductOperations productOperations = new ProductOperations();
                         //productOperations.ProductOperationsCreate(item.ProductId, 3, "Satış No:" + item.Basket.BasketKey + " - Adet:" + item.Quantity, dbBasket.UserId);
-                        Product product = db.Products.FirstOrDefault(x => x.Id == item.ProductId);
-                        product.Stock = product.Stock - item.Quantity;
-                        db.Entry(product).State = EntityState.Modified;
+                        //Product product = db.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                        //product.Stock = product.Stock - item.Quantity;
+                        //db.Entry(product).State = EntityState.Modified;
                         item.InTheBasket = false;
                         db.Entry(item).State = EntityState.Modified;
                     }

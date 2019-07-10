@@ -31,7 +31,9 @@ namespace SakalliTicaret.Core.Model.Entity
         [Required]
         [Display(Name = "Şifre")]
         public string Password { get; set; }
+        [MinLength(11,ErrorMessage = "En Az 11 Karakter Girmelisiniz.")]
         [Display(Name = "Tc Numarası")]
+        [Required]
         public string TCKN { get; set; }
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
