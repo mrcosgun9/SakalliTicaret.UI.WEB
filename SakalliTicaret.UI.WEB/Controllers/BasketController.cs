@@ -550,15 +550,15 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     Basket dbBasket = db.Baskets.Include(x => x.User).FirstOrDefault(x => x.BasketKey == merchant_oid);
                     dbBasket.StatusId = 2;
                     db.Entry(dbBasket).State = EntityState.Modified;
-                    basketTransactions.Status = status;
-                    basketTransactions.CreateDateTime = DateTime.Now;
-                    basketTransactions.UserId = dbBasket.UserId;
-                    basketTransactions.BasketKey = dbBasket.BasketKey;
-                    basketTransactions.BasketId = dbBasket.Id;
-                    basketTransactions.Description = "Ödeme İşlemi Başarıyla Gerçekleştirildi.";
-                    basketTransactions.CreateUserId = dbBasket.UserId;
-                    db.BasketTransactionses.Add(basketTransactions);
-                    List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == basket.Id).ToList();
+                    //basketTransactions.Status = status;
+                    //basketTransactions.CreateDateTime = DateTime.Now;
+                    //basketTransactions.UserId = dbBasket.UserId;
+                    //basketTransactions.BasketKey = dbBasket.BasketKey;
+                    //basketTransactions.BasketId = dbBasket.Id;
+                    //basketTransactions.Description = "Ödeme İşlemi Başarıyla Gerçekleştirildi.";
+                    //basketTransactions.CreateUserId = dbBasket.UserId;
+                    //db.BasketTransactionses.Add(basketTransactions);
+                    List<OrderProduct> orderProducts = db.OrderProducts.Where(x => x.BasketId == dbBasket.Id).ToList();
                     foreach (var item in orderProducts)
                     {
                         //ProductOperations productOperations = new ProductOperations();
@@ -569,23 +569,22 @@ namespace SakalliTicaret.UI.WEB.Controllers
                         item.InTheBasket = false;
                         db.Entry(item).State = EntityState.Modified;
                     }
-                    db.SaveChanges();
 
-                    MailSayfasiGet(merchant_oid);
-                    SendMail sendMail = new SendMail();
-                    sendMail.MailSender("Ödemeniz başarıyla tamamlandı", MailSayfasiGet(merchant_oid), dbBasket.User.Email);
+                    db.SaveChanges();
 
                     Session.Remove("NotUserBasketModel");
                     Session.Remove("AktifSepet");
+
+
+                    //SendMail sendMail = new SendMail();
+                    //sendMail.MailSender("Ödemeniz başarıyla tamamlandı", MailSayfasiGet(merchant_oid), dbBasket.User.Email);
+
                 }
                 catch (Exception e)
                 {
                     SendMail sendMail = new SendMail();
                     sendMail.MailSender("Ödeme Yapıldı Sepet Kapatılamadı", "Sayfadan gelen hata:<br>" + "Sipariş Numarası:" + merchant_oid + e.InnerException + "<br><br>" + e.Source + "<br><br>" + e.Message, "mrcosgun9@gmail.com");
-
                 }
-
-
                 Response.Write("OK");
             }
 
@@ -594,7 +593,8 @@ namespace SakalliTicaret.UI.WEB.Controllers
 
         public string MailSayfasiGet(string basketKey)
         {
-            string adres = Request.Url.Authority + "/OdemeOnay/" + basketKey;
+            //string adres = Request.Url.Authority + "/OdemeOnay/" + basketKey;
+            string adres = "http://sakalliticaret.com/OdemeOnay/" + basketKey;
             if (adres.StartsWith("localhost"))
                 adres = "Http://" + adres;
             WebRequest req = WebRequest.Create(adres);
