@@ -49,6 +49,47 @@ namespace SakalliTicaret.UI.WEB.Controllers
                 {
                     if (_loginState.IsLogin())
                     {
+                        foreach (var item in s.Products)
+                        {
+                            Product product = db.Products.FirstOrDefault(x => x.Id == item.Product.Id);
+                            if (product.Stock == 0)
+                            {
+                                OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(
+                                    x => x.BasketId == s.BasketId && x.ProductId == item.Product.Id);
+                                db.OrderProducts.Remove(orderProduct);
+                                s.BasketItemRemove(product.Id);
+                                db.OrderProducts.Remove(orderProduct);
+                                if (s.Products.Count == 0)
+                                {
+                                    break;
+                                }
+
+                            }
+                            else if (product != null && product.Stock < item.Quantity)
+                            {
+
+                                ViewBag.ResultType = "danger";
+                                ViewBag.ResultMessage = "Eklediğiniz ürün adeti stoklarda bulunmamaktadır. Sepetiniz Düzenlendi.";
+
+                                s.BasketItems.FirstOrDefault(x => x.Product.Id == item.Product.Id).Quantity =
+                                    product.Stock;
+                                Session["AktifSepet"] = s;
+                                s = (BasketClass)Session["AktifSepet"];
+                                OrderProduct orderProduct = db.OrderProducts.FirstOrDefault(
+                                    x => x.BasketId == s.BasketId && x.ProductId == item.Product.Id);
+                                orderProduct.Quantity = product.Stock;
+                                orderProduct.Amount = (double)(orderProduct.Quantity * product.Price);
+                                db.Entry(orderProduct).State = EntityState.Modified;
+
+                                //BasketClass.BasketItem basketItem = new BasketClass.BasketItem();
+                                //basketItem = s.BasketItems.FirstOrDefault(x => x.Product.Id == item.Product.Id);
+
+
+
+                            }
+                            db.SaveChanges();
+                        }
+                   
                         return Redirect("/Sepet/Tamamla/Adres");
 
                     }
@@ -71,9 +112,9 @@ namespace SakalliTicaret.UI.WEB.Controllers
             User user = _loginState.IsLoginUser();
             BasketClass s = (BasketClass)Session["AktifSepet"];
             //GirisSepetControl();
-            if (s == null)
+            if (s == null && s.Products.Count <= 0)
             {
-                return Redirect("/Anasayfa");
+                return Redirect("/Sepetim");
             }
             if (user == null)
             {

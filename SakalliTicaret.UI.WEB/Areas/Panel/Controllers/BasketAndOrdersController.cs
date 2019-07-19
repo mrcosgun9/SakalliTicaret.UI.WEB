@@ -43,7 +43,14 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
            
             if (basket.StatusId == 2)
             {
-                MailSubject = "Sakallı Ticaret | Ürünleriniz Onaylandı Kargo Hazırlanıyor.";
+               Product product=new Product();
+                foreach (var item in basket.OrderProducts)
+                {
+                    product = db.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                    product.Stock = product.Stock - item.Quantity;
+                    db.Entry(product).State = EntityState.Modified;
+                }
+                
             }
             if (basket.StatusId == 3)
             {
@@ -55,7 +62,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             db.Entry(basket).State = EntityState.Modified;
             db.SaveChanges();
            
-            sendMail.MailSender(MailSubject, MailSayfasiGet(basket.BasketKey),basket.User.Email);
+            //sendMail.MailSender(MailSubject, MailSayfasiGet(basket.BasketKey),basket.User.Email);
             
             return Redirect("/Panel/BasketAndOrders/Index");
         }
@@ -90,8 +97,7 @@ namespace SakalliTicaret.UI.WEB.Areas.Panel.Controllers
             basket.StatusId = basket.Status.NextStatus;
             db.Entry(basket).State = EntityState.Modified;
             db.SaveChanges();
-            string MailSubject = "Sakallı Ticaret | Ürünleriniz Kargoya Verildi.";
-            sendMail.MailSender(MailSubject, MailSayfasiGet(basket.BasketKey), basket.User.Email);
+         
             return Redirect("/Panel/BasketAndOrders/Index");
         }
     }
