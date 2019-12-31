@@ -73,10 +73,11 @@ namespace SakalliTicaret.UI.WEB.Controllers
                     user.CreateDateTime = DateTime.Now;
                     user.IsActive = true;
                     user.UserKey = encodeDecode.EnCode(user.Email);
-                    user.IsMailSuccess = false;
-                    string verifyUrl = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) +
-                                       "/MailOnayla?Id=" + user.UserKey;
-                    sendMail.MailSender("Sakalli Ticaret | Üyelik Aktivasyonu", "Üyelik Aktivasyonu İçin Aşağıdaki Linke Tıklayınız<br><br><br><a href='" + verifyUrl + "'>Aktivasyın Linki</a>", user.Email);
+                    user.IsMailSuccess = true;
+                    //string verifyUrl = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) +
+                    //                   "/MailOnayla?Id=" + user.UserKey;
+                    //sendMail.MailSender("Sakalli Ticaret | Üyelik Aktivasyonu", "Üyelik Aktivasyonu İçin Aşağıdaki Linke Tıklayınız<br><br><br><a href='" + verifyUrl + "'>Aktivasyın Linki</a>", user.Email);
+
                     db.Users.Add(user);
                     db.SaveChanges();
                     return Redirect("/Kullanici/KayitBasarili");
